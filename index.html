@@ -318,11 +318,76 @@ header {
 }
 .map-subtitle { font-size: 0.74rem; color: var(--muted); margin-bottom: 20px; }
 
-.floor-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+/* FLOOR SECTIONS */
+.floor-section {
+  margin-bottom: 20px;
 }
+.floor-section:last-child { margin-bottom: 0; }
+
+.floor-band {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+.floor-tab {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  padding: 16px 10px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  flex-shrink: 0;
+  gap: 8px;
+  user-select: none;
+}
+.floor-tab.f1 { background: #e0f2fe; color: #0369a1; border-right: 2px solid #bae6fd; }
+.floor-tab.f2 { background: var(--accent-lt); color: #7a5000; border-right: 2px solid #fde68a; }
+.floor-tab.f3 { background: var(--primary-dim); color: var(--primary); border-right: 2px solid #bbf7d0; }
+
+.floor-label-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.floor-label-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.floor-label-badge.f1 { background: #e0f2fe; color: #0369a1; }
+.floor-label-badge.f2 { background: var(--accent-lt); color: #7a5000; }
+.floor-label-badge.f3 { background: var(--primary-dim); color: var(--primary); }
+.floor-label-line { flex: 1; height: 1px; background: var(--border); }
+.floor-summary { font-size: 0.7rem; color: var(--muted); }
+
+.floor-rooms {
+  flex: 1;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+.floor-rooms.layout-f1 { grid-template-columns: repeat(2, 1fr); }
+.floor-rooms.layout-f2 { grid-template-columns: 1fr repeat(2, 1fr) repeat(3, 1fr); }
+.floor-rooms.layout-f3 { grid-template-columns: repeat(3, 1fr) repeat(2, 1fr); }
+
+.room-hod-span { grid-column: 1; }
+.room-bi-span  { grid-column: 2 / 4; align-self: start; }
+.room-cub3-span{ grid-column: 4 / 7; }
+
 
 /* Room layouts */
 .room {
@@ -333,12 +398,9 @@ header {
   transition: box-shadow .15s;
 }
 .room:hover { box-shadow: var(--shadow-md); }
-
-.room.r-hod { grid-column: 1 / 4; border-color: var(--accent); }
+.room.r-hod { border-color: var(--accent); }
 .room.r-fbi { border-color: var(--pink); }
-.room.r-cubs { grid-column: 1 / 4; }
 
-.room-head {
   padding: 6px 12px;
   font-size: 0.68rem;
   font-weight: 700;
@@ -489,7 +551,7 @@ header {
     <div class="map-container">
       <div class="map-title">Departmental Office Floor Plan</div>
       <div class="map-subtitle">Drag-and-drop allocation available in the Allocation Manager tab. This view reflects current state.</div>
-      <div class="floor-grid" id="floorGrid"></div>
+      <div id="floorGrid"></div>
       <div class="unassigned-map">
         <h3>Unassigned / Off Campus</h3>
         <div class="una-grid" id="unaGrid"></div>
@@ -540,20 +602,23 @@ const FACULTY = [
 ];
 
 const OFFICES = [
-  { id:'hod',  label:'HoD Office',      type:'hod', capacity:1,  gender:null, occupants:['f01'] },
-  { id:'tri1', label:'Tri-Seater A',    type:'tri', capacity:3,  gender:null, occupants:['f18','f17'] },
-  { id:'tri2', label:'Tri-Seater B',    type:'tri', capacity:3,  gender:null, occupants:['f15','f14'] },
-  { id:'tri3', label:'Tri-Seater C',    type:'tri', capacity:3,  gender:null, occupants:['f16'] },
-  { id:'bi1',  label:'Bi-Seater A',     type:'bi',  capacity:2,  gender:null, occupants:['f13','f09'] },
-  { id:'bi2',  label:'Bi-Seater B',     type:'bi',  capacity:2,  gender:null, occupants:['f11','f12'] },
-  { id:'fbi',  label:'Female Bi-Seater',type:'fbi', capacity:2,  gender:'f',  occupants:['f07'] },
-  { id:'c1',   label:'Cubicle 1',       type:'cub', capacity:1,  gender:null, occupants:['f08'] },
-  { id:'c2',   label:'Cubicle 2',       type:'cub', capacity:1,  gender:null, occupants:['f06'] },
-  { id:'c3',   label:'Cubicle 3',       type:'cub', capacity:1,  gender:null, occupants:['f05'] },
-  { id:'c4',   label:'Cubicle 4',       type:'cub', capacity:1,  gender:null, occupants:['f04'] },
-  { id:'c5',   label:'Cubicle 5',       type:'cub', capacity:1,  gender:null, occupants:['f03'] },
-  { id:'c6',   label:'Cubicle 6',       type:'cub', capacity:1,  gender:null, occupants:[] },
-  { id:'c7',   label:'Cubicle 7',       type:'cub', capacity:1,  gender:null, occupants:[] },
+  // ── Floor 1 ──
+  { id:'c5',  label:'Cubicle 1',        type:'cub', floor:1, capacity:1, gender:null, occupants:['f03'] },
+  { id:'c3',  label:'Cubicle 2',        type:'cub', floor:1, capacity:1, gender:null, occupants:['f05'] },
+  // ── Floor 2 ──
+  { id:'hod', label:'HoD Office',       type:'hod', floor:2, capacity:1, gender:null, occupants:['f01'] },
+  { id:'bi1', label:'Bi-Seater A',      type:'bi',  floor:2, capacity:2, gender:null, occupants:['f13','f09'] },
+  { id:'bi2', label:'Bi-Seater B',      type:'bi',  floor:2, capacity:2, gender:null, occupants:['f12','f11'] },
+  { id:'c4',  label:'Cubicle 3',        type:'cub', floor:2, capacity:1, gender:null, occupants:['f04'] },
+  { id:'c2',  label:'Cubicle 4',        type:'cub', floor:2, capacity:1, gender:null, occupants:['f06'] },
+  { id:'c7',  label:'Cubicle 5',        type:'cub', floor:2, capacity:1, gender:null, occupants:[] },
+  // ── Floor 3 ──
+  { id:'tri1',label:'Tri-Seater A',     type:'tri', floor:3, capacity:3, gender:null, occupants:['f18','f17'] },
+  { id:'tri2',label:'Tri-Seater B',     type:'tri', floor:3, capacity:3, gender:null, occupants:['f15','f14'] },
+  { id:'tri3',label:'Tri-Seater C',     type:'tri', floor:3, capacity:3, gender:null, occupants:['f16'] },
+  { id:'fbi', label:'Female Bi-Seater', type:'fbi', floor:3, capacity:2, gender:'f',  occupants:['f07'] },
+  { id:'c1',  label:'Cubicle 6',        type:'cub', floor:3, capacity:1, gender:null, occupants:['f08'] },
+  { id:'c6',  label:'Cubicle 7',        type:'cub', floor:3, capacity:1, gender:null, occupants:[] },
 ];
 
 // faculty not in any office
@@ -678,17 +743,30 @@ function chipHTML(facultyId, sourceOfficeId) {
 
 function renderOfficesCol() {
   const col = document.getElementById('officesCol');
-  const hodOffice = OFFICES.find(o=>o.type==='hod');
-  const triOffices = OFFICES.filter(o=>o.type==='tri');
-  const biOffices = OFFICES.filter(o=>o.type==='bi');
-  const fbiOffice = OFFICES.find(o=>o.type==='fbi');
-  const cubOffices = OFFICES.filter(o=>o.type==='cub');
+  const FLOOR_LABELS = { 1:'First Floor', 2:'Second Floor', 3:'Third Floor' };
+  const FLOOR_DESCS  = {
+    1:'Faculty cubicles',
+    2:'HoD Office · Shared offices · Faculty cubicles',
+    3:'Shared offices · Faculty cubicles'
+  };
 
-  col.innerHTML = `
-    ${renderGroup('HoD Office', [hodOffice], 'offices-grid')}
-    ${renderGroup('Shared Offices', [...triOffices, ...biOffices, fbiOffice], 'offices-grid')}
-    ${renderGroup('Cubicles', cubOffices, 'cubicles-grid')}
-  `;
+  let html = '';
+  [1,2,3].forEach(fl => {
+    const offices = OFFICES.filter(o => o.floor === fl);
+    const shared  = offices.filter(o => o.type !== 'cub');
+    const cubs    = offices.filter(o => o.type === 'cub');
+    html += `
+      <div class="office-group">
+        <div class="floor-label-row">
+          <span class="floor-label-badge f${fl}">${FLOOR_LABELS[fl]}</span>
+          <span class="floor-label-line"></span>
+          <span class="floor-summary">${offices.length} room${offices.length!==1?'s':''}</span>
+        </div>
+        ${shared.length ? `<div class="offices-grid" style="margin-bottom:8px">${shared.map(o=>renderOfficeCard(o)).join('')}</div>` : ''}
+        ${cubs.length   ? `<div class="cubicles-grid">${cubs.map(o=>renderOfficeCard(o)).join('')}</div>` : ''}
+      </div>`;
+  });
+  col.innerHTML = html;
   addDropListeners();
 }
 
@@ -895,14 +973,6 @@ function occupantRow(fId) {
 }
 
 function renderMap() {
-  const hodO = oById('hod');
-  const tri1 = oById('tri1');
-  const tri2 = oById('tri2');
-  const tri3 = oById('tri3');
-  const fbi  = oById('fbi');
-  const bi1  = oById('bi1');
-  const bi2  = oById('bi2');
-  const cubs = OFFICES.filter(o=>o.type==='cub');
 
   function seatsOf(office) {
     let html = office.occupants.map(id => occupantRow(id)).join('');
@@ -911,94 +981,93 @@ function renderMap() {
     return html;
   }
 
-  // HoD
-  const hodRow = hodO.occupants.length > 0
-    ? `<div style="display:flex;align-items:center;gap:12px;flex:1">${occupantRow(hodO.occupants[0])}</div>`
-    : `<div class="map-empty" style="flex:1">— Empty —</div>`;
+  function roomCard(o, extraClass='') {
+    const headCls = o.type==='hod' ? 'h-hod' : o.type==='fbi' ? 'h-fbi' : 'h-std';
+    const roomCls = o.type==='hod' ? 'r-hod' : o.type==='fbi' ? 'r-fbi' : '';
+    const prefix  = o.type==='fbi' ? '♀ ' : o.type==='hod' ? '🏛 ' : '';
+    const capSpan = `<span class="room-cap">${o.occupants.length}/${o.capacity}</span>`;
+    return `
+      <div class="room ${roomCls} ${extraClass}">
+        <div class="room-head ${headCls}">
+          <span class="room-name-text" id="rname-${o.id}">${prefix}${o.label}</span>
+          <button class="edit-name-btn" onclick="startRenameMap('${o.id}')" title="Rename">✎</button>
+          ${o.type!=='hod'?capSpan:''}
+        </div>
+        <div class="room-body${o.type==='hod'?' hod-body':''}">${
+          o.type==='hod'
+            ? (o.occupants.length>0 ? `<div style="display:flex;align-items:center;flex:1">${occupantRow(o.occupants[0])}</div>` : `<div class="map-empty" style="flex:1">— Empty —</div>`)
+            : seatsOf(o)
+        }</div>
+      </div>`;
+  }
 
-  const cubsHTML = cubs.map((c,i) => {
-    const fId = c.occupants[0];
+  function cubCell(o) {
+    const fId = o.occupants[0];
     if (fId) {
       const f = fById(fId);
       return `<div class="cub-cell occ">
-        <div class="cub-num">C${i+1}</div>
-        <div class="avatar ${rankClass(f.rank)}" style="width:26px;height:26px;font-size:.58rem;margin:0 auto 4px">${initials(f.name)}</div>
-        <div class="cub-name">${f.name}</div>
-        ${f.sen != null ? `<div style="font-size:.55rem;font-weight:700;color:var(--primary);margin-top:2px">#${f.sen}</div>` : ''}
+        <div class="cub-num" style="display:flex;align-items:center;justify-content:space-between">
+          <span>${o.label}</span>
+          <button class="edit-name-btn" style="opacity:.5;font-size:10px" onclick="startRenameMap('${o.id}')" title="Rename">✎</button>
+        </div>
+        <div class="avatar ${rankClass(f.rank)}" style="width:28px;height:28px;font-size:.58rem;margin:4px auto">${initials(f.name)}</div>
+        <div class="cub-name">${f.name.replace(/^(Dr\.?|Col\.?)\s*/i,'')}</div>
+        ${f.sen!=null?`<div style="font-size:.55rem;font-weight:700;color:var(--primary);margin-top:2px">#${f.sen}</div>`:''}
         <div class="sdot d-${f.status}" style="margin:4px auto 0"></div>
       </div>`;
     } else {
       return `<div class="cub-cell emp">
-        <div class="cub-num">C${i+1}</div>
-        <div class="cub-name emp-text">Empty</div>
+        <div class="cub-num" style="display:flex;align-items:center;justify-content:space-between">
+          <span>${o.label}</span>
+          <button class="edit-name-btn" style="opacity:.5;font-size:10px" onclick="startRenameMap('${o.id}')" title="Rename">✎</button>
+        </div>
+        <div class="cub-name emp-text" style="margin-top:10px">Empty</div>
       </div>`;
     }
-  }).join('');
+  }
 
-  document.getElementById('floorGrid').innerHTML = `
-    <div class="room r-hod">
-      <div class="room-head h-hod">
-        <span class="room-name-text" id="rname-hod">🏛 ${hodO.label}</span>
-        <button class="edit-name-btn" onclick="startRenameMap('hod')" title="Rename">✎</button>
-      </div>
-      <div class="room-body hod-body">${hodRow}</div>
-    </div>
-    <div class="room r-tri1">
-      <div class="room-head h-std">
-        <span class="room-name-text" id="rname-tri1">${tri1.label}</span>
-        <button class="edit-name-btn" onclick="startRenameMap('tri1')" title="Rename">✎</button>
-        <span class="room-cap">${tri1.occupants.length}/${tri1.capacity}</span>
-      </div>
-      <div class="room-body">${seatsOf(tri1)}</div>
-    </div>
-    <div class="room r-tri2">
-      <div class="room-head h-std">
-        <span class="room-name-text" id="rname-tri2">${tri2.label}</span>
-        <button class="edit-name-btn" onclick="startRenameMap('tri2')" title="Rename">✎</button>
-        <span class="room-cap">${tri2.occupants.length}/${tri2.capacity}</span>
-      </div>
-      <div class="room-body">${seatsOf(tri2)}</div>
-    </div>
-    <div class="room r-tri3">
-      <div class="room-head h-std">
-        <span class="room-name-text" id="rname-tri3">${tri3.label}</span>
-        <button class="edit-name-btn" onclick="startRenameMap('tri3')" title="Rename">✎</button>
-        <span class="room-cap">${tri3.occupants.length}/${tri3.capacity}</span>
-      </div>
-      <div class="room-body">${seatsOf(tri3)}</div>
-    </div>
-    <div class="room r-bi1">
-      <div class="room-head h-std">
-        <span class="room-name-text" id="rname-bi1">${bi1.label}</span>
-        <button class="edit-name-btn" onclick="startRenameMap('bi1')" title="Rename">✎</button>
-        <span class="room-cap">${bi1.occupants.length}/${bi1.capacity}</span>
-      </div>
-      <div class="room-body">${seatsOf(bi1)}</div>
-    </div>
-    <div class="room r-bi2">
-      <div class="room-head h-std">
-        <span class="room-name-text" id="rname-bi2">${bi2.label}</span>
-        <button class="edit-name-btn" onclick="startRenameMap('bi2')" title="Rename">✎</button>
-        <span class="room-cap">${bi2.occupants.length}/${bi2.capacity}</span>
-      </div>
-      <div class="room-body">${seatsOf(bi2)}</div>
-    </div>
-    <div class="room r-fbi">
-      <div class="room-head h-fbi">
-        <span class="room-name-text" id="rname-fbi">♀ ${fbi.label}</span>
-        <button class="edit-name-btn" onclick="startRenameMap('fbi')" title="Rename">✎</button>
-        <span class="room-cap">${fbi.occupants.length}/${fbi.capacity}</span>
-      </div>
-      <div class="room-body">${seatsOf(fbi)}</div>
-    </div>
-    <div class="room r-cubs">
-      <div class="room-head h-std">
-        <span class="room-name-text">Cubicles (×7)</span>
-        <span class="room-cap">${cubs.filter(c=>c.occupants.length>0).length}/7</span>
-      </div>
-      <div class="cubs-map-grid">${cubsHTML}</div>
-    </div>
-  `;
+  const FLOOR_META = [
+    { fl:1, name:'Ground Floor',  icon:'🏢', note:'Faculty offices' },
+    { fl:2, name:'Second Floor',  icon:'🏛',  note:'Administration & shared offices' },
+    { fl:3, name:'Third Floor',   icon:'📐',  note:'Shared offices' },
+  ];
+
+  let html = '';
+  FLOOR_META.forEach(({fl, name, icon, note}) => {
+    const flOffices = OFFICES.filter(o=>o.floor===fl);
+    const shared    = flOffices.filter(o=>o.type!=='cub');
+    const cubs      = flOffices.filter(o=>o.type==='cub');
+    const totalSeats = flOffices.reduce((a,o)=>a+o.capacity,0);
+    const occupied   = flOffices.reduce((a,o)=>a+o.occupants.length,0);
+
+    let roomsHTML = '';
+    if (shared.length) {
+      roomsHTML += `<div style="display:grid;grid-template-columns:repeat(${Math.min(shared.length,3)},1fr);gap:10px;margin-bottom:${cubs.length?'10px':'0'}">
+        ${shared.map(o=>roomCard(o)).join('')}
+      </div>`;
+    }
+    if (cubs.length) {
+      roomsHTML += `<div class="cubs-map-grid" style="grid-template-columns:repeat(${cubs.length},1fr)">
+        ${cubs.map(o=>cubCell(o)).join('')}
+      </div>`;
+    }
+
+    html += `
+      <div class="floor-section">
+        <div class="floor-band">
+          <div class="floor-tab f${fl}">${icon} ${name}</div>
+          <div style="flex:1;padding:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+              <span style="font-size:.72rem;color:var(--muted)">${note}</span>
+              <span style="font-size:.7rem;font-weight:600;color:var(--primary);background:var(--surface2);padding:2px 8px;border-radius:10px">${occupied}/${totalSeats} seats</span>
+            </div>
+            ${roomsHTML}
+          </div>
+        </div>
+      </div>`;
+  });
+
+  document.getElementById('floorGrid').innerHTML = html;
 
   // Unassigned section
   document.getElementById('unaGrid').innerHTML = UNASSIGNED.map(fId => {
