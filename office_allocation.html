@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChE Office Allocation — NUST</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0ece3;
+  --surface: #ffffff;
+  --surface2: #f8f6f2;
+  --primary: #1b3d28;
+  --primary-lt: #2a5c3d;
+  --primary-dim: #e8f0eb;
+  --accent: #b8952a;
+  --accent-lt: #fdf3d8;
+  --pink: #be185d;
+  --pink-lt: #fdf2f8;
+  --text: #1c1917;
+  --muted: #78716c;
+  --border: #e2ddd7;
+  --in: #15803d;
+  --leave: #b45309;
+  --retired: #9ca3af;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* HEADER */
+header {
+  background: var(--primary);
+  color: white;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hdr-left h1 { font-family: 'Lora', serif; font-size: 1.25rem; font-weight: 700; letter-spacing: .01em; }
+.hdr-left p { font-size: 0.75rem; opacity: .65; margin-top: 2px; }
+.hdr-badge {
+  background: var(--accent);
+  color: #3d2800;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: .04em;
+}
+
+/* STATS BAR */
+.stats-bar {
+  background: var(--primary-lt);
+  display: flex;
+  gap: 0;
+  padding: 0 28px;
+  overflow-x: auto;
+}
+.stat {
+  padding: 9px 20px 9px 0;
+  margin-right: 20px;
+  border-right: 1px solid rgba(255,255,255,.15);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  color: rgba(255,255,255,.8);
+  font-size: 0.76rem;
+}
+.stat:last-child { border-right: none; }
+.stat strong { font-size: 1.15rem; font-weight: 600; color: white; }
+
+/* TABS */
+.tab-bar {
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  padding: 0 28px;
+  display: flex;
+  gap: 4px;
+}
+.tab-btn {
+  padding: 13px 20px;
+  font-size: 0.83rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all .15s;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: .01em;
+}
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--accent); font-weight: 600; }
+.tab-btn:hover:not(.active) { color: var(--text); }
+
+/* MAIN */
+.main { padding: 24px 28px; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* LEGEND */
+.legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ALLOCATION LAYOUT */
+.alloc-layout { display: grid; grid-template-columns: 1fr 260px; gap: 20px; align-items: start; }
+.offices-col {}
+.sidebar-col { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 14px; }
+
+/* OFFICE GROUP */
+.grp-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.grp-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.office-group { margin-bottom: 22px; }
+
+.offices-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.cubicles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+
+/* OFFICE CARD */
+.ocard {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow .15s, border-color .15s;
+}
+.ocard:hover { box-shadow: var(--shadow-md); }
+.ocard.dragover { border-color: var(--accent); background: var(--accent-lt); }
+
+.ocard-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 11px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  gap: 6px;
+}
+.ocard-head.hod-head { background: var(--accent); }
+.ocard-head.hod-head .oname { color: #3d2800; }
+.ocard-head.hod-head .ocap { background: rgba(0,0,0,.15); color: #3d2800; }
+.ocard-head.hod-head .edit-name-btn { color: #7a5000; }
+.ocard-head.fbi-head { background: var(--pink-lt); border-bottom-color: #fbcfe8; }
+.ocard-head.fbi-head .oname { color: var(--pink); }
+.ocard-head.fbi-head .edit-name-btn { color: var(--pink); }
+
+.oname-wrap { display: flex; align-items: center; gap: 4px; flex: 1; min-width: 0; }
+.oname { font-size: 0.76rem; font-weight: 600; color: var(--primary); }
+.oname-input {
+  font-size: 0.76rem; font-weight: 600; color: var(--primary);
+  border: none; outline: none; background: transparent;
+  border-bottom: 1.5px solid var(--accent);
+  padding: 1px 2px; width: 100%; font-family: 'DM Sans', sans-serif;
+}
+.edit-name-btn {
+  background: none; border: none; cursor: pointer; color: var(--muted);
+  font-size: 11px; padding: 0 2px; opacity: 0; transition: opacity .15s;
+  flex-shrink: 0; line-height: 1;
+}
+.ocard-head:hover .edit-name-btn,
+.room-head:hover .edit-name-btn { opacity: 1; }
+.edit-name-btn:hover { opacity: 1 !important; color: var(--accent); }
+
+.ocap { font-size: 0.65rem; color: var(--muted); background: var(--border); padding: 2px 6px; border-radius: 10px; flex-shrink: 0; }
+.ocard-body { padding: 7px; display: flex; flex-direction: column; gap: 5px; min-height: 44px; }
+
+/* SEAT SLOT */
+.seat {
+  border: 1.5px dashed var(--border);
+  border-radius: 6px;
+  min-height: 38px;
+  display: flex;
+  align-items: flex-start;
+  padding: 6px 8px;
+  transition: all .15s;
+  gap: 8px;
+  position: relative;
+}
+.seat.filled { border-style: solid; border-color: var(--border); background: var(--surface2); }
+.seat.dragover { border-color: var(--accent) !important; background: var(--accent-lt) !important; }
+.seat.empty-slot { align-items: center; }
+.seat.empty-slot:hover { border-color: var(--primary); background: var(--primary-dim); cursor: pointer; }
+
+/* FACULTY CHIP */
+.chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  width: 100%;
+  cursor: grab;
+  user-select: none;
+}
+.chip:active { cursor: grabbing; }
+.chip.dragging-source { opacity: .3; }
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  color: white;
+  letter-spacing: -.01em;
+  margin-top: 1px;
+}
+.av-hod { background: var(--primary); }
+.av-prof { background: #7c3aed; }
+.av-assoc { background: #0369a1; }
+.av-asst { background: #0891b2; }
+
+.chip-info { flex: 1; min-width: 0; }
+.chip-name { font-size: 0.77rem; font-weight: 500; color: var(--text); line-height: 1.35; word-break: break-word; white-space: normal; }
+.chip-sub { font-size: 0.62rem; color: var(--muted); margin-top: 1px; }
+
+.sdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.d-in { background: var(--in); }
+.d-leave { background: var(--leave); }
+.d-retired { background: var(--retired); }
+
+.rm-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 0 2px;
+  font-size: 14px;
+  line-height: 1;
+  display: none;
+  opacity: .5;
+  transition: opacity .1s;
+}
+.seat.filled:hover .rm-btn { display: block; }
+.rm-btn:hover { opacity: 1; color: #dc2626; }
+
+/* SIDEBAR PANELS */
+.panel {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.panel-head {
+  padding: 9px 12px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.panel-count { font-size: 0.68rem; font-weight: 400; color: var(--muted); }
+.panel-body { padding: 8px; min-height: 60px; display: flex; flex-direction: column; gap: 5px; }
+.panel-body.dragover { background: var(--accent-lt); }
+
+.pool-item {
+  border: 1.5px dashed var(--border);
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: grab;
+  transition: all .15s;
+  user-select: none;
+  background: var(--surface);
+}
+.pool-item:hover { border-color: var(--muted); box-shadow: var(--shadow); }
+.pool-item.dragging-source { opacity: .3; }
+
+.pool-empty {
+  text-align: center;
+  padding: 16px;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* FLOOR MAP */
+.map-container {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.map-title {
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.map-subtitle { font-size: 0.74rem; color: var(--muted); margin-bottom: 20px; }
+
+.floor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Room layouts */
+.room {
+  border: 2px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+  background: white;
+  transition: box-shadow .15s;
+}
+.room:hover { box-shadow: var(--shadow-md); }
+
+.room.r-hod { grid-column: 1 / 4; border-color: var(--accent); }
+.room.r-fbi { border-color: var(--pink); }
+.room.r-cubs { grid-column: 1 / 4; }
+
+.room-head {
+  padding: 6px 12px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.room-head.h-hod { background: var(--accent); color: #3d2800; border: none; }
+.room-head.h-std { background: var(--surface2); color: var(--primary); }
+.room-head.h-fbi { background: var(--pink-lt); color: var(--pink); border-bottom-color: #fbcfe8; }
+.room-head.h-fbi .edit-name-btn { color: var(--pink); }
+.room-name-text { flex: 1; }
+.room-name-input {
+  flex: 1; font-size: 0.68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  border: none; outline: none; background: transparent;
+  border-bottom: 1.5px solid var(--accent); padding: 1px 2px;
+  font-family: 'DM Sans', sans-serif; color: inherit; min-width: 0;
+}
+.room-cap { margin-left: auto; font-weight: 400; font-size: 0.65rem; opacity: .6; letter-spacing: 0; text-transform: none; flex-shrink: 0; }
+
+.room-body { padding: 10px 12px; display: flex; flex-direction: column; gap: 5px; }
+.room-body.hod-body { flex-direction: row; align-items: center; gap: 16px; padding: 10px 20px; }
+
+.map-occupant {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 0.77rem;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: var(--surface2);
+}
+.map-occupant .occ-name { font-weight: 500; line-height: 1.35; flex: 1; word-break: break-word; }
+.map-empty {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.72rem;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px dashed var(--border);
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Cubicles in map */
+.cubs-map-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  padding: 10px 12px;
+}
+.cub-cell {
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  padding: 8px 6px;
+  text-align: center;
+}
+.cub-cell.occ { background: var(--surface2); }
+.cub-cell.emp { border-style: dashed; }
+.cub-num { font-size: 0.58rem; color: var(--muted); margin-bottom: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.cub-name { font-size: 0.68rem; font-weight: 500; line-height: 1.3; }
+.cub-name.emp-text { color: var(--muted); font-style: italic; }
+
+/* UNASSIGNED MAP section */
+.unassigned-map {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.unassigned-map h3 { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+.una-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+.una-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--primary);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  box-shadow: var(--shadow-md);
+  transform: translateY(60px);
+  opacity: 0;
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  z-index: 999;
+  max-width: 280px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* PRINT label */
+@media print {
+  .tab-bar, .stats-bar, header .hdr-badge, .legend { print-color-adjust: exact; }
+  .tab-content { display: block !important; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-left">
+    <h1>Department of Chemical Engineering</h1>
+    <p>Office Allocation &amp; Floor Map — NUST, Islamabad</p>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span id="saveStatus" style="font-size:.72rem;opacity:.6;"></span>
+    <button onclick="exportJSON()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:white;font-family:'DM Sans',sans-serif;font-size:.75rem;padding:5px 12px;border-radius:6px;cursor:pointer;">⬇ Export</button>
+    <label style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:white;font-family:'DM Sans',sans-serif;font-size:.75rem;padding:5px 12px;border-radius:6px;cursor:pointer;">
+      ⬆ Import <input type="file" accept=".json" onchange="importJSON(event)" style="display:none">
+    </label>
+    <button onclick="resetAll()" style="background:rgba(220,38,38,.3);border:1px solid rgba(220,38,38,.5);color:white;font-family:'DM Sans',sans-serif;font-size:.75rem;padding:5px 12px;border-radius:6px;cursor:pointer;">↺ Reset</button>
+  </div>
+</header>
+
+<div class="stats-bar" id="statsBar"></div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('map')">🗺 Floor Map</button>
+  <button class="tab-btn" onclick="switchTab('alloc')">⚙️ Allocation Manager</button>
+</div>
+
+<div class="main">
+  <!-- FLOOR MAP TAB -->
+  <div id="tab-map" class="tab-content active">
+    <div class="legend">
+      <div class="legend-item"><div class="leg-dot d-in"></div> In Service</div>
+      <div class="legend-item"><div class="leg-dot d-leave"></div> On Leave</div>
+      <div class="legend-item"><div class="leg-dot d-retired"></div> Retired / NA</div>
+      <div class="legend-item"><div class="leg-dot" style="background:#7c3aed"></div> Professor</div>
+      <div class="legend-item"><div class="leg-dot" style="background:#0369a1"></div> Associate Prof</div>
+      <div class="legend-item"><div class="leg-dot" style="background:#0891b2"></div> Asst Prof</div>
+    </div>
+    <div class="map-container">
+      <div class="map-title">Departmental Office Floor Plan</div>
+      <div class="map-subtitle">Drag-and-drop allocation available in the Allocation Manager tab. This view reflects current state.</div>
+      <div class="floor-grid" id="floorGrid"></div>
+      <div class="unassigned-map">
+        <h3>Unassigned / Off Campus</h3>
+        <div class="una-grid" id="unaGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALLOCATION MANAGER TAB -->
+  <div id="tab-alloc" class="tab-content">
+    <div class="legend">
+      <div class="legend-item"><div class="leg-dot d-in"></div> In Service</div>
+      <div class="legend-item"><div class="leg-dot d-leave"></div> On Leave</div>
+      <div class="legend-item"><div class="leg-dot d-retired"></div> Retired / NA</div>
+      <div class="legend-item" style="font-style:italic;color:var(--muted)">Drag faculty cards between offices · Click ✕ to unassign</div>
+    </div>
+    <div class="alloc-layout">
+      <div class="offices-col" id="officesCol"></div>
+      <div class="sidebar-col" id="sidebarCol"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─────────────── DATA ───────────────
+const FACULTY = [
+  { id:'f01', name:'Dr. Iftikhar Ahmad',        rank:'HoD',           status:'in',      sen:null,  gender:'m' },
+  { id:'f02', name:'Dr. Asad Ullah Khan',        rank:'Professor',     status:'retired', sen:1,     gender:'m' },
+  { id:'f03', name:'Dr. Tayyaba Noor',           rank:'Associate Prof',status:'in',      sen:2,     gender:'f' },
+  { id:'f04', name:'Dr. M Nouman Aslam Khan',    rank:'Associate Prof',status:'in',      sen:3,     gender:'m' },
+  { id:'f05', name:'Dr. Muhammad Ahsan',         rank:'Associate Prof',status:'in',      sen:4,     gender:'m' },
+  { id:'f06', name:'Dr. Muhammad Salman Haider', rank:'Associate Prof',status:'in',      sen:5,     gender:'m' },
+  { id:'f07', name:'Dr. Ayesha Raza',            rank:'Asst Prof',     status:'in',      sen:6,     gender:'f' },
+  { id:'f08', name:'Dr. Umair Sikander',         rank:'Asst Prof',     status:'in',      sen:7,     gender:'m' },
+  { id:'f09', name:'Dr. Syed Rafay Hussain Jafri',rank:'Asst Prof',   status:'in',      sen:8,     gender:'m' },
+  { id:'f10', name:'Dr. Muhammad Siyar',         rank:'Asst Prof',     status:'leave',   sen:9,     gender:'m' },
+  { id:'f11', name:'Dr. Nouman Ahmad',           rank:'Asst Prof',     status:'in',      sen:10,    gender:'m' },
+  { id:'f12', name:'Dr. Haider Ejaz',            rank:'Asst Prof',     status:'in',      sen:11,    gender:'m' },
+  { id:'f13', name:'Dr. M Tajmeel Feroze',       rank:'Asst Prof',     status:'in',      sen:12,    gender:'m' },
+  { id:'f14', name:'Dr. M. Zia Ul Mustafa',      rank:'Asst Prof',     status:'in',      sen:13,    gender:'m' },
+  { id:'f15', name:'Dr. Humanyun Nadeem',        rank:'Asst Prof',     status:'in',      sen:14,    gender:'m' },
+  { id:'f16', name:'Dr. Mutawara Mahmood Baig',  rank:'Asst Prof',     status:'in',      sen:15,    gender:'f' },
+  { id:'f17', name:'Dr. Muhammad Sajid',         rank:'Asst Prof',     status:'in',      sen:16,    gender:'m' },
+  { id:'f18', name:'Dr. Zia Ur Rahman',          rank:'Asst Prof',     status:'in',      sen:17,    gender:'m' },
+  { id:'f19', name:'Dr. Erum Pervaiz',           rank:'Professor',     status:'leave',   sen:null,  gender:'f' },
+  { id:'f20', name:'Col. Nadeem Ehsan',          rank:'Asst Prof',     status:'retired', sen:null,  gender:'m' },
+];
+
+const OFFICES = [
+  { id:'hod',  label:'HoD Office',      type:'hod', capacity:1,  gender:null, occupants:['f01'] },
+  { id:'tri1', label:'Tri-Seater A',    type:'tri', capacity:3,  gender:null, occupants:['f18','f17'] },
+  { id:'tri2', label:'Tri-Seater B',    type:'tri', capacity:3,  gender:null, occupants:['f15','f14'] },
+  { id:'tri3', label:'Tri-Seater C',    type:'tri', capacity:3,  gender:null, occupants:['f16'] },
+  { id:'bi1',  label:'Bi-Seater A',     type:'bi',  capacity:2,  gender:null, occupants:['f13','f12'] },
+  { id:'bi2',  label:'Bi-Seater B',     type:'bi',  capacity:2,  gender:null, occupants:['f11','f09'] },
+  { id:'fbi',  label:'Female Bi-Seater',type:'fbi', capacity:2,  gender:'f',  occupants:['f07'] },
+  { id:'c1',   label:'Cubicle 1',       type:'cub', capacity:1,  gender:null, occupants:['f08'] },
+  { id:'c2',   label:'Cubicle 2',       type:'cub', capacity:1,  gender:null, occupants:['f06'] },
+  { id:'c3',   label:'Cubicle 3',       type:'cub', capacity:1,  gender:null, occupants:['f05'] },
+  { id:'c4',   label:'Cubicle 4',       type:'cub', capacity:1,  gender:null, occupants:['f04'] },
+  { id:'c5',   label:'Cubicle 5',       type:'cub', capacity:1,  gender:null, occupants:['f03'] },
+  { id:'c6',   label:'Cubicle 6',       type:'cub', capacity:1,  gender:null, occupants:['f19'] },
+  { id:'c7',   label:'Cubicle 7',       type:'cub', capacity:1,  gender:null, occupants:[] },
+];
+
+// faculty not in any office
+let UNASSIGNED = ['f10','f20','f02'];
+
+// ─────────────── HELPERS ───────────────
+function fById(id) { return FACULTY.find(f => f.id === id); }
+function oById(id) { return OFFICES.find(o => o.id === id); }
+
+function rankClass(rank) {
+  if (rank === 'HoD') return 'av-hod';
+  if (rank === 'Professor') return 'av-prof';
+  if (rank === 'Associate Prof') return 'av-assoc';
+  return 'av-asst';
+}
+function initials(name) {
+  return name.replace(/^(Dr\.?|Col\.?)\s*/i,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+}
+function statusDot(status) {
+  return `<div class="sdot d-${status}"></div>`;
+}
+function rankShort(rank) {
+  if (rank==='HoD') return 'Head of Department';
+  if (rank==='Associate Prof') return 'Associate Professor';
+  if (rank==='Asst Prof') return 'Asst. Professor';
+  return rank;
+}
+
+// ─────────────── RENAME OFFICE ───────────────
+function startRenameCard(officeId) {
+  const o = oById(officeId);
+  const wrap = document.getElementById('oname-wrap-'+officeId);
+  if (!wrap) return;
+  wrap.innerHTML = `<input class="oname-input" id="oname-input-${officeId}"
+    value="${o.label}" maxlength="40"
+    onblur="commitRename('${officeId}')"
+    onkeydown="if(event.key==='Enter')this.blur();if(event.key==='Escape'){this.value='${o.label}';this.blur();}" />`;
+  const inp = document.getElementById('oname-input-'+officeId);
+  inp.focus(); inp.select();
+}
+
+function commitRename(officeId) {
+  const inp = document.getElementById('oname-input-'+officeId);
+  if (!inp) return;
+  const o = oById(officeId);
+  const newName = inp.value.trim() || o.label;
+  o.label = newName;
+  saveState();
+  renderAllocation();
+  renderMap();
+}
+
+function startRenameMap(officeId) {
+  const o = oById(officeId);
+  const span = document.getElementById('rname-'+officeId);
+  if (!span) return;
+  const inp = document.createElement('input');
+  inp.className = 'room-name-input';
+  inp.value = o.label;
+  inp.maxLength = 40;
+  const prefix = officeId === 'hod' ? '🏛 ' : officeId === 'fbi' ? '♀ ' : '';
+  inp.onblur = () => {
+    const newLabel = inp.value.trim() || o.label;
+    o.label = newLabel;
+    saveState();
+    renderAllocation();
+    renderMap();
+  };
+  inp.onkeydown = (e) => { if(e.key==='Enter') inp.blur(); if(e.key==='Escape'){inp.value=o.label;inp.blur();} };
+  span.replaceWith(inp);
+  inp.focus(); inp.select();
+}
+
+
+
+// ─────────────── STATE ───────────────
+let dragFacultyId = null;
+let dragSourceOfficeId = null; // null = from pool
+function renderStats() {
+  const allOccupants = OFFICES.flatMap(o=>o.occupants);
+  const totalSeats = OFFICES.reduce((a,o)=>a+o.capacity,0);
+  const occupied = allOccupants.length;
+  const inService = FACULTY.filter(f=>f.status==='in' && allOccupants.includes(f.id)).length;
+  const onLeave = FACULTY.filter(f=>f.status==='leave').length;
+  const pct = Math.round(occupied/totalSeats*100);
+
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat"><strong>${FACULTY.length}</strong> Total Faculty</div>
+    <div class="stat"><strong>${inService}</strong> In Service (assigned)</div>
+    <div class="stat"><strong>${onLeave}</strong> On Leave</div>
+    <div class="stat"><strong>${occupied}/${totalSeats}</strong> Seats Occupied</div>
+    <div class="stat"><strong>${pct}%</strong> Occupancy</div>
+    <div class="stat"><strong>${UNASSIGNED.length}</strong> Unassigned</div>
+  `;
+}
+
+// ─────────────── ALLOCATION MANAGER ───────────────
+function renderAllocation() {
+  renderOfficesCol();
+  renderSidebar();
+  renderStats();
+}
+
+function chipHTML(facultyId, sourceOfficeId) {
+  const f = fById(facultyId);
+  const senBadge = f.sen != null
+    ? `<span style="font-size:.6rem;font-weight:700;background:var(--primary-dim);color:var(--primary);padding:1px 5px;border-radius:8px;flex-shrink:0">#${f.sen}</span>`
+    : '';
+  return `
+    <div class="chip" draggable="true" id="chip-${facultyId}"
+      ondragstart="onChipDragStart(event,'${facultyId}','${sourceOfficeId}')"
+      ondragend="onChipDragEnd(event,'${facultyId}')">
+      <div class="avatar ${rankClass(f.rank)}">${initials(f.name)}</div>
+      <div class="chip-info">
+        <div class="chip-name" title="${f.name}">${f.name.replace(/^Dr\.? /,'Dr. ')}</div>
+        <div class="chip-sub">${rankShort(f.rank)}</div>
+      </div>
+      ${senBadge}
+      ${statusDot(f.status)}
+    </div>`;
+}
+
+function renderOfficesCol() {
+  const col = document.getElementById('officesCol');
+  const hodOffice = OFFICES.find(o=>o.type==='hod');
+  const triOffices = OFFICES.filter(o=>o.type==='tri');
+  const biOffices = OFFICES.filter(o=>o.type==='bi');
+  const fbiOffice = OFFICES.find(o=>o.type==='fbi');
+  const cubOffices = OFFICES.filter(o=>o.type==='cub');
+
+  col.innerHTML = `
+    ${renderGroup('HoD Office', [hodOffice], 'offices-grid')}
+    ${renderGroup('Shared Offices', [...triOffices, ...biOffices, fbiOffice], 'offices-grid')}
+    ${renderGroup('Cubicles', cubOffices, 'cubicles-grid')}
+  `;
+  addDropListeners();
+}
+
+function renderGroup(label, offices, gridClass) {
+  return `
+    <div class="office-group">
+      <div class="grp-label">${label}</div>
+      <div class="${gridClass}">
+        ${offices.map(o => renderOfficeCard(o)).join('')}
+      </div>
+    </div>`;
+}
+
+function renderOfficeCard(office) {
+  const headClass = office.type==='hod' ? 'hod-head' : office.type==='fbi' ? 'fbi-head' : '';
+  const fillRate = office.occupants.length < office.capacity ? 'partial' : 'full';
+  const slots = [];
+  for (let i=0; i<office.capacity; i++) {
+    const fId = office.occupants[i];
+    if (fId) {
+      const f = fById(fId);
+      slots.push(`
+        <div class="seat filled" data-office="${office.id}" data-slot="${i}"
+          ondragover="onSeatDragOver(event)" ondragleave="onSeatDragLeave(event)"
+          ondrop="onSeatDrop(event,'${office.id}','${i}')">
+          ${chipHTML(fId, office.id)}
+          <button class="rm-btn" onclick="unassignFaculty('${fId}','${office.id}')" title="Unassign">✕</button>
+        </div>`);
+    } else {
+      slots.push(`
+        <div class="seat empty-slot" data-office="${office.id}" data-slot="${i}"
+          ondragover="onSeatDragOver(event)" ondragleave="onSeatDragLeave(event)"
+          ondrop="onSeatDrop(event,'${office.id}','${i}')">
+          <span style="font-size:.72rem;color:var(--muted);font-style:italic;padding-left:8px">Empty seat</span>
+        </div>`);
+    }
+  }
+  const capLabel = `${office.occupants.length}/${office.capacity}`;
+  return `
+    <div class="ocard" id="ocard-${office.id}"
+      ondragover="onCardDragOver(event,'${office.id}')"
+      ondragleave="onCardDragLeave(event,'${office.id}')"
+      ondrop="onCardDrop(event,'${office.id}')">
+      <div class="ocard-head ${headClass}">
+        <div class="oname-wrap" id="oname-wrap-${office.id}">
+          <span class="oname">${office.label}</span>
+          <button class="edit-name-btn" onclick="startRenameCard('${office.id}')" title="Rename">✎</button>
+        </div>
+        <span class="ocap">${capLabel}</span>
+      </div>
+      <div class="ocard-body">${slots.join('')}</div>
+    </div>`;
+}
+
+function renderSidebar() {
+  const col = document.getElementById('sidebarCol');
+  col.innerHTML = `
+    <div class="panel">
+      <div class="panel-head">
+        Unassigned / Off Campus
+        <span class="panel-count">${UNASSIGNED.length} faculty</span>
+      </div>
+      <div class="panel-body" id="poolBody"
+        ondragover="onPoolDragOver(event)"
+        ondragleave="onPoolDragLeave(event)"
+        ondrop="onPoolDrop(event)">
+        ${UNASSIGNED.length === 0
+          ? '<div class="pool-empty">All faculty assigned ✓</div>'
+          : UNASSIGNED.map(fId => {
+              const f = fById(fId);
+              return `<div class="pool-item" draggable="true" id="pool-${fId}"
+                ondragstart="onPoolDragStart(event,'${fId}')"
+                ondragend="onPoolDragEnd(event,'${fId}')">
+                <div class="avatar ${rankClass(f.rank)}">${initials(f.name)}</div>
+                <div class="chip-info">
+                  <div class="chip-name" title="${f.name}">${f.name}</div>
+                  <div class="chip-sub">${rankShort(f.rank)} · ${f.status==='leave'?'On Leave':f.status==='retired'?'Retired':'In Service'}</div>
+                </div>
+                ${f.sen != null ? `<span style="font-size:.6rem;font-weight:700;background:var(--primary-dim);color:var(--primary);padding:1px 5px;border-radius:8px;flex-shrink:0">#${f.sen}</span>` : ''}
+                ${statusDot(f.status)}
+              </div>`;
+            }).join('')}
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">Rank Legend</div>
+      <div class="panel-body" style="gap:8px;padding:12px;">
+        ${[['HoD','av-hod','Head of Department'],['Professor','av-prof','Professor'],['Associate Prof','av-assoc','Associate Prof'],['Asst Prof','av-asst','Asst. Professor']].map(([r,cls,lbl])=>`
+          <div style="display:flex;align-items:center;gap:8px;font-size:.76rem;">
+            <div class="avatar ${cls}" style="width:20px;height:20px;font-size:.5rem;">●</div>
+            <span>${lbl}</span>
+          </div>`).join('')}
+        <div style="height:8px;border-top:1px solid var(--border);margin-top:4px;"></div>
+        ${[['d-in','In Service'],['d-leave','On Leave'],['d-retired','Retired']].map(([cls,lbl])=>`
+          <div style="display:flex;align-items:center;gap:8px;font-size:.76rem;">
+            <div class="sdot ${cls}"></div><span>${lbl}</span>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+// ─────────────── DRAG & DROP ───────────────
+function onChipDragStart(e, fId, officeId) {
+  dragFacultyId = fId;
+  dragSourceOfficeId = officeId;
+  setTimeout(()=>{ const el=document.getElementById('chip-'+fId); if(el) el.classList.add('dragging-source'); },0);
+  e.dataTransfer.effectAllowed = 'move';
+}
+function onChipDragEnd(e, fId) {
+  const el = document.getElementById('chip-'+fId);
+  if(el) el.classList.remove('dragging-source');
+}
+function onPoolDragStart(e, fId) {
+  dragFacultyId = fId;
+  dragSourceOfficeId = null;
+  setTimeout(()=>{ const el=document.getElementById('pool-'+fId); if(el) el.classList.add('dragging-source'); },0);
+  e.dataTransfer.effectAllowed = 'move';
+}
+function onPoolDragEnd(e, fId) {
+  const el = document.getElementById('pool-'+fId);
+  if(el) el.classList.remove('dragging-source');
+}
+
+function onSeatDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('dragover'); }
+function onSeatDragLeave(e) { e.currentTarget.classList.remove('dragover'); }
+function onCardDragOver(e, officeId) { e.preventDefault(); document.getElementById('ocard-'+officeId)?.classList.add('dragover'); }
+function onCardDragLeave(e, officeId) { document.getElementById('ocard-'+officeId)?.classList.remove('dragover'); }
+function onPoolDragOver(e) { e.preventDefault(); document.getElementById('poolBody')?.classList.add('dragover'); }
+function onPoolDragLeave(e) { document.getElementById('poolBody')?.classList.remove('dragover'); }
+
+function onSeatDrop(e, targetOfficeId, slotIdx) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('dragover');
+  moveFacultyToOffice(dragFacultyId, dragSourceOfficeId, targetOfficeId);
+}
+function onCardDrop(e, targetOfficeId) {
+  e.preventDefault();
+  document.getElementById('ocard-'+targetOfficeId)?.classList.remove('dragover');
+  moveFacultyToOffice(dragFacultyId, dragSourceOfficeId, targetOfficeId);
+}
+function onPoolDrop(e) {
+  e.preventDefault();
+  document.getElementById('poolBody')?.classList.remove('dragover');
+  if (!dragFacultyId) return;
+  unassignFaculty(dragFacultyId, dragSourceOfficeId);
+}
+
+function addDropListeners() {
+  // already handled via inline handlers
+}
+
+function moveFacultyToOffice(fId, srcOfficeId, tgtOfficeId) {
+  if (!fId) return;
+  const tgtOffice = oById(tgtOfficeId);
+  if (!tgtOffice) return;
+
+  // check capacity
+  if (tgtOffice.occupants.includes(fId)) { toast('Already in this office'); return; }
+  if (tgtOffice.occupants.length >= tgtOffice.capacity) { toast('Office is full!'); return; }
+
+  // gender check
+  const f = fById(fId);
+  if (tgtOffice.gender === 'f' && f.gender !== 'f') { toast('This is a female-only office'); return; }
+
+  // remove from source
+  if (srcOfficeId) {
+    const src = oById(srcOfficeId);
+    if (src) src.occupants = src.occupants.filter(id => id !== fId);
+  } else {
+    UNASSIGNED = UNASSIGNED.filter(id => id !== fId);
+  }
+
+  tgtOffice.occupants.push(fId);
+  const f2 = fById(fId);
+  toast(`${f2.name.replace(/^Dr\.?\s*/,'')} → ${tgtOffice.label}`);
+  renderAllocation();
+  renderMap();
+}
+
+function unassignFaculty(fId, officeId) {
+  if (officeId) {
+    const o = oById(officeId);
+    if (o) o.occupants = o.occupants.filter(id => id !== fId);
+  }
+  if (!UNASSIGNED.includes(fId)) UNASSIGNED.push(fId);
+  const f = fById(fId);
+  toast(`${f.name.replace(/^Dr\.?\s*/,'')} unassigned`);
+  renderAllocation();
+  renderMap();
+}
+
+// ─────────────── FLOOR MAP ───────────────
+function occupantRow(fId) {
+  const f = fById(fId);
+  const senBadge = f.sen != null
+    ? `<span style="font-size:.58rem;font-weight:700;background:var(--primary-dim);color:var(--primary);padding:1px 5px;border-radius:8px;flex-shrink:0;margin-top:2px">#${f.sen}</span>`
+    : '';
+  return `<div class="map-occupant">
+    <div class="avatar ${rankClass(f.rank)}" style="width:22px;height:22px;font-size:.5rem;margin-top:1px;flex-shrink:0">${initials(f.name)}</div>
+    <span class="occ-name">${f.name}</span>
+    ${senBadge}
+    <div class="sdot d-${f.status}" style="margin-left:4px;flex-shrink:0;margin-top:4px"></div>
+  </div>`;
+}
+
+function renderMap() {
+  const hodO = oById('hod');
+  const tri1 = oById('tri1');
+  const tri2 = oById('tri2');
+  const tri3 = oById('tri3');
+  const fbi  = oById('fbi');
+  const bi1  = oById('bi1');
+  const bi2  = oById('bi2');
+  const cubs = OFFICES.filter(o=>o.type==='cub');
+
+  function seatsOf(office) {
+    let html = office.occupants.map(id => occupantRow(id)).join('');
+    const empty = office.capacity - office.occupants.length;
+    for (let i=0; i<empty; i++) html += `<div class="map-empty">— Empty seat —</div>`;
+    return html;
+  }
+
+  // HoD
+  const hodRow = hodO.occupants.length > 0
+    ? `<div style="display:flex;align-items:center;gap:12px;flex:1">${occupantRow(hodO.occupants[0])}</div>`
+    : `<div class="map-empty" style="flex:1">— Empty —</div>`;
+
+  const cubsHTML = cubs.map((c,i) => {
+    const fId = c.occupants[0];
+    if (fId) {
+      const f = fById(fId);
+      return `<div class="cub-cell occ">
+        <div class="cub-num">C${i+1}</div>
+        <div class="avatar ${rankClass(f.rank)}" style="width:26px;height:26px;font-size:.58rem;margin:0 auto 4px">${initials(f.name)}</div>
+        <div class="cub-name">${f.name.replace(/^(Dr\.?|Col\.?)\s*/i,'')}</div>
+        ${f.sen != null ? `<div style="font-size:.55rem;font-weight:700;color:var(--primary);margin-top:2px">#${f.sen}</div>` : ''}
+        <div class="sdot d-${f.status}" style="margin:4px auto 0"></div>
+      </div>`;
+    } else {
+      return `<div class="cub-cell emp">
+        <div class="cub-num">C${i+1}</div>
+        <div class="cub-name emp-text">Empty</div>
+      </div>`;
+    }
+  }).join('');
+
+  document.getElementById('floorGrid').innerHTML = `
+    <div class="room r-hod">
+      <div class="room-head h-hod">
+        <span class="room-name-text" id="rname-hod">🏛 ${hodO.label}</span>
+        <button class="edit-name-btn" onclick="startRenameMap('hod')" title="Rename">✎</button>
+      </div>
+      <div class="room-body hod-body">${hodRow}</div>
+    </div>
+    <div class="room r-tri1">
+      <div class="room-head h-std">
+        <span class="room-name-text" id="rname-tri1">${tri1.label}</span>
+        <button class="edit-name-btn" onclick="startRenameMap('tri1')" title="Rename">✎</button>
+        <span class="room-cap">${tri1.occupants.length}/${tri1.capacity}</span>
+      </div>
+      <div class="room-body">${seatsOf(tri1)}</div>
+    </div>
+    <div class="room r-tri2">
+      <div class="room-head h-std">
+        <span class="room-name-text" id="rname-tri2">${tri2.label}</span>
+        <button class="edit-name-btn" onclick="startRenameMap('tri2')" title="Rename">✎</button>
+        <span class="room-cap">${tri2.occupants.length}/${tri2.capacity}</span>
+      </div>
+      <div class="room-body">${seatsOf(tri2)}</div>
+    </div>
+    <div class="room r-tri3">
+      <div class="room-head h-std">
+        <span class="room-name-text" id="rname-tri3">${tri3.label}</span>
+        <button class="edit-name-btn" onclick="startRenameMap('tri3')" title="Rename">✎</button>
+        <span class="room-cap">${tri3.occupants.length}/${tri3.capacity}</span>
+      </div>
+      <div class="room-body">${seatsOf(tri3)}</div>
+    </div>
+    <div class="room r-bi1">
+      <div class="room-head h-std">
+        <span class="room-name-text" id="rname-bi1">${bi1.label}</span>
+        <button class="edit-name-btn" onclick="startRenameMap('bi1')" title="Rename">✎</button>
+        <span class="room-cap">${bi1.occupants.length}/${bi1.capacity}</span>
+      </div>
+      <div class="room-body">${seatsOf(bi1)}</div>
+    </div>
+    <div class="room r-bi2">
+      <div class="room-head h-std">
+        <span class="room-name-text" id="rname-bi2">${bi2.label}</span>
+        <button class="edit-name-btn" onclick="startRenameMap('bi2')" title="Rename">✎</button>
+        <span class="room-cap">${bi2.occupants.length}/${bi2.capacity}</span>
+      </div>
+      <div class="room-body">${seatsOf(bi2)}</div>
+    </div>
+    <div class="room r-fbi">
+      <div class="room-head h-fbi">
+        <span class="room-name-text" id="rname-fbi">♀ ${fbi.label}</span>
+        <button class="edit-name-btn" onclick="startRenameMap('fbi')" title="Rename">✎</button>
+        <span class="room-cap">${fbi.occupants.length}/${fbi.capacity}</span>
+      </div>
+      <div class="room-body">${seatsOf(fbi)}</div>
+    </div>
+    <div class="room r-cubs">
+      <div class="room-head h-std">
+        <span class="room-name-text">Cubicles (×7)</span>
+        <span class="room-cap">${cubs.filter(c=>c.occupants.length>0).length}/7</span>
+      </div>
+      <div class="cubs-map-grid">${cubsHTML}</div>
+    </div>
+  `;
+
+  // Unassigned section
+  document.getElementById('unaGrid').innerHTML = UNASSIGNED.map(fId => {
+    const f = fById(fId);
+    return `<div class="una-card">
+      <div class="avatar ${rankClass(f.rank)}" style="width:24px;height:24px;font-size:.58rem">${initials(f.name)}</div>
+      <div>
+        <div style="font-size:.76rem;font-weight:500">${f.name}</div>
+        <div style="font-size:.65rem;color:var(--muted)">${rankShort(f.rank)} · ${f.status==='leave'?'On Leave':f.status==='retired'?'Retired':'In Service'}</div>
+      </div>
+      <div class="sdot d-${f.status}" style="margin-left:6px;flex-shrink:0"></div>
+    </div>`;
+  }).join('') || '<span style="font-size:.78rem;color:var(--muted);font-style:italic">None — all faculty assigned</span>';
+}
+
+// ─────────────── TABS ───────────────
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+tabId).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (tabId==='map') renderMap();
+  if (tabId==='alloc') renderAllocation();
+}
+
+// ─────────────── TOAST ───────────────
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove('show'), 2200);
+}
+
+// ─────────────── PERSIST ───────────────
+const STORAGE_KEY = 'cheOfficeAlloc_v1';
+
+function saveState() {
+  const state = {
+    offices: OFFICES.map(o => ({ id: o.id, label: o.label, occupants: [...o.occupants] })),
+    unassigned: [...UNASSIGNED],
+    savedAt: new Date().toLocaleString('en-PK', {timeZone:'Asia/Karachi'})
+  };
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    const el = document.getElementById('saveStatus');
+    el.textContent = `Saved ${state.savedAt}`;
+    setTimeout(() => el.textContent = '', 3000);
+  } catch(e) { /* storage not available in preview */ }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const parsed = JSON.parse(raw);
+    parsed.offices.forEach(saved => {
+      const o = oById(saved.id);
+      if (o) { o.occupants = saved.occupants; if(saved.label) o.label = saved.label; }
+    });
+    UNASSIGNED.length = 0;
+    (parsed.unassigned || []).forEach(id => UNASSIGNED.push(id));
+    return true;
+  } catch(e) { return false; }
+}
+
+function exportJSON() {
+  const state = {
+    offices: OFFICES.map(o => ({ id: o.id, label: o.label, occupants: [...o.occupants] })),
+    unassigned: [...UNASSIGNED],
+    exportedAt: new Date().toLocaleString('en-PK', {timeZone:'Asia/Karachi'})
+  };
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `ChE_OfficeAlloc_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  toast('Allocation exported as JSON');
+}
+
+function importJSON(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const state = JSON.parse(ev.target.result);
+      state.offices.forEach(saved => {
+        const o = oById(saved.id);
+        if (o) o.occupants = saved.occupants;
+      });
+      UNASSIGNED.length = 0;
+      (state.unassigned || []).forEach(id => UNASSIGNED.push(id));
+      saveState();
+      renderAllocation();
+      renderMap();
+      toast('Allocation imported successfully ✓');
+    } catch(err) { toast('Invalid file — could not import'); }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+const DEFAULT_OFFICES = JSON.parse(JSON.stringify(OFFICES.map(o=>({id:o.id,occupants:[...o.occupants]}))));
+const DEFAULT_UNASSIGNED = [...UNASSIGNED];
+
+function resetAll() {
+  if (!confirm('Reset to original allocation? This cannot be undone.')) return;
+  DEFAULT_OFFICES.forEach(d => { const o = oById(d.id); if(o) o.occupants = [...d.occupants]; });
+  UNASSIGNED.length = 0;
+  DEFAULT_UNASSIGNED.forEach(id => UNASSIGNED.push(id));
+  localStorage.removeItem(STORAGE_KEY);
+  renderAllocation();
+  renderMap();
+  toast('Reset to original allocation');
+}
+
+// Patch renderAllocation to auto-save
+const _origRenderAllocation = renderAllocation;
+
+// ─────────────── INIT ───────────────
+loadState();
+renderStats();
+renderMap();
+renderAllocation();
+
+// Auto-save after every change — patch move/unassign
+const _origMove = moveFacultyToOffice;
+moveFacultyToOffice = function(...args) {
+  _origMove(...args);
+  saveState();
+};
+const _origUnassign = unassignFaculty;
+unassignFaculty = function(...args) {
+  _origUnassign(...args);
+  saveState();
+};
+</script>
+</body>
+</html>
