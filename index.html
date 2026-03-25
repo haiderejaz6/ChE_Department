@@ -923,7 +923,7 @@ function renderMap() {
       return `<div class="cub-cell occ">
         <div class="cub-num">C${i+1}</div>
         <div class="avatar ${rankClass(f.rank)}" style="width:26px;height:26px;font-size:.58rem;margin:0 auto 4px">${initials(f.name)}</div>
-        <div class="cub-name">${f.name.replace(/^(Dr\.?|Col\.?)\s*/i,'')}</div>
+        <div class="cub-name">${f.name}</div>
         ${f.sen != null ? `<div style="font-size:.55rem;font-weight:700;color:var(--primary);margin-top:2px">#${f.sen}</div>` : ''}
         <div class="sdot d-${f.status}" style="margin:4px auto 0"></div>
       </div>`;
