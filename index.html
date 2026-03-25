@@ -544,20 +544,20 @@ const OFFICES = [
   { id:'tri1', label:'Tri-Seater A',    type:'tri', capacity:3,  gender:null, occupants:['f18','f17'] },
   { id:'tri2', label:'Tri-Seater B',    type:'tri', capacity:3,  gender:null, occupants:['f15','f14'] },
   { id:'tri3', label:'Tri-Seater C',    type:'tri', capacity:3,  gender:null, occupants:['f16'] },
-  { id:'bi1',  label:'Bi-Seater A',     type:'bi',  capacity:2,  gender:null, occupants:['f13','f12'] },
-  { id:'bi2',  label:'Bi-Seater B',     type:'bi',  capacity:2,  gender:null, occupants:['f11','f09'] },
+  { id:'bi1',  label:'Bi-Seater A',     type:'bi',  capacity:2,  gender:null, occupants:['f12','f08'] },
+  { id:'bi2',  label:'Bi-Seater B',     type:'bi',  capacity:2,  gender:null, occupants:['f11','f10'] },
   { id:'fbi',  label:'Female Bi-Seater',type:'fbi', capacity:2,  gender:'f',  occupants:['f07'] },
   { id:'c1',   label:'Cubicle 1',       type:'cub', capacity:1,  gender:null, occupants:['f08'] },
   { id:'c2',   label:'Cubicle 2',       type:'cub', capacity:1,  gender:null, occupants:['f06'] },
   { id:'c3',   label:'Cubicle 3',       type:'cub', capacity:1,  gender:null, occupants:['f05'] },
   { id:'c4',   label:'Cubicle 4',       type:'cub', capacity:1,  gender:null, occupants:['f04'] },
   { id:'c5',   label:'Cubicle 5',       type:'cub', capacity:1,  gender:null, occupants:['f03'] },
-  { id:'c6',   label:'Cubicle 6',       type:'cub', capacity:1,  gender:null, occupants:['f19'] },
+  { id:'c6',   label:'Cubicle 6',       type:'cub', capacity:1,  gender:null, occupants:[] },
   { id:'c7',   label:'Cubicle 7',       type:'cub', capacity:1,  gender:null, occupants:[] },
 ];
 
 // faculty not in any office
-let UNASSIGNED = ['f10','f20','f02'];
+let UNASSIGNED = ['f10','f20','f02','f19'];
 
 // ─────────────── HELPERS ───────────────
 function fById(id) { return FACULTY.find(f => f.id === id); }
