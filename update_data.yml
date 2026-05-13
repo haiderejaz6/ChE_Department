@@ -1,0 +1,32 @@
+name: Update OBE Data
+
+# Runs when you push the Excel file, or manually from the Actions tab
+on:
+  push:
+    paths:
+      - "Qalam_CLOs.xlsx"
+  workflow_dispatch:
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pandas openpyxl
+
+      - name: Convert Excel → data.json
+        run: python scripts/excel_to_json.py
+
+      - name: Commit updated data.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "auto: regenerate data.json from Qalam_CLOs.xlsx"
+          file_pattern: data.json
