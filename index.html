@@ -4,554 +4,740 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OBE Dashboard · SCME, NUST</title>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root {
-  --bg:#0a1628; --sf:#0f1e34; --card:#142038; --bdr:#1c2f4a;
-  --gold:#c9a62a; --goldl:#e8c550;
-  --tx:#e2e8f4; --mu:#7a8ca8; --dim:#3a4c64;
-  --c2:#60a5fa; --c3:#34d399; --c4:#fbbf24; --c5:#f97316; --c6:#f43f5e;
-  --p3:#c084fc; --p4:#818cf8; --a3:#fb923c;
+/* ── TOKENS ─────────────────────────────────────────────── */
+:root{
+  --bg:#eef1f8;
+  --sf:#ffffff;
+  --card:#ffffff;
+  --bdr:#dde4f0;
+  --bdr2:#c4cfe4;
+  --gold:#b8920e;
+  --goldd:#96760a;
+  --goldl:#d4a820;
+  --tx:#18263e;
+  --mu:#5a6e8c;
+  --dim:#9aaabf;
+  --dimfill:#f0f3fa;
+  --shadow:0 1px 3px rgba(30,50,90,0.06),0 4px 16px rgba(30,50,90,0.06);
+  --shadow-lg:0 2px 8px rgba(30,50,90,0.08),0 8px 32px rgba(30,50,90,0.10);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tx);display:flex;flex-direction:column;}
 
-/* ---- HEADER ---- */
-header{background:linear-gradient(160deg,#0d1e36 0%,#0a1628 70%);border-bottom:1px solid var(--bdr);padding:2rem 2.5rem;position:relative;overflow:hidden;}
-header::after{content:'';position:absolute;top:-90px;right:-80px;width:380px;height:380px;background:radial-gradient(circle,rgba(201,166,42,0.08) 0%,transparent 70%);pointer-events:none;}
-.hdr{max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;}
-.badge{width:58px;height:58px;border-radius:12px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Crimson Pro',serif;font-size:1.15rem;font-weight:700;color:#0a1628;flex-shrink:0;letter-spacing:-0.5px;}
-.hdr-text h1{font-family:'Crimson Pro',serif;font-size:1.75rem;font-weight:700;letter-spacing:-0.3px;}
+/* ── HEADER ─────────────────────────────────────────────── */
+header{
+  flex-shrink:0;
+  background:var(--sf);
+  border-bottom:1.5px solid var(--bdr);
+  padding:0 2rem;
+  display:flex;align-items:center;gap:1.1rem;
+  height:60px;
+  box-shadow:var(--shadow);
+  z-index:30;
+}
+.logo{
+  width:38px;height:38px;border-radius:9px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Crimson Pro',serif;font-size:.82rem;font-weight:700;
+  color:#fff;flex-shrink:0;letter-spacing:-.3px;
+  box-shadow:0 2px 8px rgba(184,146,14,.35);
+}
+.hdr-text h1{
+  font-family:'Crimson Pro',serif;font-size:1.25rem;font-weight:700;color:var(--tx);white-space:nowrap;
+}
 .hdr-text h1 em{color:var(--gold);font-style:normal;}
-.hdr-text p{color:var(--mu);font-size:0.82rem;margin-top:0.2rem;}
-.hdr-stats{margin-left:auto;display:flex;gap:1.75rem;}
-.stat{text-align:center;}
-.stat-n{font-family:'Crimson Pro',serif;font-size:1.9rem;font-weight:700;color:var(--gold);line-height:1;}
-.stat-l{font-size:0.63rem;color:var(--mu);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.1rem;}
+.hdr-text p{font-size:.7rem;color:var(--mu);margin-top:.05rem;}
+.vsep{width:1px;height:24px;background:var(--bdr);flex-shrink:0;}
+.hdr-stats{display:flex;gap:1.5rem;}
+.stat-n{font-family:'Crimson Pro',serif;font-size:1.5rem;font-weight:700;color:var(--gold);line-height:1;}
+.stat-l{font-size:.6rem;color:var(--mu);text-transform:uppercase;letter-spacing:.1em;}
 
-/* ---- NAV ---- */
-.nav-bar{background:var(--sf);border-bottom:1px solid var(--bdr);padding:0 2.5rem;position:sticky;top:0;z-index:50;}
-.nav-inner{max-width:1380px;margin:0 auto;display:flex;}
-.tab{padding:0.85rem 1.4rem;cursor:pointer;border:none;border-bottom:3px solid transparent;font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:500;color:var(--mu);background:none;transition:all 0.18s;white-space:nowrap;}
-.tab:hover{color:var(--tx);}
-.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+/* ── TABBAR ─────────────────────────────────────────────── */
+.tabbar{
+  flex-shrink:0;background:var(--sf);border-bottom:1px solid var(--bdr);
+  display:flex;align-items:center;padding:0 2rem;gap:.25rem;z-index:20;
+}
+.tabbar-filters{display:flex;gap:.3rem;margin-left:auto;padding:.4rem 0;}
+.tab-btn{
+  padding:.7rem 1.3rem;border:none;background:none;cursor:pointer;
+  font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:500;
+  color:var(--mu);border-bottom:2.5px solid transparent;
+  transition:all .15s;white-space:nowrap;margin-bottom:-1px;
+}
+.tab-btn:hover{color:var(--tx);}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.fbtn{
+  padding:.26rem .72rem;border:1px solid var(--bdr);border-radius:16px;
+  font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:500;
+  color:var(--mu);background:none;cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.fbtn:hover{border-color:var(--bdr2);color:var(--tx);}
+.fbtn.active{background:rgba(184,146,14,.1);border-color:var(--gold);color:var(--goldd);}
 
-/* ---- MAIN ---- */
-main{max-width:1380px;margin:0 auto;padding:2rem 2.5rem 4rem;}
-.section{margin-bottom:2.5rem;}
-.sec-hd{font-family:'Crimson Pro',serif;font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:0.75rem;margin-bottom:0.9rem;}
-.sec-hd::before{content:'';display:block;width:4px;height:1.1em;background:var(--gold);border-radius:2px;}
+/* ── BODY WRAPPER ───────────────────────────────────────── */
+.body-wrap{flex:1;overflow:hidden;min-height:0;position:relative;}
 
-/* ---- HEATMAP ---- */
-.hm-scroll{overflow-x:auto;border:1px solid var(--bdr);border-radius:12px;background:var(--card);}
-table.hm{width:100%;border-collapse:collapse;min-width:860px;}
-table.hm thead th{padding:0.6rem 0.35rem;font-size:0.63rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--mu);background:var(--sf);border-bottom:1px solid var(--bdr);text-align:center;}
+/* ── DASHBOARD TAB ──────────────────────────────────────── */
+#tab-dash{
+  position:absolute;inset:0;overflow-y:auto;
+  padding:1.75rem 2rem 3rem;
+}
+#tab-dash.hidden,#tab-graph.hidden{display:none!important;}
+
+.sec-hd{
+  font-family:'Crimson Pro',serif;font-size:1.2rem;font-weight:700;
+  display:flex;align-items:center;gap:.7rem;margin-bottom:.85rem;color:var(--tx);
+}
+.sec-hd::before{content:'';display:block;width:4px;height:1em;background:var(--gold);border-radius:2px;}
+.section{margin-bottom:2.2rem;}
+
+/* Heatmap */
+.hm-scroll{overflow-x:auto;border:1px solid var(--bdr);border-radius:14px;background:var(--sf);box-shadow:var(--shadow);}
+table.hm{width:100%;border-collapse:collapse;min-width:840px;}
+table.hm thead th{
+  padding:.55rem .3rem;font-size:.6rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.07em;color:var(--mu);
+  background:#f7f9fd;border-bottom:1px solid var(--bdr);text-align:center;
+}
 table.hm thead th:first-child{text-align:left;padding-left:1.2rem;min-width:210px;}
-table.hm tbody tr{border-bottom:1px solid rgba(255,255,255,0.03);}
+table.hm tbody tr{border-bottom:1px solid rgba(0,0,0,.04);}
 table.hm tbody tr:last-child{border-bottom:none;}
-table.hm tbody tr:hover{background:rgba(255,255,255,0.015);}
-.hmc{padding:0.55rem 0.5rem 0.55rem 1.2rem!important;}
-.hm-cc{font-size:0.78rem;font-weight:700;color:var(--tx);}
-.hm-ct{font-size:0.66rem;color:var(--mu);}
-.hm-plo{padding:0.35rem!important;text-align:center;}
-.hm-dot{width:34px;height:34px;border-radius:8px;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;transition:transform 0.15s;cursor:default;}
+table.hm tbody tr:hover{background:#fafbff;}
+.hm-cc{padding:.55rem .5rem .55rem 1.2rem!important;}
+.hm-course-code{font-size:.76rem;font-weight:700;color:var(--tx);}
+.hm-course-title{font-size:.63rem;color:var(--mu);}
+.hm-plo{padding:.3rem .28rem!important;text-align:center;}
+.hm-dot{
+  width:32px;height:32px;border-radius:8px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.64rem;font-weight:700;transition:transform .14s;cursor:default;
+}
 .hm-dot:hover{transform:scale(1.2);}
-.hm-dot.empty{background:rgba(255,255,255,0.04);color:var(--dim);}
-.bb{display:inline-block;font-size:0.58rem;font-weight:600;padding:0.1rem 0.35rem;border-radius:3px;margin-left:0.4rem;}
-.bb-2022F{background:rgba(99,102,241,0.2);color:#a5b4fc;}
-.bb-2023F{background:rgba(16,185,129,0.2);color:#6ee7b7;}
-.bb-2024F{background:rgba(245,158,11,0.2);color:#fcd34d;}
-.bb-2025F{background:rgba(239,68,68,0.2);color:#fca5a5;}
+.hm-dot.empty{background:#f0f3fa;color:var(--dim);font-size:.7rem;}
 
-/* ---- DOMAIN LEGEND ---- */
-.dom-leg{display:flex;flex-wrap:wrap;gap:0.55rem;padding:0.85rem 1.2rem;background:var(--card);border:1px solid var(--bdr);border-radius:10px;align-items:center;margin-bottom:1rem;}
-.dl-t{font-size:0.67rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.09em;margin-right:0.4rem;}
-.dl-i{display:flex;align-items:center;gap:0.35rem;font-size:0.7rem;color:var(--mu);}
-.dl-sw{width:18px;height:7px;border-radius:2px;}
+/* Batch badges */
+.bb{display:inline-block;font-size:.57rem;font-weight:700;padding:.08rem .32rem;border-radius:3px;margin-left:.35rem;vertical-align:middle;}
+.bb-2022F{background:#eef0ff;color:#4f46e5;}
+.bb-2023F{background:#ecfdf5;color:#059669;}
+.bb-2024F{background:#fffbeb;color:#d97706;}
+.bb-2025F{background:#fff1f2;color:#e11d48;}
 
-/* ---- CHART ---- */
-.chart-card{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:1.5rem;}
-.chart-sub{font-size:0.77rem;color:var(--mu);margin-bottom:1.1rem;}
+/* Domain legend */
+.dom-leg{
+  display:flex;flex-wrap:wrap;gap:.5rem;padding:.75rem 1rem;
+  background:var(--sf);border:1px solid var(--bdr);border-radius:10px;
+  align-items:center;margin-bottom:.9rem;box-shadow:var(--shadow);
+}
+.dl-t{font-size:.63rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.09em;margin-right:.3rem;}
+.dl-i{display:flex;align-items:center;gap:.32rem;font-size:.68rem;color:var(--mu);}
+.dl-sw{width:16px;height:6px;border-radius:2px;}
 
-/* ---- COURSE GRID ---- */
-.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(338px,1fr));gap:1.1rem;}
-.ccard{background:var(--card);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;transition:border-color 0.18s,transform 0.18s;cursor:pointer;}
-.ccard:hover{border-color:rgba(201,166,42,0.4);transform:translateY(-2px);}
-.ccard.open{border-color:var(--gold);}
-.cc-hdr{padding:1.1rem 1.2rem 0.75rem;display:flex;justify-content:space-between;align-items:flex-start;}
-.cc-l{flex:1;}
-.cc-code{font-size:0.77rem;font-weight:700;color:var(--gold);font-family:'Outfit',monospace;}
-.cc-title{font-family:'Crimson Pro',serif;font-size:1.05rem;font-weight:600;color:var(--tx);margin-top:0.2rem;line-height:1.3;}
-.cc-meta{display:flex;gap:0.4rem;margin-top:0.6rem;flex-wrap:wrap;align-items:center;}
-.cc-r{text-align:right;flex-shrink:0;padding-left:1rem;}
-.cc-n{font-family:'Crimson Pro',serif;font-size:2rem;font-weight:700;color:var(--mu);line-height:1;}
-.cc-nl{font-size:0.58rem;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;}
-.pm{display:inline-flex;align-items:center;justify-content:center;width:28px;height:19px;border-radius:4px;font-size:0.59rem;font-weight:800;color:#fff;}
-.dm-bar{display:flex;height:5px;margin:0 1.2rem 0.9rem;border-radius:3px;overflow:hidden;gap:1px;}
+/* Chart */
+.chart-card{background:var(--sf);border:1px solid var(--bdr);border-radius:14px;padding:1.4rem;box-shadow:var(--shadow);}
+.chart-sub{font-size:.74rem;color:var(--mu);margin-bottom:1rem;}
+
+/* Course grid */
+.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1rem;}
+.ccard{
+  background:var(--sf);border:1px solid var(--bdr);border-radius:14px;
+  overflow:hidden;transition:border-color .18s,box-shadow .18s,transform .18s;
+  cursor:pointer;box-shadow:var(--shadow);
+}
+.ccard:hover{border-color:var(--bdr2);box-shadow:var(--shadow-lg);transform:translateY(-2px);}
+.ccard.open{border-color:var(--gold);box-shadow:0 0 0 2px rgba(184,146,14,.15),var(--shadow-lg);}
+.cc-hdr{padding:1rem 1.1rem .7rem;display:flex;justify-content:space-between;align-items:flex-start;}
+.cc-code{font-size:.73rem;font-weight:700;color:var(--gold);font-family:'DM Mono',monospace;}
+.cc-title{font-family:'Crimson Pro',serif;font-size:1rem;font-weight:700;color:var(--tx);margin-top:.2rem;line-height:1.3;}
+.cc-meta{display:flex;gap:.35rem;margin-top:.55rem;flex-wrap:wrap;align-items:center;}
+.cc-r{text-align:right;flex-shrink:0;padding-left:.8rem;}
+.cc-n{font-family:'Crimson Pro',serif;font-size:1.9rem;font-weight:700;color:var(--dim);line-height:1;}
+.cc-nl{font-size:.56rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;}
+.pm{display:inline-flex;align-items:center;justify-content:center;width:26px;height:18px;border-radius:4px;font-size:.57rem;font-weight:800;color:#fff;}
+.dm-bar{display:flex;height:4px;margin:0 1.1rem .85rem;border-radius:3px;overflow:hidden;gap:1px;background:#f0f3fa;}
 .dm-seg{height:100%;}
-.exp-btn{width:22px;height:22px;border:1px solid var(--bdr);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mu);background:none;font-size:0.8rem;transition:all 0.15s;flex-shrink:0;margin-top:0.15rem;}
-.ccard.open .exp-btn{background:var(--gold);border-color:var(--gold);color:#0a1628;}
+.exp-btn{
+  width:22px;height:22px;border:1px solid var(--bdr);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--mu);background:none;font-size:.8rem;
+  transition:all .15s;flex-shrink:0;margin-top:.15rem;
+}
+.ccard.open .exp-btn{background:var(--gold);border-color:var(--gold);color:#fff;}
 .clo-list{display:none;border-top:1px solid var(--bdr);}
 .ccard.open .clo-list{display:block;}
-.clo-item{padding:0.75rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.03);display:grid;grid-template-columns:34px 1fr auto;gap:0.55rem;align-items:start;}
+.clo-item{
+  padding:.7rem 1.1rem;border-bottom:1px solid rgba(0,0,0,.04);
+  display:grid;grid-template-columns:38px 1fr auto;gap:.5rem;align-items:start;
+}
 .clo-item:last-child{border-bottom:none;}
-.clo-num{font-size:0.67rem;font-weight:700;color:var(--dim);padding-top:0.1rem;}
-.clo-desc{font-size:0.77rem;color:var(--mu);line-height:1.5;}
-.clo-tags{display:flex;flex-direction:column;gap:0.25rem;align-items:flex-end;flex-shrink:0;}
-.tag{font-size:0.6rem;font-weight:700;padding:0.13rem 0.42rem;border-radius:4px;white-space:nowrap;}
-.tag-plo{background:rgba(201,166,42,0.15);color:var(--goldl);}
-.tag-em-Low{background:rgba(122,140,168,0.12);color:var(--mu);}
-.tag-em-Medium{background:rgba(201,166,42,0.15);color:var(--gold);}
-.tag-em-High{background:rgba(244,63,94,0.18);color:#fb7185;}
+.clo-num{font-size:.63rem;font-weight:700;color:var(--dim);padding-top:.1rem;font-family:'DM Mono',monospace;}
+.clo-desc{font-size:.74rem;color:var(--mu);line-height:1.5;}
+.clo-tags{display:flex;flex-direction:column;gap:.22rem;align-items:flex-end;flex-shrink:0;}
+.tag{font-size:.58rem;font-weight:700;padding:.1rem .38rem;border-radius:4px;white-space:nowrap;}
 
-/* ---- TOOLTIP ---- */
-#tt{position:fixed;pointer-events:none;z-index:999;background:#172840;border:1px solid var(--bdr);border-radius:8px;padding:0.6rem 0.9rem;font-size:0.74rem;max-width:270px;box-shadow:0 6px 24px rgba(0,0,0,0.55);display:none;color:var(--tx);}
-#tt .tt-hd{font-weight:700;color:var(--gold);margin-bottom:0.3rem;font-size:0.78rem;}
-#tt .tt-row{color:var(--mu);line-height:1.45;margin-bottom:0.15rem;}
+/* PLO footer */
+.plo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.4rem;margin-bottom:1rem;}
+.plo-def{
+  display:flex;align-items:center;gap:.5rem;padding:.38rem .6rem;
+  border-radius:8px;background:var(--sf);border:1px solid var(--bdr);box-shadow:var(--shadow);
+}
+.plo-ic{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.57rem;font-weight:800;color:#fff;flex-shrink:0;}
+.plo-code-t{font-size:.65rem;font-weight:700;color:var(--tx);display:block;}
+.plo-name-t{font-size:.65rem;color:var(--mu);}
 
-/* ---- FOOTER ---- */
-footer{border-top:1px solid var(--bdr);padding:2rem 2.5rem;max-width:1380px;margin:0 auto;}
-.plo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(218px,1fr));gap:0.45rem;margin-bottom:1rem;}
-.plo-def{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.65rem;border-radius:7px;background:var(--card);border:1px solid var(--bdr);}
-.plo-ic{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.58rem;font-weight:800;color:#0a1628;flex-shrink:0;}
-.plo-code-t{font-size:0.67rem;font-weight:700;color:var(--tx);display:block;}
-.plo-name-t{font-size:0.67rem;color:var(--mu);}
+/* ── GRAPH TAB ───────────────────────────────────────────── */
+#tab-graph{
+  position:absolute;inset:0;
+  display:flex;
+}
+#canvas-wrap{flex:1;position:relative;overflow:hidden;}
+#graph-svg{width:100%;height:100%;cursor:grab;background:var(--bg);}
+#graph-svg:active{cursor:grabbing;}
+.graph-hint{
+  position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);
+  font-size:.7rem;color:var(--mu);pointer-events:none;white-space:nowrap;
+  background:rgba(255,255,255,.9);padding:.35rem .85rem;border-radius:20px;
+  border:1px solid var(--bdr);box-shadow:var(--shadow);
+}
 
-/* ---- SCROLLBAR ---- */
-::-webkit-scrollbar{width:5px;height:5px;}
+/* Side panel */
+.panel{
+  width:300px;flex-shrink:0;border-left:1px solid var(--bdr);
+  background:var(--sf);display:flex;flex-direction:column;
+  overflow:hidden;transition:width .22s ease,opacity .22s;
+  box-shadow:-2px 0 12px rgba(30,50,90,.06);
+}
+.panel.hidden{width:0;opacity:0;border-left:none;}
+.panel-hdr{
+  padding:.9rem 1.1rem .75rem;border-bottom:1px solid var(--bdr);
+  display:flex;justify-content:space-between;align-items:flex-start;
+  flex-shrink:0;
+}
+.panel-type{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--mu);margin-bottom:.25rem;}
+.panel-name{font-family:'Crimson Pro',serif;font-size:1.1rem;font-weight:700;color:var(--tx);line-height:1.25;}
+.panel-sub{font-size:.72rem;color:var(--mu);margin-top:.2rem;}
+.close-btn{background:none;border:none;cursor:pointer;color:var(--dim);font-size:.9rem;padding:.15rem;line-height:1;transition:color .15s;flex-shrink:0;}
+.close-btn:hover{color:var(--tx);}
+.panel-body{flex:1;overflow-y:auto;padding:.8rem 1.1rem;}
+.psec-hd{
+  font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--mu);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;
+}
+.psec-hd::after{content:'';flex:1;height:1px;background:var(--bdr);}
+
+/* Panel CLO items */
+.p-clo-item{
+  display:grid;grid-template-columns:36px 1fr;gap:.45rem;
+  margin-bottom:.55rem;padding-bottom:.55rem;border-bottom:1px solid rgba(0,0,0,.05);
+}
+.p-clo-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.p-clo-badge{
+  width:32px;height:32px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:.57rem;font-weight:500;flex-shrink:0;
+}
+.p-clo-desc{font-size:.71rem;color:var(--mu);line-height:1.45;}
+.p-clo-tags{display:flex;gap:.28rem;flex-wrap:wrap;margin-top:.28rem;}
+.pctag{font-size:.57rem;font-weight:700;padding:.09rem .35rem;border-radius:3px;}
+.plo-conn{
+  display:flex;align-items:center;gap:.45rem;padding:.38rem .6rem;
+  border-radius:8px;border:1px solid var(--bdr);margin-bottom:.38rem;
+  cursor:pointer;transition:border-color .14s,background .14s;
+}
+.plo-conn:hover{background:#f7f9fd;border-color:var(--bdr2);}
+.plo-pill-sm{width:28px;height:18px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:800;color:#fff;flex-shrink:0;}
+.plo-conn-name{font-size:.71rem;color:var(--tx);font-weight:500;}
+.plo-conn-cnt{font-size:.62rem;color:var(--mu);}
+.p-bar-wrap{height:3px;border-radius:2px;background:var(--bdr);margin-top:.25rem;overflow:hidden;}
+.p-bar-fill{height:100%;border-radius:2px;}
+.pcourse-item{
+  display:flex;gap:.45rem;align-items:center;padding:.35rem 0;
+  border-bottom:1px solid rgba(0,0,0,.04);cursor:pointer;
+}
+.pcourse-item:last-child{border-bottom:none;}
+.pcourse-item:hover .pci-name{color:var(--gold);}
+.pci-batch{font-size:.56rem;font-weight:700;padding:.09rem .3rem;border-radius:3px;flex-shrink:0;}
+.pci-name{font-size:.71rem;color:var(--tx);flex:1;}
+.pci-cnt{font-size:.62rem;color:var(--mu);}
+
+/* Tooltip */
+#tip{
+  position:fixed;pointer-events:none;z-index:999;
+  background:rgba(255,255,255,.97);border:1px solid var(--bdr2);
+  border-radius:9px;padding:.5rem .8rem;font-size:.72rem;max-width:240px;
+  box-shadow:var(--shadow-lg);display:none;color:var(--tx);
+}
+#tip .th{font-weight:700;color:var(--gold);margin-bottom:.18rem;}
+#tip .tm{color:var(--mu);line-height:1.5;}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px;}
+::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
 
 @media(max-width:700px){
-  header,.nav-bar,main,footer{padding-left:1rem;padding-right:1rem;}
+  header,.tabbar,#tab-dash{padding-left:1rem;padding-right:1rem;}
   .hdr-stats{display:none;}
-  .hdr{flex-wrap:wrap;}
+  .panel{width:100%;}
 }
 </style>
 </head>
 <body>
-<div id="tt"></div>
+
+<!-- HEADER -->
 <header>
-  <div class="hdr">
-    <div class="badge">NUST</div>
-    <div class="hdr-text">
-      <h1>Outcome-Based <em>Education</em> Dashboard</h1>
-      <p>School of Chemical &amp; Materials Engineering &nbsp;·&nbsp; BE Chemical Engineering Programme</p>
-    </div>
-    <div class="hdr-stats" id="hdr-stats"></div>
+  <div class="logo">NUST</div>
+  <div class="hdr-text">
+    <h1>Outcome-Based <em>Education</em></h1>
+    <p>SCME · BE Chemical Engineering Programme</p>
   </div>
+  <div class="vsep"></div>
+  <div class="hdr-stats" id="hdr-stats"></div>
 </header>
-<nav class="nav-bar">
-  <div class="nav-inner" id="nav-tabs"></div>
-</nav>
-<main>
-  <section class="section">
-    <h2 class="sec-hd">PLO Coverage Matrix</h2>
-    <p style="color:var(--mu);font-size:0.78rem;margin-bottom:0.9rem;">
-      Cell colour = PLO identifier &nbsp;·&nbsp; Brightness = emphasis level (Low / Medium / High) &nbsp;·&nbsp; Number = CLO count &nbsp;·&nbsp; Hover for details.
-    </p>
-    <div class="hm-scroll"><table class="hm" id="hm"></table></div>
-  </section>
-  <section class="section">
-    <h2 class="sec-hd">Bloom's Domain Distribution</h2>
-    <div class="dom-leg" id="dom-leg"></div>
-    <div class="chart-card">
-      <p class="chart-sub">Proportion of CLOs at each Bloom's Taxonomy domain level per course. C = Cognitive, P = Psychomotor, A = Affective.</p>
-      <canvas id="domChart" style="max-height:420px;"></canvas>
+
+<!-- TABBAR -->
+<div class="tabbar">
+  <button class="tab-btn active" id="tbtn-dash"  onclick="switchTab('dash')">📊  Dashboard</button>
+  <button class="tab-btn"        id="tbtn-graph" onclick="switchTab('graph')">🕸  Network Graph</button>
+  <div class="vsep" style="margin:0 .6rem;"></div>
+  <div class="tabbar-filters" id="filters"></div>
+</div>
+
+<!-- BODY -->
+<div class="body-wrap">
+
+  <!-- ── DASHBOARD TAB ── -->
+  <div id="tab-dash">
+
+    <div class="section">
+      <h2 class="sec-hd">PLO Coverage Matrix</h2>
+      <p style="font-size:.74rem;color:var(--mu);margin-bottom:.75rem;">
+        Colour = PLO &nbsp;·&nbsp; Brightness = emphasis (Low / Medium / High) &nbsp;·&nbsp; Number = CLO count &nbsp;·&nbsp; Hover for details
+      </p>
+      <div class="hm-scroll"><table class="hm" id="hm"></table></div>
     </div>
-  </section>
-  <section class="section">
-    <h2 class="sec-hd">Course Explorer</h2>
-    <p id="cinfo" style="color:var(--mu);font-size:0.78rem;margin-bottom:1rem;"></p>
-    <div class="course-grid" id="cgrid"></div>
-  </section>
-</main>
-<footer>
-  <h3 style="font-family:'Crimson Pro',serif;font-size:1.1rem;font-weight:700;margin-bottom:0.9rem;">Programme Learning Outcomes (PLOs)</h3>
-  <div class="plo-grid" id="plo-footer"></div>
-  <p style="margin-top:1.5rem;color:var(--dim);font-size:0.72rem;">
-    SCME · NUST · OBE Dashboard · Data sourced from Qalam CLO records.
-    To update: run <code style="color:var(--gold);background:rgba(201,166,42,0.1);padding:0.1rem 0.35rem;border-radius:3px;">python scripts/excel_to_json.py</code>
-    then push to GitHub — the site updates automatically.
-  </p>
-</footer>
+
+    <div class="section">
+      <h2 class="sec-hd">Bloom's Domain Distribution</h2>
+      <div class="dom-leg" id="dom-leg"></div>
+      <div class="chart-card">
+        <p class="chart-sub">Proportion of CLOs at each Bloom's Taxonomy level per course. C = Cognitive &nbsp;·&nbsp; P = Psychomotor &nbsp;·&nbsp; A = Affective</p>
+        <canvas id="domChart" style="max-height:400px;"></canvas>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="sec-hd">
+        Course Explorer
+        <span id="cinfo" style="font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:400;color:var(--mu);margin-left:.4rem;"></span>
+      </h2>
+      <div class="course-grid" id="cgrid"></div>
+    </div>
+
+    <div style="border-top:1px solid var(--bdr);padding-top:1.5rem;">
+      <h3 style="font-family:'Crimson Pro',serif;font-size:1.05rem;font-weight:700;margin-bottom:.85rem;color:var(--tx);">Programme Learning Outcomes (PLOs)</h3>
+      <div class="plo-grid" id="plo-footer"></div>
+      <p style="margin-top:1.2rem;color:var(--dim);font-size:.68rem;">
+        To update: run
+        <code style="background:#f0f3fa;padding:.1rem .35rem;border-radius:3px;font-family:'DM Mono',monospace;color:var(--gold);">python scripts/excel_to_json.py</code>
+        then push to GitHub — the site updates automatically.
+      </p>
+    </div>
+
+  </div><!-- /tab-dash -->
+
+  <!-- ── GRAPH TAB ── -->
+  <div id="tab-graph" class="hidden">
+    <div id="canvas-wrap">
+      <svg id="graph-svg"></svg>
+      <div class="graph-hint">Click any node to inspect &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Drag to pan</div>
+    </div>
+    <div class="panel hidden" id="panel">
+      <div class="panel-hdr">
+        <div style="flex:1;min-width:0;">
+          <div class="panel-type" id="p-type">—</div>
+          <div class="panel-name" id="p-name">—</div>
+          <div class="panel-sub"  id="p-sub"></div>
+        </div>
+        <button class="close-btn" onclick="closePanel()">✕</button>
+      </div>
+      <div class="panel-body" id="p-body"></div>
+    </div>
+  </div><!-- /tab-graph -->
+
+</div><!-- /body-wrap -->
+
+<div id="tip"></div>
+
 <script>
-// ================================================================
-// DATA — loaded from data.json if available, else falls back here
-// ================================================================
-const FALLBACK = {
-  plos:{
-    "PLO-1":"Engineering Knowledge",
-    "PLO-2":"Problem Analysis",
-    "PLO-3":"Design/Development of Solutions",
-    "PLO-4":"Investigation",
-    "PLO-5":"Modern Tool Usage",
-    "PLO-6":"The Engineer & Society",
-    "PLO-7":"Environment & Sustainability",
-    "PLO-8":"Ethics",
-    "PLO-9":"Individual & Team Work",
-    "PLO-10":"Communication",
-    "PLO-11":"Project Management",
-    "PLO-12":"Lifelong Learning"
-  },
-  courses:[
-    {code:"CHE-425",title:"Maintenance & Process Safety",batch:"2022F",clos:[
-      {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Describe the key principles of process safety and maintenance of industrial operations."},
-      {code:"CLO-2",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Explain the practical application of safety and risk management in process industry."}
-    ]},
-    {code:"CHE-360",title:"Fundamentals of Polymer Engineering",batch:"2022F",clos:[
-      {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Explain the fundamentals of polymer engineering: classification, rheology, colligative, thermal, and mechanical properties."},
-      {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-4",description:"Relate fundamental concepts of polymer engineering to study techniques for synthesis and processing of polymeric materials."}
-    ]},
-    {code:"OTM-456",title:"Project Management",batch:"2022F",clos:[
-      {code:"CLO-1",plo:"PLO-12",emphasis:"Low",domain:"C-2",description:"Comprehend the process of transforming resources into products and development of its operational strategy."},
-      {code:"CLO-2",plo:"PLO-12",emphasis:"Medium",domain:"C-3",description:"Use a variety of problem-solving and forecasting techniques to aid in effective decision making and quality control."},
-      {code:"CLO-3",plo:"PLO-11",emphasis:"Medium",domain:"C-4",description:"Apply project management tools, techniques and inventory management methods."}
-    ]},
-    {code:"CHE-484",title:"Natural Gas Engineering",batch:"2022F",clos:[
-      {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Infer the basic knowledge about gas processing and gas drilling."},
-      {code:"CLO-2",plo:"PLO-2",emphasis:"Low",domain:"C-2",description:"Comprehend the understanding of gas storage and transmission operations."},
-      {code:"CLO-3",plo:"PLO-3",emphasis:"Medium",domain:"C-4",description:"Analyze and design gas processing and purification operations."}
-    ]},
-    {code:"HU-115",title:"Principles of Sociology",batch:"2022F",clos:[
-      {code:"CLO-1",plo:"PLO-6",emphasis:"Low",domain:"C-2",description:"Comprehend the fundamental theories of sociology pertaining to human behaviors."},
-      {code:"CLO-2",plo:"PLO-12",emphasis:"High",domain:"C-6",description:"Devise the practical applications of the theories to human behavior in day-to-day life."}
-    ]},
-    {code:"CHE-465",title:"Data Science & ML in ChE",batch:"2022F",clos:[
-      {code:"CLO-1",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Describe and apply the concepts of linear algebra, probability, and statistics used for data distributions."},
-      {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Use mathematical and statistical theory for decision-making and problem solution."},
-      {code:"CLO-3",plo:"PLO-5",emphasis:"Medium",domain:"C-3",description:"Apply algorithms of data science and machine learning using Python."}
-    ]},
-    {code:"ECO-130",title:"Engineering Economics",batch:"2023F",clos:[
-      {code:"CLO-1",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Comprehend the concepts of Engineering Economics."},
-      {code:"CLO-2",plo:"PLO-11",emphasis:"Medium",domain:"C-4",description:"Gain working knowledge of money management and analyse economics comparisons of alternative engineering projects."},
-      {code:"CLO-3",plo:"PLO-12",emphasis:"Medium",domain:"C-3",description:"Apply alternatives based on taxable income and market structure."}
-    ]},
-    {code:"CHE-349",title:"Separation Processes-II",batch:"2023F",clos:[
-      {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend the principles of simultaneous heat and mass transfer and extend their applications in chemical engineering processes."},
-      {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Describe the coupled heat and mass transfer equations and apply to design the process equipment."},
-      {code:"CLO-3",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Solve and analyze complex engineering problems pertaining to SHMT operation."},
-      {code:"CLO-4",plo:"PLO-5",emphasis:"Medium",domain:"P-4",description:"Measures key process variables such as temperature, flow rate, and composition during separation process equipment operation."},
-      {code:"CLO-5",plo:"PLO-2",emphasis:"Medium",domain:"C-4",description:"Compute and analyze performance metrics (drying rate, extraction efficiency) from collected experimental data."},
-      {code:"CLO-6",plo:"PLO-10",emphasis:"Medium",domain:"A-3",description:"Participate actively and responsibly in teamwork while conducting separation experiments and handling equipment."},
-      {code:"CLO-7",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Adjust and operate experimental units such as evaporators, dryers, and extraction columns under supervision."}
-    ]},
-    {code:"CHE-323",title:"Instrumentation & Process Control",batch:"2023F",clos:[
-      {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend open/closed loop control systems based on the fundamentals of process dynamics."},
-      {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Solve problems related to open/closed control loop systems."},
-      {code:"CLO-3",plo:"PLO-4",emphasis:"High",domain:"C-6",description:"Design and explain control loops for process variables (temperature, pressure, level, etc.) of a given industrial process."},
-      {code:"CLO-4",plo:"PLO-5",emphasis:"Medium",domain:"P-4",description:"Calibrate automatic process control sensors (flow, pressure, temperature, level) using manual instruments as reference standards."},
-      {code:"CLO-5",plo:"PLO-4",emphasis:"Medium",domain:"P-3",description:"Follow procedures to apply ON/OFF, PI, and PID control modes for achieving set points and accurately adjust input parameters."},
-      {code:"CLO-6",plo:"PLO-8",emphasis:"Medium",domain:"C-4",description:"Analyze and interpret process response curves in relation to control theory to evaluate performance of control strategies."},
-      {code:"CLO-7",plo:"PLO-8",emphasis:"Medium",domain:"A-3",description:"Demonstrate responsible handling of control equipment and participate effectively in group-based experimentation and troubleshooting."}
-    ]},
-    {code:"CHE-347",title:"Chemical Reaction Engineering",batch:"2023F",clos:[
-      {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend the concepts of reaction engineering fundamentals."},
-      {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Apply design equations of ideal reactors to study their performance for homogenous single and multiple reactions."},
-      {code:"CLO-3",plo:"PLO-2",emphasis:"Medium",domain:"C-4",description:"Differentiate homogeneous and heterogeneous reactions, and modify design parameters for reactor calculations."},
-      {code:"CLO-4",plo:"PLO-4",emphasis:"High",domain:"C-6",description:"Design chemical reactors for various industrial chemical problems."},
-      {code:"CLO-5",plo:"PLO-4",emphasis:"Medium",domain:"P-4",description:"Execute reactor startup procedures by applying appropriate conditions and trace concentration-time data with precision."},
-      {code:"CLO-6",plo:"PLO-9",emphasis:"Medium",domain:"A-3",description:"Demonstrate punctuality and attentive demeanor as an individual or in a team during the lab to improve productivity and meet deadlines."},
-      {code:"CLO-7",plo:"PLO-6",emphasis:"Medium",domain:"P-3",description:"Practice lab safety considerations while preparing reactants and collecting products for toxic or corrosive substances."},
-      {code:"CLO-8",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Recall standard experimental procedures and analyze and interpret results, comparing with theoretical concepts to derive valid conclusions."}
-    ]},
-    {code:"CHE-345",title:"Transport Phenomena",batch:"2023F",clos:[
-      {code:"CLO-1",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Comprehend mechanisms of momentum, heat and mass transport and identify their applications for steady and transient flow systems."},
-      {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-4",description:"Express microscopic and macroscopic mass/energy/momentum balance equations and solve them for several systems."},
-      {code:"CLO-3",plo:"PLO-4",emphasis:"High",domain:"C-5",description:"Analyze and solve engineering problems pertaining to transport phenomena in industrial processes."}
-    ]},
-    {code:"MATH-243",title:"Vector Calculus",batch:"2024F",clos:[
-      {code:"CLO-1",plo:"PLO-2",emphasis:"Low",domain:"C-2",description:"Comprehend the characterization of differential equations and select the appropriate method for solution."},
-      {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Choose and apply the methods for analytic and approximate solutions of Ordinary and Partial differential equations."},
-      {code:"CLO-3",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Relate the knowledge for mathematical formulation of physical problems and their solutions."}
-    ]},
-    {code:"CHE-242",title:"Heat Transfer",batch:"2024F",clos:[
-      {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend the fundamentals of heat transfer related to steady state conduction, convection, and radiation."},
-      {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Use the knowledge of heat transfer model equations to solve problems related to heat transfer systems."},
-      {code:"CLO-3",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Solve and analyze engineering problems pertaining to heat transfer operations."},
-      {code:"CLO-4",plo:"PLO-4",emphasis:"Medium",domain:"P-4",description:"Execute the standard startup procedure and set the requisite temperature, flows and pressures by following established protocols."},
-      {code:"CLO-5",plo:"PLO-9",emphasis:"Medium",domain:"A-3",description:"Demonstrate punctuality and attentive demeanor as an individual or in a team during the whole lab session."},
-      {code:"CLO-6",plo:"PLO-6",emphasis:"Medium",domain:"P-3",description:"Follow lab safety considerations for operating all kinds of heat exchangers and electrical heating devices."},
-      {code:"CLO-7",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Recall standard experimental procedures and analyze and interpret results, comparing with theoretical concepts to derive valid conclusions."}
-    ]},
-    {code:"CHE-346",title:"Particulate Technology",batch:"2024F",clos:[
-      {code:"CLO-1",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Relate the fundamentals of particulate systems to size reduction, transportation and storage of solids."},
-      {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Extend the concepts of particulate behavior to illustrate the mechanism of mixing and separation of solids."},
-      {code:"CLO-3",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Follow equipment standard operating procedure (SOP) for particle size reduction, separation and handling."},
-      {code:"CLO-4",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Analyze the effect of attrition, impact and compression on particle size reduction and determine efficiency of equipment."},
-      {code:"CLO-5",plo:"PLO-1",emphasis:"Medium",domain:"P-4",description:"Grind solid particles and perform distribution analysis by use of standards (Tyler mesh) for particle size analysis."},
-      {code:"CLO-6",plo:"PLO-8",emphasis:"Medium",domain:"A-3",description:"Initiate experiment by following equipment procedure and safety SOPs."}
-    ]},
-    {code:"PHY-102",title:"Applied Physics",batch:"2025F",clos:[
-      {code:"CLO-1",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics."},
-      {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Discuss the fundamentals of electromagnetic induction and thermometry to demonstrate the working principle of related equipment."},
-      {code:"CLO-3",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Realize the experiment by following instructions by the teacher."},
-      {code:"CLO-4",plo:"PLO-9",emphasis:"Medium",domain:"A-3",description:"Exhibit capability to work in team during the lab activities."},
-      {code:"CLO-5",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class."}
-    ]},
-    {code:"QR-100",title:"Quantitative Reasoning-I",batch:"2025F",clos:[
-      {code:"CLO-1",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Apply fundamental numerical literacy to compute values, demonstrate numerical relationships, and construct accurate data representations."},
-      {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Solve problems using fundamental mathematical and statistical concepts, demonstrate applications, and relate to real-world scenarios."},
-      {code:"CLO-3",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Interpret and modify data in various formats (tables, graphs, charts, equations) to produce meaningful insights."}
-    ]}
-  ]
+/* ================================================================
+   STATIC DATA  (overridden by data.json if present)
+================================================================ */
+const PLOS_DEF = {
+  "PLO-1":"Engineering Knowledge","PLO-2":"Problem Analysis",
+  "PLO-3":"Design/Development of Solutions","PLO-4":"Investigation",
+  "PLO-5":"Modern Tool Usage","PLO-6":"The Engineer & Society",
+  "PLO-7":"Environment & Sustainability","PLO-8":"Ethics",
+  "PLO-9":"Individual & Team Work","PLO-10":"Communication",
+  "PLO-11":"Project Management","PLO-12":"Lifelong Learning"
 };
-
-// ================================================================
-// CONSTANTS
-// ================================================================
-const PLO_COLORS={
-  "PLO-1":"#3b82f6","PLO-2":"#06b6d4","PLO-3":"#10b981",
-  "PLO-4":"#84cc16","PLO-5":"#eab308","PLO-6":"#f97316",
-  "PLO-7":"#ef4444","PLO-8":"#ec4899","PLO-9":"#a855f7",
-  "PLO-10":"#8b5cf6","PLO-11":"#6366f1","PLO-12":"#14b8a6"
+const PLO_COLORS = {
+  "PLO-1":"#2563eb","PLO-2":"#0891b2","PLO-3":"#059669","PLO-4":"#65a30d",
+  "PLO-5":"#d97706","PLO-6":"#ea580c","PLO-7":"#dc2626","PLO-8":"#db2777",
+  "PLO-9":"#9333ea","PLO-10":"#7c3aed","PLO-11":"#4f46e5","PLO-12":"#0d9488"
 };
-const DOMAIN_CFG={
-  "C-2":{color:"#60a5fa",label:"C2 · Understand",cat:"Cognitive"},
-  "C-3":{color:"#34d399",label:"C3 · Apply",cat:"Cognitive"},
-  "C-4":{color:"#fbbf24",label:"C4 · Analyze",cat:"Cognitive"},
-  "C-5":{color:"#f97316",label:"C5 · Evaluate",cat:"Cognitive"},
-  "C-6":{color:"#f43f5e",label:"C6 · Create",cat:"Cognitive"},
-  "P-3":{color:"#c084fc",label:"P3 · Precision",cat:"Psychomotor"},
-  "P-4":{color:"#818cf8",label:"P4 · Articulation",cat:"Psychomotor"},
-  "A-3":{color:"#fb923c",label:"A3 · Valuing",cat:"Affective"}
+const BATCH_COLORS = {"2022F":"#4f46e5","2023F":"#059669","2024F":"#d97706","2025F":"#e11d48"};
+const DOMAIN_CFG = {
+  "C-2":{color:"#3b82f6",label:"C2 · Understand"},
+  "C-3":{color:"#10b981",label:"C3 · Apply"},
+  "C-4":{color:"#f59e0b",label:"C4 · Analyze"},
+  "C-5":{color:"#f97316",label:"C5 · Evaluate"},
+  "C-6":{color:"#ef4444",label:"C6 · Create"},
+  "P-3":{color:"#a855f7",label:"P3 · Precision"},
+  "P-4":{color:"#6366f1",label:"P4 · Articulation"},
+  "A-3":{color:"#f97316",label:"A3 · Valuing"}
 };
-const EMPHASIS_ALPHA={Low:0.35,Medium:0.7,High:1.0};
-const EMPHASIS_ORDER={None:0,Low:1,Medium:2,High:3};
+const EMPHASIS_ORDER = {None:0,Low:1,Medium:2,High:3};
 
-// ================================================================
-// UTILS
-// ================================================================
-function normPLO(p){return p.trim().replace(/^PLO\s+(\d+)$/,"PLO-$1");}
-function normDomain(d){return d.trim().replace(/^([CPA])\s*(\d)$/,"$1-$2");}
-function hexToRgb(h){const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);return`${r},${g},${b}`;}
-function domColor(d){return (DOMAIN_CFG[normDomain(d)]||{color:"#7a8ca8"}).color;}
-function domLabel(d){return (DOMAIN_CFG[normDomain(d)]||{label:d}).label;}
+const COURSES_EMBEDDED = [
+  {code:"CHE-425",title:"Maintenance & Process Safety",batch:"2022F",clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Describe the key principles of process safety and maintenance of industrial operations."},
+    {code:"CLO-2",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Explain the practical application of safety and risk management in process industry."}
+  ]},
+  {code:"CHE-360",title:"Fundamentals of Polymer Engineering",batch:"2022F",clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Explain the fundamentals of polymer engineering: classification, rheology, colligative, thermal, and mechanical properties."},
+    {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-4",description:"Relate fundamental concepts of polymer engineering to study techniques for synthesis and processing of polymeric materials."}
+  ]},
+  {code:"OTM-456",title:"Project Management",batch:"2022F",clos:[
+    {code:"CLO-1",plo:"PLO-12",emphasis:"Low",domain:"C-2",description:"Comprehend the process of transforming resources into products and development of its operational strategy."},
+    {code:"CLO-2",plo:"PLO-12",emphasis:"Medium",domain:"C-3",description:"Use a variety of problem-solving and forecasting techniques to aid in effective decision making and quality control."},
+    {code:"CLO-3",plo:"PLO-11",emphasis:"Medium",domain:"C-4",description:"Apply project management tools, techniques and inventory management methods."}
+  ]},
+  {code:"CHE-484",title:"Natural Gas Engineering",batch:"2022F",clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Infer the basic knowledge about gas processing and gas drilling."},
+    {code:"CLO-2",plo:"PLO-2",emphasis:"Low",domain:"C-2",description:"Comprehend the understanding of gas storage and transmission operations."},
+    {code:"CLO-3",plo:"PLO-3",emphasis:"Medium",domain:"C-4",description:"Analyze and design gas processing and purification operations."}
+  ]},
+  {code:"HU-115",title:"Principles of Sociology",batch:"2022F",clos:[
+    {code:"CLO-1",plo:"PLO-6",emphasis:"Low",domain:"C-2",description:"Comprehend the fundamental theories of sociology pertaining to human behaviors."},
+    {code:"CLO-2",plo:"PLO-12",emphasis:"High",domain:"C-6",description:"Devise the practical applications of the theories to human behavior in day-to-day life."}
+  ]},
+  {code:"CHE-465",title:"Data Science & ML in ChE",batch:"2022F",clos:[
+    {code:"CLO-1",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Describe and apply the concepts of linear algebra, probability, and statistics used for data distributions."},
+    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Use mathematical and statistical theory for decision-making and problem solution."},
+    {code:"CLO-3",plo:"PLO-5",emphasis:"Medium",domain:"C-3",description:"Apply algorithms of data science and machine learning using Python."}
+  ]},
+  {code:"ECO-130",title:"Engineering Economics",batch:"2023F",clos:[
+    {code:"CLO-1",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Comprehend the concepts of Engineering Economics."},
+    {code:"CLO-2",plo:"PLO-11",emphasis:"Medium",domain:"C-4",description:"Gain working knowledge of money management and analyse economics comparisons of alternative engineering projects."},
+    {code:"CLO-3",plo:"PLO-12",emphasis:"Medium",domain:"C-3",description:"Apply alternatives based on taxable income and market structure."}
+  ]},
+  {code:"CHE-349",title:"Separation Processes-II",batch:"2023F",clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend the principles of simultaneous heat and mass transfer and extend their applications."},
+    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Describe the coupled heat and mass transfer equations and apply to design the process equipment."},
+    {code:"CLO-3",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Solve and analyze complex engineering problems pertaining to SHMT operation."},
+    {code:"CLO-4",plo:"PLO-5",emphasis:"Medium",domain:"P-4",description:"Measures key process variables such as temperature, flow rate, and composition."},
+    {code:"CLO-5",plo:"PLO-2",emphasis:"Medium",domain:"C-4",description:"Compute and analyze performance metrics from collected experimental data."},
+    {code:"CLO-6",plo:"PLO-10",emphasis:"Medium",domain:"A-3",description:"Participate actively and responsibly in teamwork while conducting separation experiments."},
+    {code:"CLO-7",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Adjust and operate experimental units such as evaporators, dryers, and extraction columns."}
+  ]},
+  {code:"CHE-323",title:"Instrumentation & Process Control",batch:"2023F",clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend open/closed loop control systems based on the fundamentals of process dynamics."},
+    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Solve problems related to open/closed control loop systems."},
+    {code:"CLO-3",plo:"PLO-4",emphasis:"High",domain:"C-6",description:"Design and explain control loops for process variables of a given industrial process."},
+    {code:"CLO-4",plo:"PLO-5",emphasis:"Medium",domain:"P-4",description:"Calibrate automatic process control sensors using manual instruments as reference standards."},
+    {code:"CLO-5",plo:"PLO-4",emphasis:"Medium",domain:"P-3",description:"Follow procedures to apply ON/OFF, PI, and PID control modes for achieving set points."},
+    {code:"CLO-6",plo:"PLO-8",emphasis:"Medium",domain:"C-4",description:"Analyze and interpret process response curves in relation to control theory."},
+    {code:"CLO-7",plo:"PLO-8",emphasis:"Medium",domain:"A-3",description:"Demonstrate responsible handling of control equipment and participate in group-based experimentation."}
+  ]},
+  {code:"CHE-347",title:"Chemical Reaction Engineering",batch:"2023F",clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend the concepts of reaction engineering fundamentals."},
+    {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Apply design equations of ideal reactors to study their performance for homogenous single and multiple reactions."},
+    {code:"CLO-3",plo:"PLO-2",emphasis:"Medium",domain:"C-4",description:"Differentiate homogeneous and heterogeneous reactions, and modify design parameters for reactor calculations."},
+    {code:"CLO-4",plo:"PLO-4",emphasis:"High",domain:"C-6",description:"Design chemical reactors for various industrial chemical problems."},
+    {code:"CLO-5",plo:"PLO-4",emphasis:"Medium",domain:"P-4",description:"Execute reactor startup procedures by applying appropriate conditions and trace concentration-time data with precision."},
+    {code:"CLO-6",plo:"PLO-9",emphasis:"Medium",domain:"A-3",description:"Demonstrate punctuality and attentive demeanor as an individual or in a team during the lab."},
+    {code:"CLO-7",plo:"PLO-6",emphasis:"Medium",domain:"P-3",description:"Practice lab safety considerations while preparing reactants and collecting products."},
+    {code:"CLO-8",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Recall standard experimental procedures and analyze results, comparing with theoretical concepts to derive valid conclusions."}
+  ]},
+  {code:"CHE-345",title:"Transport Phenomena",batch:"2023F",clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Comprehend mechanisms of momentum, heat and mass transport and identify their applications for steady and transient flow systems."},
+    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-4",description:"Express microscopic and macroscopic mass/energy/momentum balance equations and solve them for several systems."},
+    {code:"CLO-3",plo:"PLO-4",emphasis:"High",domain:"C-5",description:"Analyze and solve engineering problems pertaining to transport phenomena in industrial processes."}
+  ]},
+  {code:"MATH-243",title:"Vector Calculus",batch:"2024F",clos:[
+    {code:"CLO-1",plo:"PLO-2",emphasis:"Low",domain:"C-2",description:"Comprehend the characterization of differential equations and select the appropriate method for solution."},
+    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Choose and apply the methods for analytic and approximate solutions of Ordinary and Partial differential equations."},
+    {code:"CLO-3",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Relate the knowledge for mathematical formulation of physical problems and their solutions."}
+  ]},
+  {code:"CHE-242",title:"Heat Transfer",batch:"2024F",clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend the fundamentals of heat transfer related to steady state conduction, convection, and radiation."},
+    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Use the knowledge of heat transfer model equations to solve problems related to heat transfer systems."},
+    {code:"CLO-3",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Solve and analyze engineering problems pertaining to heat transfer operations."},
+    {code:"CLO-4",plo:"PLO-4",emphasis:"Medium",domain:"P-4",description:"Execute the standard startup procedure and set the requisite temperature, flows and pressures."},
+    {code:"CLO-5",plo:"PLO-9",emphasis:"Medium",domain:"A-3",description:"Demonstrate punctuality and attentive demeanor as an individual or in a team during the whole lab session."},
+    {code:"CLO-6",plo:"PLO-6",emphasis:"Medium",domain:"P-3",description:"Follow lab safety considerations for operating all kinds of heat exchangers and electrical heating devices."},
+    {code:"CLO-7",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Recall standard experimental procedures and analyze and interpret results, comparing with theoretical concepts."}
+  ]},
+  {code:"CHE-346",title:"Particulate Technology",batch:"2024F",clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Relate the fundamentals of particulate systems to size reduction, transportation and storage of solids."},
+    {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Extend the concepts of particulate behavior to illustrate the mechanism of mixing and separation of solids."},
+    {code:"CLO-3",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Follow equipment standard operating procedure (SOP) for particle size reduction, separation and handling."},
+    {code:"CLO-4",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Analyze the effect of attrition, impact and compression on particle size reduction and determine efficiency of equipment."},
+    {code:"CLO-5",plo:"PLO-1",emphasis:"Medium",domain:"P-4",description:"Grind solid particles and perform distribution analysis by use of standards (Tyler mesh) for particle size analysis."},
+    {code:"CLO-6",plo:"PLO-8",emphasis:"Medium",domain:"A-3",description:"Initiate experiment by following equipment procedure and safety SOPs."}
+  ]},
+  {code:"PHY-102",title:"Applied Physics",batch:"2025F",clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics."},
+    {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Discuss the fundamentals of electromagnetic induction and thermometry to demonstrate the working principle of related equipment."},
+    {code:"CLO-3",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Realize the experiment by following instructions by the teacher."},
+    {code:"CLO-4",plo:"PLO-9",emphasis:"Medium",domain:"A-3",description:"Exhibit capability to work in team during the lab activities."},
+    {code:"CLO-5",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class."}
+  ]},
+  {code:"QR-100",title:"Quantitative Reasoning-I",batch:"2025F",clos:[
+    {code:"CLO-1",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Apply fundamental numerical literacy to compute values, demonstrate numerical relationships, and construct accurate data representations."},
+    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Solve problems using fundamental mathematical and statistical concepts, demonstrate their applications, and relate to real-world scenarios."},
+    {code:"CLO-3",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Interpret and modify data in various formats (tables, graphs, charts, equations) to produce meaningful insights."}
+  ]}
+];
 
-// ================================================================
-// STATE
-// ================================================================
-let DATA=FALLBACK;
-let activeBatch="All";
-let domChart=null;
+/* ================================================================
+   APP STATE
+================================================================ */
+let activeBatch = "All";
+let activeTab   = "dash";
+let DATA        = { plos: PLOS_DEF, courses: COURSES_EMBEDDED };
+let domChart    = null;
+let graphBuilt  = false;
+let simulation, svgSel, gSel, linkSel, nodeSel;
+let selectedNode = null;
 
-// ================================================================
-// LOAD DATA (from data.json, fall back to embedded)
-// ================================================================
-async function init(){
-  try{
-    const r=await fetch("./data.json");
-    if(r.ok) DATA=await r.json();
-  }catch(e){}
-  // Normalize
-  DATA.courses.forEach(c=>{
-    c.clos.forEach(cl=>{
-      cl.plo=normPLO(cl.plo);
-      cl.domain=normDomain(cl.domain);
-    });
-  });
-  renderAll();
+/* ================================================================
+   INIT
+================================================================ */
+async function init() {
+  try {
+    const r = await fetch("./data.json");
+    if (r.ok) DATA = await r.json();
+  } catch(e) {}
+  buildFilters();
+  renderStats();
+  renderDash();
 }
 
-// ================================================================
-// RENDER ALL
-// ================================================================
-function renderAll(){
-  const courses=filteredCourses();
+/* ================================================================
+   TAB SWITCHING
+================================================================ */
+window.switchTab = function(tab) {
+  activeTab = tab;
+  document.getElementById("tab-dash").classList.toggle("hidden",  tab !== "dash");
+  document.getElementById("tab-graph").classList.toggle("hidden", tab !== "graph");
+  document.getElementById("tbtn-dash").classList.toggle("active",  tab === "dash");
+  document.getElementById("tbtn-graph").classList.toggle("active", tab === "graph");
+  if (tab === "graph") {
+    if (!graphBuilt) { buildGraph(); graphBuilt = true; }
+    else if (simulation) simulation.alpha(0.2).restart();
+  }
+};
+
+/* ================================================================
+   BATCH FILTER
+================================================================ */
+function buildFilters() {
+  const batches = ["All", ...[...new Set(DATA.courses.map(c => c.batch))].sort()];
+  document.getElementById("filters").innerHTML = batches.map(b =>
+    `<button class="fbtn${activeBatch===b?" active":""}" onclick="setBatch('${b}')">${b==="All"?"All batches":b}</button>`
+  ).join("");
+}
+
+window.setBatch = function(b) {
+  activeBatch = b;
+  buildFilters();
   renderStats();
-  renderTabs();
+  renderDash();
+  if (activeTab === "graph") { graphBuilt = false; buildGraph(); graphBuilt = true; closePanel(); }
+};
+
+function filtered() {
+  return activeBatch === "All" ? DATA.courses : DATA.courses.filter(c => c.batch === activeBatch);
+}
+
+/* ================================================================
+   HEADER STATS
+================================================================ */
+function renderStats() {
+  const courses  = filtered();
+  const totalCLOs = courses.reduce((a,c) => a + c.clos.length, 0);
+  const ploSet   = new Set(courses.flatMap(c => c.clos.map(cl => cl.plo)));
+  const nBatches = [...new Set(DATA.courses.map(c => c.batch))].length;
+  document.getElementById("hdr-stats").innerHTML = [
+    [DATA.courses.length,"Courses"],[totalCLOs,"CLOs"],[nBatches,"Batches"],[ploSet.size,"PLOs"]
+  ].map(([n,l]) =>
+    `<div style="text-align:center;">
+       <div class="stat-n">${n}</div>
+       <div class="stat-l">${l}</div>
+     </div>`
+  ).join("");
+}
+
+/* ================================================================
+   DASHBOARD RENDER
+================================================================ */
+function renderDash() {
+  const courses = filtered();
   renderHeatmap(courses);
   renderDomainLegend();
   renderDomainChart(courses);
   renderCourseGrid(courses);
   renderPLOFooter();
-  document.getElementById("cinfo").textContent=
-    `Showing ${courses.length} course${courses.length!==1?"s":""} · ${courses.reduce((a,c)=>a+c.clos.length,0)} CLOs`;
+  document.getElementById("cinfo").textContent =
+    `— ${courses.length} course${courses.length!==1?"s":""}, ${courses.reduce((a,c)=>a+c.clos.length,0)} CLOs`;
 }
 
-function filteredCourses(){
-  if(activeBatch==="All") return DATA.courses;
-  return DATA.courses.filter(c=>c.batch===activeBatch);
-}
-
-// ================================================================
-// HEADER STATS
-// ================================================================
-function renderStats(){
-  const el=document.getElementById("hdr-stats");
-  const totalCLOs=DATA.courses.reduce((a,c)=>a+c.clos.length,0);
-  const batches=[...new Set(DATA.courses.map(c=>c.batch))].sort();
-  const ploSet=new Set(DATA.courses.flatMap(c=>c.clos.map(cl=>cl.plo)));
-  el.innerHTML=[
-    [DATA.courses.length,"Courses"],
-    [totalCLOs,"CLOs"],
-    [batches.length,"Batches"],
-    [ploSet.size,"PLOs Covered"]
-  ].map(([n,l])=>`<div class="stat"><div class="stat-n">${n}</div><div class="stat-l">${l}</div></div>`).join("");
-}
-
-// ================================================================
-// TABS
-// ================================================================
-function renderTabs(){
-  const el=document.getElementById("nav-tabs");
-  const batches=["All",...[...new Set(DATA.courses.map(c=>c.batch))].sort()];
-  el.innerHTML=batches.map(b=>`<button class="tab${activeBatch===b?" active":""}" onclick="setBatch('${b}')">${b==="All"?"All Batches":b}</button>`).join("");
-}
-window.setBatch=function(b){activeBatch=b;renderAll();};
-
-// ================================================================
-// HEATMAP
-// ================================================================
-function renderHeatmap(courses){
-  const el=document.getElementById("hm");
-  const plos=Object.keys(DATA.plos);
-
-  // Build course×plo map: {courseCode: {PLO: {count,maxEmphasis}}}
-  const map={};
-  courses.forEach(c=>{
-    map[c.code]={};
-    plos.forEach(p=>map[c.code][p]={count:0,maxEmphasis:"None",clos:[]});
-    c.clos.forEach(cl=>{
-      if(map[c.code][cl.plo]!==undefined){
-        map[c.code][cl.plo].count++;
-        map[c.code][cl.plo].clos.push(cl);
-        if(EMPHASIS_ORDER[cl.emphasis]>EMPHASIS_ORDER[map[c.code][cl.plo].maxEmphasis])
-          map[c.code][cl.plo].maxEmphasis=cl.emphasis;
-      }
+/* ── Heatmap ── */
+function renderHeatmap(courses) {
+  const plos = Object.keys(DATA.plos);
+  const map  = {};
+  courses.forEach(c => {
+    map[c.code] = {};
+    plos.forEach(p => map[c.code][p] = {count:0, maxEmphasis:"None"});
+    c.clos.forEach(cl => {
+      if (!map[c.code][cl.plo]) return;
+      map[c.code][cl.plo].count++;
+      if (EMPHASIS_ORDER[cl.emphasis] > EMPHASIS_ORDER[map[c.code][cl.plo].maxEmphasis])
+        map[c.code][cl.plo].maxEmphasis = cl.emphasis;
     });
   });
 
-  // Header
-  const thead=`<thead><tr>
+  const alphaMap = {None:0, Low:0.22, Medium:0.55, High:0.9};
+  const thead = `<thead><tr>
     <th style="text-align:left;padding-left:1.2rem;">Course</th>
-    ${plos.map(p=>`<th class="plo-header" title="${DATA.plos[p]}">${p.replace("PLO-","P")}</th>`).join("")}
+    ${plos.map(p=>`<th title="${DATA.plos[p]}">${p.replace("PLO-","P")}</th>`).join("")}
   </tr></thead>`;
-
-  // Body
-  const tbody="<tbody>"+courses.map(c=>{
-    const cells=plos.map(p=>{
-      const d=map[c.code][p];
-      if(!d||d.count===0) return `<td class="hm-plo"><div class="hm-dot empty">·</div></td>`;
-      const col=PLO_COLORS[p]||"#888";
-      const alpha=EMPHASIS_ALPHA[d.maxEmphasis]||0.5;
-      const tip=`data-plo="${p}" data-course="${c.code}" data-count="${d.count}" data-em="${d.maxEmphasis}"`;
-      return `<td class="hm-plo"><div class="hm-dot" style="background:rgba(${hexToRgb(col)},${alpha});color:rgba(255,255,255,0.9);" ${tip} onmouseenter="showTT(event,this)" onmouseleave="hideTT()">${d.count}</div></td>`;
+  const tbody = "<tbody>" + courses.map(c => {
+    const cells = plos.map(p => {
+      const d = map[c.code]?.[p];
+      if (!d || !d.count) return `<td class="hm-plo"><div class="hm-dot empty">·</div></td>`;
+      const col   = PLO_COLORS[p] || "#888";
+      const alpha = alphaMap[d.maxEmphasis] || 0.22;
+      return `<td class="hm-plo">
+        <div class="hm-dot"
+          style="background:${col};opacity:${alpha + 0.08};color:#fff;"
+          onmouseenter="showTip(event,'${c.code}','${p}','${d.count}','${d.maxEmphasis}')"
+          onmouseleave="hideTip()">${d.count}</div></td>`;
     }).join("");
     return `<tr>
-      <td class="hmc">
-        <div class="hm-cc">${c.code}<span class="bb bb-${c.batch}">${c.batch}</span></div>
-        <div class="hm-ct">${c.title}</div>
+      <td class="hm-cc">
+        <div class="hm-course-code">${c.code}<span class="bb bb-${c.batch}">${c.batch}</span></div>
+        <div class="hm-course-title">${c.title}</div>
       </td>${cells}
     </tr>`;
-  }).join("")+"</tbody>";
+  }).join("") + "</tbody>";
 
-  el.innerHTML=thead+tbody;
+  document.getElementById("hm").innerHTML = thead + tbody;
 }
 
-// ================================================================
-// TOOLTIP
-// ================================================================
-const ttEl=document.getElementById("tt");
-window.showTT=function(e,el){
-  const plo=el.dataset.plo,code=el.dataset.course,em=el.dataset.em;
-  const course=DATA.courses.find(c=>c.code===code);
-  if(!course) return;
-  const clos=course.clos.filter(cl=>cl.plo===plo);
-  ttEl.innerHTML=`<div class="tt-hd">${code} → ${plo}: ${DATA.plos[plo]}</div>
-    <div class="tt-row" style="color:var(--gold);margin-bottom:0.3rem;">Emphasis: ${em} · ${clos.length} CLO${clos.length>1?"s":""}</div>
-    ${clos.map(cl=>`<div class="tt-row">· <b>${cl.code}</b> [${cl.domain}] ${cl.description.substring(0,80)}…</div>`).join("")}`;
-  ttEl.style.display="block";
-  moveTT(e);
+/* ── Tooltip ── */
+const tip = document.getElementById("tip");
+window.showTip = function(e, code, plo, count, em) {
+  const course = DATA.courses.find(c => c.code === code);
+  const clos   = course ? course.clos.filter(cl => cl.plo === plo) : [];
+  tip.innerHTML = `<div class="th">${code} → ${plo}: ${DATA.plos[plo]||""}</div>
+    <div class="tm" style="color:var(--gold);margin-bottom:.2rem;">Emphasis: ${em} · ${count} CLO${count>1?"s":""}</div>
+    ${clos.map(cl=>`<div class="tm">· <b>${cl.code}</b> [${cl.domain}] ${cl.description.substring(0,75)}…</div>`).join("")}`;
+  tip.style.display = "block";
+  moveTip(e);
 };
-window.hideTT=function(){ttEl.style.display="none";};
-document.addEventListener("mousemove",moveTT);
-function moveTT(e){
-  if(ttEl.style.display==="none") return;
-  let x=e.clientX+14, y=e.clientY+14;
-  if(x+280>window.innerWidth) x=e.clientX-294;
-  if(y+160>window.innerHeight) y=e.clientY-170;
-  ttEl.style.left=x+"px"; ttEl.style.top=y+"px";
+window.hideTip = function() { tip.style.display = "none"; };
+document.addEventListener("mousemove", moveTip);
+function moveTip(e) {
+  if (tip.style.display === "none") return;
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + 280 > window.innerWidth)  x = e.clientX - 290;
+  if (y + 160 > window.innerHeight) y = e.clientY - 170;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
 }
 
-// ================================================================
-// DOMAIN LEGEND
-// ================================================================
-function renderDomainLegend(){
-  const el=document.getElementById("dom-leg");
-  el.innerHTML=`<span class="dl-t">Bloom's Taxonomy</span>`+
-    Object.entries(DOMAIN_CFG).map(([k,v])=>
+/* ── Domain legend ── */
+function renderDomainLegend() {
+  document.getElementById("dom-leg").innerHTML =
+    `<span class="dl-t">Bloom's Taxonomy</span>` +
+    Object.entries(DOMAIN_CFG).map(([,v]) =>
       `<div class="dl-i"><div class="dl-sw" style="background:${v.color};"></div>${v.label}</div>`
     ).join("");
 }
 
-// ================================================================
-// DOMAIN CHART
-// ================================================================
-function renderDomainChart(courses){
-  const ctx=document.getElementById("domChart").getContext("2d");
-  if(domChart) domChart.destroy();
-  const domains=Object.keys(DOMAIN_CFG);
-  const labels=courses.map(c=>c.code);
-  const datasets=domains.map(d=>({
-    label:DOMAIN_CFG[d].label,
-    data:courses.map(c=>c.clos.filter(cl=>cl.domain===d).length),
-    backgroundColor:DOMAIN_CFG[d].color,
-    borderWidth:0,borderRadius:2
-  }));
-  domChart=new Chart(ctx,{
-    type:"bar",
-    data:{labels,datasets},
-    options:{
-      responsive:true,indexAxis:"y",
-      plugins:{legend:{position:"bottom",labels:{color:"#7a8ca8",font:{family:"Outfit",size:11},boxWidth:12,padding:14}},
-        tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.raw}`}}},
-      scales:{
-        x:{stacked:true,ticks:{color:"#7a8ca8",font:{family:"Outfit",size:11}},grid:{color:"rgba(255,255,255,0.05)"}},
-        y:{stacked:true,ticks:{color:"#e2e8f4",font:{family:"Outfit",size:11,weight:"600"}},grid:{color:"rgba(255,255,255,0.05)"}}
+/* ── Domain chart ── */
+function renderDomainChart(courses) {
+  const ctx = document.getElementById("domChart").getContext("2d");
+  if (domChart) domChart.destroy();
+  domChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: courses.map(c => c.code),
+      datasets: Object.entries(DOMAIN_CFG).map(([d,cfg]) => ({
+        label: cfg.label,
+        data:  courses.map(c => c.clos.filter(cl => cl.domain === d).length),
+        backgroundColor: cfg.color,
+        borderWidth: 0, borderRadius: 3
+      }))
+    },
+    options: {
+      responsive: true, indexAxis: "y",
+      plugins: {
+        legend: { position:"bottom", labels:{color:"#5a6e8c",font:{family:"Outfit",size:11},boxWidth:12,padding:14} },
+        tooltip: { callbacks:{ label: ctx => `${ctx.dataset.label}: ${ctx.raw}` } }
+      },
+      scales: {
+        x: { stacked:true, ticks:{color:"#5a6e8c",font:{family:"Outfit",size:11}}, grid:{color:"rgba(0,0,0,.05)"} },
+        y: { stacked:true, ticks:{color:"#18263e",font:{family:"Outfit",size:11,weight:"600"}}, grid:{color:"rgba(0,0,0,.05)"} }
       }
     }
   });
 }
 
-// ================================================================
-// COURSE GRID
-// ================================================================
-function renderCourseGrid(courses){
-  const el=document.getElementById("cgrid");
-  el.innerHTML=courses.map(c=>{
-    const ploSet=[...new Set(c.clos.map(cl=>cl.plo))];
-    const ploTags=ploSet.map(p=>`<div class="pm" style="background:${PLO_COLORS[p]||'#888'}" title="${DATA.plos[p]}">${p.replace("PLO-","P")}</div>`).join("");
-    // Mini domain bar
-    const total=c.clos.length;
-    const bar=Object.entries(DOMAIN_CFG).map(([d,cfg])=>{
-      const cnt=c.clos.filter(cl=>cl.domain===d).length;
-      if(cnt===0) return "";
-      return `<div class="dm-seg" style="background:${cfg.color};width:${(cnt/total*100).toFixed(1)}%;"></div>`;
+/* ── Course grid ── */
+function renderCourseGrid(courses) {
+  document.getElementById("cgrid").innerHTML = courses.map(c => {
+    const ploSet = [...new Set(c.clos.map(cl => cl.plo))];
+    const pills  = ploSet.map(p =>
+      `<div class="pm" style="background:${PLO_COLORS[p]||'#888'}" title="${DATA.plos[p]}">${p.replace("PLO-","P")}</div>`
+    ).join("");
+    const total = c.clos.length;
+    const bar = Object.entries(DOMAIN_CFG).map(([d,cfg]) => {
+      const cnt = c.clos.filter(cl => cl.domain === d).length;
+      return cnt ? `<div class="dm-seg" style="background:${cfg.color};width:${(cnt/total*100).toFixed(1)}%;"></div>` : "";
     }).join("");
-    const cloRows=c.clos.map(cl=>`
-      <div class="clo-item">
+    const cloRows = c.clos.map(cl => {
+      const col = PLO_COLORS[cl.plo] || "#888";
+      const dc  = (DOMAIN_CFG[cl.domain]||{color:"#888"}).color;
+      const dl  = (DOMAIN_CFG[cl.domain]||{label:cl.domain}).label;
+      return `<div class="clo-item">
         <div class="clo-num">${cl.code}</div>
         <div class="clo-desc">${cl.description}</div>
         <div class="clo-tags">
-          <span class="tag tag-plo">${cl.plo}</span>
-          <span class="tag tag-dom" style="background:${domColor(cl.domain)};color:#0a1628;">${domLabel(cl.domain)}</span>
-          <span class="tag tag-em-${cl.emphasis}">${cl.emphasis}</span>
+          <span class="tag" style="background:${col}18;color:${col};">${cl.plo}</span>
+          <span class="tag" style="background:${dc}18;color:${dc};">${dl}</span>
+          <span class="tag" style="background:#f0f3fa;color:var(--mu);">${cl.emphasis}</span>
         </div>
-      </div>`).join("");
+      </div>`;
+    }).join("");
     return `<div class="ccard" id="cc-${c.code}" onclick="toggleCard('${c.code}')">
       <div class="cc-hdr">
-        <div class="cc-l">
+        <div style="flex:1;">
           <div class="cc-code">${c.code} <span class="bb bb-${c.batch}">${c.batch}</span></div>
           <div class="cc-title">${c.title}</div>
-          <div class="cc-meta">${ploTags}</div>
+          <div class="cc-meta">${pills}</div>
         </div>
         <div class="cc-r">
           <div class="cc-n">${c.clos.length}</div>
           <div class="cc-nl">CLOs</div>
-          <button class="exp-btn" aria-label="expand">▾</button>
+          <button class="exp-btn">▾</button>
         </div>
       </div>
       <div class="dm-bar">${bar}</div>
@@ -559,29 +745,284 @@ function renderCourseGrid(courses){
     </div>`;
   }).join("");
 }
+window.toggleCard = id => document.getElementById("cc-"+id).classList.toggle("open");
 
-window.toggleCard=function(code){
-  document.getElementById("cc-"+code).classList.toggle("open");
-};
-
-// ================================================================
-// PLO FOOTER
-// ================================================================
-function renderPLOFooter(){
-  const el=document.getElementById("plo-footer");
-  el.innerHTML=Object.entries(DATA.plos).map(([k,v])=>`
-    <div class="plo-def">
-      <div class="plo-ic" style="background:${PLO_COLORS[k]||'#888'}">${k.replace("PLO-","P")}</div>
-      <div>
-        <span class="plo-code-t">${k}</span>
-        <span class="plo-name-t">${v}</span>
-      </div>
-    </div>`).join("");
+/* ── PLO footer ── */
+function renderPLOFooter() {
+  document.getElementById("plo-footer").innerHTML = Object.entries(DATA.plos).map(([k,v]) =>
+    `<div class="plo-def">
+       <div class="plo-ic" style="background:${PLO_COLORS[k]||'#888'}">${k.replace("PLO-","P")}</div>
+       <div><span class="plo-code-t">${k}</span><span class="plo-name-t">${v}</span></div>
+     </div>`
+  ).join("");
 }
 
-// ================================================================
-// BOOT
-// ================================================================
+/* ================================================================
+   GRAPH
+================================================================ */
+function buildGraph() {
+  const svgEl = document.getElementById("graph-svg");
+  const W = svgEl.clientWidth  || 900;
+  const H = svgEl.clientHeight || 600;
+  d3.select(svgEl).selectAll("*").remove();
+
+  const courses = filtered();
+
+  /* build edge map */
+  const edgeMap = {};
+  courses.forEach(c => {
+    c.clos.forEach(cl => {
+      const key = `${c.code}→${cl.plo}`;
+      if (!edgeMap[key]) edgeMap[key] = {source:c.code, target:cl.plo, count:0, maxEmphasis:"None"};
+      edgeMap[key].count++;
+      if (EMPHASIS_ORDER[cl.emphasis] > EMPHASIS_ORDER[edgeMap[key].maxEmphasis])
+        edgeMap[key].maxEmphasis = cl.emphasis;
+    });
+  });
+  const links = Object.values(edgeMap);
+
+  const activePLOs = [...new Set(courses.flatMap(c => c.clos.map(cl => cl.plo)))]
+    .sort((a,b) => parseInt(a.replace("PLO-","")) - parseInt(b.replace("PLO-","")));
+
+  const nodes = [
+    ...activePLOs.map(p => ({
+      id:p, type:"plo", label:p, fullLabel:DATA.plos[p]||p,
+      radius:28, color:PLO_COLORS[p]||"#888"
+    })),
+    ...courses.map(c => ({
+      id:c.code, type:"course", label:c.code, fullLabel:c.title,
+      batch:c.batch, radius:13, color:BATCH_COLORS[c.batch]||"#6b8fc4"
+    }))
+  ];
+
+  /* SVG + zoom */
+  svgSel = d3.select(svgEl);
+  const zoom = d3.zoom().scaleExtent([0.2,4])
+    .on("zoom", e => gSel.attr("transform", e.transform));
+  svgSel.call(zoom);
+  gSel = svgSel.append("g");
+
+  /* edges */
+  linkSel = gSel.append("g").selectAll("line").data(links).join("line")
+    .attr("stroke", d => PLO_COLORS[d.target]||"#888")
+    .attr("stroke-opacity", d => 0.18 + (EMPHASIS_ORDER[d.maxEmphasis]/3)*0.55)
+    .attr("stroke-width",   d => Math.sqrt(d.count)*1.8 + 0.6)
+    .attr("stroke-linecap","round");
+
+  /* node groups */
+  nodeSel = gSel.append("g").selectAll("g").data(nodes).join("g")
+    .style("cursor","pointer")
+    .call(d3.drag()
+      .on("start",(e,d) => { if(!e.active) simulation.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on("drag", (e,d) => { d.fx=e.x; d.fy=e.y; })
+      .on("end",  (e,d) => { if(!e.active) simulation.alphaTarget(0); d.fx=null; d.fy=null; })
+    )
+    .on("mouseenter", graphHoverOn)
+    .on("mouseleave", graphHoverOff)
+    .on("click", (e,d) => { e.stopPropagation(); graphClick(d); });
+
+  /* PLO circles */
+  nodeSel.filter(d => d.type==="plo").each(function(d) {
+    const s = d3.select(this);
+    s.append("circle").attr("r",d.radius+8).attr("fill",d.color).attr("fill-opacity",.09).attr("stroke","none");
+    s.append("circle").attr("r",d.radius)
+      .attr("fill",d.color).attr("fill-opacity",.13)
+      .attr("stroke",d.color).attr("stroke-width",2).attr("stroke-opacity",.65);
+    s.append("text").text(d.label.replace("PLO-","P"))
+      .attr("text-anchor","middle").attr("dominant-baseline","central")
+      .attr("font-family","'DM Mono',monospace").attr("font-size","10px").attr("font-weight","700")
+      .attr("fill",d.color).attr("fill-opacity",".9");
+  });
+
+  /* Course circles */
+  nodeSel.filter(d => d.type==="course").each(function(d) {
+    const s = d3.select(this);
+    s.append("circle").attr("r",d.radius)
+      .attr("fill",d.color).attr("fill-opacity",.15)
+      .attr("stroke",d.color).attr("stroke-width",1.2).attr("stroke-opacity",.7);
+    s.append("text").text(d.label.split("-")[1]||d.label)
+      .attr("text-anchor","middle").attr("dominant-baseline","central")
+      .attr("font-family","'DM Mono',monospace").attr("font-size","7px").attr("font-weight","500")
+      .attr("fill",d.color).attr("fill-opacity",".85");
+  });
+
+  /* PLO outside labels */
+  const lblLayer = gSel.append("g");
+  lblLayer.selectAll("text").data(nodes.filter(d=>d.type==="plo")).join("text")
+    .attr("id",   d => "plbl-"+d.id.replace("-",""))
+    .text(d => d.fullLabel)
+    .attr("text-anchor","middle")
+    .attr("font-family","'Outfit',sans-serif").attr("font-size","9.5px")
+    .attr("fill","#5a6e8c").attr("pointer-events","none");
+
+  /* simulation */
+  simulation = d3.forceSimulation(nodes)
+    .force("link",      d3.forceLink(links).id(d=>d.id).distance(d=>100+d.count*18).strength(0.5))
+    .force("charge",    d3.forceManyBody().strength(d=>d.type==="plo"?-650:-130))
+    .force("center",    d3.forceCenter(W/2, H/2))
+    .force("collision", d3.forceCollide(d=>d.radius+14))
+    .on("tick", () => {
+      linkSel
+        .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
+        .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+      nodeSel.attr("transform",d=>`translate(${d.x},${d.y})`);
+      lblLayer.selectAll("text").each(function(d){
+        d3.select(this).attr("x",d.x).attr("y",d.y+d.radius+13);
+      });
+    });
+
+  svgSel.on("click",()=>{ closePanel(); graphDeselect(); });
+}
+
+/* graph hover */
+function graphHoverOn(event,d) {
+  linkSel.attr("stroke-opacity",l=>{
+    const s=typeof l.source==="object"?l.source.id:l.source;
+    const t=typeof l.target==="object"?l.target.id:l.target;
+    return (s===d.id||t===d.id)?0.85:0.04;
+  });
+  tip.innerHTML = d.type==="plo"
+    ? `<div class="th">${d.label}</div><div class="tm">${d.fullLabel}</div>`
+    : `<div class="th">${d.label}</div><div class="tm">${d.fullLabel}</div><div class="tm" style="color:var(--gold);margin-top:.15rem;">${d.batch}</div>`;
+  tip.style.display = "block";
+}
+function graphHoverOff() {
+  if (!selectedNode) graphRestoreEdges();
+  tip.style.display = "none";
+}
+function graphRestoreEdges() {
+  if (!linkSel) return;
+  linkSel.attr("stroke-opacity", d => 0.18+(EMPHASIS_ORDER[d.maxEmphasis]/3)*0.55);
+}
+function graphDeselect() { selectedNode=null; graphRestoreEdges(); }
+
+function graphClick(d) {
+  selectedNode = d;
+  linkSel.attr("stroke-opacity",l=>{
+    const s=typeof l.source==="object"?l.source.id:l.source;
+    const t=typeof l.target==="object"?l.target.id:l.target;
+    return (s===d.id||t===d.id)?0.88:0.04;
+  });
+  openPanel(d);
+}
+
+/* ── Side panel ── */
+function openPanel(d) {
+  document.getElementById("panel").classList.remove("hidden");
+  d.type==="course" ? renderCoursePanel(d) : renderPLOPanel(d);
+}
+window.closePanel = function() {
+  document.getElementById("panel").classList.add("hidden");
+  graphDeselect();
+};
+
+function renderCoursePanel(d) {
+  const course = DATA.courses.find(c=>c.code===d.id); if(!course) return;
+  document.getElementById("p-type").textContent = "Course · "+course.batch;
+  document.getElementById("p-name").textContent = course.code;
+  document.getElementById("p-sub").textContent  = course.title;
+
+  const byPLO={};
+  course.clos.forEach(cl=>{ if(!byPLO[cl.plo]) byPLO[cl.plo]=[]; byPLO[cl.plo].push(cl); });
+  const maxC = Math.max(...Object.values(byPLO).map(a=>a.length));
+
+  const ploHtml = Object.entries(byPLO).map(([plo,clos])=>{
+    const col = PLO_COLORS[plo]||"#888";
+    const pct = (clos.length/maxC*100).toFixed(0);
+    return `<div class="plo-conn" onclick="_jumpToPLO('${plo}')">
+      <div class="plo-pill-sm" style="background:${col};">${plo.replace("PLO-","P")}</div>
+      <div style="flex:1;">
+        <div class="plo-conn-name">${DATA.plos[plo]||plo}</div>
+        <div class="plo-conn-cnt">${clos.length} CLO${clos.length>1?"s":""}</div>
+        <div class="p-bar-wrap"><div class="p-bar-fill" style="width:${pct}%;background:${col};"></div></div>
+      </div>
+    </div>`;
+  }).join("");
+
+  const cloHtml = course.clos.map(cl=>{
+    const col = PLO_COLORS[cl.plo]||"#888";
+    const dc  = (DOMAIN_CFG[cl.domain]||{color:"#888"}).color;
+    const dl  = (DOMAIN_CFG[cl.domain]||{label:cl.domain}).label;
+    return `<div class="p-clo-item">
+      <div class="p-clo-badge" style="background:${col}18;border:1px solid ${col}30;color:${col};">${cl.code}</div>
+      <div>
+        <div class="p-clo-desc">${cl.description}</div>
+        <div class="p-clo-tags">
+          <span class="pctag" style="background:${col}18;color:${col};">${cl.plo}</span>
+          <span class="pctag" style="background:${dc}18;color:${dc};">${dl}</span>
+          <span class="pctag" style="background:#f0f3fa;color:var(--mu);">${cl.emphasis}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+
+  document.getElementById("p-body").innerHTML =
+    `<div style="margin-bottom:1rem;"><div class="psec-hd">PLO Connections</div>${ploHtml}</div>
+     <div><div class="psec-hd">${course.clos.length} CLOs</div>${cloHtml}</div>`;
+}
+
+function renderPLOPanel(d) {
+  const col = PLO_COLORS[d.id]||"#888";
+  document.getElementById("p-type").textContent = "Programme Learning Outcome";
+  document.getElementById("p-name").innerHTML   = `<span style="color:${col}">${d.id}</span>`;
+  document.getElementById("p-sub").textContent  = DATA.plos[d.id]||"";
+
+  const connected = filtered()
+    .map(c=>({course:c, clos:c.clos.filter(cl=>cl.plo===d.id)}))
+    .filter(x=>x.clos.length>0)
+    .sort((a,b)=>b.clos.length-a.clos.length);
+  const totalCLOs = connected.reduce((a,x)=>a+x.clos.length,0);
+
+  const emC={Low:0,Medium:0,High:0};
+  connected.forEach(x=>x.clos.forEach(cl=>emC[cl.emphasis]=(emC[cl.emphasis]||0)+1));
+  const emBars = ["Low","Medium","High"].map(em=>{
+    const pct = totalCLOs?(emC[em]||0)/totalCLOs*100:0;
+    const ec  = {Low:"var(--dim)",Medium:col,High:"#ef4444"}[em];
+    return `<div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.3rem;">
+      <span style="font-size:.62rem;color:var(--mu);width:50px;">${em}</span>
+      <div style="flex:1;height:4px;border-radius:2px;background:var(--bdr);">
+        <div style="width:${pct.toFixed(1)}%;height:100%;border-radius:2px;background:${ec};"></div>
+      </div>
+      <span style="font-size:.6rem;color:var(--mu);width:20px;text-align:right;">${emC[em]||0}</span>
+    </div>`;
+  }).join("");
+
+  const courseHtml = connected.map(x=>{
+    const bc = BATCH_COLORS[x.course.batch]||"#888";
+    return `<div class="pcourse-item" onclick="_jumpToCourse('${x.course.code}')">
+      <span class="pci-batch" style="background:${bc}18;color:${bc};">${x.course.batch}</span>
+      <span class="pci-name">${x.course.code} — ${x.course.title}</span>
+      <span class="pci-cnt">${x.clos.length}</span>
+    </div>`;
+  }).join("");
+
+  document.getElementById("p-body").innerHTML =
+    `<div style="margin-bottom:1rem;">
+       <div class="psec-hd">Overview</div>
+       <div style="display:flex;gap:1.5rem;margin-bottom:.8rem;">
+         <div style="text-align:center;">
+           <div style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:700;color:${col};line-height:1;">${connected.length}</div>
+           <div style="font-size:.6rem;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;">Courses</div>
+         </div>
+         <div style="text-align:center;">
+           <div style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:700;color:${col};line-height:1;">${totalCLOs}</div>
+           <div style="font-size:.6rem;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;">CLOs</div>
+         </div>
+       </div>
+       ${emBars}
+     </div>
+     <div><div class="psec-hd">Connected Courses</div>${courseHtml}</div>`;
+}
+
+window._jumpToPLO    = plo  => graphClick({id:plo, type:"plo", fullLabel:DATA.plos[plo]||plo});
+window._jumpToCourse = code => {
+  const c = DATA.courses.find(x=>x.code===code); if(!c) return;
+  graphClick({id:code, type:"course", label:code, fullLabel:c.title, batch:c.batch});
+};
+
+/* ================================================================
+   BOOT
+================================================================ */
 init();
 </script>
 </body>
