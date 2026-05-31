@@ -1508,239 +1508,410 @@ function cmRenderHeatmap(courses, sortedConcepts, idx) {
   el.innerHTML = legendHtml + tableHtml;
 }
 
-/* ── Concept Network view ────────────────────────────────── */
+/* ── Concept Network — Bubble Cluster layout ─────────────── */
 /*
-   Layout: course nodes (rectangles) are pinned in a ring; concept nodes
-   (circles) float in the centre pulled toward every course that teaches them.
-   Shared concepts naturally sit between their courses; unique ones orbit close
-   to their single parent.
+  Visual model
+  ─────────────
+  • Each course is represented by a large translucent bubble (circle).
+  • Unique concepts live INSIDE their course bubble as small labelled dots.
+  • Shared concepts float OUTSIDE all bubbles as larger coloured nodes;
+    edges connect them to every course bubble that teaches them.
+  • Everything is draggable; shared-concept nodes use D3 force layout
+    so they settle naturally between their connected courses.
+  • Zoom / pan on the SVG background.
 */
 let cmNetSim = null;
 
+/* ── palette (same as getCMConceptColor so colours are consistent) ── */
 function cmRenderNetwork(courses, sortedConcepts, idx) {
   const el = document.getElementById("cmv-network");
-  if (!sortedConcepts.length) {
+  if (!courses.length) {
     el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);font-size:.85rem;">
-      No shared concepts for current filters.</div>`;
+      No courses to display.</div>`;
     return;
   }
+  if (cmNetSim) { cmNetSim.stop(); cmNetSim = null; }
 
-  el.innerHTML = `
-    <svg id="cm-net-svg"></svg>
-    <div class="cm-net-hint">Drag nodes · Scroll to zoom · Click a concept for details</div>
+  el.innerHTML = `<svg id="cm-net-svg" style="width:100%;height:100%;display:block;"></svg>
+    <div class="cm-net-hint">Drag any node · Scroll/pinch to zoom · Click concept for CLO details</div>
     <div class="cm-net-legend" id="cm-net-legend"></div>`;
 
-  const svg    = d3.select("#cm-net-svg");
-  const W      = el.clientWidth  || 900;
-  const H      = el.clientHeight || 520;
+  /* ── Dimensions ──────────────────────────────────────────────────────── */
+  const W = el.clientWidth || 960, H = el.clientHeight || 620;
+  const svg  = d3.select("#cm-net-svg").attr("viewBox",`0 0 ${W} ${H}`);
+  const root = svg.append("g");
+  svg.call(d3.zoom().scaleExtent([0.1,5])
+    .on("zoom", e => root.attr("transform", e.transform)))
+    .on("dblclick.zoom", null);
 
-  svg.attr("viewBox", `0 0 ${W} ${H}`);
+  /* ── Data partitioning ───────────────────────────────────────────────── */
+  const conceptsByCourse = {};          // courseCode → [unique concept labels]
+  const sharedConcepts   = [];          // [{label, count, courses:[]}]
 
-  // ── Zoom ──────────────────────────────────────────────────────────────────
-  const zoomG = svg.append("g").attr("class","cm-zoom-g");
-  svg.call(d3.zoom().scaleExtent([0.25, 3])
-    .on("zoom", e => zoomG.attr("transform", e.transform)));
+  courses.forEach(c => { conceptsByCourse[c.code] = []; });
 
-  // ── Build nodes & links ───────────────────────────────────────────────────
-  const courseSet  = new Set(courses.map(c => c.code));
-  const conceptSet = new Set(sortedConcepts.map(([c]) => c));
+  sortedConcepts.forEach(([label, codes]) => {
+    const visible = codes.filter(c => courses.some(x => x.code === c));
+    if (!visible.length) return;
+    if (visible.length === 1) {
+      if (conceptsByCourse[visible[0]]) conceptsByCourse[visible[0]].push(label);
+    } else {
+      sharedConcepts.push({ label, count: visible.length, courses: visible });
+    }
+  });
 
-  const nodes = [];
-  const links = [];
+  /* ── Bubble radius: scales with unique concept count ─────────────────── */
+  const uniqueCounts = courses.map(c => conceptsByCourse[c.code].length);
+  const minUC = Math.min(...uniqueCounts), maxUC = Math.max(...uniqueCounts);
+  const bubbleR = c => {
+    const n = (conceptsByCourse[c.code]||[]).length;
+    const t = maxUC > minUC ? (n - minUC)/(maxUC - minUC) : 0.5;
+    return 55 + t * 45;   // 55 – 100 px
+  };
 
-  // Course nodes — pinned in a ring around the perimeter
-  const R = Math.min(W, H) * 0.38;
-  const cx = W / 2, cy = H / 2;
-  courses.forEach((course, i) => {
-    const angle = (2 * Math.PI * i / courses.length) - Math.PI / 2;
-    nodes.push({
+  /* ── Course nodes (force-simulated, draggable) ────────────────────────── */
+  const courseNodes = courses.map((course, i) => {
+    const angle = (2*Math.PI*i/courses.length) - Math.PI/2;
+    const R = Math.min(W,H)*0.33;
+    return {
       id:    course.code,
       type:  "course",
       label: course.code,
       title: course.title,
       batch: course.batch,
       color: BATCH_COLORS[course.batch] || "#888",
-      fx:    cx + R * Math.cos(angle),   // pinned
-      fy:    cy + R * Math.sin(angle),
+      r:     bubbleR(course),
+      x:     W/2 + R*Math.cos(angle),
+      y:     H/2 + R*Math.sin(angle),
+    };
+  });
+
+  /* ── Shared-concept nodes ─────────────────────────────────────────────── */
+  const sharedNodes = sharedConcepts.map(sc => {
+    const parents = sc.courses.map(c => courseNodes.find(n => n.id === c)).filter(Boolean);
+    const sx = parents.reduce((a,n)=>a+n.x,0)/parents.length + (Math.random()-.5)*60;
+    const sy = parents.reduce((a,n)=>a+n.y,0)/parents.length + (Math.random()-.5)*60;
+    return {
+      id:    "s::" + sc.label,
+      type:  "shared",
+      label: sc.label,
+      count: sc.count,
+      color: getCMConceptColor(sc.label),
+      r:     7 + sc.count * 3,    // 10 – 22 px for 1–5 courses
+      x: sx, y: sy,
+    };
+  });
+
+  const allNodes  = [...courseNodes, ...sharedNodes];
+
+  /* ── Links: shared concepts ↔ course bubbles ─────────────────────────── */
+  const links = [];
+  sharedConcepts.forEach(sc => {
+    sc.courses.filter(c => courses.some(x=>x.code===c)).forEach(code => {
+      links.push({ source: code, target: "s::"+sc.label,
+                   color: getCMConceptColor(sc.label) });
     });
   });
 
-  // Concept nodes — start at centroid of their connected courses
-  sortedConcepts.forEach(([concept, codes]) => {
-    const linkedCourses = codes.filter(c => courseSet.has(c));
-    if (!linkedCourses.length) return;
-    // Start position = average of pinned course positions
-    const courseNodes = linkedCourses.map(c => nodes.find(n => n.id === c));
-    const sx = courseNodes.reduce((a,n) => a + n.fx, 0) / courseNodes.length;
-    const sy = courseNodes.reduce((a,n) => a + n.fy, 0) / courseNodes.length;
-    nodes.push({
-      id:      "c::" + concept,
-      type:    "concept",
-      label:   concept,
-      shared:  linkedCourses.length > 1,
-      count:   linkedCourses.length,
-      color:   getCMConceptColor(concept),
-      x:       sx + (Math.random() - 0.5) * 30,
-      y:       sy + (Math.random() - 0.5) * 30,
-    });
-    linkedCourses.forEach(code => {
-      links.push({ source: code, target: "c::" + concept, shared: linkedCourses.length > 1 });
-    });
-  });
+  /* ── SVG layers (back-to-front) ──────────────────────────────────────── */
+  const linkLayer       = root.append("g").attr("class","nl");
+  const bubbleLayer     = root.append("g").attr("class","nb");
+  const uniqueLayer     = root.append("g").attr("class","nu");
+  const sharedLayer     = root.append("g").attr("class","ns");
 
-  // ── Link layer ────────────────────────────────────────────────────────────
-  const linkLayer = zoomG.append("g").attr("class","cm-links");
-  const linkSels = linkLayer.selectAll("line")
-    .data(links).enter().append("line")
-    .attr("stroke",       d => d.shared ? "#94a3b8" : "#cbd5e1")
-    .attr("stroke-width", d => d.shared ? 1.8 : 1)
-    .attr("stroke-opacity", d => d.shared ? 0.7 : 0.4);
+  /* ── Edges ───────────────────────────────────────────────────────────── */
+  const linkEl = linkLayer.selectAll("line").data(links).enter().append("line")
+    .attr("stroke",         d => d.color)
+    .attr("stroke-width",   2)
+    .attr("stroke-opacity", 0.45);
 
-  // ── Course nodes ──────────────────────────────────────────────────────────
-  const courseLayer = zoomG.append("g").attr("class","cm-course-nodes");
-  const courseNd = courseLayer.selectAll("g.cn")
-    .data(nodes.filter(n => n.type === "course"))
-    .enter().append("g").attr("class","cn")
-    .style("cursor","default");
-
-  const CRECT_W = 72, CRECT_H = 26;
-  courseNd.append("rect")
-    .attr("width",  CRECT_W).attr("height", CRECT_H)
-    .attr("x", -CRECT_W/2).attr("y", -CRECT_H/2)
-    .attr("rx", 7).attr("ry", 7)
-    .attr("fill",   d => d.color + "1a")
+  /* ── Course bubbles ──────────────────────────────────────────────────── */
+  // Outer glow circle
+  const bubbleGlow = bubbleLayer.selectAll("circle.bg").data(courseNodes)
+    .enter().append("circle").attr("class","bg")
+    .attr("r",  d => d.r + 8)
+    .attr("fill", d => d.color)
+    .attr("fill-opacity", 0.04)
     .attr("stroke", d => d.color)
-    .attr("stroke-width", 1.8);
+    .attr("stroke-width", 0.5)
+    .attr("stroke-opacity", 0.15)
+    .attr("pointer-events","none");
 
-  courseNd.append("text")
-    .text(d => d.label)
-    .attr("text-anchor","middle").attr("dominant-baseline","central")
-    .attr("font-family","'DM Mono',monospace").attr("font-size","9.5px")
-    .attr("font-weight","700").attr("fill", d => d.color);
-
-  // Tooltip on hover
-  courseNd.on("mouseenter", function(e, d) {
-    d3.select(this).select("rect").attr("fill", d.color + "30");
-    showTip(e, `<div class="th">${d.label}</div><div class="tm">${d.title}</div>`);
-  }).on("mouseleave", function(e, d) {
-    d3.select(this).select("rect").attr("fill", d.color + "1a");
-    hideTip();
-  }).on("mousemove", moveTip);
-
-  // ── Concept nodes ─────────────────────────────────────────────────────────
-  const conceptLayer = zoomG.append("g").attr("class","cm-concept-nodes");
-  const conceptNd = conceptLayer.selectAll("g.cpt")
-    .data(nodes.filter(n => n.type === "concept"))
-    .enter().append("g").attr("class","cpt")
-    .style("cursor","pointer")
-    .call(d3.drag()
-      .on("start", (e,d) => { if (!e.active) sim.alphaTarget(0.15).restart(); d.fx=d.x; d.fy=d.y; })
-      .on("drag",  (e,d) => { d.fx=e.x; d.fy=e.y; })
-      .on("end",   (e,d) => { if (!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; }))
-    .on("click", (e,d) => { e.stopPropagation(); cmClickConcept(d.label, null); })
+  // Main bubble
+  const bubbleEl = bubbleLayer.selectAll("circle.bm").data(courseNodes)
+    .enter().append("circle").attr("class","bm")
+    .attr("r",  d => d.r)
+    .attr("fill",         d => d.color)
+    .attr("fill-opacity", 0.10)
+    .attr("stroke",       d => d.color)
+    .attr("stroke-width", 2)
+    .attr("stroke-opacity", 0.5)
+    .style("cursor","grab")
+    .call(dragBehavior(true))
     .on("mouseenter", (e,d) => {
-      // Highlight connected links
-      linkSels
-        .attr("stroke-opacity", l => {
-          const src = typeof l.source === "object" ? l.source.id : l.source;
-          const tgt = typeof l.target === "object" ? l.target.id : l.target;
-          return (tgt === d.id) ? 1 : 0.1;
-        })
-        .attr("stroke-width", l => {
-          const tgt = typeof l.target === "object" ? l.target.id : l.target;
-          return (tgt === d.id) ? 2.5 : (l.shared ? 1.8 : 1);
-        });
-      const courses = idx[d.label] || [];
-      showTip(e,
-        `<div class="th">${d.label}</div>` +
-        `<div class="tm">${courses.length} course${courses.length!==1?'s':''}: ${courses.join(', ')}</div>`
-      );
+      d3.select(e.currentTarget).attr("fill-opacity", 0.18);
+      highlightCourse(d.id);
+      showTip(e,`<div class="th">${d.label}</div><div class="tm">${d.title}</div>`);
     })
     .on("mouseleave", (e,d) => {
-      linkSels
-        .attr("stroke-opacity", l => l.shared ? 0.7 : 0.4)
-        .attr("stroke-width",   l => l.shared ? 1.8 : 1);
+      d3.select(e.currentTarget).attr("fill-opacity", 0.10);
+      resetHighlight(); hideTip();
+    })
+    .on("mousemove", moveTip);
+
+  // Course code label (centred in bubble)
+  const courseLabel = bubbleLayer.selectAll("text.bl").data(courseNodes)
+    .enter().append("text").attr("class","bl")
+    .text(d => d.label)
+    .attr("text-anchor","middle")
+    .attr("dominant-baseline","central")
+    .attr("font-family","'DM Mono',monospace")
+    .attr("font-size","10px").attr("font-weight","800")
+    .attr("fill", d => d.color)
+    .attr("pointer-events","none");
+
+  /* ── Unique concept dots (inside each bubble) ─────────────────────────── */
+  // Lay them out on a mini polar grid relative to the parent course centre
+  const uniqueData = [];
+  courseNodes.forEach(cn => {
+    const labels = conceptsByCourse[cn.id] || [];
+    labels.forEach((label, i) => {
+      const n     = labels.length;
+      const rings = Math.ceil(n / 6);
+      const ring  = Math.floor(i / 6);
+      const slot  = i % 6;
+      const rr    = (ring + 1) * (cn.r - 12) / (rings + 0.5);
+      const angle = (2*Math.PI*slot/Math.min(n - ring*6, 6)) + ring*0.3;
+      uniqueData.push({
+        parentId: cn.id,
+        label,
+        ox: Math.cos(angle)*rr,    // offset from parent centre
+        oy: Math.sin(angle)*rr,
+        color: getCMConceptColor(label),
+        parentNode: cn,
+      });
+    });
+  });
+
+  const uniqueG = uniqueLayer.selectAll("g.uc").data(uniqueData)
+    .enter().append("g").attr("class","uc")
+    .style("cursor","pointer")
+    .on("click",  (e,d) => { e.stopPropagation(); cmClickConcept(d.label, null); })
+    .on("mouseenter", (e,d) => {
+      d3.select(e.currentTarget).select("circle").attr("r",5).attr("fill-opacity",1);
+      showTip(e,
+        `<div class="th">${d.label}</div>` +
+        `<div class="tm">Unique to ${d.parentId}</div>` +
+        `<div class="tm" style="font-size:.62rem;color:var(--dim);">Click for CLO details</div>`);
+    })
+    .on("mouseleave", (e,d) => {
+      d3.select(e.currentTarget).select("circle").attr("r",3.5).attr("fill-opacity",0.75);
       hideTip();
     })
     .on("mousemove", moveTip);
 
-  // Circle + label for concept nodes
-  conceptNd.append("circle")
-    .attr("r",  d => d.shared ? 6 + d.count * 1.5 : 5)
-    .attr("fill",   d => d.color)
-    .attr("fill-opacity", d => d.shared ? 0.85 : 0.55)
-    .attr("stroke","#fff").attr("stroke-width", 1.5);
+  uniqueG.append("circle")
+    .attr("r", 3.5)
+    .attr("fill", d => d.color)
+    .attr("fill-opacity", 0.75)
+    .attr("stroke","#fff").attr("stroke-width",0.8);
 
-  conceptNd.append("text")
+  uniqueG.append("text")
     .text(d => d.label)
     .attr("text-anchor","middle")
-    .attr("dy","1.6em")
+    .attr("dy","1.55em")
     .attr("font-family","'Outfit',sans-serif")
-    .attr("font-size", d => d.shared ? "9.5px" : "8.5px")
-    .attr("font-weight", d => d.shared ? "600" : "400")
-    .attr("fill", d => d.shared ? d.color : "#7a8fa8")
+    .attr("font-size","7.5px")
+    .attr("fill", d => d.color)
+    .attr("fill-opacity", 0.9)
     .attr("pointer-events","none");
 
-  // ── Force simulation ──────────────────────────────────────────────────────
-  if (cmNetSim) cmNetSim.stop();
-  const sim = d3.forceSimulation(nodes)
-    .force("link",      d3.forceLink(links).id(d=>d.id)
-                         .distance(d => d.shared ? 90 : 70)
-                         .strength(d => d.shared ? 0.4 : 0.6))
-    .force("charge",    d3.forceManyBody()
-                         .strength(d => d.type==="course" ? 0 : -60))
-    .force("concept-center", d3.forceCenter(cx, cy).strength(0.02))
-    .force("collision", d3.forceCollide()
-                         .radius(d => d.type==="course" ? 55 : (d.shared ? 8+d.count*1.5+18 : 24))
-                         .strength(0.7))
-    .alphaDecay(0.025)
-    .on("tick", () => {
-      // Keep concept nodes inside a soft boundary
-      nodes.forEach(d => {
-        if (d.type === "concept") {
-          d.x = Math.max(30, Math.min(W-30, d.x));
-          d.y = Math.max(20, Math.min(H-20, d.y));
-        }
-      });
-      linkSels
-        .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-        .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
-      courseNd.attr("transform", d => `translate(${d.fx},${d.fy})`);
-      conceptNd.attr("transform", d => `translate(${d.x},${d.y})`);
+  /* ── Shared concept nodes (outside bubbles) ──────────────────────────── */
+  const sharedG = sharedLayer.selectAll("g.sc").data(sharedNodes)
+    .enter().append("g").attr("class","sc")
+    .style("cursor","pointer")
+    .call(dragBehavior(false))
+    .on("click",  (e,d) => { e.stopPropagation(); cmClickConcept(d.label, null); })
+    .on("mouseenter", (e,d) => {
+      d3.select(e.currentTarget).select("circle").attr("r", d.r*1.25).attr("fill-opacity",1);
+      highlightShared(d.id);
+      const courseList = (idx[d.label]||[]).join(", ");
+      showTip(e,
+        `<div class="th">${d.label}</div>` +
+        `<div class="tm">Shared by ${d.count} courses: ${courseList}</div>` +
+        `<div class="tm" style="font-size:.62rem;color:var(--dim);">Click for CLO details</div>`);
+    })
+    .on("mouseleave", (e,d) => {
+      d3.select(e.currentTarget).select("circle").attr("r", d.r).attr("fill-opacity",0.85);
+      resetHighlight(); hideTip();
+    })
+    .on("mousemove", moveTip);
+
+  sharedG.append("circle")
+    .attr("r",  d => d.r)
+    .attr("fill",         d => d.color)
+    .attr("fill-opacity", 0.85)
+    .attr("stroke","#fff")
+    .attr("stroke-width", 1.8);
+
+  // Label below node
+  sharedG.append("text")
+    .text(d => d.label)
+    .attr("text-anchor","middle")
+    .attr("dy", d => d.r + 11)
+    .attr("font-family","'Outfit',sans-serif")
+    .attr("font-size","9px").attr("font-weight","600")
+    .attr("fill", d => d.color)
+    .attr("pointer-events","none");
+
+  // Count badge (number of courses)
+  sharedG.append("text")
+    .text(d => d.count)
+    .attr("text-anchor","middle").attr("dominant-baseline","central")
+    .attr("font-family","'DM Mono',monospace")
+    .attr("font-size","8px").attr("font-weight","800")
+    .attr("fill","#fff")
+    .attr("pointer-events","none");
+
+  /* ── Highlight helpers ──────────────────────────────────────────────── */
+  function highlightCourse(courseId) {
+    linkEl.attr("stroke-opacity", l => {
+      const s = typeof l.source==="object"?l.source.id:l.source;
+      return s === courseId ? 0.9 : 0.05;
+    }).attr("stroke-width", l => {
+      const s = typeof l.source==="object"?l.source.id:l.source;
+      return s === courseId ? 3 : 2;
     });
+    sharedG.select("circle")
+      .attr("fill-opacity", d => {
+        const hit = links.some(l => {
+          const s = typeof l.source==="object"?l.source.id:l.source;
+          const t = typeof l.target==="object"?l.target.id:l.target;
+          return s===courseId && t===d.id;
+        });
+        return hit ? 1 : 0.12;
+      });
+  }
+  function highlightShared(nodeId) {
+    linkEl.attr("stroke-opacity", l => {
+      const t = typeof l.target==="object"?l.target.id:l.target;
+      return t === nodeId ? 0.95 : 0.05;
+    }).attr("stroke-width", l => {
+      const t = typeof l.target==="object"?l.target.id:l.target;
+      return t === nodeId ? 3 : 2;
+    });
+  }
+  function resetHighlight() {
+    linkEl.attr("stroke-opacity", 0.45).attr("stroke-width", 2);
+    sharedG.select("circle").attr("fill-opacity", 0.85);
+  }
+
+  /* ── Drag helper ────────────────────────────────────────────────────── */
+  function dragBehavior(isCourse) {
+    return d3.drag()
+      .on("start", (e,d) => {
+        if (!e.active) sim.alphaTarget(0.15).restart();
+        d.fx = d.x; d.fy = d.y;
+        if (isCourse) d3.select(e.sourceEvent.target.parentNode||e.sourceEvent.target)
+          .style("cursor","grabbing");
+      })
+      .on("drag",  (e,d) => { d.fx = e.x; d.fy = e.y; })
+      .on("end",   (e,d) => {
+        if (!e.active) sim.alphaTarget(0);
+        d.fx = null; d.fy = null;
+        if (isCourse) d3.select(e.sourceEvent.target.parentNode||e.sourceEvent.target)
+          .style("cursor","grab");
+      });
+  }
+
+  /* ── Tick: update positions ─────────────────────────────────────────── */
+  function ticked() {
+    // Clamp shared nodes inside canvas
+    sharedNodes.forEach(d => {
+      d.x = Math.max(d.r+5, Math.min(W-d.r-5, d.x));
+      d.y = Math.max(d.r+5, Math.min(H-d.r-5, d.y));
+    });
+    // Clamp course nodes
+    courseNodes.forEach(d => {
+      d.x = Math.max(d.r+5, Math.min(W-d.r-5, d.x));
+      d.y = Math.max(d.r+5, Math.min(H-d.r-5, d.y));
+    });
+
+    // Edges
+    linkEl
+      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+
+    // Course bubbles + labels
+    [bubbleEl, bubbleGlow, courseLabel].forEach(sel =>
+      sel.attr("cx", d => d.x).attr("cy", d => d.y)
+         .attr("x",  d => d.x).attr("y",  d => d.y)   // text uses x/y
+    );
+    bubbleEl.attr("cx", d => d.x).attr("cy", d => d.y);
+    bubbleGlow.attr("cx", d => d.x).attr("cy", d => d.y);
+    courseLabel.attr("x", d => d.x).attr("y", d => d.y);
+
+    // Unique concept dots: positioned relative to their parent course
+    uniqueG.attr("transform", d => {
+      const pn = courseNodes.find(n => n.id === d.parentId);
+      if (!pn) return "";
+      return `translate(${pn.x + d.ox},${pn.y + d.oy})`;
+    });
+
+    // Shared concept nodes
+    sharedG.attr("transform", d => `translate(${d.x},${d.y})`);
+  }
+
+  /* ── Force simulation (course + shared nodes) ────────────────────────── */
+  const sim = d3.forceSimulation(allNodes)
+    .force("link", d3.forceLink(links).id(d=>d.id)
+      .distance(d => {
+        const cn = courseNodes.find(n=>n.id===(typeof d.source==="object"?d.source.id:d.source));
+        const sn = sharedNodes.find(n=>n.id===(typeof d.target==="object"?d.target.id:d.target));
+        return (cn ? cn.r : 60) + (sn ? sn.r : 12) + 20;
+      })
+      .strength(0.4))
+    .force("charge", d3.forceManyBody()
+      .strength(d => d.type==="course" ? -300 : -80))
+    .force("centerX", d3.forceX(W/2).strength(0.03))
+    .force("centerY", d3.forceY(H/2).strength(0.03))
+    .force("collide", d3.forceCollide()
+      .radius(d => d.type==="course" ? d.r+28 : d.r+16)
+      .strength(0.85))
+    .alphaDecay(0.018)
+    .on("tick", ticked);
+
   cmNetSim = sim;
 
-  // Click on background to close detail panel
-  svg.on("click", () => cmCloseDetail());
+  // Click background → deselect
+  svg.on("click", () => { cmCloseDetail(); resetHighlight(); });
 
-  // ── Legend ────────────────────────────────────────────────────────────────
-  const batches = [...new Set(courses.map(c => c.batch))].sort();
+  /* ── Legend ─────────────────────────────────────────────────────────── */
+  const batches = [...new Set(courses.map(c=>c.batch))].sort();
   const leg = document.getElementById("cm-net-legend");
   if (leg) {
     leg.innerHTML =
-      `<div class="cm-net-legend-title">Courses by Batch</div>` +
+      `<div class="cm-net-legend-title">Course Batches</div>` +
       batches.map(b => {
-        const col = BATCH_COLORS[b] || "#888";
+        const col = BATCH_COLORS[b]||"#888";
         return `<div class="cm-net-leg-row">
           <div class="cm-net-leg-dot" style="background:${col};"></div>
-          <span style="color:${col};font-weight:600;">${b}</span>
-        </div>`;
+          <span style="color:${col};font-weight:600;">${b}</span></div>`;
       }).join("") +
-      `<div style="margin-top:.5rem;">
-        <div class="cm-net-legend-title">Concepts</div>
-        <div class="cm-net-leg-row">
-          <circle style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#64748b;margin-right:.3rem;"></circle>
-          <span style="color:var(--mu);">Larger = more courses</span>
-        </div>
-        <div class="cm-net-leg-row" style="margin-top:.2rem;">
-          <div class="cm-net-leg-line" style="background:#94a3b8;"></div>
-          <span style="color:var(--mu);">Shared edge</span>
-        </div>
-        <div class="cm-net-leg-row" style="margin-top:.2rem;">
-          <div class="cm-net-leg-line" style="background:#cbd5e1;opacity:.5;"></div>
-          <span style="color:var(--dim);">Unique edge</span>
-        </div>
-      </div>`;
+      `<div style="border-top:1px solid var(--bdr);margin:.4rem 0 .3rem;"></div>
+       <div class="cm-net-legend-title">Nodes</div>
+       <div class="cm-net-leg-row">
+         <svg width="18" height="18"><circle cx="9" cy="9" r="8"
+           fill="none" stroke="#64748b" stroke-width="2"/></svg>
+         <span style="color:var(--mu);">Course bubble</span></div>
+       <div class="cm-net-leg-row">
+         <svg width="18" height="18"><circle cx="9" cy="9" r="4"
+           fill="#64748b" fill-opacity=".75"/></svg>
+         <span style="color:var(--mu);">Unique concept</span></div>
+       <div class="cm-net-leg-row">
+         <svg width="18" height="18"><circle cx="9" cy="9" r="7"
+           fill="#2563eb" fill-opacity=".85" stroke="#fff" stroke-width="1.5"/></svg>
+         <span style="color:var(--mu);">Shared concept</span></div>`;
   }
 }
 
