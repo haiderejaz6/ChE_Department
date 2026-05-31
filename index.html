@@ -311,7 +311,7 @@ table.hm tbody tr:hover{background:#fafbff;}
 }
 .cm-input:focus{border-color:var(--gold);}
 #cm-body{flex:1;overflow:auto;padding:1.5rem 2rem 3rem;}
-#cmv-heatmap.hidden,#cmv-bubbles.hidden,#cmv-list.hidden{display:none!important;}
+#cmv-heatmap.hidden,#cmv-network.hidden,#cmv-list.hidden{display:none!important;}
 
 /* Heatmap view */
 .cm-hm-wrap{overflow-x:auto;}
@@ -361,9 +361,26 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 .cc-tag:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.1);}
 .cc-tag.selected{border-color:var(--tx);box-shadow:0 0 0 2px rgba(0,0,0,.08);}
 
-/* Bubble view */
-#cmv-bubbles{text-align:center;}
-.cm-bubble-svg{display:block;width:100%;max-width:960px;margin:0 auto;}
+/* Network view */
+#cmv-network{position:relative;height:calc(100vh - 200px);min-height:480px;}
+#cm-net-svg{width:100%;height:100%;display:block;}
+.cm-net-hint{
+  position:absolute;bottom:.75rem;left:50%;transform:translateX(-50%);
+  font-size:.65rem;color:var(--dim);background:rgba(255,255,255,.85);
+  padding:.25rem .7rem;border-radius:20px;border:1px solid var(--bdr);
+  pointer-events:none;white-space:nowrap;
+}
+.cm-net-legend{
+  position:absolute;top:.75rem;right:.75rem;
+  background:rgba(255,255,255,.92);border:1px solid var(--bdr);
+  border-radius:10px;padding:.55rem .75rem;font-size:.65rem;
+  box-shadow:var(--shadow);min-width:130px;
+}
+.cm-net-legend-title{font-weight:700;color:var(--mu);margin-bottom:.35rem;
+  font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;}
+.cm-net-leg-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.2rem;}
+.cm-net-leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.cm-net-leg-line{width:22px;height:2px;border-radius:1px;flex-shrink:0;}
 
 /* List view */
 .cm-list-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1rem;}
@@ -408,6 +425,59 @@ table.cm-hm th,table.cm-hm td{padding:0;}
   display:inline-flex;align-items:center;justify-content:center;
   width:18px;height:18px;border-radius:50%;font-size:.58rem;font-weight:800;
   background:var(--gold);color:#fff;margin-left:.35rem;vertical-align:middle;
+}
+
+/* Extraction mode badge */
+.cm-mode-badge{
+  font-size:.62rem;font-weight:700;padding:.18rem .55rem;border-radius:10px;
+  letter-spacing:.04em;display:none;
+}
+.cm-mode-badge.mode-rule{background:#e0f2fe;color:#0369a1;}
+.cm-mode-badge.mode-llm{background:#f0fdf4;color:#15803d;}
+.cm-mode-badge.mode-both{background:rgba(184,146,14,.12);color:var(--goldd);}
+
+/* Methodology note */
+.cm-method-note{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:linear-gradient(135deg,#fefce8 0%,#f0f9ff 100%);
+  border:1px solid #e2d58e;border-left:4px solid var(--gold);
+  border-radius:12px;padding:1rem 1.2rem;margin:1rem 2rem 0;
+  position:relative;font-size:.74rem;color:var(--tx);line-height:1.55;
+  box-shadow:0 1px 6px rgba(184,146,14,.1);
+}
+.cm-method-icon{font-size:1.4rem;flex-shrink:0;margin-top:.05rem;}
+.cm-method-body{flex:1;}
+.cm-method-body strong{font-size:.8rem;display:block;margin-bottom:.35rem;color:var(--tx);}
+.cm-method-body p{margin:0 0 .4rem;color:var(--mu);}
+.cm-method-body code{
+  background:rgba(0,0,0,.06);padding:.07rem .35rem;border-radius:4px;
+  font-family:'DM Mono',monospace;font-size:.7rem;color:var(--goldd);
+}
+.cm-method-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:.5rem 0;}
+.cm-method-card{
+  background:rgba(255,255,255,.75);border:1px solid var(--bdr);
+  border-radius:9px;padding:.6rem .8rem;
+}
+.cm-method-card--rule{border-top:3px solid #0891b2;}
+.cm-method-card--llm{border-top:3px solid #059669;}
+.cm-mc-head{
+  font-size:.7rem;font-weight:700;color:var(--tx);
+  display:flex;align-items:center;gap:.4rem;margin-bottom:.3rem;
+}
+.cm-mc-tag{
+  font-size:.58rem;font-weight:700;padding:.07rem .35rem;border-radius:4px;
+  background:rgba(0,0,0,.06);color:var(--mu);font-family:'DM Mono',monospace;
+}
+.cm-mc-body{font-size:.68rem;color:var(--mu);line-height:1.5;}
+.cm-method-close{
+  position:absolute;top:.6rem;right:.7rem;
+  background:none;border:none;cursor:pointer;color:var(--dim);
+  font-size:.8rem;padding:.1rem;line-height:1;transition:color .12s;
+}
+.cm-method-close:hover{color:var(--tx);}
+@media(max-width:700px){
+  .cm-method-grid{grid-template-columns:1fr;}
+  .cm-method-note{margin:1rem 1rem 0;}
 }
 
 ::-webkit-scrollbar{width:4px;height:4px;}
@@ -514,7 +584,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
         <span class="cm-label">View:</span>
         <div class="cm-seg" id="cm-view-seg">
           <button class="cm-seg-btn active" data-view="heatmap"  onclick="cmSetView('heatmap')">Overlap Heatmap</button>
-          <button class="cm-seg-btn"        data-view="bubbles"  onclick="cmSetView('bubbles')">Concept Bubbles</button>
+          <button class="cm-seg-btn"        data-view="network"  onclick="cmSetView('network')">Concept Network</button>
           <button class="cm-seg-btn"        data-view="list"     onclick="cmSetView('list')">Course Concepts</button>
         </div>
       </div>
@@ -527,13 +597,54 @@ table.cm-hm th,table.cm-hm td{padding:0;}
         </select>
         <span class="cm-label" style="margin-left:.9rem">Search:</span>
         <input id="cm-search" class="cm-input" placeholder="filter concepts…" oninput="cmRender()">
+        <span id="cm-mode-badge" class="cm-mode-badge" title="How concepts were extracted"></span>
       </div>
+    </div>
+
+    <!-- Methodology note -->
+    <div class="cm-method-note" id="cm-method-note">
+      <div class="cm-method-icon">🔬</div>
+      <div class="cm-method-body">
+        <strong>How concepts are extracted</strong>
+        <p>
+          Each course's CLO descriptions are processed by <code>excel_to_json.py</code> using
+          one of two strategies — selectable via the <code>--mode</code> flag:
+        </p>
+        <div class="cm-method-grid">
+          <div class="cm-method-card cm-method-card--rule">
+            <div class="cm-mc-head">Rule-based <span class="cm-mc-tag">--mode rule</span></div>
+            <div class="cm-mc-body">
+              A curated library of ~90 regex patterns maps CLO text to short canonical
+              concepts (1–2 words). Fast, deterministic, and works offline — used by
+              GitHub Actions CI so the site can auto-update without an LLM server.
+            </div>
+          </div>
+          <div class="cm-method-card cm-method-card--llm">
+            <div class="cm-mc-head">LLM-assisted <span class="cm-mc-tag">--mode llm / both</span></div>
+            <div class="cm-mc-body">
+              All CLOs for a course are sent in a <em>single</em> Ollama prompt (local
+              LLaMA&nbsp;3 / Mistral / Phi-3).  The model extracts 8–14 generic
+              1–2&nbsp;word concepts per course, then a second pass normalises
+              synonyms across the whole programme vocabulary — maximising cross-course
+              overlap detection.
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:.55rem;">
+          Short, generic labels (e.g. <em>kinetics</em> rather than
+          <em>reaction kinetics fundamentals</em>) are deliberately preferred so
+          that concepts shared across courses surface clearly in all three views below.
+          Run <code>python scripts/excel_to_json.py --mode both</code> locally after
+          updating the Excel file for the richest results.
+        </p>
+      </div>
+      <button class="cm-method-close" onclick="document.getElementById('cm-method-note').style.display='none'" title="Dismiss">✕</button>
     </div>
 
     <!-- View containers -->
     <div id="cm-body">
       <div id="cmv-heatmap"></div>
-      <div id="cmv-bubbles" class="hidden"></div>
+      <div id="cmv-network" class="hidden"></div>
       <div id="cmv-list"    class="hidden"></div>
     </div>
 
@@ -715,6 +826,7 @@ window.switchTab = function(tab) {
     else if (simulation) simulation.alpha(0.2).restart();
   }
   if (tab === "concepts") cmRender();
+  else if (cmNetSim) cmNetSim.stop();
 };
 
 /* ================================================================
@@ -733,7 +845,7 @@ window.setBatch = function(b) {
   renderStats();
   renderDash();
   if (activeTab === "graph") { graphBuilt = false; buildGraph(); graphBuilt = true; closePanel(); }
-  if (activeTab === "concepts") cmRender();
+  if (activeTab === "concepts") { if (cmNetSim) cmNetSim.stop(); cmRender(); }
 };
 
 function filtered() {
@@ -1231,10 +1343,12 @@ function getConceptIndex() {
   return idx;
 }
 
-/* getConceptsForCourse */
+/* getConceptsForCourse — prefer course-level concepts field, fall back to CLO aggregation */
 function getConceptsForCourse(courseCode) {
   const course = DATA.courses.find(c => c.code === courseCode);
   if (!course) return [];
+  // Use course-level summary if LLM mode wrote it
+  if (course.concepts && course.concepts.length) return [...course.concepts].sort();
   const s = new Set();
   (course.clos||[]).forEach(cl => (cl.concepts||[]).forEach(c => s.add(c)));
   return [...s].sort();
@@ -1250,6 +1364,17 @@ window.cmSetView = function(v) {
 
 window.cmRender = function() {
   if (activeTab !== "concepts") return;
+
+  // Update mode badge
+  const badge = document.getElementById("cm-mode-badge");
+  if (badge) {
+    const mode = DATA.concept_mode || "rule";
+    const labels = {rule:"Rule-based", llm:"LLM-assisted", both:"Rule + LLM"};
+    badge.textContent = labels[mode] || mode;
+    badge.className = `cm-mode-badge mode-${mode}`;
+    badge.style.display = "inline-block";
+  }
+
   const minOverlap = parseInt(document.getElementById("cm-min-overlap").value);
   const search     = (document.getElementById("cm-search").value || "").toLowerCase().trim();
   const courses    = filtered();
@@ -1274,11 +1399,11 @@ window.cmRender = function() {
   sortedConcepts.forEach(([c]) => getCMConceptColor(c));
 
   document.getElementById("cmv-heatmap").classList.toggle("hidden", cmView !== "heatmap");
-  document.getElementById("cmv-bubbles").classList.toggle("hidden", cmView !== "bubbles");
+  document.getElementById("cmv-network").classList.toggle("hidden", cmView !== "network");
   document.getElementById("cmv-list").classList.toggle("hidden",    cmView !== "list");
 
   if (cmView === "heatmap") cmRenderHeatmap(courses, sortedConcepts, idx);
-  if (cmView === "bubbles") cmRenderBubbles(courses, sortedConcepts, idx);
+  if (cmView === "network") cmRenderNetwork(courses, sortedConcepts, idx);
   if (cmView === "list")    cmRenderList(courses, sortedConcepts, idx);
 };
 
@@ -1383,86 +1508,248 @@ function cmRenderHeatmap(courses, sortedConcepts, idx) {
   el.innerHTML = legendHtml + tableHtml;
 }
 
-/* ── Bubble view ──────────────────────────────────────────── */
-function cmRenderBubbles(courses, sortedConcepts, idx) {
-  const el = document.getElementById("cmv-bubbles");
+/* ── Concept Network view ────────────────────────────────── */
+/*
+   Layout: course nodes (rectangles) are pinned in a ring; concept nodes
+   (circles) float in the centre pulled toward every course that teaches them.
+   Shared concepts naturally sit between their courses; unique ones orbit close
+   to their single parent.
+*/
+let cmNetSim = null;
+
+function cmRenderNetwork(courses, sortedConcepts, idx) {
+  const el = document.getElementById("cmv-network");
   if (!sortedConcepts.length) {
-    el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);font-size:.85rem;">No concepts match.</div>`;
+    el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);font-size:.85rem;">
+      No shared concepts for current filters.</div>`;
     return;
   }
 
-  const W = 900, H = 520;
-  const maxCount = Math.max(...sortedConcepts.map(([,v]) => v.length));
-  const minR = 22, maxR = 70;
+  el.innerHTML = `
+    <svg id="cm-net-svg"></svg>
+    <div class="cm-net-hint">Drag nodes · Scroll to zoom · Click a concept for details</div>
+    <div class="cm-net-legend" id="cm-net-legend"></div>`;
 
-  // Simple force-free packed circles via D3 pack if available, else manual grid
-  const nodes = sortedConcepts.map(([concept, codes]) => ({
-    concept,
-    codes,
-    r: minR + ((codes.length - 1) / Math.max(maxCount - 1, 1)) * (maxR - minR),
-    color: getCMConceptColor(concept),
-  }));
+  const svg    = d3.select("#cm-net-svg");
+  const W      = el.clientWidth  || 900;
+  const H      = el.clientHeight || 520;
 
-  // Greedy circle packing
-  const placed = [];
-  nodes.forEach(n => {
-    let px = W/2 + (Math.random()-.5)*200, py = H/2 + (Math.random()-.5)*100;
-    for (let iter=0; iter<400; iter++) {
-      let overlap = false;
-      for (const p of placed) {
-        const dx = px-p.x, dy = py-p.y;
-        const dist = Math.sqrt(dx*dx+dy*dy);
-        const minDist = n.r + p.r + 5;
-        if (dist < minDist) {
-          const push = (minDist - dist + 2) / dist;
-          px += dx * push * 0.5;
-          py += dy * push * 0.5;
-          overlap = true;
-        }
-      }
-      px = Math.max(n.r+4, Math.min(W-n.r-4, px));
-      py = Math.max(n.r+4, Math.min(H-n.r-4, py));
-      if (!overlap) break;
-    }
-    n.x = px; n.y = py;
-    placed.push(n);
+  svg.attr("viewBox", `0 0 ${W} ${H}`);
+
+  // ── Zoom ──────────────────────────────────────────────────────────────────
+  const zoomG = svg.append("g").attr("class","cm-zoom-g");
+  svg.call(d3.zoom().scaleExtent([0.25, 3])
+    .on("zoom", e => zoomG.attr("transform", e.transform)));
+
+  // ── Build nodes & links ───────────────────────────────────────────────────
+  const courseSet  = new Set(courses.map(c => c.code));
+  const conceptSet = new Set(sortedConcepts.map(([c]) => c));
+
+  const nodes = [];
+  const links = [];
+
+  // Course nodes — pinned in a ring around the perimeter
+  const R = Math.min(W, H) * 0.38;
+  const cx = W / 2, cy = H / 2;
+  courses.forEach((course, i) => {
+    const angle = (2 * Math.PI * i / courses.length) - Math.PI / 2;
+    nodes.push({
+      id:    course.code,
+      type:  "course",
+      label: course.code,
+      title: course.title,
+      batch: course.batch,
+      color: BATCH_COLORS[course.batch] || "#888",
+      fx:    cx + R * Math.cos(angle),   // pinned
+      fy:    cy + R * Math.sin(angle),
+    });
   });
 
-  const circles = nodes.map(n => {
-    const textLines = n.concept.length > 14
-      ? [n.concept.substring(0,14), n.concept.substring(14)]
-      : [n.concept];
-    const fs = n.r > 40 ? 11 : n.r > 28 ? 9.5 : 8.5;
-    const lineH = fs + 2;
-    const textSvg = textLines.map((line, i) =>
-      `<tspan x="${n.x}" dy="${i===0 ? -(textLines.length-1)*lineH/2 : lineH}">${line}</tspan>`
-    ).join("");
-    return `
-      <g onclick="cmClickConcept('${n.concept.replace(/'/g,"\\'")}',null)" style="cursor:pointer;">
-        <circle cx="${n.x}" cy="${n.y}" r="${n.r}"
-          fill="${n.color}" fill-opacity="${0.15 + n.codes.length/maxCount*0.55}"
-          stroke="${n.color}" stroke-width="1.5" stroke-opacity="0.6">
-          <title>${n.concept} — ${n.codes.length} course${n.codes.length>1?'s':''}: ${n.codes.join(', ')}</title>
-        </circle>
-        <text x="${n.x}" y="${n.y}" text-anchor="middle" dominant-baseline="central"
-          font-family="'Outfit',sans-serif" font-size="${fs}" font-weight="600"
-          fill="${n.color}" pointer-events="none">${textSvg}</text>
-        <text x="${n.x}" y="${n.y+n.r-10}" text-anchor="middle"
-          font-family="'DM Mono',monospace" font-size="9" font-weight="700"
-          fill="${n.color}" fill-opacity="0.8" pointer-events="none">${n.codes.length}</text>
-      </g>`;
-  }).join("");
+  // Concept nodes — start at centroid of their connected courses
+  sortedConcepts.forEach(([concept, codes]) => {
+    const linkedCourses = codes.filter(c => courseSet.has(c));
+    if (!linkedCourses.length) return;
+    // Start position = average of pinned course positions
+    const courseNodes = linkedCourses.map(c => nodes.find(n => n.id === c));
+    const sx = courseNodes.reduce((a,n) => a + n.fx, 0) / courseNodes.length;
+    const sy = courseNodes.reduce((a,n) => a + n.fy, 0) / courseNodes.length;
+    nodes.push({
+      id:      "c::" + concept,
+      type:    "concept",
+      label:   concept,
+      shared:  linkedCourses.length > 1,
+      count:   linkedCourses.length,
+      color:   getCMConceptColor(concept),
+      x:       sx + (Math.random() - 0.5) * 30,
+      y:       sy + (Math.random() - 0.5) * 30,
+    });
+    linkedCourses.forEach(code => {
+      links.push({ source: code, target: "c::" + concept, shared: linkedCourses.length > 1 });
+    });
+  });
 
-  el.innerHTML = `
-    <h2 class="cm-hm-section-hd" style="margin-bottom:.5rem;">Concept Bubble Chart</h2>
-    <p style="font-size:.73rem;color:var(--mu);margin-bottom:.85rem;">
-      Bubble size = number of courses covering the concept. Click any bubble for details.
-    </p>
-    <svg class="cm-bubble-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg"
-      style="border:1px solid var(--bdr);border-radius:14px;background:var(--sf);box-shadow:var(--shadow);">
-      ${circles}
-    </svg>`;
+  // ── Link layer ────────────────────────────────────────────────────────────
+  const linkLayer = zoomG.append("g").attr("class","cm-links");
+  const linkSels = linkLayer.selectAll("line")
+    .data(links).enter().append("line")
+    .attr("stroke",       d => d.shared ? "#94a3b8" : "#cbd5e1")
+    .attr("stroke-width", d => d.shared ? 1.8 : 1)
+    .attr("stroke-opacity", d => d.shared ? 0.7 : 0.4);
+
+  // ── Course nodes ──────────────────────────────────────────────────────────
+  const courseLayer = zoomG.append("g").attr("class","cm-course-nodes");
+  const courseNd = courseLayer.selectAll("g.cn")
+    .data(nodes.filter(n => n.type === "course"))
+    .enter().append("g").attr("class","cn")
+    .style("cursor","default");
+
+  const CRECT_W = 72, CRECT_H = 26;
+  courseNd.append("rect")
+    .attr("width",  CRECT_W).attr("height", CRECT_H)
+    .attr("x", -CRECT_W/2).attr("y", -CRECT_H/2)
+    .attr("rx", 7).attr("ry", 7)
+    .attr("fill",   d => d.color + "1a")
+    .attr("stroke", d => d.color)
+    .attr("stroke-width", 1.8);
+
+  courseNd.append("text")
+    .text(d => d.label)
+    .attr("text-anchor","middle").attr("dominant-baseline","central")
+    .attr("font-family","'DM Mono',monospace").attr("font-size","9.5px")
+    .attr("font-weight","700").attr("fill", d => d.color);
+
+  // Tooltip on hover
+  courseNd.on("mouseenter", function(e, d) {
+    d3.select(this).select("rect").attr("fill", d.color + "30");
+    showTip(e, `<div class="th">${d.label}</div><div class="tm">${d.title}</div>`);
+  }).on("mouseleave", function(e, d) {
+    d3.select(this).select("rect").attr("fill", d.color + "1a");
+    hideTip();
+  }).on("mousemove", moveTip);
+
+  // ── Concept nodes ─────────────────────────────────────────────────────────
+  const conceptLayer = zoomG.append("g").attr("class","cm-concept-nodes");
+  const conceptNd = conceptLayer.selectAll("g.cpt")
+    .data(nodes.filter(n => n.type === "concept"))
+    .enter().append("g").attr("class","cpt")
+    .style("cursor","pointer")
+    .call(d3.drag()
+      .on("start", (e,d) => { if (!e.active) sim.alphaTarget(0.15).restart(); d.fx=d.x; d.fy=d.y; })
+      .on("drag",  (e,d) => { d.fx=e.x; d.fy=e.y; })
+      .on("end",   (e,d) => { if (!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; }))
+    .on("click", (e,d) => { e.stopPropagation(); cmClickConcept(d.label, null); })
+    .on("mouseenter", (e,d) => {
+      // Highlight connected links
+      linkSels
+        .attr("stroke-opacity", l => {
+          const src = typeof l.source === "object" ? l.source.id : l.source;
+          const tgt = typeof l.target === "object" ? l.target.id : l.target;
+          return (tgt === d.id) ? 1 : 0.1;
+        })
+        .attr("stroke-width", l => {
+          const tgt = typeof l.target === "object" ? l.target.id : l.target;
+          return (tgt === d.id) ? 2.5 : (l.shared ? 1.8 : 1);
+        });
+      const courses = idx[d.label] || [];
+      showTip(e,
+        `<div class="th">${d.label}</div>` +
+        `<div class="tm">${courses.length} course${courses.length!==1?'s':''}: ${courses.join(', ')}</div>`
+      );
+    })
+    .on("mouseleave", (e,d) => {
+      linkSels
+        .attr("stroke-opacity", l => l.shared ? 0.7 : 0.4)
+        .attr("stroke-width",   l => l.shared ? 1.8 : 1);
+      hideTip();
+    })
+    .on("mousemove", moveTip);
+
+  // Circle + label for concept nodes
+  conceptNd.append("circle")
+    .attr("r",  d => d.shared ? 6 + d.count * 1.5 : 5)
+    .attr("fill",   d => d.color)
+    .attr("fill-opacity", d => d.shared ? 0.85 : 0.55)
+    .attr("stroke","#fff").attr("stroke-width", 1.5);
+
+  conceptNd.append("text")
+    .text(d => d.label)
+    .attr("text-anchor","middle")
+    .attr("dy","1.6em")
+    .attr("font-family","'Outfit',sans-serif")
+    .attr("font-size", d => d.shared ? "9.5px" : "8.5px")
+    .attr("font-weight", d => d.shared ? "600" : "400")
+    .attr("fill", d => d.shared ? d.color : "#7a8fa8")
+    .attr("pointer-events","none");
+
+  // ── Force simulation ──────────────────────────────────────────────────────
+  if (cmNetSim) cmNetSim.stop();
+  const sim = d3.forceSimulation(nodes)
+    .force("link",      d3.forceLink(links).id(d=>d.id)
+                         .distance(d => d.shared ? 90 : 70)
+                         .strength(d => d.shared ? 0.4 : 0.6))
+    .force("charge",    d3.forceManyBody()
+                         .strength(d => d.type==="course" ? 0 : -60))
+    .force("concept-center", d3.forceCenter(cx, cy).strength(0.02))
+    .force("collision", d3.forceCollide()
+                         .radius(d => d.type==="course" ? 55 : (d.shared ? 8+d.count*1.5+18 : 24))
+                         .strength(0.7))
+    .alphaDecay(0.025)
+    .on("tick", () => {
+      // Keep concept nodes inside a soft boundary
+      nodes.forEach(d => {
+        if (d.type === "concept") {
+          d.x = Math.max(30, Math.min(W-30, d.x));
+          d.y = Math.max(20, Math.min(H-20, d.y));
+        }
+      });
+      linkSels
+        .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+      courseNd.attr("transform", d => `translate(${d.fx},${d.fy})`);
+      conceptNd.attr("transform", d => `translate(${d.x},${d.y})`);
+    });
+  cmNetSim = sim;
+
+  // Click on background to close detail panel
+  svg.on("click", () => cmCloseDetail());
+
+  // ── Legend ────────────────────────────────────────────────────────────────
+  const batches = [...new Set(courses.map(c => c.batch))].sort();
+  const leg = document.getElementById("cm-net-legend");
+  if (leg) {
+    leg.innerHTML =
+      `<div class="cm-net-legend-title">Courses by Batch</div>` +
+      batches.map(b => {
+        const col = BATCH_COLORS[b] || "#888";
+        return `<div class="cm-net-leg-row">
+          <div class="cm-net-leg-dot" style="background:${col};"></div>
+          <span style="color:${col};font-weight:600;">${b}</span>
+        </div>`;
+      }).join("") +
+      `<div style="margin-top:.5rem;">
+        <div class="cm-net-legend-title">Concepts</div>
+        <div class="cm-net-leg-row">
+          <circle style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#64748b;margin-right:.3rem;"></circle>
+          <span style="color:var(--mu);">Larger = more courses</span>
+        </div>
+        <div class="cm-net-leg-row" style="margin-top:.2rem;">
+          <div class="cm-net-leg-line" style="background:#94a3b8;"></div>
+          <span style="color:var(--mu);">Shared edge</span>
+        </div>
+        <div class="cm-net-leg-row" style="margin-top:.2rem;">
+          <div class="cm-net-leg-line" style="background:#cbd5e1;opacity:.5;"></div>
+          <span style="color:var(--dim);">Unique edge</span>
+        </div>
+      </div>`;
+  }
 }
+
+function showTip(e, html) {
+  tip.innerHTML = html;
+  tip.style.display = "block";
+  moveTip(e);
+}
+
 
 /* ── List view ────────────────────────────────────────────── */
 function cmRenderList(courses, sortedConcepts, idx) {
