@@ -124,9 +124,13 @@ table.hm tbody tr:hover{background:#fafbff;}
 /* Batch badges */
 .bb{display:inline-block;font-size:.57rem;font-weight:700;padding:.08rem .32rem;border-radius:3px;margin-left:.35rem;vertical-align:middle;}
 .bb-2022F{background:#eef0ff;color:#4f46e5;}
+.bb-2022S{background:#f5f3ff;color:#7c3aed;}
 .bb-2023F{background:#ecfdf5;color:#059669;}
+.bb-2023S{background:#f0fdfa;color:#0d9488;}
 .bb-2024F{background:#fffbeb;color:#d97706;}
+.bb-2024S{background:#fff7ed;color:#ea580c;}
 .bb-2025F{background:#fff1f2;color:#e11d48;}
+.bb-2025S{background:#fdf2f8;color:#db2777;}
 
 /* Domain legend */
 .dom-leg{
@@ -317,6 +321,22 @@ table.hm tbody tr:hover{background:#fafbff;}
   transition:all .15s;white-space:nowrap;
 }
 .cm-fit-btn:hover{background:rgba(184,146,14,.08);color:var(--goldd);border-color:var(--gold);}
+.cm-slider{
+  -webkit-appearance:none;appearance:none;
+  width:90px;height:4px;border-radius:2px;
+  background:var(--bdr2);outline:none;cursor:pointer;
+  transition:background .15s;
+}
+.cm-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--gold);cursor:pointer;
+  box-shadow:0 1px 4px rgba(0,0,0,.15);
+}
+.cm-slider::-moz-range-thumb{
+  width:14px;height:14px;border-radius:50%;border:none;
+  background:var(--gold);cursor:pointer;
+}
 #cm-body{flex:1;overflow:auto;padding:1.5rem 2rem 3rem;}
 #cmv-heatmap.hidden,#cmv-network.hidden,#cmv-list.hidden{display:none!important;}
 
@@ -482,6 +502,52 @@ table.cm-hm th,table.cm-hm td{padding:0;}
   font-size:.8rem;padding:.1rem;line-height:1;transition:color .12s;
 }
 .cm-method-close:hover{color:var(--tx);}
+
+/* ── Course popup (concept map) ─────────────────────────── */
+.cm-course-popup{
+  position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);
+  z-index:60;background:var(--sf);border:1.5px solid var(--bdr2);
+  border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.14);
+  width:300px;max-height:70vh;overflow-y:auto;display:none;
+  font-family:'Outfit',sans-serif;
+}
+.cm-popup-hdr{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  padding:.85rem 1rem .75rem;border-bottom:2px solid var(--bdr);
+  position:sticky;top:0;background:var(--sf);z-index:2;
+}
+.cm-popup-code{font-family:'DM Mono',monospace;font-size:.8rem;font-weight:800;display:flex;align-items:center;flex-wrap:wrap;gap:.2rem;}
+.cm-popup-title{font-family:'Crimson Pro',serif;font-size:.95rem;font-weight:700;color:var(--tx);margin-top:.18rem;line-height:1.3;}
+.cm-popup-close{background:none;border:none;cursor:pointer;color:var(--dim);font-size:.85rem;padding:.15rem;line-height:1;flex-shrink:0;margin-left:.5rem;}
+.cm-popup-close:hover{color:var(--tx);}
+.cm-popup-section{padding:.65rem 1rem;}
+.cm-popup-section+.cm-popup-section{border-top:1px solid var(--bdr);}
+.cm-popup-section-hd{
+  display:flex;align-items:center;gap:.35rem;
+  font-size:.62rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--mu);margin-bottom:.45rem;
+}
+.cm-popup-count{
+  background:var(--bdr);color:var(--mu);border-radius:8px;
+  padding:.05rem .38rem;font-size:.6rem;font-weight:700;
+}
+.cm-popup-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.cm-popup-dot--unique{background:#94a3b8;}
+.cm-popup-dot--shared{background:var(--gold);}
+.cm-popup-tags{display:flex;flex-wrap:wrap;gap:.3rem;}
+.cm-popup-tag{
+  padding:.2rem .55rem;border-radius:12px;font-size:.68rem;font-weight:600;
+  cursor:pointer;transition:filter .12s;
+}
+.cm-popup-tag:hover{filter:brightness(.9);}
+.cm-popup-tag--shared{font-weight:700;}
+.cm-popup-shared{display:flex;flex-direction:column;gap:.4rem;}
+.cm-popup-shared-row{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;}
+.cm-popup-also{font-size:.63rem;color:var(--mu);display:flex;align-items:center;gap:.25rem;flex-wrap:wrap;}
+.cm-popup-course-chip{
+  font-family:'DM Mono',monospace;font-size:.6rem;font-weight:700;
+  padding:.08rem .3rem;border-radius:4px;border:1px solid;
+}
 @media(max-width:700px){
   .cm-method-grid{grid-template-columns:1fr;}
   .cm-method-note{margin:1rem 1rem 0;}
@@ -604,6 +670,13 @@ table.cm-hm th,table.cm-hm td{padding:0;}
         </select>
         <span class="cm-label" style="margin-left:.9rem">Search:</span>
         <input id="cm-search" class="cm-input" placeholder="filter concepts…" oninput="cmRender()">
+        <div id="cm-force-controls" style="display:none;align-items:center;gap:.4rem;">
+          <span class="cm-label">Spread:</span>
+          <input type="range" id="cm-force-slider" min="1" max="10" value="5" step="1"
+            class="cm-slider" title="Adjust repulsion between nodes"
+            oninput="cmUpdateForce(this.value)">
+          <span id="cm-force-val" style="font-size:.68rem;color:var(--mu);width:1.4rem;text-align:center;">5</span>
+        </div>
         <button class="cm-fit-btn" onclick="cmFitView()" title="Auto-fit all nodes into view">⊡ Fit</button>
         <span id="cm-mode-badge" class="cm-mode-badge" title="How concepts were extracted"></span>
       </div>
@@ -679,7 +752,32 @@ const PLO_COLORS = {
   "PLO-5":"#d97706","PLO-6":"#ea580c","PLO-7":"#dc2626","PLO-8":"#db2777",
   "PLO-9":"#9333ea","PLO-10":"#7c3aed","PLO-11":"#4f46e5","PLO-12":"#0d9488"
 };
-const BATCH_COLORS = {"2022F":"#4f46e5","2023F":"#059669","2024F":"#d97706","2025F":"#e11d48"};
+// Semester map: batch code → semester number (even semesters = current cohorts)
+// Odd semesters are pre-registered for future batches.
+const SEMESTER_MAP = {
+  "2025F": 2,  "2025S": 1,
+  "2024F": 4,  "2024S": 3,
+  "2023F": 6,  "2023S": 5,
+  "2022F": 8,  "2022S": 7,
+};
+// Colour palette: one per semester, warm→cool = higher→lower semester
+const BATCH_COLORS = {
+  "2022F": "#4f46e5",   // Sem 8 — deep indigo
+  "2022S": "#7c3aed",   // Sem 7 — violet
+  "2023F": "#059669",   // Sem 6 — emerald
+  "2023S": "#0d9488",   // Sem 5 — teal
+  "2024F": "#d97706",   // Sem 4 — amber
+  "2024S": "#ea580c",   // Sem 3 — orange
+  "2025F": "#e11d48",   // Sem 2 — rose
+  "2025S": "#db2777",   // Sem 1 — pink
+};
+function semesterLabel(batch) {
+  const n = SEMESTER_MAP[batch];
+  return n ? `Semester ${n}` : batch;
+}
+function batchSortKey(batch) {
+  return SEMESTER_MAP[batch] || 99;
+}
 const DOMAIN_CFG = {
   "C-2":{color:"#3b82f6",label:"C2 · Understand"},
   "C-3":{color:"#10b981",label:"C3 · Apply"},
@@ -841,10 +939,14 @@ window.switchTab = function(tab) {
    BATCH FILTER
 ================================================================ */
 function buildFilters() {
-  const batches = ["All", ...[...new Set(DATA.courses.map(c => c.batch))].sort()];
-  document.getElementById("filters").innerHTML = batches.map(b =>
-    `<button class="fbtn${activeBatch===b?" active":""}" onclick="setBatch('${b}')">${b==="All"?"All batches":b}</button>`
-  ).join("");
+  // Sort batches by semester number (Sem 1 first → Sem 8 last)
+  const present = [...new Set(DATA.courses.map(c => c.batch))]
+    .sort((a,b) => batchSortKey(a) - batchSortKey(b));
+  const batches = ["All", ...present];
+  document.getElementById("filters").innerHTML = batches.map(b => {
+    const label = b === "All" ? "All Semesters" : semesterLabel(b);
+    return `<button class="fbtn${activeBatch===b?" active":""}" onclick="setBatch('${b}')" title="${b}">${label}</button>`;
+  }).join("");
 }
 
 window.setBatch = function(b) {
@@ -869,7 +971,7 @@ function renderStats() {
   const ploSet   = new Set(courses.flatMap(c => c.clos.map(cl => cl.plo)));
   const nBatches = [...new Set(DATA.courses.map(c => c.batch))].length;
   document.getElementById("hdr-stats").innerHTML = [
-    [DATA.courses.length,"Courses"],[totalCLOs,"CLOs"],[nBatches,"Batches"],[ploSet.size,"PLOs"]
+    [DATA.courses.length,"Courses"],[totalCLOs,"CLOs"],[nBatches,"Semesters"],[ploSet.size,"PLOs"]
   ].map(([n,l]) =>
     `<div style="text-align:center;">
        <div class="stat-n">${n}</div>
@@ -1366,11 +1468,18 @@ window.cmFitView = function() {
   if (window._cmFitFn) window._cmFitFn();
 };
 
+window.cmUpdateForce = function(val) {
+  document.getElementById("cm-force-val").textContent = val;
+  if (window._cmUpdateForceFn) window._cmUpdateForceFn(Number(val));
+};
+
 window.cmSetView = function(v) {
   cmView = v;
   document.querySelectorAll(".cm-seg-btn").forEach(b => {
     b.classList.toggle("active", b.dataset.view === v);
   });
+  const fc = document.getElementById("cm-force-controls");
+  if (fc) fc.style.display = v === "network" ? "flex" : "none";
   cmRender();
 };
 
@@ -1467,7 +1576,7 @@ function cmRenderHeatmap(courses, sortedConcepts, idx) {
       <td colspan="${sortedConcepts.length + 1}" style="padding:.4rem 0 .15rem;background:none;">
         <div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
           color:${bColor};padding:.25rem .65rem;background:${bColor}12;border-radius:4px;display:inline-block;">
-          ${batch}
+          ${semesterLabel(batch)}
         </div>
       </td></tr>`;
 
@@ -1689,10 +1798,14 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
     .attr("stroke-opacity", 0.5)
     .style("cursor","grab")
     .call(dragBehavior(true))
+    .on("click", (e, d) => {
+      e.stopPropagation();
+      showCoursePopup(d, conceptsByCourse, idx, courses);
+    })
     .on("mouseenter", (e,d) => {
       d3.select(e.currentTarget).attr("fill-opacity", 0.18);
       highlightCourse(d.id);
-      showTip(e,`<div class="th">${d.label}</div><div class="tm">${d.title}</div>`);
+      showTip(e,`<div class="th">${d.label}</div><div class="tm">${d.title}</div><div class="tm" style="font-size:.62rem;color:var(--dim);">Click for concept details</div>`);
     })
     .on("mouseleave", (e,d) => {
       d3.select(e.currentTarget).attr("fill-opacity", 0.10);
@@ -1926,22 +2039,42 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
   cmNetSim = sim;
 
   // Click background → deselect
-  svg.on("click", () => { cmCloseDetail(); resetHighlight(); });
+  svg.on("click", () => {
+    cmCloseDetail(); resetHighlight();
+    const p = document.getElementById('cm-course-popup');
+    if (p) p.style.display = 'none';
+  });
 
   // Expose fit so toolbar button can call it
   window._cmFitFn = () => fitToNodes(true);
+
+  // Expose force updater — called by the Spread slider
+  // val 1–10 maps to charge multiplier 0.2× – 2.0×
+  window._cmUpdateForceFn = (val) => {
+    const mult = val / 5;   // slider mid-point (5) = baseline
+    sim.force("charge", d3.forceManyBody()
+      .strength(d => d.type === "course"
+        ? -500 * chargeScale * mult
+        : -120 * chargeScale * mult)
+      .distanceMax(2000 * chargeScale * mult));
+    sim.force("collide", d3.forceCollide()
+      .radius(d => d.type === "course" ? d.r + 35 * mult : d.r + 18 * mult)
+      .strength(0.9).iterations(3));
+    sim.alphaTarget(0.2).restart();
+    setTimeout(() => sim.alphaTarget(0), 1200);
+  };
 
   /* ── Legend ─────────────────────────────────────────────────────────── */
   const batches = [...new Set(courses.map(c=>c.batch))].sort();
   const leg = document.getElementById("cm-net-legend");
   if (leg) {
     leg.innerHTML =
-      `<div class="cm-net-legend-title">Course Batches</div>` +
+      `<div class="cm-net-legend-title">Semesters</div>` +
       batches.map(b => {
         const col = BATCH_COLORS[b]||"#888";
         return `<div class="cm-net-leg-row">
           <div class="cm-net-leg-dot" style="background:${col};"></div>
-          <span style="color:${col};font-weight:600;">${b}</span></div>`;
+          <span style="color:${col};font-weight:600;">${semesterLabel(b)}</span></div>`;
       }).join("") +
       `<div style="border-top:1px solid var(--bdr);margin:.4rem 0 .3rem;"></div>
        <div class="cm-net-legend-title">Nodes</div>
@@ -1958,6 +2091,73 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
            fill="#2563eb" fill-opacity=".85" stroke="#fff" stroke-width="1.5"/></svg>
          <span style="color:var(--mu);">Shared concept</span></div>`;
   }
+}
+
+/* ── Course popup ─────────────────────────────────────────── */
+function showCoursePopup(d, conceptsByCourse, idx, courses) {
+  let panel = document.getElementById("cm-course-popup");
+  if (!panel) {
+    panel = document.createElement("div");
+    panel.id = "cm-course-popup";
+    panel.className = "cm-course-popup";
+    document.body.appendChild(panel);
+  }
+
+  const unique  = (conceptsByCourse[d.id] || []).sort();
+  const shared  = Object.entries(idx)
+    .filter(([, codes]) => codes.includes(d.id) && codes.length > 1)
+    .map(([concept, codes]) => ({ concept, others: codes.filter(c => c !== d.id) }))
+    .sort((a,b) => b.others.length - a.others.length);
+
+  const uniqueHTML = unique.length
+    ? unique.map(c => {
+        const col = getCMConceptColor(c);
+        return `<span class="cm-popup-tag" style="background:${col}18;color:${col};">${c}</span>`;
+      }).join("")
+    : `<span style="color:var(--dim);font-size:.7rem;">None</span>`;
+
+  const sharedHTML = shared.length
+    ? shared.map(({concept, others}) => {
+        const col = getCMConceptColor(concept);
+        const sem = others.map(code => {
+          const co = courses.find(x => x.code === code);
+          const bc = BATCH_COLORS[co?.batch] || "#888";
+          return `<span class="cm-popup-course-chip" style="color:${bc};border-color:${bc}40;">${code}</span>`;
+        }).join("");
+        return `<div class="cm-popup-shared-row">
+          <span class="cm-popup-tag cm-popup-tag--shared" style="background:${col}18;color:${col};">${concept}</span>
+          <span class="cm-popup-also">also in ${sem}</span>
+        </div>`;
+      }).join("")
+    : `<span style="color:var(--dim);font-size:.7rem;">No shared concepts with current filter</span>`;
+
+  const semLabel = semesterLabel(d.batch);
+  panel.innerHTML = `
+    <div class="cm-popup-hdr" style="border-color:${d.color}40;">
+      <div>
+        <div class="cm-popup-code" style="color:${d.color};">${d.label}
+          <span class="bb bb-${d.batch}" style="margin-left:.4rem;">${semLabel}</span>
+        </div>
+        <div class="cm-popup-title">${d.title}</div>
+      </div>
+      <button class="cm-popup-close" onclick="document.getElementById('cm-course-popup').style.display='none'">✕</button>
+    </div>
+    <div class="cm-popup-section">
+      <div class="cm-popup-section-hd">
+        <span class="cm-popup-dot cm-popup-dot--unique"></span>
+        Unique concepts <span class="cm-popup-count">${unique.length}</span>
+      </div>
+      <div class="cm-popup-tags">${uniqueHTML}</div>
+    </div>
+    <div class="cm-popup-section">
+      <div class="cm-popup-section-hd">
+        <span class="cm-popup-dot cm-popup-dot--shared"></span>
+        Shared concepts <span class="cm-popup-count">${shared.length}</span>
+      </div>
+      <div class="cm-popup-shared">${sharedHTML}</div>
+    </div>`;
+
+  panel.style.display = "block";
 }
 
 function showTip(e, html) {
