@@ -1715,14 +1715,14 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
   const bubbleR = c => {
     const n = (conceptsByCourse[c.code]||[]).length;
     const t = maxUC > minUC ? (n - minUC)/(maxUC - minUC) : 0.5;
-    return 55 + t * 45;   // 55 – 100 px
+    return 70 + t * 50;   // 70 – 120 px
   };
 
   /* ── Course nodes — initial ring scales with N ────────────────────────── */
   const courseNodes = courses.map((course, i) => {
     const angle = (2*Math.PI*i/courses.length) - Math.PI/2;
-    // Spread the initial ring wider as N grows so nodes don't start on top
-    const R = Math.max(180, courses.length * 55);
+    // Moderate initial ring — fitToNodes will frame everything after settling
+    const R = Math.max(150, courses.length * 40);
     return {
       id:    course.code,
       type:  "course",
@@ -1747,7 +1747,7 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
       label: sc.label,
       count: sc.count,
       color: getCMConceptColor(sc.label),
-      r:     7 + sc.count * 3,    // 10 – 22 px for 1–5 courses
+      r:     10 + sc.count * 4,   // 14 – 30 px for 1–5 courses
       x: sx, y: sy,
     };
   });
@@ -1772,8 +1772,8 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
   /* ── Edges ───────────────────────────────────────────────────────────── */
   const linkEl = linkLayer.selectAll("line").data(links).enter().append("line")
     .attr("stroke",         d => d.color)
-    .attr("stroke-width",   2)
-    .attr("stroke-opacity", 0.45);
+    .attr("stroke-width",   2.5)
+    .attr("stroke-opacity", 0.65);
 
   /* ── Course bubbles ──────────────────────────────────────────────────── */
   // Outer glow circle
@@ -1781,10 +1781,10 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
     .enter().append("circle").attr("class","bg")
     .attr("r",  d => d.r + 8)
     .attr("fill", d => d.color)
-    .attr("fill-opacity", 0.04)
+    .attr("fill-opacity", 0.08)
     .attr("stroke", d => d.color)
-    .attr("stroke-width", 0.5)
-    .attr("stroke-opacity", 0.15)
+    .attr("stroke-width", 1)
+    .attr("stroke-opacity", 0.30)
     .attr("pointer-events","none");
 
   // Main bubble
@@ -1792,10 +1792,10 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
     .enter().append("circle").attr("class","bm")
     .attr("r",  d => d.r)
     .attr("fill",         d => d.color)
-    .attr("fill-opacity", 0.10)
+    .attr("fill-opacity", 0.18)
     .attr("stroke",       d => d.color)
-    .attr("stroke-width", 2)
-    .attr("stroke-opacity", 0.5)
+    .attr("stroke-width", 2.5)
+    .attr("stroke-opacity", 0.8)
     .style("cursor","grab")
     .call(dragBehavior(true))
     .on("click", (e, d) => {
@@ -1803,12 +1803,12 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
       showCoursePopup(d, conceptsByCourse, idx, courses);
     })
     .on("mouseenter", (e,d) => {
-      d3.select(e.currentTarget).attr("fill-opacity", 0.18);
+      d3.select(e.currentTarget).attr("fill-opacity", 0.30);
       highlightCourse(d.id);
       showTip(e,`<div class="th">${d.label}</div><div class="tm">${d.title}</div><div class="tm" style="font-size:.62rem;color:var(--dim);">Click for concept details</div>`);
     })
     .on("mouseleave", (e,d) => {
-      d3.select(e.currentTarget).attr("fill-opacity", 0.10);
+      d3.select(e.currentTarget).attr("fill-opacity", 0.18);
       resetHighlight(); hideTip();
     })
     .on("mousemove", moveTip);
@@ -1820,7 +1820,7 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
     .attr("text-anchor","middle")
     .attr("dominant-baseline","central")
     .attr("font-family","'DM Mono',monospace")
-    .attr("font-size","10px").attr("font-weight","800")
+    .attr("font-size","13px").attr("font-weight","800")
     .attr("fill", d => d.color)
     .attr("pointer-events","none");
 
@@ -1859,13 +1859,13 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
         `<div class="tm" style="font-size:.62rem;color:var(--dim);">Click for CLO details</div>`);
     })
     .on("mouseleave", (e,d) => {
-      d3.select(e.currentTarget).select("circle").attr("r",3.5).attr("fill-opacity",0.75);
+      d3.select(e.currentTarget).select("circle").attr("r",5).attr("fill-opacity",0.75);
       hideTip();
     })
     .on("mousemove", moveTip);
 
   uniqueG.append("circle")
-    .attr("r", 3.5)
+    .attr("r", 5)
     .attr("fill", d => d.color)
     .attr("fill-opacity", 0.75)
     .attr("stroke","#fff").attr("stroke-width",0.8);
@@ -1875,9 +1875,9 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
     .attr("text-anchor","middle")
     .attr("dy","1.55em")
     .attr("font-family","'Outfit',sans-serif")
-    .attr("font-size","7.5px")
+    .attr("font-size","9px")
     .attr("fill", d => d.color)
-    .attr("fill-opacity", 0.9)
+    .attr("fill-opacity", 1.0)
     .attr("pointer-events","none");
 
   /* ── Shared concept nodes (outside bubbles) ──────────────────────────── */
@@ -1914,7 +1914,7 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
     .attr("text-anchor","middle")
     .attr("dy", d => d.r + 11)
     .attr("font-family","'Outfit',sans-serif")
-    .attr("font-size","9px").attr("font-weight","600")
+    .attr("font-size","11px").attr("font-weight","700")
     .attr("fill", d => d.color)
     .attr("pointer-events","none");
 
@@ -1923,7 +1923,7 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
     .text(d => d.count)
     .attr("text-anchor","middle").attr("dominant-baseline","central")
     .attr("font-family","'DM Mono',monospace")
-    .attr("font-size","8px").attr("font-weight","800")
+    .attr("font-size","9px").attr("font-weight","800")
     .attr("fill","#fff")
     .attr("pointer-events","none");
 
@@ -2005,36 +2005,48 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
     sharedG.attr("transform", d => `translate(${d.x},${d.y})`);
   }
 
-  /* ── Force simulation — infinite canvas, scales with N ─────────────── */
-  // Charge scales with course count so large graphs spread proportionally.
+  /* ── Force simulation ───────────────────────────────────────────────── */
   const N = courses.length;
-  const chargeScale = Math.max(1, Math.log2(N + 1));
 
-  const sim = d3.forceSimulation(allNodes)
-    // Link distance = sum of both node radii + breathing room
-    .force("link", d3.forceLink(links).id(d => d.id)
-      .distance(d => {
-        const src = typeof d.source==="object" ? d.source : allNodes.find(n=>n.id===d.source);
-        const tgt = typeof d.target==="object" ? d.target : allNodes.find(n=>n.id===d.target);
-        return (src?.r||60) + (tgt?.r||12) + 40;
+  // Charge: moderate fixed values — not scaled by log(N) which was over-repelling
+  const BASE_COURSE_CHARGE  = -350;
+  const BASE_SHARED_CHARGE  = -80;
+  // Link distance: bubble radius + shared node radius + gap
+  const linkDist = d => {
+    const src = typeof d.source==="object" ? d.source : allNodes.find(n=>n.id===d.source);
+    const tgt = typeof d.target==="object" ? d.target : allNodes.find(n=>n.id===d.target);
+    return (src?.r||70) + (tgt?.r||14) + 30;
+  };
+
+  // Centering: ONLY on isolated course nodes (no links) to stop them flying off.
+  // Connected nodes are not pulled — they find their own natural position.
+  const isolatedIds = new Set(
+    courseNodes.filter(cn =>
+      !links.some(l => {
+        const s = typeof l.source==="object"?l.source.id:l.source;
+        return s === cn.id;
       })
-      .strength(0.35))
-    // Strong repulsion between all nodes — scales up with graph size
+    ).map(cn => cn.id)
+  );
+
+  let tickCount = 0;
+  const sim = d3.forceSimulation(allNodes)
+    .force("link", d3.forceLink(links).id(d => d.id)
+      .distance(linkDist)
+      .strength(0.4))
     .force("charge", d3.forceManyBody()
-      .strength(d => d.type==="course"
-        ? -500 * chargeScale
-        : -120 * chargeScale)
-      .distanceMax(2000 * chargeScale))   // allow repulsion to reach far
-    // NO forceX / forceY — nodes are free to spread without being pulled back
-    // Collision: keep nodes from overlapping
+      .strength(d => d.type==="course" ? BASE_COURSE_CHARGE : BASE_SHARED_CHARGE)
+      .distanceMax(800))
+    // Gentle pull toward centre ONLY for isolated courses
+    .force("isolate-x", d3.forceX(W/2).strength(d => isolatedIds.has(d.id) ? 0.06 : 0))
+    .force("isolate-y", d3.forceY(H/2).strength(d => isolatedIds.has(d.id) ? 0.06 : 0))
     .force("collide", d3.forceCollide()
-      .radius(d => d.type==="course" ? d.r + 35 : d.r + 18)
-      .strength(0.9)
-      .iterations(3))
-    .alphaDecay(0.012)           // cool slowly so layout has time to spread
-    .velocityDecay(0.35)
-    .on("tick", ticked)
-    .on("end", () => fitToNodes(true));   // auto-frame when sim finishes
+      .radius(d => d.type==="course" ? d.r + 30 : d.r + 16)
+      .strength(0.85).iterations(3))
+    .alphaDecay(0.018)
+    .velocityDecay(0.45)
+    .on("tick", () => { ticked(); tickCount++; if (tickCount === 80) fitToNodes(false); })
+    .on("end", () => fitToNodes(true));
 
   cmNetSim = sim;
 
@@ -2051,17 +2063,17 @@ function cmRenderNetwork(courses, sortedConcepts, idx) {
   // Expose force updater — called by the Spread slider
   // val 1–10 maps to charge multiplier 0.2× – 2.0×
   window._cmUpdateForceFn = (val) => {
-    const mult = val / 5;   // slider mid-point (5) = baseline
+    const mult = val / 5;   // slider mid-point (5) = 1× baseline
     sim.force("charge", d3.forceManyBody()
       .strength(d => d.type === "course"
-        ? -500 * chargeScale * mult
-        : -120 * chargeScale * mult)
-      .distanceMax(2000 * chargeScale * mult));
+        ? BASE_COURSE_CHARGE * mult
+        : BASE_SHARED_CHARGE * mult)
+      .distanceMax(800 * mult));
     sim.force("collide", d3.forceCollide()
-      .radius(d => d.type === "course" ? d.r + 35 * mult : d.r + 18 * mult)
-      .strength(0.9).iterations(3));
-    sim.alphaTarget(0.2).restart();
-    setTimeout(() => sim.alphaTarget(0), 1200);
+      .radius(d => d.type === "course" ? d.r + 30 * mult : d.r + 16 * mult)
+      .strength(0.85).iterations(3));
+    sim.alphaTarget(0.25).restart();
+    setTimeout(() => { sim.alphaTarget(0); fitToNodes(true); }, 1500);
   };
 
   /* ── Legend ─────────────────────────────────────────────────────────── */
