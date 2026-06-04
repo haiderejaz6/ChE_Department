@@ -24,6 +24,8 @@
   --dimfill:#f0f3fa;
   --shadow:0 1px 3px rgba(30,50,90,0.06),0 4px 16px rgba(30,50,90,0.06);
   --shadow-lg:0 2px 8px rgba(30,50,90,0.08),0 8px 32px rgba(30,50,90,0.10);
+  --col-s1:#e11d48; --col-s2:#ea580c; --col-s3:#d97706; --col-s4:#65a30d;
+  --col-s5:#0d9488; --col-s6:#059669; --col-s7:#0891b2; --col-s8:#4f46e5;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;height:100%;overflow:hidden;}
@@ -48,9 +50,7 @@ header{
   color:#fff;flex-shrink:0;letter-spacing:-.3px;
   box-shadow:0 2px 8px rgba(184,146,14,.35);
 }
-.hdr-text h1{
-  font-family:'Crimson Pro',serif;font-size:1.25rem;font-weight:700;color:var(--tx);white-space:nowrap;
-}
+.hdr-text h1{font-family:'Crimson Pro',serif;font-size:1.25rem;font-weight:700;color:var(--tx);white-space:nowrap;}
 .hdr-text h1 em{color:var(--gold);font-style:normal;}
 .hdr-text p{font-size:.7rem;color:var(--mu);margin-top:.05rem;}
 .vsep{width:1px;height:24px;background:var(--bdr);flex-shrink:0;}
@@ -63,7 +63,7 @@ header{
   flex-shrink:0;background:var(--sf);border-bottom:1px solid var(--bdr);
   display:flex;align-items:center;padding:0 2rem;gap:.25rem;z-index:20;
 }
-.tabbar-filters{display:flex;gap:.3rem;margin-left:auto;padding:.4rem 0;}
+.tabbar-filters{display:flex;gap:.3rem;margin-left:auto;padding:.4rem 0;flex-wrap:wrap;}
 .tab-btn{
   padding:.7rem 1.3rem;border:none;background:none;cursor:pointer;
   font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:500;
@@ -84,10 +84,7 @@ header{
 .body-wrap{flex:1;overflow:hidden;min-height:0;position:relative;}
 
 /* ── DASHBOARD TAB ──────────────────────────────────────── */
-#tab-dash{
-  position:absolute;inset:0;overflow-y:auto;
-  padding:1.75rem 2rem 3rem;
-}
+#tab-dash{position:absolute;inset:0;overflow-y:auto;padding:1.75rem 2rem 3rem;}
 #tab-dash.hidden,#tab-graph.hidden,#tab-concepts.hidden{display:none!important;}
 
 .sec-hd{
@@ -121,16 +118,12 @@ table.hm tbody tr:hover{background:#fafbff;}
 .hm-dot:hover{transform:scale(1.2);}
 .hm-dot.empty{background:#f0f3fa;color:var(--dim);font-size:.7rem;}
 
-/* Batch badges */
-.bb{display:inline-block;font-size:.57rem;font-weight:700;padding:.08rem .32rem;border-radius:3px;margin-left:.35rem;vertical-align:middle;}
-.bb-2022F{background:#eef0ff;color:#4f46e5;}
-.bb-2022S{background:#f5f3ff;color:#7c3aed;}
-.bb-2023F{background:#ecfdf5;color:#059669;}
-.bb-2023S{background:#f0fdfa;color:#0d9488;}
-.bb-2024F{background:#fffbeb;color:#d97706;}
-.bb-2024S{background:#fff7ed;color:#ea580c;}
-.bb-2025F{background:#fff1f2;color:#e11d48;}
-.bb-2025S{background:#fdf2f8;color:#db2777;}
+/* Semester badges */
+.sem-badge{
+  display:inline-block;font-size:.57rem;font-weight:700;padding:.08rem .32rem;
+  border-radius:3px;margin-left:.35rem;vertical-align:middle;
+  background:rgba(0,0,0,.06);color:var(--mu);
+}
 
 /* Domain legend */
 .dom-leg{
@@ -194,40 +187,79 @@ table.hm tbody tr:hover{background:#fafbff;}
 .plo-code-t{font-size:.65rem;font-weight:700;color:var(--tx);display:block;}
 .plo-name-t{font-size:.65rem;color:var(--mu);}
 
-/* ── GRAPH TAB ───────────────────────────────────────────── */
-#tab-graph{
-  position:absolute;inset:0;
-  display:flex;
+/* ══════════════════════════════════════════════════════════
+   CURRICULUM GRAPH TAB — UCSD-style semester columns
+══════════════════════════════════════════════════════════ */
+#tab-graph{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;}
+
+/* Top control bar for the curriculum graph */
+.cg-toolbar{
+  flex-shrink:0;background:var(--sf);border-bottom:1px solid var(--bdr);
+  padding:.5rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  box-shadow:var(--shadow);z-index:5;
 }
-#canvas-wrap{flex:1;position:relative;overflow:hidden;}
-#graph-svg{width:100%;height:100%;cursor:grab;background:var(--bg);}
-#graph-svg:active{cursor:grabbing;}
-.graph-hint{
-  position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);
-  font-size:.7rem;color:var(--mu);pointer-events:none;white-space:nowrap;
-  background:rgba(255,255,255,.9);padding:.35rem .85rem;border-radius:20px;
-  border:1px solid var(--bdr);box-shadow:var(--shadow);
+.cg-label{font-size:.68rem;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;}
+.cg-legend{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;}
+.cg-leg-item{display:flex;align-items:center;gap:.3rem;font-size:.68rem;color:var(--mu);}
+.cg-leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+
+/* Scrollable canvas for the semester grid */
+#cg-canvas{flex:1;overflow:auto;padding:1.5rem 2rem 3rem;background:var(--bg);}
+
+/* Semester columns layout */
+.cg-grid{
+  display:flex;gap:1.4rem;align-items:flex-start;
+  min-width:max-content;
+}
+.cg-col{
+  width:190px;flex-shrink:0;display:flex;flex-direction:column;gap:.65rem;
+}
+.cg-col-hdr{
+  background:var(--sf);border:1.5px solid var(--bdr);border-radius:10px;
+  padding:.5rem .75rem;text-align:center;box-shadow:var(--shadow);
+  border-top-width:3px;
+}
+.cg-col-sem{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;}
+.cg-col-count{font-size:.62rem;color:var(--mu);margin-top:.12rem;}
+
+/* Individual course card in the graph */
+.cg-node{
+  background:var(--sf);border:1.5px solid var(--bdr);border-radius:10px;
+  padding:.62rem .75rem;box-shadow:var(--shadow);
+  cursor:pointer;transition:all .17s;position:relative;
+  border-left-width:4px;
+}
+.cg-node:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px) scale(1.01);}
+.cg-node.selected{box-shadow:0 0 0 2px var(--gold),var(--shadow-lg);border-color:var(--gold)!important;}
+.cg-node-code{font-family:'DM Mono',monospace;font-size:.72rem;font-weight:700;}
+.cg-node-title{font-size:.7rem;color:var(--mu);margin-top:.18rem;line-height:1.35;}
+.cg-node-meta{display:flex;gap:.35rem;margin-top:.42rem;flex-wrap:wrap;align-items:center;}
+.cg-credits{
+  display:inline-flex;align-items:center;gap:.2rem;
+  font-size:.58rem;font-weight:700;padding:.08rem .3rem;
+  border-radius:4px;background:#f0f3fa;color:var(--mu);
+}
+.cg-plo-dots{display:flex;gap:.18rem;flex-wrap:wrap;}
+.cg-plo-dot{
+  width:12px;height:12px;border-radius:3px;
+  display:inline-block;cursor:default;
 }
 
-/* Side panel */
-.panel{
-  width:300px;flex-shrink:0;border-left:1px solid var(--bdr);
+/* Side panel for curriculum graph */
+.cg-panel{
+  width:320px;flex-shrink:0;border-left:1px solid var(--bdr);
   background:var(--sf);display:flex;flex-direction:column;
   overflow:hidden;transition:width .22s ease,opacity .22s;
   box-shadow:-2px 0 12px rgba(30,50,90,.06);
 }
-.panel.hidden{width:0;opacity:0;border-left:none;}
-.panel-hdr{
+.cg-panel.hidden{width:0;opacity:0;border-left:none;}
+#cg-panel-inner{flex:1;overflow-y:auto;padding:.8rem 1.1rem;}
+.cg-phdr{
   padding:.9rem 1.1rem .75rem;border-bottom:1px solid var(--bdr);
-  display:flex;justify-content:space-between;align-items:flex-start;
-  flex-shrink:0;
+  display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;
 }
-.panel-type{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--mu);margin-bottom:.25rem;}
-.panel-name{font-family:'Crimson Pro',serif;font-size:1.1rem;font-weight:700;color:var(--tx);line-height:1.25;}
-.panel-sub{font-size:.72rem;color:var(--mu);margin-top:.2rem;}
 .close-btn{background:none;border:none;cursor:pointer;color:var(--dim);font-size:.9rem;padding:.15rem;line-height:1;transition:color .15s;flex-shrink:0;}
 .close-btn:hover{color:var(--tx);}
-.panel-body{flex:1;overflow-y:auto;padding:.8rem 1.1rem;}
 .psec-hd{
   font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
   color:var(--mu);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;
@@ -248,26 +280,17 @@ table.hm tbody tr:hover{background:#fafbff;}
 .p-clo-desc{font-size:.71rem;color:var(--mu);line-height:1.45;}
 .p-clo-tags{display:flex;gap:.28rem;flex-wrap:wrap;margin-top:.28rem;}
 .pctag{font-size:.57rem;font-weight:700;padding:.09rem .35rem;border-radius:3px;}
+.p-bar-wrap{height:3px;border-radius:2px;background:var(--bdr);margin-top:.25rem;overflow:hidden;}
+.p-bar-fill{height:100%;border-radius:2px;}
 .plo-conn{
   display:flex;align-items:center;gap:.45rem;padding:.38rem .6rem;
-  border-radius:8px;border:1px solid var(--bdr);margin-bottom:.38rem;
-  cursor:pointer;transition:border-color .14s,background .14s;
+  border-radius:8px;border:1px solid var(--bdr);margin-bottom:.38rem;cursor:pointer;
+  transition:border-color .14s,background .14s;
 }
 .plo-conn:hover{background:#f7f9fd;border-color:var(--bdr2);}
 .plo-pill-sm{width:28px;height:18px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:800;color:#fff;flex-shrink:0;}
 .plo-conn-name{font-size:.71rem;color:var(--tx);font-weight:500;}
 .plo-conn-cnt{font-size:.62rem;color:var(--mu);}
-.p-bar-wrap{height:3px;border-radius:2px;background:var(--bdr);margin-top:.25rem;overflow:hidden;}
-.p-bar-fill{height:100%;border-radius:2px;}
-.pcourse-item{
-  display:flex;gap:.45rem;align-items:center;padding:.35rem 0;
-  border-bottom:1px solid rgba(0,0,0,.04);cursor:pointer;
-}
-.pcourse-item:last-child{border-bottom:none;}
-.pcourse-item:hover .pci-name{color:var(--gold);}
-.pci-batch{font-size:.56rem;font-weight:700;padding:.09rem .3rem;border-radius:3px;flex-shrink:0;}
-.pci-name{font-size:.71rem;color:var(--tx);flex:1;}
-.pci-cnt{font-size:.62rem;color:var(--mu);}
 
 /* Tooltip */
 #tip{
@@ -279,11 +302,10 @@ table.hm tbody tr:hover{background:#fafbff;}
 #tip .th{font-weight:700;color:var(--gold);margin-bottom:.18rem;}
 #tip .tm{color:var(--mu);line-height:1.5;}
 
-
-/* ── CONCEPT MAP TAB ────────────────────────────────────── */
-#tab-concepts{
-  position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;
-}
+/* ══════════════════════════════════════════════════════════
+   CONCEPT MAP TAB
+══════════════════════════════════════════════════════════ */
+#tab-concepts{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;}
 .cm-toolbar{
   flex-shrink:0;
   background:var(--sf);border-bottom:1px solid var(--bdr);
@@ -310,37 +332,26 @@ table.hm tbody tr:hover{background:#fafbff;}
 .cm-input{
   padding:.28rem .65rem;border:1px solid var(--bdr);border-radius:6px;
   font-family:'Outfit',sans-serif;font-size:.73rem;color:var(--tx);
-  background:var(--sf);width:160px;outline:none;
-  transition:border-color .15s;
+  background:var(--sf);width:160px;outline:none;transition:border-color .15s;
 }
 .cm-input:focus{border-color:var(--gold);}
 .cm-fit-btn{
   padding:.28rem .65rem;border:1px solid var(--bdr);border-radius:6px;
   font-family:'Outfit',sans-serif;font-size:.73rem;font-weight:600;
-  color:var(--mu);background:var(--sf);cursor:pointer;
-  transition:all .15s;white-space:nowrap;
+  color:var(--mu);background:var(--sf);cursor:pointer;transition:all .15s;white-space:nowrap;
 }
 .cm-fit-btn:hover{background:rgba(184,146,14,.08);color:var(--goldd);border-color:var(--gold);}
 .cm-slider{
   -webkit-appearance:none;appearance:none;
   width:90px;height:4px;border-radius:2px;
   background:var(--bdr2);outline:none;cursor:pointer;
-  transition:background .15s;
 }
-.cm-slider::-webkit-slider-thumb{
-  -webkit-appearance:none;appearance:none;
-  width:14px;height:14px;border-radius:50%;
-  background:var(--gold);cursor:pointer;
-  box-shadow:0 1px 4px rgba(0,0,0,.15);
-}
-.cm-slider::-moz-range-thumb{
-  width:14px;height:14px;border-radius:50%;border:none;
-  background:var(--gold);cursor:pointer;
-}
+.cm-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.15);}
+.cm-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;border:none;background:var(--gold);cursor:pointer;}
 #cm-body{flex:1;overflow:auto;padding:1.5rem 2rem 3rem;}
-#cmv-heatmap.hidden,#cmv-network.hidden,#cmv-list.hidden{display:none!important;}
+#cmv-heatmap.hidden,#cmv-network.hidden,#cmv-list.hidden,#cmv-curriculum.hidden{display:none!important;}
 
-/* Heatmap view */
+/* Concept heatmap */
 .cm-hm-wrap{overflow-x:auto;}
 table.cm-hm{border-collapse:collapse;width:100%;}
 table.cm-hm th,table.cm-hm td{padding:0;}
@@ -348,12 +359,9 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 .cm-hm-col-th{
   writing-mode:vertical-lr;transform:rotate(180deg);
   font-size:.6rem;font-weight:600;color:var(--mu);
-  padding:.5rem .35rem;text-align:left;white-space:nowrap;
-  max-height:130px;
+  padding:.5rem .35rem;text-align:left;white-space:nowrap;max-height:130px;
 }
-.cm-hm-col-th span{
-  display:block;overflow:hidden;text-overflow:ellipsis;max-height:120px;cursor:default;
-}
+.cm-hm-col-th span{display:block;overflow:hidden;text-overflow:ellipsis;max-height:120px;cursor:default;}
 .cm-hm-row-th{
   font-size:.64rem;font-weight:700;color:var(--tx);padding:.38rem .6rem .38rem 0;
   white-space:nowrap;text-align:right;font-family:'DM Mono',monospace;max-width:140px;
@@ -367,14 +375,13 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 }
 .cm-hm-dot:hover{transform:scale(1.25);z-index:10;position:relative;}
 .cm-hm-dot.empty{background:#f0f3fa;color:var(--dim);}
-.cm-hm-dot.self{background:rgba(184,146,14,.15);color:var(--gold);}
 .cm-hm-section-hd{
   font-family:'Crimson Pro',serif;font-size:1.1rem;font-weight:700;
   display:flex;align-items:center;gap:.6rem;margin:1.2rem 0 .6rem;color:var(--tx);
 }
 .cm-hm-section-hd::before{content:'';display:block;width:4px;height:1em;background:var(--gold);border-radius:2px;}
 
-/* Shared concept legend strip */
+/* Concept strip */
 .cm-concept-strip{
   display:flex;flex-wrap:wrap;gap:.35rem;
   background:var(--sf);border:1px solid var(--bdr);border-radius:10px;
@@ -382,8 +389,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 }
 .cc-tag{
   padding:.22rem .6rem;border-radius:20px;font-size:.67rem;font-weight:600;
-  cursor:pointer;transition:all .15s;border:1.5px solid transparent;
-  white-space:nowrap;
+  cursor:pointer;transition:all .15s;border:1.5px solid transparent;white-space:nowrap;
 }
 .cc-tag:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.1);}
 .cc-tag.selected{border-color:var(--tx);box-shadow:0 0 0 2px rgba(0,0,0,.08);}
@@ -403,155 +409,80 @@ table.cm-hm th,table.cm-hm td{padding:0;}
   border-radius:10px;padding:.55rem .75rem;font-size:.65rem;
   box-shadow:var(--shadow);min-width:130px;
 }
-.cm-net-legend-title{font-weight:700;color:var(--mu);margin-bottom:.35rem;
-  font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;}
+.cm-net-legend-title{font-weight:700;color:var(--mu);margin-bottom:.35rem;font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;}
 .cm-net-leg-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.2rem;}
 .cm-net-leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
 .cm-net-leg-line{width:22px;height:2px;border-radius:1px;flex-shrink:0;}
 
 /* List view */
 .cm-list-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1rem;}
-.cm-course-card{
-  background:var(--sf);border:1px solid var(--bdr);border-radius:12px;
-  padding:1rem 1.1rem;box-shadow:var(--shadow);
-}
+.cm-course-card{background:var(--sf);border:1px solid var(--bdr);border-radius:12px;padding:1rem 1.1rem;box-shadow:var(--shadow);}
 .cm-cc-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.6rem;}
 .cm-cc-code{font-family:'DM Mono',monospace;font-size:.72rem;font-weight:700;color:var(--gold);}
 .cm-cc-title{font-family:'Crimson Pro',serif;font-size:.95rem;font-weight:700;color:var(--tx);margin-top:.15rem;line-height:1.3;}
 .cm-cc-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.45rem;}
-.cm-ctag{
-  padding:.18rem .5rem;border-radius:12px;font-size:.63rem;font-weight:600;
-  cursor:pointer;transition:all .12s;
-}
+.cm-ctag{padding:.18rem .5rem;border-radius:12px;font-size:.63rem;font-weight:600;cursor:pointer;transition:all .12s;}
 .cm-ctag:hover{filter:brightness(.92);transform:translateY(-1px);}
 .cm-ctag.shared{outline:2px solid rgba(0,0,0,.18);}
 
-/* Overlap detail panel (shared between views) */
+/* ─── Curriculum Concept Graph view ─────────────────────── */
+#cmv-curriculum{overflow:auto;padding:0;}
+.cm-curr-grid{
+  display:flex;gap:1.4rem;align-items:flex-start;
+  min-width:max-content;padding:1.5rem 2rem 3rem;
+}
+.cm-curr-col{width:210px;flex-shrink:0;display:flex;flex-direction:column;gap:.6rem;}
+.cm-curr-col-hdr{
+  background:var(--sf);border:1.5px solid var(--bdr);border-radius:10px;
+  padding:.45rem .75rem;text-align:center;box-shadow:var(--shadow);border-top-width:3px;
+}
+.cm-curr-col-sem{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;}
+.cm-curr-course{
+  background:var(--sf);border:1.5px solid var(--bdr);border-radius:10px;
+  padding:.6rem .75rem;box-shadow:var(--shadow);border-left-width:4px;
+  cursor:pointer;transition:all .16s;
+}
+.cm-curr-course:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
+.cm-curr-course.highlight{box-shadow:0 0 0 2px var(--gold),var(--shadow-lg);}
+.cm-curr-code{font-family:'DM Mono',monospace;font-size:.7rem;font-weight:700;}
+.cm-curr-title{font-size:.65rem;color:var(--mu);margin-top:.1rem;line-height:1.3;}
+.cm-curr-concepts{display:flex;flex-wrap:wrap;gap:.2rem;margin-top:.42rem;}
+.cm-curr-concept{
+  padding:.14rem .38rem;border-radius:10px;font-size:.58rem;font-weight:600;
+  cursor:pointer;transition:all .12s;
+}
+.cm-curr-concept:hover{filter:brightness(.88);}
+.cm-curr-concept.shared{outline:1.5px solid rgba(0,0,0,.2);}
+.cm-curr-shared-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:14px;height:14px;border-radius:50%;font-size:.48rem;font-weight:800;
+  background:var(--gold);color:#fff;margin-left:.18rem;vertical-align:middle;
+}
+
+/* Overlap detail popup */
 .cm-detail{
   position:fixed;right:1.5rem;bottom:1.5rem;z-index:50;
   background:var(--sf);border:1.5px solid var(--bdr2);border-radius:14px;
-  box-shadow:var(--shadow-lg);padding:1rem 1.2rem;max-width:340px;
-  display:none;
+  box-shadow:var(--shadow-lg);padding:1rem 1.2rem;max-width:340px;display:none;
 }
 .cm-detail.show{display:block;}
-.cm-detail-close{
-  position:absolute;top:.6rem;right:.7rem;background:none;border:none;
-  cursor:pointer;color:var(--dim);font-size:.85rem;
-}
-.cm-detail-concept{
-  font-family:'Crimson Pro',serif;font-size:1.05rem;font-weight:700;
-  color:var(--tx);margin-bottom:.5rem;padding-right:1.5rem;
-}
+.cm-detail-close{position:absolute;top:.6rem;right:.7rem;background:none;border:none;cursor:pointer;color:var(--dim);font-size:.85rem;}
+.cm-detail-concept{font-family:'Crimson Pro',serif;font-size:1.05rem;font-weight:700;color:var(--tx);margin-bottom:.5rem;padding-right:1.5rem;}
 .cm-detail-courses{display:flex;flex-direction:column;gap:.3rem;}
 .cm-dc-row{display:flex;align-items:center;gap:.45rem;font-size:.72rem;}
 .cm-dc-code{font-family:'DM Mono',monospace;font-weight:700;color:var(--gold);flex-shrink:0;min-width:65px;}
 .cm-dc-title{color:var(--mu);}
-
-/* Overlap callout count badge */
 .cm-overlap-badge{
   display:inline-flex;align-items:center;justify-content:center;
   width:18px;height:18px;border-radius:50%;font-size:.58rem;font-weight:800;
   background:var(--gold);color:#fff;margin-left:.35rem;vertical-align:middle;
 }
 
-/* Extraction mode badge */
-.cm-mode-badge{
-  font-size:.62rem;font-weight:700;padding:.18rem .55rem;border-radius:10px;
-  letter-spacing:.04em;display:none;
-}
+/* Mode badge */
+.cm-mode-badge{font-size:.62rem;font-weight:700;padding:.18rem .55rem;border-radius:10px;letter-spacing:.04em;display:none;}
 .cm-mode-badge.mode-rule{background:#e0f2fe;color:#0369a1;}
 .cm-mode-badge.mode-llm{background:#f0fdf4;color:#15803d;}
 .cm-mode-badge.mode-both{background:rgba(184,146,14,.12);color:var(--goldd);}
-
-/* Methodology note */
-.cm-method-note{
-  display:flex;gap:1rem;align-items:flex-start;
-  background:linear-gradient(135deg,#fefce8 0%,#f0f9ff 100%);
-  border:1px solid #e2d58e;border-left:4px solid var(--gold);
-  border-radius:12px;padding:1rem 1.2rem;margin:1rem 2rem 0;
-  position:relative;font-size:.74rem;color:var(--tx);line-height:1.55;
-  box-shadow:0 1px 6px rgba(184,146,14,.1);
-}
-.cm-method-icon{font-size:1.4rem;flex-shrink:0;margin-top:.05rem;}
-.cm-method-body{flex:1;}
-.cm-method-body strong{font-size:.8rem;display:block;margin-bottom:.35rem;color:var(--tx);}
-.cm-method-body p{margin:0 0 .4rem;color:var(--mu);}
-.cm-method-body code{
-  background:rgba(0,0,0,.06);padding:.07rem .35rem;border-radius:4px;
-  font-family:'DM Mono',monospace;font-size:.7rem;color:var(--goldd);
-}
-.cm-method-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:.5rem 0;}
-.cm-method-card{
-  background:rgba(255,255,255,.75);border:1px solid var(--bdr);
-  border-radius:9px;padding:.6rem .8rem;
-}
-.cm-method-card--rule{border-top:3px solid #0891b2;}
-.cm-method-card--llm{border-top:3px solid #059669;}
-.cm-mc-head{
-  font-size:.7rem;font-weight:700;color:var(--tx);
-  display:flex;align-items:center;gap:.4rem;margin-bottom:.3rem;
-}
-.cm-mc-tag{
-  font-size:.58rem;font-weight:700;padding:.07rem .35rem;border-radius:4px;
-  background:rgba(0,0,0,.06);color:var(--mu);font-family:'DM Mono',monospace;
-}
-.cm-mc-body{font-size:.68rem;color:var(--mu);line-height:1.5;}
-.cm-method-close{
-  position:absolute;top:.6rem;right:.7rem;
-  background:none;border:none;cursor:pointer;color:var(--dim);
-  font-size:.8rem;padding:.1rem;line-height:1;transition:color .12s;
-}
-.cm-method-close:hover{color:var(--tx);}
-
-/* ── Course popup (concept map) ─────────────────────────── */
-.cm-course-popup{
-  position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);
-  z-index:60;background:var(--sf);border:1.5px solid var(--bdr2);
-  border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.14);
-  width:300px;max-height:70vh;overflow-y:auto;display:none;
-  font-family:'Outfit',sans-serif;
-}
-.cm-popup-hdr{
-  display:flex;align-items:flex-start;justify-content:space-between;
-  padding:.85rem 1rem .75rem;border-bottom:2px solid var(--bdr);
-  position:sticky;top:0;background:var(--sf);z-index:2;
-}
-.cm-popup-code{font-family:'DM Mono',monospace;font-size:.8rem;font-weight:800;display:flex;align-items:center;flex-wrap:wrap;gap:.2rem;}
-.cm-popup-title{font-family:'Crimson Pro',serif;font-size:.95rem;font-weight:700;color:var(--tx);margin-top:.18rem;line-height:1.3;}
-.cm-popup-close{background:none;border:none;cursor:pointer;color:var(--dim);font-size:.85rem;padding:.15rem;line-height:1;flex-shrink:0;margin-left:.5rem;}
-.cm-popup-close:hover{color:var(--tx);}
-.cm-popup-section{padding:.65rem 1rem;}
-.cm-popup-section+.cm-popup-section{border-top:1px solid var(--bdr);}
-.cm-popup-section-hd{
-  display:flex;align-items:center;gap:.35rem;
-  font-size:.62rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:.08em;color:var(--mu);margin-bottom:.45rem;
-}
-.cm-popup-count{
-  background:var(--bdr);color:var(--mu);border-radius:8px;
-  padding:.05rem .38rem;font-size:.6rem;font-weight:700;
-}
-.cm-popup-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.cm-popup-dot--unique{background:#94a3b8;}
-.cm-popup-dot--shared{background:var(--gold);}
-.cm-popup-tags{display:flex;flex-wrap:wrap;gap:.3rem;}
-.cm-popup-tag{
-  padding:.2rem .55rem;border-radius:12px;font-size:.68rem;font-weight:600;
-  cursor:pointer;transition:filter .12s;
-}
-.cm-popup-tag:hover{filter:brightness(.9);}
-.cm-popup-tag--shared{font-weight:700;}
-.cm-popup-shared{display:flex;flex-direction:column;gap:.4rem;}
-.cm-popup-shared-row{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;}
-.cm-popup-also{font-size:.63rem;color:var(--mu);display:flex;align-items:center;gap:.25rem;flex-wrap:wrap;}
-.cm-popup-course-chip{
-  font-family:'DM Mono',monospace;font-size:.6rem;font-weight:700;
-  padding:.08rem .3rem;border-radius:4px;border:1px solid;
-}
-@media(max-width:700px){
-  .cm-method-grid{grid-template-columns:1fr;}
-  .cm-method-note{margin:1rem 1rem 0;}
-}
 
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
@@ -560,7 +491,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 @media(max-width:700px){
   header,.tabbar,#tab-dash{padding-left:1rem;padding-right:1rem;}
   .hdr-stats{display:none;}
-  .panel{width:100%;}
+  .cg-panel{width:100%;}
 }
 </style>
 </head>
@@ -579,9 +510,9 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 
 <!-- TABBAR -->
 <div class="tabbar">
-  <button class="tab-btn active" id="tbtn-dash"     onclick="switchTab('dash')">📊  Dashboard</button>
-  <button class="tab-btn"        id="tbtn-graph"    onclick="switchTab('graph')">🕸  Network Graph</button>
-  <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🔬  Concept Map</button>
+  <button class="tab-btn active" id="tbtn-dash"     onclick="switchTab('dash')">📊 Dashboard</button>
+  <button class="tab-btn"        id="tbtn-graph"    onclick="switchTab('graph')">🗂 Curriculum Graph</button>
+  <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🔬 Concept Map</button>
   <div class="vsep" style="margin:0 .6rem;"></div>
   <div class="tabbar-filters" id="filters"></div>
 </div>
@@ -591,24 +522,21 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 
   <!-- ── DASHBOARD TAB ── -->
   <div id="tab-dash">
-
     <div class="section">
       <h2 class="sec-hd">PLO Coverage Matrix</h2>
       <p style="font-size:.74rem;color:var(--mu);margin-bottom:.75rem;">
-        Colour = PLO &nbsp;·&nbsp; Brightness = emphasis (Low / Medium / High) &nbsp;·&nbsp; Number = CLO count &nbsp;·&nbsp; Hover for details
+        Colour = PLO · Brightness = emphasis (Low / Medium / High) · Number = CLO count · Hover for details
       </p>
       <div class="hm-scroll"><table class="hm" id="hm"></table></div>
     </div>
-
     <div class="section">
       <h2 class="sec-hd">Bloom's Domain Distribution</h2>
       <div class="dom-leg" id="dom-leg"></div>
       <div class="chart-card">
-        <p class="chart-sub">Proportion of CLOs at each Bloom's Taxonomy level per course. C = Cognitive &nbsp;·&nbsp; P = Psychomotor &nbsp;·&nbsp; A = Affective</p>
+        <p class="chart-sub">Proportion of CLOs at each Bloom's Taxonomy level per course. C = Cognitive · P = Psychomotor · A = Affective</p>
         <canvas id="domChart" style="max-height:400px;"></canvas>
       </div>
     </div>
-
     <div class="section">
       <h2 class="sec-hd">
         Course Explorer
@@ -616,49 +544,54 @@ table.cm-hm th,table.cm-hm td{padding:0;}
       </h2>
       <div class="course-grid" id="cgrid"></div>
     </div>
-
     <div style="border-top:1px solid var(--bdr);padding-top:1.5rem;">
       <h3 style="font-family:'Crimson Pro',serif;font-size:1.05rem;font-weight:700;margin-bottom:.85rem;color:var(--tx);">Programme Learning Outcomes (PLOs)</h3>
       <div class="plo-grid" id="plo-footer"></div>
       <p style="margin-top:1.2rem;color:var(--dim);font-size:.68rem;">
         To update: run
-        <code style="background:#f0f3fa;padding:.1rem .35rem;border-radius:3px;font-family:'DM Mono',monospace;color:var(--gold);">python scripts/excel_to_json.py</code>
-        then push to GitHub — the site updates automatically.
+        <code style="background:#f0f3fa;padding:.1rem .35rem;border-radius:3px;font-family:'DM Mono',monospace;color:var(--gold);">python excel_to_json.py --mode rule</code>
+        then refresh.
       </p>
     </div>
-
   </div><!-- /tab-dash -->
 
-  <!-- ── GRAPH TAB ── -->
+  <!-- ── CURRICULUM GRAPH TAB (UCSD-style) ── -->
   <div id="tab-graph" class="hidden">
-    <div id="canvas-wrap">
-      <svg id="graph-svg"></svg>
-      <div class="graph-hint">Click any node to inspect &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Drag to pan</div>
-    </div>
-    <div class="panel hidden" id="panel">
-      <div class="panel-hdr">
-        <div style="flex:1;min-width:0;">
-          <div class="panel-type" id="p-type">—</div>
-          <div class="panel-name" id="p-name">—</div>
-          <div class="panel-sub"  id="p-sub"></div>
-        </div>
-        <button class="close-btn" onclick="closePanel()">✕</button>
+    <!-- Toolbar -->
+    <div class="cg-toolbar">
+      <span class="cg-label">Semester colours:</span>
+      <div class="cg-legend" id="cg-legend"></div>
+      <div style="margin-left:auto;font-size:.68rem;color:var(--mu);">
+        Click any course card to inspect CLOs · Credits shown as Lec+Lab
       </div>
-      <div class="panel-body" id="p-body"></div>
+    </div>
+    <!-- Grid + side panel -->
+    <div style="flex:1;display:flex;overflow:hidden;">
+      <div id="cg-canvas"></div>
+      <div class="cg-panel hidden" id="cg-panel">
+        <div class="cg-phdr">
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--mu);margin-bottom:.25rem;" id="cgp-type">—</div>
+            <div style="font-family:'Crimson Pro',serif;font-size:1.1rem;font-weight:700;color:var(--tx);line-height:1.25;" id="cgp-name">—</div>
+            <div style="font-size:.72rem;color:var(--mu);margin-top:.2rem;" id="cgp-sub"></div>
+          </div>
+          <button class="close-btn" onclick="cgClosePanel()">✕</button>
+        </div>
+        <div id="cg-panel-inner"></div>
+      </div>
     </div>
   </div><!-- /tab-graph -->
 
   <!-- ── CONCEPT MAP TAB ── -->
   <div id="tab-concepts" class="hidden">
-
-    <!-- Controls bar -->
     <div class="cm-toolbar">
       <div class="cm-toolbar-left">
         <span class="cm-label">View:</span>
         <div class="cm-seg" id="cm-view-seg">
-          <button class="cm-seg-btn active" data-view="heatmap"  onclick="cmSetView('heatmap')">Overlap Heatmap</button>
-          <button class="cm-seg-btn"        data-view="network"  onclick="cmSetView('network')">Concept Network</button>
-          <button class="cm-seg-btn"        data-view="list"     onclick="cmSetView('list')">Course Concepts</button>
+          <button class="cm-seg-btn active" data-view="curriculum" onclick="cmSetView('curriculum')">Curriculum Graph</button>
+          <button class="cm-seg-btn"        data-view="heatmap"    onclick="cmSetView('heatmap')">Overlap Heatmap</button>
+          <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Concept Network</button>
+          <button class="cm-seg-btn"        data-view="list"       onclick="cmSetView('list')">Course Concepts</button>
         </div>
       </div>
       <div class="cm-toolbar-right">
@@ -673,62 +606,19 @@ table.cm-hm th,table.cm-hm td{padding:0;}
         <div id="cm-force-controls" style="display:none;align-items:center;gap:.4rem;">
           <span class="cm-label">Spread:</span>
           <input type="range" id="cm-force-slider" min="1" max="10" value="5" step="1"
-            class="cm-slider" title="Adjust repulsion between nodes"
-            oninput="cmUpdateForce(this.value)">
+            class="cm-slider" oninput="cmUpdateForce(this.value)">
           <span id="cm-force-val" style="font-size:.68rem;color:var(--mu);width:1.4rem;text-align:center;">5</span>
         </div>
-        <button class="cm-fit-btn" onclick="cmFitView()" title="Auto-fit all nodes into view">⊡ Fit</button>
-        <span id="cm-mode-badge" class="cm-mode-badge" title="How concepts were extracted"></span>
+        <button class="cm-fit-btn" onclick="cmFitView()">⊡ Fit</button>
+        <span id="cm-mode-badge" class="cm-mode-badge"></span>
       </div>
     </div>
-
-    <!-- Methodology note -->
-    <div class="cm-method-note" id="cm-method-note">
-      <div class="cm-method-icon">🔬</div>
-      <div class="cm-method-body">
-        <strong>How concepts are extracted</strong>
-        <p>
-          Each course's CLO descriptions are processed by <code>excel_to_json.py</code> using
-          one of two strategies — selectable via the <code>--mode</code> flag:
-        </p>
-        <div class="cm-method-grid">
-          <div class="cm-method-card cm-method-card--rule">
-            <div class="cm-mc-head">Rule-based <span class="cm-mc-tag">--mode rule</span></div>
-            <div class="cm-mc-body">
-              A curated library of ~90 regex patterns maps CLO text to short canonical
-              concepts (1–2 words). Fast, deterministic, and works offline — used by
-              GitHub Actions CI so the site can auto-update without an LLM server.
-            </div>
-          </div>
-          <div class="cm-method-card cm-method-card--llm">
-            <div class="cm-mc-head">LLM-assisted <span class="cm-mc-tag">--mode llm / both</span></div>
-            <div class="cm-mc-body">
-              All CLOs for a course are sent in a <em>single</em> Ollama prompt (local
-              LLaMA&nbsp;3 / Mistral / Phi-3).  The model extracts 8–14 generic
-              1–2&nbsp;word concepts per course, then a second pass normalises
-              synonyms across the whole programme vocabulary — maximising cross-course
-              overlap detection.
-            </div>
-          </div>
-        </div>
-        <p style="margin-top:.55rem;">
-          Short, generic labels (e.g. <em>kinetics</em> rather than
-          <em>reaction kinetics fundamentals</em>) are deliberately preferred so
-          that concepts shared across courses surface clearly in all three views below.
-          Run <code>python scripts/excel_to_json.py --mode both</code> locally after
-          updating the Excel file for the richest results.
-        </p>
-      </div>
-      <button class="cm-method-close" onclick="document.getElementById('cm-method-note').style.display='none'" title="Dismiss">✕</button>
-    </div>
-
-    <!-- View containers -->
     <div id="cm-body">
-      <div id="cmv-heatmap"></div>
-      <div id="cmv-network" class="hidden"></div>
-      <div id="cmv-list"    class="hidden"></div>
+      <div id="cmv-curriculum"></div>
+      <div id="cmv-heatmap"   class="hidden"></div>
+      <div id="cmv-network"   class="hidden"></div>
+      <div id="cmv-list"      class="hidden"></div>
     </div>
-
   </div><!-- /tab-concepts -->
 
 </div><!-- /body-wrap -->
@@ -752,32 +642,16 @@ const PLO_COLORS = {
   "PLO-5":"#d97706","PLO-6":"#ea580c","PLO-7":"#dc2626","PLO-8":"#db2777",
   "PLO-9":"#9333ea","PLO-10":"#7c3aed","PLO-11":"#4f46e5","PLO-12":"#0d9488"
 };
-// Semester map: batch code → semester number (even semesters = current cohorts)
-// Odd semesters are pre-registered for future batches.
-const SEMESTER_MAP = {
-  "2025F": 2,  "2025S": 1,
-  "2024F": 4,  "2024S": 3,
-  "2023F": 6,  "2023S": 5,
-  "2022F": 8,  "2022S": 7,
+
+// Semester → colour (warm = early, cool = late)
+const SEM_COLORS = {
+  1:"#e11d48", 2:"#ea580c", 3:"#d97706", 4:"#65a30d",
+  5:"#0d9488", 6:"#059669", 7:"#0891b2", 8:"#4f46e5"
 };
-// Colour palette: one per semester, warm→cool = higher→lower semester
-const BATCH_COLORS = {
-  "2022F": "#4f46e5",   // Sem 8 — deep indigo
-  "2022S": "#7c3aed",   // Sem 7 — violet
-  "2023F": "#059669",   // Sem 6 — emerald
-  "2023S": "#0d9488",   // Sem 5 — teal
-  "2024F": "#d97706",   // Sem 4 — amber
-  "2024S": "#ea580c",   // Sem 3 — orange
-  "2025F": "#e11d48",   // Sem 2 — rose
-  "2025S": "#db2777",   // Sem 1 — pink
-};
-function semesterLabel(batch) {
-  const n = SEMESTER_MAP[batch];
-  return n ? `Semester ${n}` : batch;
-}
-function batchSortKey(batch) {
-  return SEMESTER_MAP[batch] || 99;
-}
+
+function semColor(n) { return SEM_COLORS[n] || "#6b7280"; }
+function semLabel(n) { return n ? `Semester ${n}` : "Unknown"; }
+
 const DOMAIN_CFG = {
   "C-2":{color:"#3b82f6",label:"C2 · Understand"},
   "C-3":{color:"#10b981",label:"C3 · Apply"},
@@ -790,118 +664,25 @@ const DOMAIN_CFG = {
 };
 const EMPHASIS_ORDER = {None:0,Low:1,Medium:2,High:3};
 
+/* ── Static embedded courses (fallback if data.json absent) ── */
 const COURSES_EMBEDDED = [
-  {code:"CHE-425",title:"Maintenance & Process Safety",batch:"2022F",clos:[
-    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Describe the key principles of process safety and maintenance of industrial operations."},
-    {code:"CLO-2",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Explain the practical application of safety and risk management in process industry."}
+  {code:"CHE-425",title:"Maintenance & Process Safety",semester:8,lec:3,lab:0,clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Describe the key principles of process safety.",concepts:[]},
+    {code:"CLO-2",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Explain safety and risk management in process industry.",concepts:[]}
   ]},
-  {code:"CHE-360",title:"Fundamentals of Polymer Engineering",batch:"2022F",clos:[
-    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Explain the fundamentals of polymer engineering: classification, rheology, colligative, thermal, and mechanical properties."},
-    {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-4",description:"Relate fundamental concepts of polymer engineering to study techniques for synthesis and processing of polymeric materials."}
-  ]},
-  {code:"OTM-456",title:"Project Management",batch:"2022F",clos:[
-    {code:"CLO-1",plo:"PLO-12",emphasis:"Low",domain:"C-2",description:"Comprehend the process of transforming resources into products and development of its operational strategy."},
-    {code:"CLO-2",plo:"PLO-12",emphasis:"Medium",domain:"C-3",description:"Use a variety of problem-solving and forecasting techniques to aid in effective decision making and quality control."},
-    {code:"CLO-3",plo:"PLO-11",emphasis:"Medium",domain:"C-4",description:"Apply project management tools, techniques and inventory management methods."}
-  ]},
-  {code:"CHE-484",title:"Natural Gas Engineering",batch:"2022F",clos:[
-    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Infer the basic knowledge about gas processing and gas drilling."},
-    {code:"CLO-2",plo:"PLO-2",emphasis:"Low",domain:"C-2",description:"Comprehend the understanding of gas storage and transmission operations."},
-    {code:"CLO-3",plo:"PLO-3",emphasis:"Medium",domain:"C-4",description:"Analyze and design gas processing and purification operations."}
-  ]},
-  {code:"HU-115",title:"Principles of Sociology",batch:"2022F",clos:[
-    {code:"CLO-1",plo:"PLO-6",emphasis:"Low",domain:"C-2",description:"Comprehend the fundamental theories of sociology pertaining to human behaviors."},
-    {code:"CLO-2",plo:"PLO-12",emphasis:"High",domain:"C-6",description:"Devise the practical applications of the theories to human behavior in day-to-day life."}
-  ]},
-  {code:"CHE-465",title:"Data Science & ML in ChE",batch:"2022F",clos:[
-    {code:"CLO-1",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Describe and apply the concepts of linear algebra, probability, and statistics used for data distributions."},
-    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Use mathematical and statistical theory for decision-making and problem solution."},
-    {code:"CLO-3",plo:"PLO-5",emphasis:"Medium",domain:"C-3",description:"Apply algorithms of data science and machine learning using Python."}
-  ]},
-  {code:"ECO-130",title:"Engineering Economics",batch:"2023F",clos:[
-    {code:"CLO-1",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Comprehend the concepts of Engineering Economics."},
-    {code:"CLO-2",plo:"PLO-11",emphasis:"Medium",domain:"C-4",description:"Gain working knowledge of money management and analyse economics comparisons of alternative engineering projects."},
-    {code:"CLO-3",plo:"PLO-12",emphasis:"Medium",domain:"C-3",description:"Apply alternatives based on taxable income and market structure."}
-  ]},
-  {code:"CHE-349",title:"Separation Processes-II",batch:"2023F",clos:[
-    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend the principles of simultaneous heat and mass transfer and extend their applications."},
-    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Describe the coupled heat and mass transfer equations and apply to design the process equipment."},
-    {code:"CLO-3",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Solve and analyze complex engineering problems pertaining to SHMT operation."},
-    {code:"CLO-4",plo:"PLO-5",emphasis:"Medium",domain:"P-4",description:"Measures key process variables such as temperature, flow rate, and composition."},
-    {code:"CLO-5",plo:"PLO-2",emphasis:"Medium",domain:"C-4",description:"Compute and analyze performance metrics from collected experimental data."},
-    {code:"CLO-6",plo:"PLO-10",emphasis:"Medium",domain:"A-3",description:"Participate actively and responsibly in teamwork while conducting separation experiments."},
-    {code:"CLO-7",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Adjust and operate experimental units such as evaporators, dryers, and extraction columns."}
-  ]},
-  {code:"CHE-323",title:"Instrumentation & Process Control",batch:"2023F",clos:[
-    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend open/closed loop control systems based on the fundamentals of process dynamics."},
-    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Solve problems related to open/closed control loop systems."},
-    {code:"CLO-3",plo:"PLO-4",emphasis:"High",domain:"C-6",description:"Design and explain control loops for process variables of a given industrial process."},
-    {code:"CLO-4",plo:"PLO-5",emphasis:"Medium",domain:"P-4",description:"Calibrate automatic process control sensors using manual instruments as reference standards."},
-    {code:"CLO-5",plo:"PLO-4",emphasis:"Medium",domain:"P-3",description:"Follow procedures to apply ON/OFF, PI, and PID control modes for achieving set points."},
-    {code:"CLO-6",plo:"PLO-8",emphasis:"Medium",domain:"C-4",description:"Analyze and interpret process response curves in relation to control theory."},
-    {code:"CLO-7",plo:"PLO-8",emphasis:"Medium",domain:"A-3",description:"Demonstrate responsible handling of control equipment and participate in group-based experimentation."}
-  ]},
-  {code:"CHE-347",title:"Chemical Reaction Engineering",batch:"2023F",clos:[
-    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend the concepts of reaction engineering fundamentals."},
-    {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Apply design equations of ideal reactors to study their performance for homogenous single and multiple reactions."},
-    {code:"CLO-3",plo:"PLO-2",emphasis:"Medium",domain:"C-4",description:"Differentiate homogeneous and heterogeneous reactions, and modify design parameters for reactor calculations."},
-    {code:"CLO-4",plo:"PLO-4",emphasis:"High",domain:"C-6",description:"Design chemical reactors for various industrial chemical problems."},
-    {code:"CLO-5",plo:"PLO-4",emphasis:"Medium",domain:"P-4",description:"Execute reactor startup procedures by applying appropriate conditions and trace concentration-time data with precision."},
-    {code:"CLO-6",plo:"PLO-9",emphasis:"Medium",domain:"A-3",description:"Demonstrate punctuality and attentive demeanor as an individual or in a team during the lab."},
-    {code:"CLO-7",plo:"PLO-6",emphasis:"Medium",domain:"P-3",description:"Practice lab safety considerations while preparing reactants and collecting products."},
-    {code:"CLO-8",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Recall standard experimental procedures and analyze results, comparing with theoretical concepts to derive valid conclusions."}
-  ]},
-  {code:"CHE-345",title:"Transport Phenomena",batch:"2023F",clos:[
-    {code:"CLO-1",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Comprehend mechanisms of momentum, heat and mass transport and identify their applications for steady and transient flow systems."},
-    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-4",description:"Express microscopic and macroscopic mass/energy/momentum balance equations and solve them for several systems."},
-    {code:"CLO-3",plo:"PLO-4",emphasis:"High",domain:"C-5",description:"Analyze and solve engineering problems pertaining to transport phenomena in industrial processes."}
-  ]},
-  {code:"MATH-243",title:"Vector Calculus",batch:"2024F",clos:[
-    {code:"CLO-1",plo:"PLO-2",emphasis:"Low",domain:"C-2",description:"Comprehend the characterization of differential equations and select the appropriate method for solution."},
-    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Choose and apply the methods for analytic and approximate solutions of Ordinary and Partial differential equations."},
-    {code:"CLO-3",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Relate the knowledge for mathematical formulation of physical problems and their solutions."}
-  ]},
-  {code:"CHE-242",title:"Heat Transfer",batch:"2024F",clos:[
-    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend the fundamentals of heat transfer related to steady state conduction, convection, and radiation."},
-    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Use the knowledge of heat transfer model equations to solve problems related to heat transfer systems."},
-    {code:"CLO-3",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Solve and analyze engineering problems pertaining to heat transfer operations."},
-    {code:"CLO-4",plo:"PLO-4",emphasis:"Medium",domain:"P-4",description:"Execute the standard startup procedure and set the requisite temperature, flows and pressures."},
-    {code:"CLO-5",plo:"PLO-9",emphasis:"Medium",domain:"A-3",description:"Demonstrate punctuality and attentive demeanor as an individual or in a team during the whole lab session."},
-    {code:"CLO-6",plo:"PLO-6",emphasis:"Medium",domain:"P-3",description:"Follow lab safety considerations for operating all kinds of heat exchangers and electrical heating devices."},
-    {code:"CLO-7",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Recall standard experimental procedures and analyze and interpret results, comparing with theoretical concepts."}
-  ]},
-  {code:"CHE-346",title:"Particulate Technology",batch:"2024F",clos:[
-    {code:"CLO-1",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Relate the fundamentals of particulate systems to size reduction, transportation and storage of solids."},
-    {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Extend the concepts of particulate behavior to illustrate the mechanism of mixing and separation of solids."},
-    {code:"CLO-3",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Follow equipment standard operating procedure (SOP) for particle size reduction, separation and handling."},
-    {code:"CLO-4",plo:"PLO-4",emphasis:"Medium",domain:"C-4",description:"Analyze the effect of attrition, impact and compression on particle size reduction and determine efficiency of equipment."},
-    {code:"CLO-5",plo:"PLO-1",emphasis:"Medium",domain:"P-4",description:"Grind solid particles and perform distribution analysis by use of standards (Tyler mesh) for particle size analysis."},
-    {code:"CLO-6",plo:"PLO-8",emphasis:"Medium",domain:"A-3",description:"Initiate experiment by following equipment procedure and safety SOPs."}
-  ]},
-  {code:"PHY-102",title:"Applied Physics",batch:"2025F",clos:[
-    {code:"CLO-1",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics."},
-    {code:"CLO-2",plo:"PLO-1",emphasis:"Medium",domain:"C-3",description:"Discuss the fundamentals of electromagnetic induction and thermometry to demonstrate the working principle of related equipment."},
-    {code:"CLO-3",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Realize the experiment by following instructions by the teacher."},
-    {code:"CLO-4",plo:"PLO-9",emphasis:"Medium",domain:"A-3",description:"Exhibit capability to work in team during the lab activities."},
-    {code:"CLO-5",plo:"PLO-5",emphasis:"Medium",domain:"P-3",description:"Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class."}
-  ]},
-  {code:"QR-100",title:"Quantitative Reasoning-I",batch:"2025F",clos:[
-    {code:"CLO-1",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Apply fundamental numerical literacy to compute values, demonstrate numerical relationships, and construct accurate data representations."},
-    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Solve problems using fundamental mathematical and statistical concepts, demonstrate their applications, and relate to real-world scenarios."},
-    {code:"CLO-3",plo:"PLO-2",emphasis:"Medium",domain:"C-3",description:"Interpret and modify data in various formats (tables, graphs, charts, equations) to produce meaningful insights."}
+  {code:"CHE-103",title:"Chemical Engineering Principles-I",semester:1,lec:2,lab:0,clos:[
+    {code:"CLO-1",plo:"PLO-1",emphasis:"Low",domain:"C-2",description:"Comprehend the basic concepts of chemical engineering principles.",concepts:[]},
+    {code:"CLO-2",plo:"PLO-2",emphasis:"Medium",domain:"C-4",description:"Extend the concepts to solve material balance problems.",concepts:[]}
   ]}
 ];
 
 /* ================================================================
    APP STATE
 ================================================================ */
-let activeBatch = "All";
-let activeTab   = "dash";
-let DATA        = { plos: PLOS_DEF, courses: COURSES_EMBEDDED };
-let domChart    = null;
-let graphBuilt  = false;
-let simulation, svgSel, gSel, linkSel, nodeSel;
-let selectedNode = null;
+let activeSemFilter = "All";
+let activeTab = "dash";
+let DATA = { plos: PLOS_DEF, courses: COURSES_EMBEDDED };
+let domChart = null;
 
 /* ================================================================
    INIT
@@ -917,61 +698,64 @@ async function init() {
 }
 
 /* ================================================================
+   HELPERS
+================================================================ */
+function allSemesters() {
+  return [...new Set(DATA.courses.map(c=>c.semester).filter(Boolean))].sort((a,b)=>a-b);
+}
+
+function filtered() {
+  if (activeSemFilter === "All") return DATA.courses;
+  return DATA.courses.filter(c => c.semester === Number(activeSemFilter));
+}
+
+/* ================================================================
    TAB SWITCHING
 ================================================================ */
 window.switchTab = function(tab) {
   activeTab = tab;
-  document.getElementById("tab-dash").classList.toggle("hidden",     tab !== "dash");
-  document.getElementById("tab-graph").classList.toggle("hidden",    tab !== "graph");
-  document.getElementById("tab-concepts").classList.toggle("hidden", tab !== "concepts");
-  document.getElementById("tbtn-dash").classList.toggle("active",     tab === "dash");
-  document.getElementById("tbtn-graph").classList.toggle("active",   tab === "graph");
-  document.getElementById("tbtn-concepts").classList.toggle("active",tab === "concepts");
-  if (tab === "graph") {
-    if (!graphBuilt) { buildGraph(); graphBuilt = true; }
-    else if (simulation) simulation.alpha(0.2).restart();
-  }
-  if (tab === "concepts") cmRender();
-  else if (cmNetSim) cmNetSim.stop();
+  ["dash","graph","concepts"].forEach(t => {
+    document.getElementById("tab-"+t).classList.toggle("hidden", t!==tab);
+    document.getElementById("tbtn-"+t).classList.toggle("active", t===tab);
+  });
+  if (tab === "graph")    { buildCurriculumGraph(); }
+  if (tab === "concepts") { cmRender(); }
 };
 
 /* ================================================================
-   BATCH FILTER
+   FILTERS — now semester numbers
 ================================================================ */
 function buildFilters() {
-  // Sort batches by semester number (Sem 1 first → Sem 8 last)
-  const present = [...new Set(DATA.courses.map(c => c.batch))]
-    .sort((a,b) => batchSortKey(a) - batchSortKey(b));
-  const batches = ["All", ...present];
-  document.getElementById("filters").innerHTML = batches.map(b => {
-    const label = b === "All" ? "All Semesters" : semesterLabel(b);
-    return `<button class="fbtn${activeBatch===b?" active":""}" onclick="setBatch('${b}')" title="${b}">${label}</button>`;
+  const sems = allSemesters();
+  const opts = ["All", ...sems.map(String)];
+  document.getElementById("filters").innerHTML = opts.map(s => {
+    const label = s === "All" ? "All Semesters" : `Semester ${s}`;
+    const col   = s === "All" ? "" : `color:${semColor(Number(s))};border-color:${semColor(Number(s))}40;`;
+    const act   = activeSemFilter === s;
+    return `<button class="fbtn${act?" active":""}" style="${act?`background:${semColor(Number(s))}18;border-color:${semColor(Number(s))};color:${semColor(Number(s))};`:`${col}`}"
+      onclick="setFilter('${s}')">${label}</button>`;
   }).join("");
 }
 
-window.setBatch = function(b) {
-  activeBatch = b;
+window.setFilter = function(s) {
+  activeSemFilter = s;
   buildFilters();
   renderStats();
   renderDash();
-  if (activeTab === "graph") { graphBuilt = false; buildGraph(); graphBuilt = true; closePanel(); }
-  if (activeTab === "concepts") { if (cmNetSim) cmNetSim.stop(); cmRender(); }
+  if (activeTab === "graph")    buildCurriculumGraph();
+  if (activeTab === "concepts") { if(cmNetSim) cmNetSim.stop(); cmRender(); }
 };
-
-function filtered() {
-  return activeBatch === "All" ? DATA.courses : DATA.courses.filter(c => c.batch === activeBatch);
-}
 
 /* ================================================================
    HEADER STATS
 ================================================================ */
 function renderStats() {
   const courses  = filtered();
-  const totalCLOs = courses.reduce((a,c) => a + c.clos.length, 0);
+  const totalCLOs = courses.reduce((a,c) => a+c.clos.length, 0);
   const ploSet   = new Set(courses.flatMap(c => c.clos.map(cl => cl.plo)));
-  const nBatches = [...new Set(DATA.courses.map(c => c.batch))].length;
+  const nSems    = allSemesters().length;
   document.getElementById("hdr-stats").innerHTML = [
-    [DATA.courses.length,"Courses"],[totalCLOs,"CLOs"],[nBatches,"Semesters"],[ploSet.size,"PLOs"]
+    [DATA.courses.length,"Courses"],[totalCLOs,"CLOs"],[nSems,"Semesters"],[ploSet.size,"PLOs"]
   ].map(([n,l]) =>
     `<div style="text-align:center;">
        <div class="stat-n">${n}</div>
@@ -981,7 +765,7 @@ function renderStats() {
 }
 
 /* ================================================================
-   DASHBOARD RENDER
+   DASHBOARD
 ================================================================ */
 function renderDash() {
   const courses = filtered();
@@ -996,7 +780,7 @@ function renderDash() {
 
 /* ── Heatmap ── */
 function renderHeatmap(courses) {
-  const plos = Object.keys(DATA.plos);
+  const plos = Object.keys(DATA.plos||PLOS_DEF);
   const map  = {};
   courses.forEach(c => {
     map[c.code] = {};
@@ -1008,57 +792,55 @@ function renderHeatmap(courses) {
         map[c.code][cl.plo].maxEmphasis = cl.emphasis;
     });
   });
-
   const alphaMap = {None:0, Low:0.22, Medium:0.55, High:0.9};
   const thead = `<thead><tr>
     <th style="text-align:left;padding-left:1.2rem;">Course</th>
     ${plos.map(p=>`<th title="${DATA.plos[p]}">${p.replace("PLO-","P")}</th>`).join("")}
   </tr></thead>`;
   const tbody = "<tbody>" + courses.map(c => {
+    const sc = semColor(c.semester);
     const cells = plos.map(p => {
       const d = map[c.code]?.[p];
       if (!d || !d.count) return `<td class="hm-plo"><div class="hm-dot empty">·</div></td>`;
       const col   = PLO_COLORS[p] || "#888";
       const alpha = alphaMap[d.maxEmphasis] || 0.22;
       return `<td class="hm-plo">
-        <div class="hm-dot"
-          style="background:${col};opacity:${alpha + 0.08};color:#fff;"
+        <div class="hm-dot" style="background:${col};opacity:${alpha+0.08};color:#fff;"
           onmouseenter="showTip(event,'${c.code}','${p}','${d.count}','${d.maxEmphasis}')"
           onmouseleave="hideTip()">${d.count}</div></td>`;
     }).join("");
     return `<tr>
       <td class="hm-cc">
-        <div class="hm-course-code">${c.code}<span class="bb bb-${c.batch}">${c.batch}</span></div>
+        <div class="hm-course-code">${c.code}
+          <span class="sem-badge" style="background:${sc}18;color:${sc};">${semLabel(c.semester)}</span>
+        </div>
         <div class="hm-course-title">${c.title}</div>
       </td>${cells}
     </tr>`;
   }).join("") + "</tbody>";
-
   document.getElementById("hm").innerHTML = thead + tbody;
 }
 
 /* ── Tooltip ── */
 const tip = document.getElementById("tip");
 window.showTip = function(e, code, plo, count, em) {
-  const course = DATA.courses.find(c => c.code === code);
-  const clos   = course ? course.clos.filter(cl => cl.plo === plo) : [];
-  tip.innerHTML = `<div class="th">${code} → ${plo}: ${DATA.plos[plo]||""}</div>
+  const course = DATA.courses.find(c=>c.code===code);
+  const clos   = course ? course.clos.filter(cl=>cl.plo===plo) : [];
+  tip.innerHTML = `<div class="th">${code} → ${plo}: ${(DATA.plos||PLOS_DEF)[plo]||""}</div>
     <div class="tm" style="color:var(--gold);margin-bottom:.2rem;">Emphasis: ${em} · ${count} CLO${count>1?"s":""}</div>
     ${clos.map(cl=>`<div class="tm">· <b>${cl.code}</b> [${cl.domain}] ${cl.description.substring(0,75)}…</div>`).join("")}`;
-  tip.style.display = "block";
-  moveTip(e);
+  tip.style.display="block"; moveTip(e);
 };
-window.hideTip = function() { tip.style.display = "none"; };
-document.addEventListener("mousemove", moveTip);
+window.hideTip = () => tip.style.display="none";
+document.addEventListener("mousemove",moveTip);
 function moveTip(e) {
-  if (tip.style.display === "none") return;
-  let x = e.clientX + 14, y = e.clientY + 14;
-  if (x + 280 > window.innerWidth)  x = e.clientX - 290;
-  if (y + 160 > window.innerHeight) y = e.clientY - 170;
-  tip.style.left = x + "px"; tip.style.top = y + "px";
+  if(tip.style.display==="none") return;
+  let x=e.clientX+14, y=e.clientY+14;
+  if(x+280>window.innerWidth) x=e.clientX-290;
+  if(y+160>window.innerHeight) y=e.clientY-170;
+  tip.style.left=x+"px"; tip.style.top=y+"px";
 }
 
-/* ── Domain legend ── */
 function renderDomainLegend() {
   document.getElementById("dom-leg").innerHTML =
     `<span class="dl-t">Bloom's Taxonomy</span>` +
@@ -1067,49 +849,47 @@ function renderDomainLegend() {
     ).join("");
 }
 
-/* ── Domain chart ── */
 function renderDomainChart(courses) {
   const ctx = document.getElementById("domChart").getContext("2d");
   if (domChart) domChart.destroy();
   domChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: courses.map(c => c.code),
+    type:"bar",
+    data:{
+      labels: courses.map(c=>c.code),
       datasets: Object.entries(DOMAIN_CFG).map(([d,cfg]) => ({
         label: cfg.label,
-        data:  courses.map(c => c.clos.filter(cl => cl.domain === d).length),
-        backgroundColor: cfg.color,
-        borderWidth: 0, borderRadius: 3
+        data:  courses.map(c=>c.clos.filter(cl=>cl.domain===d).length),
+        backgroundColor: cfg.color, borderWidth:0, borderRadius:3
       }))
     },
-    options: {
-      responsive: true, indexAxis: "y",
-      plugins: {
-        legend: { position:"bottom", labels:{color:"#5a6e8c",font:{family:"Outfit",size:11},boxWidth:12,padding:14} },
-        tooltip: { callbacks:{ label: ctx => `${ctx.dataset.label}: ${ctx.raw}` } }
+    options:{
+      responsive:true, indexAxis:"y",
+      plugins:{
+        legend:{position:"bottom",labels:{color:"#5a6e8c",font:{family:"Outfit",size:11},boxWidth:12,padding:14}},
+        tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.raw}`}}
       },
-      scales: {
-        x: { stacked:true, ticks:{color:"#5a6e8c",font:{family:"Outfit",size:11}}, grid:{color:"rgba(0,0,0,.05)"} },
-        y: { stacked:true, ticks:{color:"#18263e",font:{family:"Outfit",size:11,weight:"600"}}, grid:{color:"rgba(0,0,0,.05)"} }
+      scales:{
+        x:{stacked:true,ticks:{color:"#5a6e8c",font:{family:"Outfit",size:11}},grid:{color:"rgba(0,0,0,.05)"}},
+        y:{stacked:true,ticks:{color:"#18263e",font:{family:"Outfit",size:11,weight:"600"}},grid:{color:"rgba(0,0,0,.05)"}}
       }
     }
   });
 }
 
-/* ── Course grid ── */
 function renderCourseGrid(courses) {
   document.getElementById("cgrid").innerHTML = courses.map(c => {
-    const ploSet = [...new Set(c.clos.map(cl => cl.plo))];
-    const pills  = ploSet.map(p =>
-      `<div class="pm" style="background:${PLO_COLORS[p]||'#888'}" title="${DATA.plos[p]}">${p.replace("PLO-","P")}</div>`
+    const sc     = semColor(c.semester);
+    const ploSet = [...new Set(c.clos.map(cl=>cl.plo))];
+    const pills  = ploSet.map(p=>
+      `<div class="pm" style="background:${PLO_COLORS[p]||'#888'}" title="${(DATA.plos||PLOS_DEF)[p]}">${p.replace("PLO-","P")}</div>`
     ).join("");
     const total = c.clos.length;
     const bar = Object.entries(DOMAIN_CFG).map(([d,cfg]) => {
-      const cnt = c.clos.filter(cl => cl.domain === d).length;
+      const cnt = c.clos.filter(cl=>cl.domain===d).length;
       return cnt ? `<div class="dm-seg" style="background:${cfg.color};width:${(cnt/total*100).toFixed(1)}%;"></div>` : "";
     }).join("");
     const cloRows = c.clos.map(cl => {
-      const col = PLO_COLORS[cl.plo] || "#888";
+      const col = PLO_COLORS[cl.plo]||"#888";
       const dc  = (DOMAIN_CFG[cl.domain]||{color:"#888"}).color;
       const dl  = (DOMAIN_CFG[cl.domain]||{label:cl.domain}).label;
       return `<div class="clo-item">
@@ -1122,12 +902,18 @@ function renderCourseGrid(courses) {
         </div>
       </div>`;
     }).join("");
-    return `<div class="ccard" id="cc-${c.code}" onclick="toggleCard('${c.code}')">
+    const credits = `${c.lec||0}L+${c.lab||0}P`;
+    return `<div class="ccard" id="cc-${c.code}" onclick="toggleCard('${c.code}')"
+      style="border-top:3px solid ${sc};">
       <div class="cc-hdr">
         <div style="flex:1;">
-          <div class="cc-code">${c.code} <span class="bb bb-${c.batch}">${c.batch}</span></div>
+          <div class="cc-code">${c.code}
+            <span class="sem-badge" style="background:${sc}18;color:${sc};">${semLabel(c.semester)}</span>
+          </div>
           <div class="cc-title">${c.title}</div>
-          <div class="cc-meta">${pills}</div>
+          <div class="cc-meta">${pills}
+            <span class="sem-badge" style="margin-left:.2rem;">${credits} cr</span>
+          </div>
         </div>
         <div class="cc-r">
           <div class="cc-n">${c.clos.length}</div>
@@ -1142,9 +928,9 @@ function renderCourseGrid(courses) {
 }
 window.toggleCard = id => document.getElementById("cc-"+id).classList.toggle("open");
 
-/* ── PLO footer ── */
 function renderPLOFooter() {
-  document.getElementById("plo-footer").innerHTML = Object.entries(DATA.plos).map(([k,v]) =>
+  const plos = DATA.plos||PLOS_DEF;
+  document.getElementById("plo-footer").innerHTML = Object.entries(plos).map(([k,v]) =>
     `<div class="plo-def">
        <div class="plo-ic" style="background:${PLO_COLORS[k]||'#888'}">${k.replace("PLO-","P")}</div>
        <div><span class="plo-code-t">${k}</span><span class="plo-name-t">${v}</span></div>
@@ -1153,188 +939,113 @@ function renderPLOFooter() {
 }
 
 /* ================================================================
-   GRAPH
+   CURRICULUM GRAPH  (UCSD-style semester columns)
 ================================================================ */
-function buildGraph() {
-  const svgEl = document.getElementById("graph-svg");
-  const W = svgEl.clientWidth  || 900;
-  const H = svgEl.clientHeight || 600;
-  d3.select(svgEl).selectAll("*").remove();
+let cgSelectedCode = null;
 
+function buildCurriculumGraph() {
+  const canvas = document.getElementById("cg-canvas");
+  const sems   = allSemesters();
   const courses = filtered();
 
-  /* build edge map */
-  const edgeMap = {};
-  courses.forEach(c => {
-    c.clos.forEach(cl => {
-      const key = `${c.code}→${cl.plo}`;
-      if (!edgeMap[key]) edgeMap[key] = {source:c.code, target:cl.plo, count:0, maxEmphasis:"None"};
-      edgeMap[key].count++;
-      if (EMPHASIS_ORDER[cl.emphasis] > EMPHASIS_ORDER[edgeMap[key].maxEmphasis])
-        edgeMap[key].maxEmphasis = cl.emphasis;
-    });
-  });
-  const links = Object.values(edgeMap);
+  // Build legend
+  document.getElementById("cg-legend").innerHTML = sems.map(s =>
+    `<div class="cg-leg-item">
+       <div class="cg-leg-dot" style="background:${semColor(s)};"></div>
+       Semester ${s}
+     </div>`
+  ).join("");
 
-  const activePLOs = [...new Set(courses.flatMap(c => c.clos.map(cl => cl.plo)))]
-    .sort((a,b) => parseInt(a.replace("PLO-","")) - parseInt(b.replace("PLO-","")));
+  // Group courses by semester
+  const bySem = {};
+  sems.forEach(s => bySem[s] = []);
+  courses.forEach(c => { if(bySem[c.semester]) bySem[c.semester].push(c); });
 
-  const nodes = [
-    ...activePLOs.map(p => ({
-      id:p, type:"plo", label:p, fullLabel:DATA.plos[p]||p,
-      radius:28, color:PLO_COLORS[p]||"#888"
-    })),
-    ...courses.map(c => ({
-      id:c.code, type:"course", label:c.code, fullLabel:c.title,
-      batch:c.batch, radius:13, color:BATCH_COLORS[c.batch]||"#6b8fc4"
-    }))
-  ];
+  canvas.innerHTML = `<div class="cg-grid" id="cg-grid-inner"></div>`;
+  const grid = document.getElementById("cg-grid-inner");
 
-  /* SVG + zoom */
-  svgSel = d3.select(svgEl);
-  const zoom = d3.zoom().scaleExtent([0.2,4])
-    .on("zoom", e => gSel.attr("transform", e.transform));
-  svgSel.call(zoom);
-  gSel = svgSel.append("g");
+  sems.forEach(sem => {
+    const col = document.createElement("div");
+    col.className = "cg-col";
+    const sc  = semColor(sem);
+    const semCourses = bySem[sem] || [];
 
-  /* edges */
-  linkSel = gSel.append("g").selectAll("line").data(links).join("line")
-    .attr("stroke", d => PLO_COLORS[d.target]||"#888")
-    .attr("stroke-opacity", d => 0.18 + (EMPHASIS_ORDER[d.maxEmphasis]/3)*0.55)
-    .attr("stroke-width",   d => Math.sqrt(d.count)*1.8 + 0.6)
-    .attr("stroke-linecap","round");
+    // Column header
+    col.innerHTML = `<div class="cg-col-hdr" style="border-top-color:${sc};">
+      <div class="cg-col-sem" style="color:${sc};">Semester ${sem}</div>
+      <div class="cg-col-count">${semCourses.length} course${semCourses.length!==1?"s":""}</div>
+    </div>`;
 
-  /* node groups */
-  nodeSel = gSel.append("g").selectAll("g").data(nodes).join("g")
-    .style("cursor","pointer")
-    .call(d3.drag()
-      .on("start",(e,d) => { if(!e.active) simulation.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
-      .on("drag", (e,d) => { d.fx=e.x; d.fy=e.y; })
-      .on("end",  (e,d) => { if(!e.active) simulation.alphaTarget(0); d.fx=null; d.fy=null; })
-    )
-    .on("mouseenter", graphHoverOn)
-    .on("mouseleave", graphHoverOff)
-    .on("click", (e,d) => { e.stopPropagation(); graphClick(d); });
+    semCourses.forEach(course => {
+      const ploSet = [...new Set(course.clos.map(cl=>cl.plo))];
+      const ploDots = ploSet.slice(0,8).map(p =>
+        `<div class="cg-plo-dot" style="background:${PLO_COLORS[p]||'#888'};" title="${(DATA.plos||PLOS_DEF)[p]}"></div>`
+      ).join("");
+      const credits = (course.lec||0) + (course.lab||0);
+      const credLabel = `${course.lec||0}L${course.lab>0?" + "+course.lab+"P":""}`;
 
-  /* PLO circles */
-  nodeSel.filter(d => d.type==="plo").each(function(d) {
-    const s = d3.select(this);
-    s.append("circle").attr("r",d.radius+8).attr("fill",d.color).attr("fill-opacity",.09).attr("stroke","none");
-    s.append("circle").attr("r",d.radius)
-      .attr("fill",d.color).attr("fill-opacity",.13)
-      .attr("stroke",d.color).attr("stroke-width",2).attr("stroke-opacity",.65);
-    s.append("text").text(d.label.replace("PLO-","P"))
-      .attr("text-anchor","middle").attr("dominant-baseline","central")
-      .attr("font-family","'DM Mono',monospace").attr("font-size","10px").attr("font-weight","700")
-      .attr("fill",d.color).attr("fill-opacity",".9");
-  });
-
-  /* Course circles */
-  nodeSel.filter(d => d.type==="course").each(function(d) {
-    const s = d3.select(this);
-    s.append("circle").attr("r",d.radius)
-      .attr("fill",d.color).attr("fill-opacity",.15)
-      .attr("stroke",d.color).attr("stroke-width",1.2).attr("stroke-opacity",.7);
-    s.append("text").text(d.label.split("-")[1]||d.label)
-      .attr("text-anchor","middle").attr("dominant-baseline","central")
-      .attr("font-family","'DM Mono',monospace").attr("font-size","7px").attr("font-weight","500")
-      .attr("fill",d.color).attr("fill-opacity",".85");
-  });
-
-  /* PLO outside labels */
-  const lblLayer = gSel.append("g");
-  lblLayer.selectAll("text").data(nodes.filter(d=>d.type==="plo")).join("text")
-    .attr("id",   d => "plbl-"+d.id.replace("-",""))
-    .text(d => d.fullLabel)
-    .attr("text-anchor","middle")
-    .attr("font-family","'Outfit',sans-serif").attr("font-size","9.5px")
-    .attr("fill","#5a6e8c").attr("pointer-events","none");
-
-  /* simulation */
-  simulation = d3.forceSimulation(nodes)
-    .force("link",      d3.forceLink(links).id(d=>d.id).distance(d=>100+d.count*18).strength(0.5))
-    .force("charge",    d3.forceManyBody().strength(d=>d.type==="plo"?-650:-130))
-    .force("center",    d3.forceCenter(W/2, H/2))
-    .force("collision", d3.forceCollide(d=>d.radius+14))
-    .on("tick", () => {
-      linkSel
-        .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
-        .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
-      nodeSel.attr("transform",d=>`translate(${d.x},${d.y})`);
-      lblLayer.selectAll("text").each(function(d){
-        d3.select(this).attr("x",d.x).attr("y",d.y+d.radius+13);
-      });
+      const node = document.createElement("div");
+      node.className = "cg-node";
+      node.id = "cgn-"+course.code;
+      node.style.borderLeftColor = sc;
+      node.innerHTML = `
+        <div class="cg-node-code" style="color:${sc};">${course.code}</div>
+        <div class="cg-node-title">${course.title}</div>
+        <div class="cg-node-meta">
+          <span class="cg-credits">${credLabel} cr</span>
+          <div class="cg-plo-dots">${ploDots}</div>
+        </div>`;
+      node.onclick = () => cgOpenPanel(course);
+      node.onmouseenter = e => {
+        const cloCount = course.clos.length;
+        tip.innerHTML = `<div class="th">${course.code}</div>
+          <div class="tm">${course.title}</div>
+          <div class="tm" style="color:var(--gold);">${semLabel(course.semester)} · ${credLabel} credits · ${cloCount} CLOs</div>`;
+        tip.style.display = "block"; moveTip(e);
+      };
+      node.onmouseleave = () => hideTip();
+      col.appendChild(node);
     });
 
-  svgSel.on("click",()=>{ closePanel(); graphDeselect(); });
-}
-
-/* graph hover */
-function graphHoverOn(event,d) {
-  linkSel.attr("stroke-opacity",l=>{
-    const s=typeof l.source==="object"?l.source.id:l.source;
-    const t=typeof l.target==="object"?l.target.id:l.target;
-    return (s===d.id||t===d.id)?0.85:0.04;
+    grid.appendChild(col);
   });
-  tip.innerHTML = d.type==="plo"
-    ? `<div class="th">${d.label}</div><div class="tm">${d.fullLabel}</div>`
-    : `<div class="th">${d.label}</div><div class="tm">${d.fullLabel}</div><div class="tm" style="color:var(--gold);margin-top:.15rem;">${d.batch}</div>`;
-  tip.style.display = "block";
-}
-function graphHoverOff() {
-  if (!selectedNode) graphRestoreEdges();
-  tip.style.display = "none";
-}
-function graphRestoreEdges() {
-  if (!linkSel) return;
-  linkSel.attr("stroke-opacity", d => 0.18+(EMPHASIS_ORDER[d.maxEmphasis]/3)*0.55);
-}
-function graphDeselect() { selectedNode=null; graphRestoreEdges(); }
-
-function graphClick(d) {
-  selectedNode = d;
-  linkSel.attr("stroke-opacity",l=>{
-    const s=typeof l.source==="object"?l.source.id:l.source;
-    const t=typeof l.target==="object"?l.target.id:l.target;
-    return (s===d.id||t===d.id)?0.88:0.04;
-  });
-  openPanel(d);
 }
 
-/* ── Side panel ── */
-function openPanel(d) {
-  document.getElementById("panel").classList.remove("hidden");
-  d.type==="course" ? renderCoursePanel(d) : renderPLOPanel(d);
-}
-window.closePanel = function() {
-  document.getElementById("panel").classList.add("hidden");
-  graphDeselect();
-};
+function cgOpenPanel(course) {
+  if (cgSelectedCode) {
+    const prev = document.getElementById("cgn-"+cgSelectedCode);
+    if (prev) prev.classList.remove("selected");
+  }
+  cgSelectedCode = course.code;
+  const node = document.getElementById("cgn-"+course.code);
+  if (node) node.classList.add("selected");
 
-function renderCoursePanel(d) {
-  const course = DATA.courses.find(c=>c.code===d.id); if(!course) return;
-  document.getElementById("p-type").textContent = "Course · "+course.batch;
-  document.getElementById("p-name").textContent = course.code;
-  document.getElementById("p-sub").textContent  = course.title;
+  const panel = document.getElementById("cg-panel");
+  panel.classList.remove("hidden");
 
-  const byPLO={};
-  course.clos.forEach(cl=>{ if(!byPLO[cl.plo]) byPLO[cl.plo]=[]; byPLO[cl.plo].push(cl); });
+  const sc = semColor(course.semester);
+  document.getElementById("cgp-type").textContent = semLabel(course.semester) +
+    ` · ${course.lec||0}L+${course.lab||0}P cr`;
+  document.getElementById("cgp-name").innerHTML =
+    `<span style="color:${sc};">${course.code}</span>`;
+  document.getElementById("cgp-sub").textContent = course.title;
+
+  const byPLO = {};
+  course.clos.forEach(cl => { if(!byPLO[cl.plo]) byPLO[cl.plo]=[]; byPLO[cl.plo].push(cl); });
   const maxC = Math.max(...Object.values(byPLO).map(a=>a.length));
-
-  const ploHtml = Object.entries(byPLO).map(([plo,clos])=>{
+  const ploHtml = Object.entries(byPLO).map(([plo,clos]) => {
     const col = PLO_COLORS[plo]||"#888";
-    const pct = (clos.length/maxC*100).toFixed(0);
-    return `<div class="plo-conn" onclick="_jumpToPLO('${plo}')">
+    return `<div class="plo-conn">
       <div class="plo-pill-sm" style="background:${col};">${plo.replace("PLO-","P")}</div>
       <div style="flex:1;">
-        <div class="plo-conn-name">${DATA.plos[plo]||plo}</div>
+        <div class="plo-conn-name">${(DATA.plos||PLOS_DEF)[plo]||plo}</div>
         <div class="plo-conn-cnt">${clos.length} CLO${clos.length>1?"s":""}</div>
-        <div class="p-bar-wrap"><div class="p-bar-fill" style="width:${pct}%;background:${col};"></div></div>
+        <div class="p-bar-wrap"><div class="p-bar-fill" style="width:${(clos.length/maxC*100).toFixed(0)}%;background:${col};"></div></div>
       </div>
     </div>`;
   }).join("");
 
-  const cloHtml = course.clos.map(cl=>{
+  const cloHtml = course.clos.map(cl => {
     const col = PLO_COLORS[cl.plo]||"#888";
     const dc  = (DOMAIN_CFG[cl.domain]||{color:"#888"}).color;
     const dl  = (DOMAIN_CFG[cl.domain]||{label:cl.domain}).label;
@@ -1351,83 +1062,32 @@ function renderCoursePanel(d) {
     </div>`;
   }).join("");
 
-  document.getElementById("p-body").innerHTML =
+  document.getElementById("cg-panel-inner").innerHTML =
     `<div style="margin-bottom:1rem;"><div class="psec-hd">PLO Connections</div>${ploHtml}</div>
      <div><div class="psec-hd">${course.clos.length} CLOs</div>${cloHtml}</div>`;
 }
 
-function renderPLOPanel(d) {
-  const col = PLO_COLORS[d.id]||"#888";
-  document.getElementById("p-type").textContent = "Programme Learning Outcome";
-  document.getElementById("p-name").innerHTML   = `<span style="color:${col}">${d.id}</span>`;
-  document.getElementById("p-sub").textContent  = DATA.plos[d.id]||"";
-
-  const connected = filtered()
-    .map(c=>({course:c, clos:c.clos.filter(cl=>cl.plo===d.id)}))
-    .filter(x=>x.clos.length>0)
-    .sort((a,b)=>b.clos.length-a.clos.length);
-  const totalCLOs = connected.reduce((a,x)=>a+x.clos.length,0);
-
-  const emC={Low:0,Medium:0,High:0};
-  connected.forEach(x=>x.clos.forEach(cl=>emC[cl.emphasis]=(emC[cl.emphasis]||0)+1));
-  const emBars = ["Low","Medium","High"].map(em=>{
-    const pct = totalCLOs?(emC[em]||0)/totalCLOs*100:0;
-    const ec  = {Low:"var(--dim)",Medium:col,High:"#ef4444"}[em];
-    return `<div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.3rem;">
-      <span style="font-size:.62rem;color:var(--mu);width:50px;">${em}</span>
-      <div style="flex:1;height:4px;border-radius:2px;background:var(--bdr);">
-        <div style="width:${pct.toFixed(1)}%;height:100%;border-radius:2px;background:${ec};"></div>
-      </div>
-      <span style="font-size:.6rem;color:var(--mu);width:20px;text-align:right;">${emC[em]||0}</span>
-    </div>`;
-  }).join("");
-
-  const courseHtml = connected.map(x=>{
-    const bc = BATCH_COLORS[x.course.batch]||"#888";
-    return `<div class="pcourse-item" onclick="_jumpToCourse('${x.course.code}')">
-      <span class="pci-batch" style="background:${bc}18;color:${bc};">${x.course.batch}</span>
-      <span class="pci-name">${x.course.code} — ${x.course.title}</span>
-      <span class="pci-cnt">${x.clos.length}</span>
-    </div>`;
-  }).join("");
-
-  document.getElementById("p-body").innerHTML =
-    `<div style="margin-bottom:1rem;">
-       <div class="psec-hd">Overview</div>
-       <div style="display:flex;gap:1.5rem;margin-bottom:.8rem;">
-         <div style="text-align:center;">
-           <div style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:700;color:${col};line-height:1;">${connected.length}</div>
-           <div style="font-size:.6rem;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;">Courses</div>
-         </div>
-         <div style="text-align:center;">
-           <div style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:700;color:${col};line-height:1;">${totalCLOs}</div>
-           <div style="font-size:.6rem;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;">CLOs</div>
-         </div>
-       </div>
-       ${emBars}
-     </div>
-     <div><div class="psec-hd">Connected Courses</div>${courseHtml}</div>`;
-}
-
-window._jumpToPLO    = plo  => graphClick({id:plo, type:"plo", fullLabel:DATA.plos[plo]||plo});
-window._jumpToCourse = code => {
-  const c = DATA.courses.find(x=>x.code===code); if(!c) return;
-  graphClick({id:code, type:"course", label:code, fullLabel:c.title, batch:c.batch});
+window.cgClosePanel = function() {
+  document.getElementById("cg-panel").classList.add("hidden");
+  if (cgSelectedCode) {
+    const prev = document.getElementById("cgn-"+cgSelectedCode);
+    if (prev) prev.classList.remove("selected");
+    cgSelectedCode = null;
+  }
 };
 
 /* ================================================================
    CONCEPT MAP TAB
 ================================================================ */
-
-// ── palette for concepts (cycle through) ──────────────────────
 const CM_PALETTE = [
   "#2563eb","#0891b2","#059669","#65a30d","#d97706","#ea580c",
   "#dc2626","#db2777","#9333ea","#7c3aed","#4f46e5","#0d9488",
   "#0369a1","#047857","#b45309","#be123c","#7e22ce","#1d4ed8",
 ];
 let conceptColorMap = {};
-let cmView = "heatmap";
+let cmView = "curriculum";
 let cmSelectedConcept = null;
+let cmNetSim = null;
 
 function getCMConceptColor(concept) {
   if (!conceptColorMap[concept]) {
@@ -1437,852 +1097,447 @@ function getCMConceptColor(concept) {
   return conceptColorMap[concept];
 }
 
-/* getConceptIndex — build from DATA if concept_index not present */
 function getConceptIndex() {
   if (DATA.concept_index) return DATA.concept_index;
-  // Fallback: derive from CLO concepts fields if present
   const idx = {};
   filtered().forEach(course => {
     const all = new Set();
-    (course.clos||[]).forEach(clo => (clo.concepts||[]).forEach(c => all.add(c)));
-    all.forEach(c => {
-      if (!idx[c]) idx[c] = [];
-      idx[c].push(course.code);
-    });
+    (course.clos||[]).forEach(clo => (clo.concepts||[]).forEach(c=>all.add(c)));
+    all.forEach(c => { if(!idx[c]) idx[c]=[]; idx[c].push(course.code); });
   });
   return idx;
 }
 
-/* getConceptsForCourse — prefer course-level concepts field, fall back to CLO aggregation */
 function getConceptsForCourse(courseCode) {
-  const course = DATA.courses.find(c => c.code === courseCode);
+  const course = DATA.courses.find(c=>c.code===courseCode);
   if (!course) return [];
-  // Use course-level summary if LLM mode wrote it
   if (course.concepts && course.concepts.length) return [...course.concepts].sort();
   const s = new Set();
-  (course.clos||[]).forEach(cl => (cl.concepts||[]).forEach(c => s.add(c)));
+  (course.clos||[]).forEach(cl=>(cl.concepts||[]).forEach(c=>s.add(c)));
   return [...s].sort();
 }
 
-window.cmFitView = function() {
-  if (window._cmFitFn) window._cmFitFn();
-};
-
+window.cmFitView = function() { if(window._cmFitFn) window._cmFitFn(); };
 window.cmUpdateForce = function(val) {
-  document.getElementById("cm-force-val").textContent = val;
-  if (window._cmUpdateForceFn) window._cmUpdateForceFn(Number(val));
+  document.getElementById("cm-force-val").textContent=val;
+  if(window._cmUpdateForceFn) window._cmUpdateForceFn(Number(val));
 };
 
 window.cmSetView = function(v) {
-  cmView = v;
-  document.querySelectorAll(".cm-seg-btn").forEach(b => {
-    b.classList.toggle("active", b.dataset.view === v);
-  });
-  const fc = document.getElementById("cm-force-controls");
-  if (fc) fc.style.display = v === "network" ? "flex" : "none";
+  cmView=v;
+  document.querySelectorAll(".cm-seg-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
+  const fc=document.getElementById("cm-force-controls");
+  if(fc) fc.style.display=v==="network"?"flex":"none";
   cmRender();
 };
 
 window.cmRender = function() {
-  if (activeTab !== "concepts") return;
-
-  // Update mode badge
-  const badge = document.getElementById("cm-mode-badge");
-  if (badge) {
-    const mode = DATA.concept_mode || "rule";
-    const labels = {rule:"Rule-based", llm:"LLM-assisted", both:"Rule + LLM"};
-    badge.textContent = labels[mode] || mode;
-    badge.className = `cm-mode-badge mode-${mode}`;
-    badge.style.display = "inline-block";
+  if(activeTab!=="concepts") return;
+  const badge=document.getElementById("cm-mode-badge");
+  if(badge){
+    const mode=DATA.concept_mode||"rule";
+    const labels={rule:"Rule-based",llm:"LLM-assisted",both:"Rule + LLM"};
+    badge.textContent=labels[mode]||mode;
+    badge.className=`cm-mode-badge mode-${mode}`;
+    badge.style.display="inline-block";
   }
-
-  const minOverlap = parseInt(document.getElementById("cm-min-overlap").value);
-  const search     = (document.getElementById("cm-search").value || "").toLowerCase().trim();
-  const courses    = filtered();
-  const rawIdx     = getConceptIndex();
-
-  // Filter to only concepts from currently visible courses
-  const visibleCodes = new Set(courses.map(c => c.code));
-  const idx = {};
-  Object.entries(rawIdx).forEach(([concept, codes]) => {
-    const filtered_codes = codes.filter(code => visibleCodes.has(code));
-    if (filtered_codes.length >= minOverlap) {
-      if (!search || concept.toLowerCase().includes(search)) {
-        idx[concept] = filtered_codes;
-      }
+  const minOverlap=parseInt(document.getElementById("cm-min-overlap").value);
+  const search=(document.getElementById("cm-search").value||"").toLowerCase().trim();
+  const courses=filtered();
+  const rawIdx=getConceptIndex();
+  const visibleCodes=new Set(courses.map(c=>c.code));
+  const idx={};
+  Object.entries(rawIdx).forEach(([concept,codes])=>{
+    const fc=codes.filter(code=>visibleCodes.has(code));
+    if(fc.length>=minOverlap){
+      if(!search||concept.toLowerCase().includes(search)) idx[concept]=fc;
     }
   });
+  const sortedConcepts=Object.entries(idx).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0]));
+  sortedConcepts.forEach(([c])=>getCMConceptColor(c));
 
-  // Sort: most shared first
-  const sortedConcepts = Object.entries(idx).sort((a,b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
-
-  // Assign colours consistently
-  sortedConcepts.forEach(([c]) => getCMConceptColor(c));
-
-  document.getElementById("cmv-heatmap").classList.toggle("hidden", cmView !== "heatmap");
-  document.getElementById("cmv-network").classList.toggle("hidden", cmView !== "network");
-  document.getElementById("cmv-list").classList.toggle("hidden",    cmView !== "list");
-
-  if (cmView === "heatmap") cmRenderHeatmap(courses, sortedConcepts, idx);
-  if (cmView === "network") cmRenderNetwork(courses, sortedConcepts, idx);
-  if (cmView === "list")    cmRenderList(courses, sortedConcepts, idx);
+  ["curriculum","heatmap","network","list"].forEach(v=>{
+    document.getElementById("cmv-"+v).classList.toggle("hidden",cmView!==v);
+  });
+  if(cmView==="curriculum") cmRenderCurriculum(courses,sortedConcepts,idx);
+  if(cmView==="heatmap")    cmRenderHeatmap(courses,sortedConcepts,idx);
+  if(cmView==="network")    cmRenderNetwork(courses,sortedConcepts,idx);
+  if(cmView==="list")       cmRenderList(courses,sortedConcepts,idx);
 };
 
-/* ── Heatmap view ─────────────────────────────────────────── */
-function cmRenderHeatmap(courses, sortedConcepts, idx) {
-  const el = document.getElementById("cmv-heatmap");
-  if (!sortedConcepts.length) {
-    el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);font-size:.85rem;">
-      No concepts match the current filters.</div>`;
+/* ── Curriculum Concept Graph (UCSD-style with concept tags) ── */
+function cmRenderCurriculum(courses,sortedConcepts,idx) {
+  const el=document.getElementById("cmv-curriculum");
+  const sems=allSemesters().filter(s=>courses.some(c=>c.semester===s));
+  const sharedSet=new Set(sortedConcepts.map(([c])=>c));
+
+  if(!courses.length){
+    el.innerHTML=`<div style="padding:3rem;text-align:center;color:var(--mu);">No courses to display.</div>`;
     return;
   }
 
-  // Legend strip of concepts
-  const legendHtml = `
-    <div style="margin-bottom:1rem;">
-      <h2 class="cm-hm-section-hd">Concept Overlap Heatmap</h2>
-      <p style="font-size:.73rem;color:var(--mu);margin-bottom:.75rem;">
-        Each cell shows whether a course covers a concept.
-        Colour = concept category · Darker = shared by more courses.
-        Click any concept tag or cell to see details.
-      </p>
-      <div class="cm-concept-strip" id="cm-legend-strip">
-        ${sortedConcepts.map(([concept, codes]) => {
-          const col = getCMConceptColor(concept);
-          const isSelected = cmSelectedConcept === concept;
-          return `<span class="cc-tag${isSelected?" selected":""}"
-            style="background:${col}1a;color:${col};border-color:${isSelected?col:'transparent'};"
-            onclick="cmClickConcept('${concept.replace(/'/g,"\\'")}',this)"
-            title="${codes.length} course${codes.length!==1?'s':''}: ${codes.join(', ')}">
-            ${concept}<span class="cm-overlap-badge" style="background:${col};">${codes.length}</span>
-          </span>`;
-        }).join("")}
-      </div>
-    </div>`;
+  const bySem={};
+  sems.forEach(s=>bySem[s]=[]);
+  courses.forEach(c=>{if(bySem[c.semester]) bySem[c.semester].push(c);});
 
-  // Matrix: courses × concepts
-  // Group courses by batch for better readability
-  const batchGroups = {};
-  courses.forEach(c => {
-    if (!batchGroups[c.batch]) batchGroups[c.batch] = [];
-    batchGroups[c.batch].push(c);
-  });
-
-  let tableRows = "";
-  Object.entries(batchGroups).sort().forEach(([batch, bCourses]) => {
-    // Batch separator row
-    const bColor = BATCH_COLORS[batch] || "#888";
-    tableRows += `<tr>
-      <td colspan="${sortedConcepts.length + 1}" style="padding:.4rem 0 .15rem;background:none;">
-        <div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-          color:${bColor};padding:.25rem .65rem;background:${bColor}12;border-radius:4px;display:inline-block;">
-          ${semesterLabel(batch)}
-        </div>
-      </td></tr>`;
-
-    bCourses.forEach(course => {
-      const courseConceptSet = new Set(getConceptsForCourse(course.code));
-      const cells = sortedConcepts.map(([concept, codes]) => {
-        const has = courseConceptSet.has(concept);
-        const col = getCMConceptColor(concept);
-        const highlighted = cmSelectedConcept === concept;
-        if (!has) {
-          return `<td class="cm-hm-cell">
-            <div class="cm-hm-dot empty${highlighted?" cm-hm-highlight-empty":""}"
-              style="${highlighted?"background:"+col+"18;":""}"
-              title="${concept}: not covered">·</div></td>`;
-        }
-        const sharedCount = codes.length;
-        const intensity = Math.min(0.9, 0.25 + (sharedCount / Math.max(...Object.values(idx).map(v=>v.length))) * 0.65);
-        return `<td class="cm-hm-cell">
-          <div class="cm-hm-dot"
-            style="background:${col};opacity:${intensity};color:#fff;"
-            onclick="cmClickConcept('${concept.replace(/'/g,"\\'")}',null)"
-            title="${concept} — ${sharedCount} course${sharedCount>1?'s':''} cover this">✓</div></td>`;
+  let html=`<div class="cm-curr-grid">`;
+  sems.forEach(sem=>{
+    const sc=semColor(sem);
+    const semCourses=bySem[sem]||[];
+    html+=`<div class="cm-curr-col">
+      <div class="cm-curr-col-hdr" style="border-top-color:${sc};">
+        <div class="cm-curr-col-sem" style="color:${sc};">Semester ${sem}</div>
+      </div>`;
+    semCourses.forEach(course=>{
+      const concepts=getConceptsForCourse(course.code);
+      const tags=concepts.map(c=>{
+        const col=getCMConceptColor(c);
+        const shared=sharedSet.has(c);
+        const cnt=(idx[c]||[]).length;
+        return `<span class="cm-curr-concept${shared?" shared":""}"
+          style="background:${col}18;color:${col};${shared?"outline-color:"+col+"55;":""}"
+          onclick="cmClickConcept('${c.replace(/'/g,"\\'")}',null)"
+          title="${shared?"Shared by "+cnt+" courses":"Unique to this course"}"
+          >${c}${shared?`<span class="cm-curr-shared-badge">${cnt}</span>`:""}</span>`;
       }).join("");
+      html+=`<div class="cm-curr-course" style="border-left-color:${sc};"
+        id="cmcc-${course.code}"
+        onclick="cmCurrSelectCourse('${course.code}',event)">
+        <div class="cm-curr-code" style="color:${sc};">${course.code}</div>
+        <div class="cm-curr-title">${course.title}</div>
+        <div class="cm-curr-concepts">${tags||'<span style="font-size:.6rem;color:var(--dim);">No concepts extracted</span>'}</div>
+      </div>`;
+    });
+    html+=`</div>`;
+  });
+  html+=`</div>`;
+  el.innerHTML=html;
+}
 
-      tableRows += `<tr style="border-bottom:1px solid rgba(0,0,0,.03);">
-        <td class="cm-hm-row-th">
-          ${course.code}
-          <span>${course.title.length>28?course.title.substring(0,26)+"…":course.title}</span>
-        </td>
+window.cmCurrSelectCourse = function(code, e) {
+  e.stopPropagation();
+  // Highlight the course; concept click is handled by cmClickConcept
+  document.querySelectorAll(".cm-curr-course").forEach(el=>el.classList.remove("highlight"));
+  const el=document.getElementById("cmcc-"+code);
+  if(el) el.classList.add("highlight");
+};
+
+/* ── Overlap heatmap view ── */
+function cmRenderHeatmap(courses,sortedConcepts,idx){
+  const el=document.getElementById("cmv-heatmap");
+  if(!sortedConcepts.length){
+    el.innerHTML=`<div style="padding:3rem;text-align:center;color:var(--mu);">No concepts match the current filters.</div>`;
+    return;
+  }
+  const sems=allSemesters().filter(s=>courses.some(c=>c.semester===s));
+  const bySem={};
+  sems.forEach(s=>bySem[s]=[]);
+  courses.forEach(c=>{if(bySem[c.semester]) bySem[c.semester].push(c);});
+
+  const legendHtml=`<div style="margin-bottom:1rem;">
+    <h2 class="cm-hm-section-hd">Concept Overlap Heatmap</h2>
+    <p style="font-size:.73rem;color:var(--mu);margin-bottom:.75rem;">
+      Each cell shows whether a course covers a concept. Colour = concept category · Click any concept to see details.
+    </p>
+    <div class="cm-concept-strip" id="cm-legend-strip">
+      ${sortedConcepts.map(([concept,codes])=>{
+        const col=getCMConceptColor(concept);
+        return `<span class="cc-tag" style="background:${col}1a;color:${col};"
+          onclick="cmClickConcept('${concept.replace(/'/g,"\\'")}',this)"
+          title="${codes.length} courses: ${codes.join(', ')}">
+          ${concept}<span class="cm-overlap-badge" style="background:${col};">${codes.length}</span>
+        </span>`;
+      }).join("")}
+    </div>
+  </div>`;
+
+  let tableRows="";
+  sems.forEach(sem=>{
+    const sc=semColor(sem);
+    tableRows+=`<tr><td colspan="${sortedConcepts.length+1}" style="padding:.4rem 0 .15rem;background:none;">
+      <div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+        color:${sc};padding:.25rem .65rem;background:${sc}12;border-radius:4px;display:inline-block;">
+        Semester ${sem}
+      </div></td></tr>`;
+    (bySem[sem]||[]).forEach(course=>{
+      const courseConceptSet=new Set(getConceptsForCourse(course.code));
+      const cells=sortedConcepts.map(([concept,codes])=>{
+        const has=courseConceptSet.has(concept);
+        const col=getCMConceptColor(concept);
+        if(!has) return `<td class="cm-hm-cell"><div class="cm-hm-dot empty" title="${concept}: not covered">·</div></td>`;
+        const si=Math.min(0.9,0.25+(codes.length/Math.max(...Object.values(idx).map(v=>v.length)))*0.65);
+        return `<td class="cm-hm-cell"><div class="cm-hm-dot"
+          style="background:${col};opacity:${si};color:#fff;"
+          onclick="cmClickConcept('${concept.replace(/'/g,"\\'")}',null)"
+          title="${concept} — ${codes.length} courses">✓</div></td>`;
+      }).join("");
+      tableRows+=`<tr style="border-bottom:1px solid rgba(0,0,0,.03);">
+        <td class="cm-hm-row-th">${course.code}<span>${course.title.length>28?course.title.substring(0,26)+"…":course.title}</span></td>
         ${cells}
       </tr>`;
     });
   });
 
-  const colHeaders = sortedConcepts.map(([concept]) =>
+  const colHeaders=sortedConcepts.map(([concept])=>
     `<th class="cm-hm-col-th"><span title="${concept}">${concept}</span></th>`
   ).join("");
 
-  const tableHtml = `
-    <div class="cm-hm-wrap">
-      <table class="cm-hm">
-        <thead><tr>
-          <th class="cm-hm-corner">Course ↓ · Concept →</th>
-          ${colHeaders}
-        </tr></thead>
-        <tbody>${tableRows}</tbody>
-      </table>
-    </div>`;
-
-  el.innerHTML = legendHtml + tableHtml;
+  el.innerHTML=legendHtml+`<div class="cm-hm-wrap">
+    <table class="cm-hm"><thead><tr>
+      <th class="cm-hm-corner">Course ↓ · Concept →</th>${colHeaders}
+    </tr></thead><tbody>${tableRows}</tbody></table>
+  </div>`;
 }
 
-/* ── Concept Network — Bubble Cluster layout ─────────────── */
-/*
-  Visual model
-  ─────────────
-  • Each course is represented by a large translucent bubble (circle).
-  • Unique concepts live INSIDE their course bubble as small labelled dots.
-  • Shared concepts float OUTSIDE all bubbles as larger coloured nodes;
-    edges connect them to every course bubble that teaches them.
-  • Everything is draggable; shared-concept nodes use D3 force layout
-    so they settle naturally between their connected courses.
-  • Zoom / pan on the SVG background.
-*/
-let cmNetSim = null;
-
-/* ── palette (same as getCMConceptColor so colours are consistent) ── */
-function cmRenderNetwork(courses, sortedConcepts, idx) {
-  const el = document.getElementById("cmv-network");
-  if (!courses.length) {
-    el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);font-size:.85rem;">
-      No courses to display.</div>`;
-    return;
-  }
-  if (cmNetSim) { cmNetSim.stop(); cmNetSim = null; }
-
-  el.innerHTML = `<svg id="cm-net-svg" style="width:100%;height:100%;display:block;"></svg>
-    <div class="cm-net-hint">Drag any node · Scroll/pinch to zoom · Click concept for CLO details</div>
+/* ── Network view ── */
+function cmRenderNetwork(courses,sortedConcepts,idx){
+  const el=document.getElementById("cmv-network");
+  if(!courses.length){el.innerHTML=`<div style="padding:3rem;text-align:center;color:var(--mu);">No courses to display.</div>`;return;}
+  if(cmNetSim){cmNetSim.stop();cmNetSim=null;}
+  el.innerHTML=`<svg id="cm-net-svg" style="width:100%;height:100%;display:block;"></svg>
+    <div class="cm-net-hint">Drag any node · Scroll to zoom · Click concept for details</div>
     <div class="cm-net-legend" id="cm-net-legend"></div>`;
 
-  /* ── Infinite canvas setup ──────────────────────────────────────────── */
-  // The SVG has NO fixed viewBox — the coordinate space is unbounded.
-  // Nodes spread as far as the forces push them; zoom/pan navigates freely.
-  // After the simulation settles we call fitToNodes() to frame all content.
-  const W = el.clientWidth || 960, H = el.clientHeight || 620;
-  const svg  = d3.select("#cm-net-svg");   // no viewBox set
-  const root = svg.append("g");
+  const W=el.clientWidth||960,H=el.clientHeight||620;
+  const svg=d3.select("#cm-net-svg");
+  const root=svg.append("g");
+  const zB=d3.zoom().scaleExtent([0.02,8]).on("zoom",e=>root.attr("transform",e.transform));
+  svg.call(zB).on("dblclick.zoom",null);
 
-  const zoomBehavior = d3.zoom()
-    .scaleExtent([0.02, 8])               // zoom out very far for big graphs
-    .on("zoom", e => root.attr("transform", e.transform));
-  svg.call(zoomBehavior).on("dblclick.zoom", null);
-
-  // Call after sim cools to auto-frame all nodes with padding
-  function fitToNodes(transition) {
+  function fitToNodes(tr){
     let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;
-    [...courseNodes, ...sharedNodes].forEach(d => {
-      const r = d.r || 12;
-      x0=Math.min(x0,d.x-r); y0=Math.min(y0,d.y-r);
-      x1=Math.max(x1,d.x+r); y1=Math.max(y1,d.y+r);
-    });
-    const PAD = 60;
-    x0-=PAD; y0-=PAD; x1+=PAD; y1+=PAD;
-    const bW=x1-x0, bH=y1-y0;
-    if (bW<=0||bH<=0) return;
-    const scale = Math.min(8, Math.min(W/bW, H/bH));
-    const tx = W/2 - scale*(x0+bW/2);
-    const ty = H/2 - scale*(y0+bH/2);
-    const t  = d3.zoomIdentity.translate(tx,ty).scale(scale);
-    if (transition) {
-      svg.transition().duration(700).ease(d3.easeCubicOut).call(zoomBehavior.transform, t);
-    } else {
-      svg.call(zoomBehavior.transform, t);
-    }
+    [...courseNodes,...sharedNodes].forEach(d=>{const r=d.r||12;x0=Math.min(x0,d.x-r);y0=Math.min(y0,d.y-r);x1=Math.max(x1,d.x+r);y1=Math.max(y1,d.y+r);});
+    const PAD=60;x0-=PAD;y0-=PAD;x1+=PAD;y1+=PAD;
+    const bW=x1-x0,bH=y1-y0;if(bW<=0||bH<=0)return;
+    const scale=Math.min(8,Math.min(W/bW,H/bH));
+    const tx=W/2-scale*(x0+bW/2),ty=H/2-scale*(y0+bH/2);
+    const t=d3.zoomIdentity.translate(tx,ty).scale(scale);
+    if(tr)svg.transition().duration(700).ease(d3.easeCubicOut).call(zB.transform,t);
+    else svg.call(zB.transform,t);
   }
 
-  /* ── Data partitioning ───────────────────────────────────────────────── */
-  const conceptsByCourse = {};          // courseCode → [unique concept labels]
-  const sharedConcepts   = [];          // [{label, count, courses:[]}]
-
-  courses.forEach(c => { conceptsByCourse[c.code] = []; });
-
-  sortedConcepts.forEach(([label, codes]) => {
-    const visible = codes.filter(c => courses.some(x => x.code === c));
-    if (!visible.length) return;
-    if (visible.length === 1) {
-      if (conceptsByCourse[visible[0]]) conceptsByCourse[visible[0]].push(label);
-    } else {
-      sharedConcepts.push({ label, count: visible.length, courses: visible });
-    }
+  const conceptsByCourse={};courses.forEach(c=>{conceptsByCourse[c.code]=[];});
+  const sharedConcepts=[];
+  sortedConcepts.forEach(([label,codes])=>{
+    const visible=codes.filter(c=>courses.some(x=>x.code===c));
+    if(!visible.length)return;
+    if(visible.length===1){if(conceptsByCourse[visible[0]])conceptsByCourse[visible[0]].push(label);}
+    else sharedConcepts.push({label,count:visible.length,courses:visible});
   });
 
-  /* ── Bubble radius: scales with unique concept count ─────────────────── */
-  const uniqueCounts = courses.map(c => conceptsByCourse[c.code].length);
-  const minUC = Math.min(...uniqueCounts), maxUC = Math.max(...uniqueCounts);
-  const bubbleR = c => {
-    const n = (conceptsByCourse[c.code]||[]).length;
-    const t = maxUC > minUC ? (n - minUC)/(maxUC - minUC) : 0.5;
-    return 70 + t * 50;   // 70 – 120 px
-  };
+  const sems=allSemesters().filter(s=>courses.some(c=>c.semester===s));
+  const semIndex={};sems.forEach((s,i)=>semIndex[s]=i);
+  const semW=Math.max(150,W/(sems.length+1));
 
-  /* ── Course nodes — initial ring scales with N ────────────────────────── */
-  const courseNodes = courses.map((course, i) => {
-    const angle = (2*Math.PI*i/courses.length) - Math.PI/2;
-    // Moderate initial ring — fitToNodes will frame everything after settling
-    const R = Math.max(150, courses.length * 40);
-    return {
-      id:    course.code,
-      type:  "course",
-      label: course.code,
-      title: course.title,
-      batch: course.batch,
-      color: BATCH_COLORS[course.batch] || "#888",
-      r:     bubbleR(course),
-      x:     W/2 + R*Math.cos(angle),
-      y:     H/2 + R*Math.sin(angle),
-    };
+  const courseNodes=courses.map(c=>{
+    const si=semIndex[c.semester]||0;
+    const sameSem=courses.filter(x=>x.semester===c.semester);
+    const posInSem=sameSem.indexOf(c);
+    return{id:c.code,type:"course",label:c.code,title:c.title,semester:c.semester,
+      color:semColor(c.semester),r:55,
+      x:(si+0.5)*semW+70+(Math.random()-.5)*30,
+      y:80+posInSem*120+(Math.random()-.5)*20};
   });
 
-  /* ── Shared-concept nodes ─────────────────────────────────────────────── */
-  const sharedNodes = sharedConcepts.map(sc => {
-    const parents = sc.courses.map(c => courseNodes.find(n => n.id === c)).filter(Boolean);
-    const sx = parents.reduce((a,n)=>a+n.x,0)/parents.length + (Math.random()-.5)*60;
-    const sy = parents.reduce((a,n)=>a+n.y,0)/parents.length + (Math.random()-.5)*60;
-    return {
-      id:    "s::" + sc.label,
-      type:  "shared",
-      label: sc.label,
-      count: sc.count,
-      color: getCMConceptColor(sc.label),
-      r:     10 + sc.count * 4,   // 14 – 30 px for 1–5 courses
-      x: sx, y: sy,
-    };
+  const sharedNodes=sharedConcepts.map(sc=>{
+    const parents=sc.courses.map(c=>courseNodes.find(n=>n.id===c)).filter(Boolean);
+    const sx=parents.reduce((a,n)=>a+n.x,0)/parents.length+(Math.random()-.5)*60;
+    const sy=parents.reduce((a,n)=>a+n.y,0)/parents.length+(Math.random()-.5)*60;
+    return{id:"s::"+sc.label,type:"shared",label:sc.label,count:sc.count,
+      color:getCMConceptColor(sc.label),r:10+sc.count*4,x:sx,y:sy};
   });
 
-  const allNodes  = [...courseNodes, ...sharedNodes];
-
-  /* ── Links: shared concepts ↔ course bubbles ─────────────────────────── */
-  const links = [];
-  sharedConcepts.forEach(sc => {
-    sc.courses.filter(c => courses.some(x=>x.code===c)).forEach(code => {
-      links.push({ source: code, target: "s::"+sc.label,
-                   color: getCMConceptColor(sc.label) });
+  const allNodes=[...courseNodes,...sharedNodes];
+  const links=[];
+  sharedConcepts.forEach(sc=>{
+    sc.courses.filter(c=>courses.some(x=>x.code===c)).forEach(code=>{
+      links.push({source:code,target:"s::"+sc.label,color:getCMConceptColor(sc.label)});
     });
   });
 
-  /* ── SVG layers (back-to-front) ──────────────────────────────────────── */
-  const linkLayer       = root.append("g").attr("class","nl");
-  const bubbleLayer     = root.append("g").attr("class","nb");
-  const uniqueLayer     = root.append("g").attr("class","nu");
-  const sharedLayer     = root.append("g").attr("class","ns");
+  const linkLayer=root.append("g"),bubbleLayer=root.append("g"),uniqueLayer=root.append("g"),sharedLayer=root.append("g");
+  const linkEl=linkLayer.selectAll("line").data(links).enter().append("line")
+    .attr("stroke",d=>d.color).attr("stroke-width",2.5).attr("stroke-opacity",0.55);
 
-  /* ── Edges ───────────────────────────────────────────────────────────── */
-  const linkEl = linkLayer.selectAll("line").data(links).enter().append("line")
-    .attr("stroke",         d => d.color)
-    .attr("stroke-width",   2.5)
-    .attr("stroke-opacity", 0.65);
+  const bubbleGlow=bubbleLayer.selectAll("circle.bg").data(courseNodes).enter().append("circle").attr("class","bg")
+    .attr("r",d=>d.r+8).attr("fill",d=>d.color).attr("fill-opacity",0.06)
+    .attr("stroke",d=>d.color).attr("stroke-width",1).attr("stroke-opacity",0.25).attr("pointer-events","none");
+  const bubbleEl=bubbleLayer.selectAll("circle.bm").data(courseNodes).enter().append("circle").attr("class","bm")
+    .attr("r",d=>d.r).attr("fill",d=>d.color).attr("fill-opacity",0.14)
+    .attr("stroke",d=>d.color).attr("stroke-width",2.5).attr("stroke-opacity",0.8)
+    .style("cursor","grab").call(dragBehavior(true))
+    .on("mouseenter",(e,d)=>{d3.select(e.currentTarget).attr("fill-opacity",0.28);showTip(e,`<div class="th">${d.label}</div><div class="tm">${d.title}</div><div class="tm" style="color:${d.color};">${semLabel(d.semester)}</div>`);})
+    .on("mouseleave",(e)=>{d3.select(e.currentTarget).attr("fill-opacity",0.14);hideTip();})
+    .on("mousemove",moveTip);
+  const courseLabel=bubbleLayer.selectAll("text.bl").data(courseNodes).enter().append("text").attr("class","bl")
+    .text(d=>d.label).attr("text-anchor","middle").attr("dominant-baseline","central")
+    .attr("font-family","'DM Mono',monospace").attr("font-size","11px").attr("font-weight","800")
+    .attr("fill",d=>d.color).attr("pointer-events","none");
 
-  /* ── Course bubbles ──────────────────────────────────────────────────── */
-  // Outer glow circle
-  const bubbleGlow = bubbleLayer.selectAll("circle.bg").data(courseNodes)
-    .enter().append("circle").attr("class","bg")
-    .attr("r",  d => d.r + 8)
-    .attr("fill", d => d.color)
-    .attr("fill-opacity", 0.08)
-    .attr("stroke", d => d.color)
-    .attr("stroke-width", 1)
-    .attr("stroke-opacity", 0.30)
-    .attr("pointer-events","none");
-
-  // Main bubble
-  const bubbleEl = bubbleLayer.selectAll("circle.bm").data(courseNodes)
-    .enter().append("circle").attr("class","bm")
-    .attr("r",  d => d.r)
-    .attr("fill",         d => d.color)
-    .attr("fill-opacity", 0.18)
-    .attr("stroke",       d => d.color)
-    .attr("stroke-width", 2.5)
-    .attr("stroke-opacity", 0.8)
-    .style("cursor","grab")
-    .call(dragBehavior(true))
-    .on("click", (e, d) => {
-      e.stopPropagation();
-      showCoursePopup(d, conceptsByCourse, idx, courses);
-    })
-    .on("mouseenter", (e,d) => {
-      d3.select(e.currentTarget).attr("fill-opacity", 0.30);
-      highlightCourse(d.id);
-      showTip(e,`<div class="th">${d.label}</div><div class="tm">${d.title}</div><div class="tm" style="font-size:.62rem;color:var(--dim);">Click for concept details</div>`);
-    })
-    .on("mouseleave", (e,d) => {
-      d3.select(e.currentTarget).attr("fill-opacity", 0.18);
-      resetHighlight(); hideTip();
-    })
-    .on("mousemove", moveTip);
-
-  // Course code label (centred in bubble)
-  const courseLabel = bubbleLayer.selectAll("text.bl").data(courseNodes)
-    .enter().append("text").attr("class","bl")
-    .text(d => d.label)
-    .attr("text-anchor","middle")
-    .attr("dominant-baseline","central")
-    .attr("font-family","'DM Mono',monospace")
-    .attr("font-size","13px").attr("font-weight","800")
-    .attr("fill", d => d.color)
-    .attr("pointer-events","none");
-
-  /* ── Unique concept dots (inside each bubble) ─────────────────────────── */
-  // Lay them out on a mini polar grid relative to the parent course centre
-  const uniqueData = [];
-  courseNodes.forEach(cn => {
-    const labels = conceptsByCourse[cn.id] || [];
-    labels.forEach((label, i) => {
-      const n     = labels.length;
-      const rings = Math.ceil(n / 6);
-      const ring  = Math.floor(i / 6);
-      const slot  = i % 6;
-      const rr    = (ring + 1) * (cn.r - 12) / (rings + 0.5);
-      const angle = (2*Math.PI*slot/Math.min(n - ring*6, 6)) + ring*0.3;
-      uniqueData.push({
-        parentId: cn.id,
-        label,
-        ox: Math.cos(angle)*rr,    // offset from parent centre
-        oy: Math.sin(angle)*rr,
-        color: getCMConceptColor(label),
-        parentNode: cn,
-      });
+  const uniqueData=[];
+  courseNodes.forEach(cn=>{
+    const labels=conceptsByCourse[cn.id]||[];
+    labels.forEach((label,i)=>{
+      const n=labels.length,rings=Math.ceil(n/6),ring=Math.floor(i/6),slot=i%6;
+      const rr=(ring+1)*(cn.r-10)/(rings+0.5);
+      const angle=(2*Math.PI*slot/Math.min(n-ring*6,6))+ring*0.3;
+      uniqueData.push({parentId:cn.id,label,ox:Math.cos(angle)*rr,oy:Math.sin(angle)*rr,color:getCMConceptColor(label),parentNode:cn});
     });
   });
-
-  const uniqueG = uniqueLayer.selectAll("g.uc").data(uniqueData)
-    .enter().append("g").attr("class","uc")
+  const uniqueG=uniqueLayer.selectAll("g.uc").data(uniqueData).enter().append("g").attr("class","uc")
     .style("cursor","pointer")
-    .on("click",  (e,d) => { e.stopPropagation(); cmClickConcept(d.label, null); })
-    .on("mouseenter", (e,d) => {
-      d3.select(e.currentTarget).select("circle").attr("r",5).attr("fill-opacity",1);
-      showTip(e,
-        `<div class="th">${d.label}</div>` +
-        `<div class="tm">Unique to ${d.parentId}</div>` +
-        `<div class="tm" style="font-size:.62rem;color:var(--dim);">Click for CLO details</div>`);
-    })
-    .on("mouseleave", (e,d) => {
-      d3.select(e.currentTarget).select("circle").attr("r",5).attr("fill-opacity",0.75);
-      hideTip();
-    })
-    .on("mousemove", moveTip);
+    .on("click",(e,d)=>{e.stopPropagation();cmClickConcept(d.label,null);})
+    .on("mouseenter",(e,d)=>{d3.select(e.currentTarget).select("circle").attr("r",5).attr("fill-opacity",1);showTip(e,`<div class="th">${d.label}</div><div class="tm">Unique to ${d.parentId}</div>`);})
+    .on("mouseleave",(e)=>{d3.select(e.currentTarget).select("circle").attr("r",4).attr("fill-opacity",0.75);hideTip();})
+    .on("mousemove",moveTip);
+  uniqueG.append("circle").attr("r",4).attr("fill",d=>d.color).attr("fill-opacity",0.75).attr("stroke","#fff").attr("stroke-width",0.8);
+  uniqueG.append("text").text(d=>d.label).attr("text-anchor","middle").attr("dy","1.55em")
+    .attr("font-family","'Outfit',sans-serif").attr("font-size","8px").attr("fill",d=>d.color).attr("pointer-events","none");
 
-  uniqueG.append("circle")
-    .attr("r", 5)
-    .attr("fill", d => d.color)
-    .attr("fill-opacity", 0.75)
-    .attr("stroke","#fff").attr("stroke-width",0.8);
+  const sharedG=sharedLayer.selectAll("g.sc").data(sharedNodes).enter().append("g").attr("class","sc")
+    .style("cursor","pointer").call(dragBehavior(false))
+    .on("click",(e,d)=>{e.stopPropagation();cmClickConcept(d.label,null);})
+    .on("mouseenter",(e,d)=>{d3.select(e.currentTarget).select("circle").attr("r",d.r*1.25).attr("fill-opacity",1);showTip(e,`<div class="th">${d.label}</div><div class="tm">Shared by ${d.count} courses: ${(idx[d.label]||[]).join(", ")}</div>`);})
+    .on("mouseleave",(e,d)=>{d3.select(e.currentTarget).select("circle").attr("r",d.r).attr("fill-opacity",0.85);hideTip();})
+    .on("mousemove",moveTip);
+  sharedG.append("circle").attr("r",d=>d.r).attr("fill",d=>d.color).attr("fill-opacity",0.85).attr("stroke","#fff").attr("stroke-width",1.8);
+  sharedG.append("text").text(d=>d.label).attr("text-anchor","middle").attr("dy",d=>d.r+11)
+    .attr("font-family","'Outfit',sans-serif").attr("font-size","11px").attr("font-weight","700").attr("fill",d=>d.color).attr("pointer-events","none");
+  sharedG.append("text").text(d=>d.count).attr("text-anchor","middle").attr("dominant-baseline","central")
+    .attr("font-family","'DM Mono',monospace").attr("font-size","9px").attr("font-weight","800").attr("fill","#fff").attr("pointer-events","none");
 
-  uniqueG.append("text")
-    .text(d => d.label)
-    .attr("text-anchor","middle")
-    .attr("dy","1.55em")
-    .attr("font-family","'Outfit',sans-serif")
-    .attr("font-size","9px")
-    .attr("fill", d => d.color)
-    .attr("fill-opacity", 1.0)
-    .attr("pointer-events","none");
-
-  /* ── Shared concept nodes (outside bubbles) ──────────────────────────── */
-  const sharedG = sharedLayer.selectAll("g.sc").data(sharedNodes)
-    .enter().append("g").attr("class","sc")
-    .style("cursor","pointer")
-    .call(dragBehavior(false))
-    .on("click",  (e,d) => { e.stopPropagation(); cmClickConcept(d.label, null); })
-    .on("mouseenter", (e,d) => {
-      d3.select(e.currentTarget).select("circle").attr("r", d.r*1.25).attr("fill-opacity",1);
-      highlightShared(d.id);
-      const courseList = (idx[d.label]||[]).join(", ");
-      showTip(e,
-        `<div class="th">${d.label}</div>` +
-        `<div class="tm">Shared by ${d.count} courses: ${courseList}</div>` +
-        `<div class="tm" style="font-size:.62rem;color:var(--dim);">Click for CLO details</div>`);
-    })
-    .on("mouseleave", (e,d) => {
-      d3.select(e.currentTarget).select("circle").attr("r", d.r).attr("fill-opacity",0.85);
-      resetHighlight(); hideTip();
-    })
-    .on("mousemove", moveTip);
-
-  sharedG.append("circle")
-    .attr("r",  d => d.r)
-    .attr("fill",         d => d.color)
-    .attr("fill-opacity", 0.85)
-    .attr("stroke","#fff")
-    .attr("stroke-width", 1.8);
-
-  // Label below node
-  sharedG.append("text")
-    .text(d => d.label)
-    .attr("text-anchor","middle")
-    .attr("dy", d => d.r + 11)
-    .attr("font-family","'Outfit',sans-serif")
-    .attr("font-size","11px").attr("font-weight","700")
-    .attr("fill", d => d.color)
-    .attr("pointer-events","none");
-
-  // Count badge (number of courses)
-  sharedG.append("text")
-    .text(d => d.count)
-    .attr("text-anchor","middle").attr("dominant-baseline","central")
-    .attr("font-family","'DM Mono',monospace")
-    .attr("font-size","9px").attr("font-weight","800")
-    .attr("fill","#fff")
-    .attr("pointer-events","none");
-
-  /* ── Highlight helpers ──────────────────────────────────────────────── */
-  function highlightCourse(courseId) {
-    linkEl.attr("stroke-opacity", l => {
-      const s = typeof l.source==="object"?l.source.id:l.source;
-      return s === courseId ? 0.9 : 0.05;
-    }).attr("stroke-width", l => {
-      const s = typeof l.source==="object"?l.source.id:l.source;
-      return s === courseId ? 3 : 2;
-    });
-    sharedG.select("circle")
-      .attr("fill-opacity", d => {
-        const hit = links.some(l => {
-          const s = typeof l.source==="object"?l.source.id:l.source;
-          const t = typeof l.target==="object"?l.target.id:l.target;
-          return s===courseId && t===d.id;
-        });
-        return hit ? 1 : 0.12;
-      });
-  }
-  function highlightShared(nodeId) {
-    linkEl.attr("stroke-opacity", l => {
-      const t = typeof l.target==="object"?l.target.id:l.target;
-      return t === nodeId ? 0.95 : 0.05;
-    }).attr("stroke-width", l => {
-      const t = typeof l.target==="object"?l.target.id:l.target;
-      return t === nodeId ? 3 : 2;
-    });
-  }
-  function resetHighlight() {
-    linkEl.attr("stroke-opacity", 0.45).attr("stroke-width", 2);
-    sharedG.select("circle").attr("fill-opacity", 0.85);
-  }
-
-  /* ── Drag helper ────────────────────────────────────────────────────── */
-  function dragBehavior(isCourse) {
+  function dragBehavior(ic){
     return d3.drag()
-      .on("start", (e,d) => {
-        if (!e.active) sim.alphaTarget(0.15).restart();
-        d.fx = d.x; d.fy = d.y;
-        if (isCourse) d3.select(e.sourceEvent.target.parentNode||e.sourceEvent.target)
-          .style("cursor","grabbing");
-      })
-      .on("drag",  (e,d) => { d.fx = e.x; d.fy = e.y; })
-      .on("end",   (e,d) => {
-        if (!e.active) sim.alphaTarget(0);
-        d.fx = null; d.fy = null;
-        if (isCourse) d3.select(e.sourceEvent.target.parentNode||e.sourceEvent.target)
-          .style("cursor","grab");
-      });
+      .on("start",(e,d)=>{if(!e.active)sim.alphaTarget(0.15).restart();d.fx=d.x;d.fy=d.y;})
+      .on("drag",(e,d)=>{d.fx=e.x;d.fy=e.y;})
+      .on("end",(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;});
   }
 
-  /* ── Tick: update positions (no clamping — infinite canvas) ─────────── */
-  function ticked() {
-    // Edges
-    linkEl
-      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+  const linkDist=d=>{
+    const src=typeof d.source==="object"?d.source:allNodes.find(n=>n.id===d.source);
+    const tgt=typeof d.target==="object"?d.target:allNodes.find(n=>n.id===d.target);
+    return(src?.r||55)+(tgt?.r||14)+30;
+  };
+  let tc=0;
+  const sim=d3.forceSimulation(allNodes)
+    .force("link",d3.forceLink(links).id(d=>d.id).distance(linkDist).strength(0.4))
+    .force("charge",d3.forceManyBody().strength(d=>d.type==="course"?-400:-80).distanceMax(800))
+    .force("collide",d3.forceCollide().radius(d=>d.type==="course"?d.r+28:d.r+14).strength(0.85).iterations(3))
+    .alphaDecay(0.018).velocityDecay(0.45)
+    .on("tick",()=>{
+      linkEl.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+      [bubbleEl,bubbleGlow].forEach(s=>s.attr("cx",d=>d.x).attr("cy",d=>d.y));
+      courseLabel.attr("x",d=>d.x).attr("y",d=>d.y);
+      uniqueG.attr("transform",d=>{const pn=courseNodes.find(n=>n.id===d.parentId);if(!pn)return"";return`translate(${pn.x+d.ox},${pn.y+d.oy})`;});
+      sharedG.attr("transform",d=>`translate(${d.x},${d.y})`);
+      tc++;if(tc===80)fitToNodes(false);
+    })
+    .on("end",()=>fitToNodes(true));
+  cmNetSim=sim;
 
-    // Course bubbles + labels
-    [bubbleEl, bubbleGlow, courseLabel].forEach(sel =>
-      sel.attr("cx", d => d.x).attr("cy", d => d.y)
-         .attr("x",  d => d.x).attr("y",  d => d.y)   // text uses x/y
-    );
-    bubbleEl.attr("cx", d => d.x).attr("cy", d => d.y);
-    bubbleGlow.attr("cx", d => d.x).attr("cy", d => d.y);
-    courseLabel.attr("x", d => d.x).attr("y", d => d.y);
-
-    // Unique concept dots: positioned relative to their parent course
-    uniqueG.attr("transform", d => {
-      const pn = courseNodes.find(n => n.id === d.parentId);
-      if (!pn) return "";
-      return `translate(${pn.x + d.ox},${pn.y + d.oy})`;
-    });
-
-    // Shared concept nodes
-    sharedG.attr("transform", d => `translate(${d.x},${d.y})`);
-  }
-
-  /* ── Force simulation ───────────────────────────────────────────────── */
-  const N = courses.length;
-
-  // Charge: moderate fixed values — not scaled by log(N) which was over-repelling
-  const BASE_COURSE_CHARGE  = -350;
-  const BASE_SHARED_CHARGE  = -80;
-  // Link distance: bubble radius + shared node radius + gap
-  const linkDist = d => {
-    const src = typeof d.source==="object" ? d.source : allNodes.find(n=>n.id===d.source);
-    const tgt = typeof d.target==="object" ? d.target : allNodes.find(n=>n.id===d.target);
-    return (src?.r||70) + (tgt?.r||14) + 30;
+  svg.on("click",()=>{cmCloseDetail();});
+  window._cmFitFn=()=>fitToNodes(true);
+  window._cmUpdateForceFn=(val)=>{
+    const mult=val/5;
+    sim.force("charge",d3.forceManyBody().strength(d=>d.type==="course"?-400*mult:-80*mult).distanceMax(800*mult));
+    sim.force("collide",d3.forceCollide().radius(d=>d.type==="course"?d.r+28*mult:d.r+14*mult).strength(0.85).iterations(3));
+    sim.alphaTarget(0.25).restart();setTimeout(()=>{sim.alphaTarget(0);fitToNodes(true);},1500);
   };
 
-  // Centering: ONLY on isolated course nodes (no links) to stop them flying off.
-  // Connected nodes are not pulled — they find their own natural position.
-  const isolatedIds = new Set(
-    courseNodes.filter(cn =>
-      !links.some(l => {
-        const s = typeof l.source==="object"?l.source.id:l.source;
-        return s === cn.id;
-      })
-    ).map(cn => cn.id)
-  );
-
-  let tickCount = 0;
-  const sim = d3.forceSimulation(allNodes)
-    .force("link", d3.forceLink(links).id(d => d.id)
-      .distance(linkDist)
-      .strength(0.4))
-    .force("charge", d3.forceManyBody()
-      .strength(d => d.type==="course" ? BASE_COURSE_CHARGE : BASE_SHARED_CHARGE)
-      .distanceMax(800))
-    // Gentle pull toward centre ONLY for isolated courses
-    .force("isolate-x", d3.forceX(W/2).strength(d => isolatedIds.has(d.id) ? 0.06 : 0))
-    .force("isolate-y", d3.forceY(H/2).strength(d => isolatedIds.has(d.id) ? 0.06 : 0))
-    .force("collide", d3.forceCollide()
-      .radius(d => d.type==="course" ? d.r + 30 : d.r + 16)
-      .strength(0.85).iterations(3))
-    .alphaDecay(0.018)
-    .velocityDecay(0.45)
-    .on("tick", () => { ticked(); tickCount++; if (tickCount === 80) fitToNodes(false); })
-    .on("end", () => fitToNodes(true));
-
-  cmNetSim = sim;
-
-  // Click background → deselect
-  svg.on("click", () => {
-    cmCloseDetail(); resetHighlight();
-    const p = document.getElementById('cm-course-popup');
-    if (p) p.style.display = 'none';
-  });
-
-  // Expose fit so toolbar button can call it
-  window._cmFitFn = () => fitToNodes(true);
-
-  // Expose force updater — called by the Spread slider
-  // val 1–10 maps to charge multiplier 0.2× – 2.0×
-  window._cmUpdateForceFn = (val) => {
-    const mult = val / 5;   // slider mid-point (5) = 1× baseline
-    sim.force("charge", d3.forceManyBody()
-      .strength(d => d.type === "course"
-        ? BASE_COURSE_CHARGE * mult
-        : BASE_SHARED_CHARGE * mult)
-      .distanceMax(800 * mult));
-    sim.force("collide", d3.forceCollide()
-      .radius(d => d.type === "course" ? d.r + 30 * mult : d.r + 16 * mult)
-      .strength(0.85).iterations(3));
-    sim.alphaTarget(0.25).restart();
-    setTimeout(() => { sim.alphaTarget(0); fitToNodes(true); }, 1500);
-  };
-
-  /* ── Legend ─────────────────────────────────────────────────────────── */
-  const batches = [...new Set(courses.map(c=>c.batch))].sort();
-  const leg = document.getElementById("cm-net-legend");
-  if (leg) {
-    leg.innerHTML =
-      `<div class="cm-net-legend-title">Semesters</div>` +
-      batches.map(b => {
-        const col = BATCH_COLORS[b]||"#888";
-        return `<div class="cm-net-leg-row">
-          <div class="cm-net-leg-dot" style="background:${col};"></div>
-          <span style="color:${col};font-weight:600;">${semesterLabel(b)}</span></div>`;
-      }).join("") +
+  const sems2=[...new Set(courses.map(c=>c.semester))].sort((a,b)=>a-b);
+  const leg=document.getElementById("cm-net-legend");
+  if(leg){
+    leg.innerHTML=`<div class="cm-net-legend-title">Semesters</div>`+
+      sems2.map(s=>{const col=semColor(s);return`<div class="cm-net-leg-row"><div class="cm-net-leg-dot" style="background:${col};"></div><span style="color:${col};font-weight:600;">${semLabel(s)}</span></div>`;}).join("")+
       `<div style="border-top:1px solid var(--bdr);margin:.4rem 0 .3rem;"></div>
        <div class="cm-net-legend-title">Nodes</div>
-       <div class="cm-net-leg-row">
-         <svg width="18" height="18"><circle cx="9" cy="9" r="8"
-           fill="none" stroke="#64748b" stroke-width="2"/></svg>
-         <span style="color:var(--mu);">Course bubble</span></div>
-       <div class="cm-net-leg-row">
-         <svg width="18" height="18"><circle cx="9" cy="9" r="4"
-           fill="#64748b" fill-opacity=".75"/></svg>
-         <span style="color:var(--mu);">Unique concept</span></div>
-       <div class="cm-net-leg-row">
-         <svg width="18" height="18"><circle cx="9" cy="9" r="7"
-           fill="#2563eb" fill-opacity=".85" stroke="#fff" stroke-width="1.5"/></svg>
-         <span style="color:var(--mu);">Shared concept</span></div>`;
+       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="8" fill="none" stroke="#64748b" stroke-width="2"/></svg><span style="color:var(--mu);">Course bubble</span></div>
+       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="4" fill="#64748b" fill-opacity=".75"/></svg><span style="color:var(--mu);">Unique concept</span></div>
+       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="7" fill="#2563eb" fill-opacity=".85" stroke="#fff" stroke-width="1.5"/></svg><span style="color:var(--mu);">Shared concept</span></div>`;
   }
 }
 
-/* ── Course popup ─────────────────────────────────────────── */
-function showCoursePopup(d, conceptsByCourse, idx, courses) {
-  let panel = document.getElementById("cm-course-popup");
-  if (!panel) {
-    panel = document.createElement("div");
-    panel.id = "cm-course-popup";
-    panel.className = "cm-course-popup";
-    document.body.appendChild(panel);
-  }
-
-  const unique  = (conceptsByCourse[d.id] || []).sort();
-  const shared  = Object.entries(idx)
-    .filter(([, codes]) => codes.includes(d.id) && codes.length > 1)
-    .map(([concept, codes]) => ({ concept, others: codes.filter(c => c !== d.id) }))
-    .sort((a,b) => b.others.length - a.others.length);
-
-  const uniqueHTML = unique.length
-    ? unique.map(c => {
-        const col = getCMConceptColor(c);
-        return `<span class="cm-popup-tag" style="background:${col}18;color:${col};">${c}</span>`;
-      }).join("")
-    : `<span style="color:var(--dim);font-size:.7rem;">None</span>`;
-
-  const sharedHTML = shared.length
-    ? shared.map(({concept, others}) => {
-        const col = getCMConceptColor(concept);
-        const sem = others.map(code => {
-          const co = courses.find(x => x.code === code);
-          const bc = BATCH_COLORS[co?.batch] || "#888";
-          return `<span class="cm-popup-course-chip" style="color:${bc};border-color:${bc}40;">${code}</span>`;
-        }).join("");
-        return `<div class="cm-popup-shared-row">
-          <span class="cm-popup-tag cm-popup-tag--shared" style="background:${col}18;color:${col};">${concept}</span>
-          <span class="cm-popup-also">also in ${sem}</span>
-        </div>`;
-      }).join("")
-    : `<span style="color:var(--dim);font-size:.7rem;">No shared concepts with current filter</span>`;
-
-  const semLabel = semesterLabel(d.batch);
-  panel.innerHTML = `
-    <div class="cm-popup-hdr" style="border-color:${d.color}40;">
-      <div>
-        <div class="cm-popup-code" style="color:${d.color};">${d.label}
-          <span class="bb bb-${d.batch}" style="margin-left:.4rem;">${semLabel}</span>
-        </div>
-        <div class="cm-popup-title">${d.title}</div>
-      </div>
-      <button class="cm-popup-close" onclick="document.getElementById('cm-course-popup').style.display='none'">✕</button>
-    </div>
-    <div class="cm-popup-section">
-      <div class="cm-popup-section-hd">
-        <span class="cm-popup-dot cm-popup-dot--unique"></span>
-        Unique concepts <span class="cm-popup-count">${unique.length}</span>
-      </div>
-      <div class="cm-popup-tags">${uniqueHTML}</div>
-    </div>
-    <div class="cm-popup-section">
-      <div class="cm-popup-section-hd">
-        <span class="cm-popup-dot cm-popup-dot--shared"></span>
-        Shared concepts <span class="cm-popup-count">${shared.length}</span>
-      </div>
-      <div class="cm-popup-shared">${sharedHTML}</div>
-    </div>`;
-
-  panel.style.display = "block";
-}
-
-function showTip(e, html) {
-  tip.innerHTML = html;
-  tip.style.display = "block";
-  moveTip(e);
-}
-
-
-/* ── List view ────────────────────────────────────────────── */
-function cmRenderList(courses, sortedConcepts, idx) {
-  const el = document.getElementById("cmv-list");
-  const sharedConceptsSet = new Set(sortedConcepts.map(([c]) => c));
-
-  const cards = courses.map(course => {
-    const concepts = getConceptsForCourse(course.code);
-    if (!concepts.length) return "";
-    const bColor = BATCH_COLORS[course.batch] || "#888";
-
-    const tags = concepts.map(c => {
-      const col = getCMConceptColor(c);
-      const shared = sharedConceptsSet.has(c);
-      const sharedCount = (idx[c]||[]).length;
-      return `<span class="cm-ctag${shared?" shared":""}"
-        style="background:${col}18;color:${col};${shared?"outline-color:"+col+"55;":""}"
+/* ── List view ── */
+function cmRenderList(courses,sortedConcepts,idx){
+  const el=document.getElementById("cmv-list");
+  const sharedSet=new Set(sortedConcepts.map(([c])=>c));
+  const cards=courses.map(course=>{
+    const concepts=getConceptsForCourse(course.code);
+    if(!concepts.length)return"";
+    const sc=semColor(course.semester);
+    const tags=concepts.map(c=>{
+      const col=getCMConceptColor(c);
+      const shared=sharedSet.has(c);
+      const cnt=(idx[c]||[]).length;
+      return`<span class="cm-ctag${shared?" shared":""}" style="background:${col}18;color:${col};${shared?"outline-color:"+col+"55;":""}"
         onclick="cmClickConcept('${c.replace(/'/g,"\\'")}',null)"
-        title="${shared ? sharedCount+' courses share this concept' : 'unique to this course'}">
-        ${c}${shared?`<span class="cm-overlap-badge" style="background:${col};margin-left:.2rem;">${sharedCount}</span>`:""}
+        title="${shared?cnt+" courses share this":"unique to this course"}">
+        ${c}${shared?`<span class="cm-overlap-badge" style="background:${col};margin-left:.2rem;">${cnt}</span>`:""}
       </span>`;
     }).join("");
-
-    return `<div class="cm-course-card">
+    return`<div class="cm-course-card" style="border-top:3px solid ${sc};">
       <div class="cm-cc-head">
         <div>
-          <div class="cm-cc-code">${course.code}
-            <span class="bb bb-${course.batch}">${course.batch}</span>
+          <div class="cm-cc-code" style="color:${sc};">${course.code}
+            <span class="sem-badge" style="background:${sc}18;color:${sc};">${semLabel(course.semester)}</span>
           </div>
           <div class="cm-cc-title">${course.title}</div>
         </div>
-        <div style="font-family:'Crimson Pro',serif;font-size:1.5rem;font-weight:700;color:var(--dim);flex-shrink:0;padding-left:.8rem;line-height:1;">
-          ${concepts.length}
-        </div>
+        <div style="font-family:'Crimson Pro',serif;font-size:1.5rem;font-weight:700;color:var(--dim);flex-shrink:0;padding-left:.8rem;line-height:1;">${concepts.length}</div>
       </div>
       <div class="cm-cc-tags">${tags}</div>
     </div>`;
   }).join("");
-
-  const conceptCount = sortedConcepts.length;
-  const sharedCount  = sortedConcepts.filter(([,v]) => v.length > 1).length;
-  el.innerHTML = `
-    <h2 class="cm-hm-section-hd">Course Concept Cards</h2>
+  const cnt=sortedConcepts.length;
+  const sh=sortedConcepts.filter(([,v])=>v.length>1).length;
+  el.innerHTML=`<h2 class="cm-hm-section-hd">Course Concept Cards</h2>
     <p style="font-size:.73rem;color:var(--mu);margin-bottom:.85rem;">
-      Each card shows concepts extracted from CLO descriptions.
-      <strong style="color:var(--tx);">Outlined tags</strong> = shared with ≥ 1 other course — click for overlap details.
-      Showing <strong>${conceptCount}</strong> concepts, <strong>${sharedCount}</strong> shared.
+      Outlined tags are shared across ≥ 1 other course — click for details.
+      Showing <strong>${cnt}</strong> concepts, <strong>${sh}</strong> shared.
     </p>
-    <div class="cm-list-grid">${cards || '<div style="color:var(--mu);font-size:.83rem;">No concepts found for visible courses.</div>'}</div>`;
+    <div class="cm-list-grid">${cards||'<div style="color:var(--mu);font-size:.83rem;">No concepts found.</div>'}</div>`;
 }
 
-/* ── Concept detail panel ─────────────────────────────────── */
-window.cmClickConcept = function(concept, tagEl) {
-  cmSelectedConcept = concept;
-  // Update selection highlight on legend tags
-  document.querySelectorAll(".cc-tag").forEach(t => t.classList.remove("selected"));
-  if (tagEl) {
-    const col = getCMConceptColor(concept);
-    tagEl.classList.add("selected");
-    tagEl.style.borderColor = col;
-  }
+/* ── Concept detail panel ── */
+window.cmClickConcept = function(concept,tagEl) {
+  cmSelectedConcept=concept;
+  document.querySelectorAll(".cc-tag").forEach(t=>t.classList.remove("selected"));
+  if(tagEl){const col=getCMConceptColor(concept);tagEl.classList.add("selected");tagEl.style.borderColor=col;}
 
-  const idx = getConceptIndex();
-  const codes = (idx[concept] || []).filter(code =>
-    filtered().some(c => c.code === code)
-  );
+  const idx=getConceptIndex();
+  const codes=(idx[concept]||[]).filter(code=>filtered().some(c=>c.code===code));
 
-  let detail = document.getElementById("cm-detail-panel");
-  if (!detail) {
-    detail = document.createElement("div");
-    detail.id = "cm-detail-panel";
-    detail.className = "cm-detail";
-    document.body.appendChild(detail);
-  }
+  let detail=document.getElementById("cm-detail-panel");
+  if(!detail){detail=document.createElement("div");detail.id="cm-detail-panel";detail.className="cm-detail";document.body.appendChild(detail);}
 
-  const rows = codes.map(code => {
-    const course = DATA.courses.find(c => c.code === code);
-    const relevantCLOs = (course?.clos||[]).filter(clo => (clo.concepts||[]).includes(concept));
-    return `<div class="cm-dc-row">
+  const rows=codes.map(code=>{
+    const course=DATA.courses.find(c=>c.code===code);
+    const rl=(course?.clos||[]).filter(clo=>(clo.concepts||[]).includes(concept));
+    return`<div class="cm-dc-row">
       <span class="cm-dc-code">${code}</span>
       <span class="cm-dc-title">${course?.title||""}</span>
     </div>
-    ${relevantCLOs.map(clo => `
-      <div style="font-size:.62rem;color:var(--dim);padding-left:1rem;margin-top:.12rem;line-height:1.4;margin-bottom:.2rem;">
-        <strong>${clo.code}</strong>: ${clo.description.substring(0,90)}…
-      </div>`).join("")}`;
+    ${rl.map(clo=>`<div style="font-size:.62rem;color:var(--dim);padding-left:1rem;margin-top:.12rem;line-height:1.4;margin-bottom:.2rem;">
+      <strong>${clo.code}</strong>: ${clo.description.substring(0,90)}…</div>`).join("")}`;
   }).join("");
 
-  const col = getCMConceptColor(concept);
-  detail.innerHTML = `
-    <button class="cm-detail-close" onclick="cmCloseDetail()">✕</button>
+  const col=getCMConceptColor(concept);
+  detail.innerHTML=`<button class="cm-detail-close" onclick="cmCloseDetail()">✕</button>
     <div class="cm-detail-concept" style="color:${col};">${concept}</div>
     <div style="font-size:.67rem;color:var(--mu);margin-bottom:.6rem;">
-      Covered by <strong style="color:var(--tx);">${codes.length}</strong> course${codes.length!==1?'s':''}
-      ${codes.length===0?'(in current filter)':''}
+      Covered by <strong style="color:var(--tx);">${codes.length}</strong> course${codes.length!==1?"s":""}
     </div>
     <div class="cm-detail-courses">${rows||'<div style="color:var(--dim);font-size:.72rem;">No courses in current filter.</div>'}</div>`;
   detail.classList.add("show");
 };
 
-window.cmCloseDetail = function() {
-  const d = document.getElementById("cm-detail-panel");
-  if (d) { d.classList.remove("show"); }
-  cmSelectedConcept = null;
+window.cmCloseDetail=function(){
+  const d=document.getElementById("cm-detail-panel");
+  if(d)d.classList.remove("show");
+  cmSelectedConcept=null;
 };
+
+function showTip(e,html){tip.innerHTML=html;tip.style.display="block";moveTip(e);}
 
 /* ================================================================
    BOOT

@@ -15,117 +15,79 @@
   },
   "courses": [
     {
-      "code": "CHE-360",
-      "title": "Fundamentals Of Polymer Engineering",
-      "batch": "2022F",
+      "code": "CHE-103",
+      "title": "Chemical Engineering Principles-I",
+      "batch": "2025F",
+      "semester": 1,
+      "lec": 2,
+      "lab": 0,
       "clos": [
         {
           "code": "CLO-1",
           "plo": "PLO-1",
           "emphasis": "Low",
           "domain": "C-2",
-          "description": "Explain the fundamentals of polymer engineering: polymer classification, rheology, colligative, thermal, and mechanical properties of the polymers.",
+          "description": "Comprehend the basic concepts of chemical engineering principles and relate them to chemical engineering calculations.",
           "concepts": [
-            "material properties",
-            "polymer chemistry",
-            "polymer processing",
-            "rheology",
-            "thermodynamics"
+            "chemical equilibrium",
+            "chemical reactions",
+            "process principles"
           ]
         },
         {
           "code": "CLO-2",
-          "plo": "PLO-1",
+          "plo": "PLO-2",
           "emphasis": "Medium",
           "domain": "C-4",
-          "description": "Relate the fundamental concepts of polymer engineering to study the techniques for the synthesis and processing of polymeric materials.",
+          "description": "Extend the concepts of process principles to solve material balance problems for single and multiple units.",
           "concepts": [
-            "chemical synthesis",
-            "polymer chemistry",
-            "polymer processing",
-            "thermodynamics"
+            "mass balance calculations",
+            "multiple unit operations",
+            "process principles",
+            "single units"
           ]
         }
       ],
       "concepts": [
-        "chemical synthesis",
+        "chemical equilibrium",
+        "chemical reactions",
         "heat transfer",
-        "material properties",
-        "polymer chemistry",
-        "polymer processing",
-        "rheology",
-        "thermodynamics"
+        "mass balance calculations",
+        "multiple unit operations",
+        "process principles",
+        "rate processes",
+        "single units",
+        "steady state"
       ]
     },
     {
-      "code": "CHE-425",
-      "title": "Maintenance & Process Safety",
-      "batch": "2022F",
+      "code": "CS-117",
+      "title": "Applications of ICT",
+      "batch": "2025F",
+      "semester": 1,
+      "lec": 2,
+      "lab": 1,
       "clos": [
         {
           "code": "CLO-1",
           "plo": "PLO-1",
           "emphasis": "Low",
           "domain": "C-2",
-          "description": "Describe the key principles of process safety and maintenance of industrial operations",
+          "description": "Understand the fundamental concepts, components, and scope of Information and Communications Technologies (ICT) in various fields and industries.",
           "concepts": [
-            "predictive maintenance",
-            "process control",
-            "process design",
-            "process safety"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-1",
-          "emphasis": "Low",
-          "domain": "C-2",
-          "description": "Explain the practical application of safety and risk management in process industry",
-          "concepts": [
-            "process control",
-            "process design",
-            "process safety",
-            "risk assessment"
-          ]
-        }
-      ],
-      "concepts": [
-        "predictive maintenance",
-        "process control",
-        "process design",
-        "process safety",
-        "risk assessment"
-      ]
-    },
-    {
-      "code": "CHE-465",
-      "title": "Data Science and Machine Learning in Chemical Engineering",
-      "batch": "2022F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Describe and apply the concepts of linear algebra, probability, and statistics used for data distributions.",
-          "concepts": [
-            "data analysis",
-            "data science",
-            "mathematical modelling",
-            "probability",
-            "statistical analysis"
+            "communication networks",
+            "information systems",
+            "information technology"
           ]
         },
         {
           "code": "CLO-2",
           "plo": "PLO-2",
           "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Use mathematical and statistical theory for decision-making and problem solution.",
+          "domain": "C-4",
+          "description": "Analyze the problem by application of ICT techniques.",
           "concepts": [
-            "mathematical modelling",
-            "probability",
-            "statistical analysis"
+            "information technology"
           ]
         },
         {
@@ -133,898 +95,285 @@
           "plo": "PLO-5",
           "emphasis": "Medium",
           "domain": "C-3",
-          "description": "Apply algorithms of data science and machine learning using Python",
+          "description": "Apply ICT platforms and tools for different purposes to address basic needs in different domains of daily, academic, and professional life.",
           "concepts": [
-            "Python",
-            "data analysis",
-            "data science",
-            "machine learning",
-            "statistical analysis"
+            "digital tools",
+            "information technology"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-7",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Demonstrate the ethical and legal considerations in use of ICT platform tools.",
+          "concepts": [
+            "digital tools",
+            "information technology"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-8",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "To demonstrate responsible conduct while working individually as well as in team.",
+          "concepts": []
+        }
+      ],
+      "concepts": [
+        "algorithmic thinking",
+        "communication networks",
+        "data analysis",
+        "digital tools",
+        "information systems",
+        "information technology",
+        "software development"
+      ]
+    },
+    {
+      "code": "HU-101",
+      "title": "Islamic Studies",
+      "batch": "2025F",
+      "semester": 1,
+      "lec": 2,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-7",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Demonstrate enhanced knowledge. of Islamic foundational beliefs, practices, historical development, spiritual values and ethical principles.",
+          "concepts": [
+            "ethical principles",
+            "islamic principles",
+            "spiritual values"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-6",
+          "emphasis": "High",
+          "domain": "C-5",
+          "description": "Describe basic sources of Islamic law and their application in daily life.",
+          "concepts": [
+            "islamic principles",
+            "law sources"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-6",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "ldentify and discuss contemporary issues within the Muslim world including social challenges, gender roles and interfaith interactions.",
+          "concepts": [
+            "gender roles",
+            "interfaith interactions",
+            "social issues"
           ]
         }
       ],
       "concepts": [
-        "Python",
-        "data analysis",
-        "data science",
-        "machine learning",
-        "mathematical modelling",
-        "probability",
-        "statistical analysis"
+        "ethical principles",
+        "gender roles",
+        "interfaith interactions",
+        "islamic principles",
+        "law sources",
+        "social issues",
+        "spiritual values"
       ]
     },
     {
-      "code": "CHE-484",
-      "title": "Natural Gas Engineering",
-      "batch": "2022F",
+      "code": "HU-114",
+      "title": "Functional English",
+      "batch": "2025F",
+      "semester": 1,
+      "lec": 3,
+      "lab": 0,
       "clos": [
         {
           "code": "CLO-1",
-          "plo": "PLO-1",
+          "plo": "PLO-9",
           "emphasis": "Low",
           "domain": "C-2",
-          "description": "Infer the basic knowledge about gas processing and gas drilling.",
+          "description": "Interpret and discuss various texts according to one’s own understanding and viewpoint, as well as that of the author or speaker.",
           "concepts": [
-            "gas engineering",
-            "gas processing"
+            "text interpretation"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-9",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Demonstrate a firm command on the use of language in expressing and arguing convincingly.",
+          "concepts": [
+            "language processing"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-9",
+          "emphasis": "High",
+          "domain": "C-5",
+          "description": "Compose well-structured paragraphs and relate short essays communicating the main idea effectively.",
+          "concepts": [
+            "essays communication",
+            "main idea",
+            "paragraph structure"
+          ]
+        }
+      ],
+      "concepts": [
+        "essays communication",
+        "language processing",
+        "main idea",
+        "paragraph structure",
+        "text interpretation"
+      ]
+    },
+    {
+      "code": "HU-131",
+      "title": "Understanding of Quran-I",
+      "batch": "2025F",
+      "semester": 1,
+      "lec": 0,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-11",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Discuss and explain the meanings of the words of Quran, its phrases and sentences.",
+          "concepts": [
+            "language processing"
+          ]
+        }
+      ],
+      "concepts": [
+        "language processing",
+        "scriptural analysis",
+        "text interpretation"
+      ]
+    },
+    {
+      "code": "MATH-101",
+      "title": "Calculus & Analytical Geometry",
+      "batch": "2025F",
+      "semester": 1,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Comprehend the concept of functions, limits and derivative, and recognize the techniques to solve the equation of single variables.",
+          "concepts": [
+            "derivative techniques",
+            "limit concepts",
+            "mathematical operations",
+            "single variable functions"
           ]
         },
         {
           "code": "CLO-2",
           "plo": "PLO-2",
-          "emphasis": "Low",
-          "domain": "C-2",
-          "description": "Comprehend the understanding of gas storage and transmission operations.",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Relate the use of differentiation and integration of single variable functions and implement them to find the area and volume applicable to different engineering problems.",
           "concepts": [
-            "gas engineering",
-            "gas processing"
+            "mathematical operations",
+            "numeric methods",
+            "single variable functions"
           ]
         },
         {
           "code": "CLO-3",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Comprehend the concept of series and limit comparison tests and solve the mathematical problems.",
+          "concepts": [
+            "limit concepts",
+            "numeric methods"
+          ]
+        }
+      ],
+      "concepts": [
+        "analytic solving",
+        "derivative techniques",
+        "limit concepts",
+        "mathematical operations",
+        "numeric methods",
+        "single variable functions"
+      ]
+    },
+    {
+      "code": "ME-105",
+      "title": "Workshop Practice",
+      "batch": "2025F",
+      "semester": 1,
+      "lec": 0,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "P-2",
+          "description": "Learn and display fundamental manufacturing processes through demonstration and practice for solutions in the field of manufacturing.",
+          "concepts": [
+            "manufacturing",
+            "manufacturing techniques",
+            "process principles",
+            "solution fabrication"
+          ]
+        },
+        {
+          "code": "CLO-2",
           "plo": "PLO-3",
           "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Analyze and design gas processing and purification operations.",
-          "concepts": [
-            "gas engineering",
-            "gas processing"
-          ]
-        }
-      ],
-      "concepts": [
-        "fluid mechanics",
-        "gas engineering",
-        "gas processing",
-        "heat transfer",
-        "mass transfer",
-        "reaction kinetics",
-        "risk assessment"
-      ]
-    },
-    {
-      "code": "HU-115",
-      "title": "Principles of Sociology",
-      "batch": "2022F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-6",
-          "emphasis": "Low",
-          "domain": "C-2",
-          "description": "Comprehend the fundamental theories of sociology pertaining to human behaviors",
-          "concepts": [
-            "human behavior",
-            "sociology"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-12",
-          "emphasis": "High",
-          "domain": "C-6",
-          "description": "Devise the practical applications of the theories to human behavior in day-to-day life",
-          "concepts": [
-            "human behavior"
-          ]
-        }
-      ],
-      "concepts": [
-        "human behavior",
-        "sociology"
-      ]
-    },
-    {
-      "code": "OTM-456",
-      "title": "Production & Operations Management",
-      "batch": "2022F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-12",
-          "emphasis": "Low",
-          "domain": "C--2",
-          "description": "Comprehend the process of transforming resources into products and development of its operational strategy.",
-          "concepts": [
-            "operations management",
-            "process design",
-            "process safety"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-12",
-          "emphasis": "Medium",
-          "domain": "C--3",
-          "description": "Use of a variety of problem-solving and forecasting techniques to aid in effective decision making and quality control.",
-          "concepts": [
-            "data analysis",
-            "forecasting",
-            "quality control"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-11",
-          "emphasis": "Medium",
-          "domain": "C--4",
-          "description": "Apply project management tools, techniques and inventory management methods",
-          "concepts": [
-            "data analysis",
-            "inventory management",
-            "project management"
-          ]
-        }
-      ],
-      "concepts": [
-        "data analysis",
-        "forecasting",
-        "inventory management",
-        "operations management",
-        "process design",
-        "process safety",
-        "project management",
-        "quality control",
-        "yield optimization"
-      ]
-    },
-    {
-      "code": "CHE-323",
-      "title": "Instrumentation & Process Control",
-      "batch": "2023F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-1",
-          "emphasis": "Low",
-          "domain": "C-2",
-          "description": "Comprehend open/closed loop control systems based on the fundamentals of process dynamics",
-          "concepts": [
-            "PID control",
-            "process control",
-            "process dynamics"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Solve problems related to open/closed control loop systems",
-          "concepts": [
-            "PID control",
-            "process control"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-4",
-          "emphasis": "High",
-          "domain": "C-6",
-          "description": "Design and explain control loops for process variables, i.e., temperature, pressure, level, etc., of a given industrial process.",
-          "concepts": [
-            "PID control",
-            "process control",
-            "process dynamics"
-          ]
-        },
-        {
-          "code": "CLO-4",
-          "plo": "PLO-5",
-          "emphasis": "Medium",
-          "domain": "P-4",
-          "description": "Calibrates automatic process control sensors (flow, pressure, temperature, level) using manual instruments as reference standards.",
-          "concepts": [
-            "PID control",
-            "instrumentation",
-            "process control",
-            "process dynamics"
-          ]
-        },
-        {
-          "code": "CLO-5",
-          "plo": "PLO-4",
-          "emphasis": "Medium",
           "domain": "P-3",
-          "description": "Follows procedures to apply ON/OFF, PI, and PID control modes for achieving set points and accurately adjusts input parameters",
+          "description": "Should perform a given task under supervision in response to learnt manufacturing processes, through hands on technique to reproduce.",
           "concepts": [
-            "PID control",
-            "process control"
-          ]
-        },
-        {
-          "code": "CLO-6",
-          "plo": "PLO-8",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Analyzes and interprets process response curves (time vs. level, pressure, etc.) in relation to control theory to evaluate performance of control strategies.",
-          "concepts": [
-            "PID control",
-            "process control",
-            "process dynamics"
-          ]
-        },
-        {
-          "code": "CLO-7",
-          "plo": "PLO-8",
-          "emphasis": "Medium",
-          "domain": "A-3",
-          "description": "Demonstrates responsible handling of control equipment and participates effectively in group-based experimentation and troubleshooting.",
-          "concepts": [
-            "PID control",
-            "process control"
-          ]
-        }
-      ],
-      "concepts": [
-        "PID control",
-        "instrumentation",
-        "process control",
-        "process dynamics"
-      ]
-    },
-    {
-      "code": "CHE-345",
-      "title": "Transport Phenomena",
-      "batch": "2023F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-1",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Comprehend mechanisms of momentum, heat and mass transport and identify their applications for steady and transient flow systems",
-          "concepts": [
-            "fluid mechanics",
-            "heat transfer",
-            "mass balance",
-            "mass transfer",
-            "momentum balance"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Express microscopic and macroscopic mass/energy/momentum balances equation and solve them for several systems applying appropriate conservation statements and boundary conditions",
-          "concepts": [
-            "differential equations",
-            "fluid mechanics",
-            "mass balance",
-            "mass transfer",
-            "momentum balance"
+            "manufacturing",
+            "manufacturing techniques",
+            "process principles"
           ]
         },
         {
           "code": "CLO-3",
-          "plo": "PLO-4",
-          "emphasis": "High",
-          "domain": "C-5",
-          "description": "Analyze and solve engineering problems pertaining to transport phenomena in industrial processes.",
-          "concepts": [
-            "mass transfer",
-            "momentum balance"
-          ]
-        }
-      ],
-      "concepts": [
-        "differential equations",
-        "fluid mechanics",
-        "heat transfer",
-        "mass balance",
-        "mass transfer",
-        "momentum balance"
-      ]
-    },
-    {
-      "code": "CHE-347",
-      "title": "Chemical Reaction Engineering",
-      "batch": "2023F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-1",
-          "emphasis": "Low",
-          "domain": "C-2",
-          "description": "Comprehend the concepts of reaction engineering fundamentals",
-          "concepts": [
-            "reaction kinetics"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-1",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Apply design equations of ideal reactors to study their performance for homogenous single and multiple reactions.",
-          "concepts": [
-            "reaction kinetics",
-            "reactor design"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Differentiate homogeneous and heterogeneous reactions, and modify the design parameters for reactor calculations.",
-          "concepts": [
-            "catalysis",
-            "reaction kinetics",
-            "reactor design"
-          ]
-        },
-        {
-          "code": "CLO-4",
-          "plo": "PLO-4",
-          "emphasis": "High",
-          "domain": "C-6",
-          "description": "Design chemical reactors for various industrial chemical problems.",
-          "concepts": [
-            "reactor design"
-          ]
-        },
-        {
-          "code": "CLO-5",
-          "plo": "PLO-4",
-          "emphasis": "Medium",
-          "domain": "P-4",
-          "description": "Execute the reactor startup procedures by applying appropriate conditions and trace the concentration-time data with precision.",
-          "concepts": [
-            "reactor design"
-          ]
-        },
-        {
-          "code": "CLO-6",
           "plo": "PLO-9",
-          "emphasis": "Medium",
-          "domain": "A-3",
-          "description": "Demonstrate punctuality and attentive demeanor as an individual or in a team during the lab conduct to improve productivity and meet deadlines.",
-          "concepts": [
-            "lab safety",
-            "laboratory practice"
-          ]
-        },
-        {
-          "code": "CLO-7",
-          "plo": "PLO-6",
-          "emphasis": "Medium",
-          "domain": "P-3",
-          "description": "Practice lab safety considerations while preparing reactants and collecting products for any toxic or corrosive substances. Identify any signs of runaway reaction reacting for its mitigation.",
-          "concepts": [
-            "lab safety",
-            "laboratory practice",
-            "process safety",
-            "reaction kinetics"
-          ]
-        },
-        {
-          "code": "CLO-8",
-          "plo": "PLO-4",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Recall the standard experimental procedures and analyze and interpret the results, comparing them with theoretical concepts learned in class to identify any discrepancies and derive valid conclusions",
-          "concepts": []
-        }
-      ],
-      "concepts": [
-        "catalysis",
-        "lab safety",
-        "laboratory practice",
-        "process safety",
-        "reaction kinetics",
-        "reactor design"
-      ]
-    },
-    {
-      "code": "CHE-349",
-      "title": "Separation Processes II",
-      "batch": "2023F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-1",
           "emphasis": "Low",
-          "domain": "C-2",
-          "description": "Comprehend the principles of simultaneous heat and mass transfer and extend their applications in chemical engineering processes theoretically as well as experimentally.",
+          "domain": "P-2",
+          "description": "Display and demonstrate the ability to work in a team by performing in group tasks.",
           "concepts": [
-            "heat transfer",
-            "mass transfer",
-            "process design"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Describe the coupled heat and mass transfer equations and apply to design the process equipment’s.",
-          "concepts": [
-            "heat transfer",
-            "mass transfer",
-            "process design"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-4",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Solve and analyze complex engineering problems pertaining to SHMT operation",
-          "concepts": []
-        },
-        {
-          "code": "CLO-4",
-          "plo": "PLO-5",
-          "emphasis": "Medium",
-          "domain": "P-4",
-          "description": "Measures key process variables such as temperature, flow rate, and composition during operation of separation process equipment.",
-          "concepts": [
-            "heat transfer",
-            "mass transfer",
-            "process design",
-            "separation"
-          ]
-        },
-        {
-          "code": "CLO-5",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Computes and analyze performance metrics (e.g., drying rate, extraction efficiency) from collected experimental data.",
-          "concepts": [
-            "drying",
-            "extraction",
-            "mass transfer",
-            "separation processes"
-          ]
-        },
-        {
-          "code": "CLO-6",
-          "plo": "PLO-10",
-          "emphasis": "Medium",
-          "domain": "A-3",
-          "description": "Participate actively and responsibly in teamwork while conducting separation experiments and handling equipment.",
-          "concepts": [
-            "separation",
-            "teamwork"
-          ]
-        },
-        {
-          "code": "CLO-7",
-          "plo": "PLO-5",
-          "emphasis": "Medium",
-          "domain": "P-3",
-          "description": "Adjusts and operates experimental units such as evaporators, dryers, and extraction columns under supervision.",
-          "concepts": [
-            "extraction",
-            "mass transfer",
-            "separation processes"
+            "team collaboration"
           ]
         }
       ],
       "concepts": [
-        "drying",
-        "extraction",
-        "heat transfer",
-        "instrumentation",
-        "mass transfer",
-        "process design",
-        "separation",
-        "separation processes",
-        "teamwork"
-      ]
-    },
-    {
-      "code": "ECO-130",
-      "title": "Engineering Economics",
-      "batch": "2023F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Comprehend the concepts of Engineering Economics",
-          "concepts": [
-            "engineering economics"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-11",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Gain a working knowledge of money management and analyse how to make economics comparisons of alternative engineering projects",
-          "concepts": [
-            "engineering economics",
-            "project management"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-12",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Apply alternatives based on taxable income and market structure",
-          "concepts": [
-            "engineering economics",
-            "project management"
-          ]
-        }
-      ],
-      "concepts": [
-        "engineering economics",
-        "project management"
-      ]
-    },
-    {
-      "code": "CHE-220",
-      "title": "Mass Transfer",
-      "batch": "2024F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-1",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Comprehend the basic concepts and theories of mass transfer to apply for process separation related problems",
-          "concepts": [
-            "mass balance",
-            "mass transfer",
-            "separation processes"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Apply the knowledge of separation principles for basic design calculations related to gas-liquid absorption and distillation processes",
-          "concepts": [
-            "absorption",
-            "distillation",
-            "reaction kinetics",
-            "separation processes"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-4",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Solve and analyze engineering problems pertaining to mass transfer operation",
-          "concepts": [
-            "mass balance",
-            "mass transfer"
-          ]
-        }
-      ],
-      "concepts": [
-        "absorption",
-        "distillation",
-        "mass balance",
-        "mass transfer",
-        "reaction kinetics",
-        "separation processes"
-      ]
-    },
-    {
-      "code": "CHE-242",
-      "title": "Heat Transfer",
-      "batch": "2024F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-1",
-          "emphasis": "Low",
-          "domain": "C-2",
-          "description": "Comprehend the fundamentals of heat transfer related to steady state conduction, convection, and radiation",
-          "concepts": [
-            "conduction",
-            "convection",
-            "heat exchanger",
-            "heat exchanger design",
-            "heat transfer",
-            "radiation"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Use the knowledge of heat transfer model equations to solve problems related to heat transfer systems",
-          "concepts": [
-            "heat exchanger",
-            "heat exchanger design",
-            "heat transfer",
-            "radiation"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-4",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Solve and analyze engineering problems pertaining to heat transfer operations",
-          "concepts": [
-            "heat exchanger",
-            "heat exchanger design",
-            "heat transfer",
-            "radiation"
-          ]
-        },
-        {
-          "code": "CLO-4",
-          "plo": "PLO-4",
-          "emphasis": "Medium",
-          "domain": "P-4",
-          "description": "Execute the standard startup procedure and set the requisite temperature, flows and pressures by following the established protocols, and collecting data at the appropriate time.",
-          "concepts": [
-            "heat transfer",
-            "process control"
-          ]
-        },
-        {
-          "code": "CLO-5",
-          "plo": "PLO-9",
-          "emphasis": "Medium",
-          "domain": "A-3",
-          "description": "Demonstrate punctuality and attentive demeanor as an individual or in a team during the whole lab session to improve productivity and meet deadlines",
-          "concepts": [
-            "lab safety",
-            "laboratory practice"
-          ]
-        },
-        {
-          "code": "CLO-6",
-          "plo": "PLO-6",
-          "emphasis": "Medium",
-          "domain": "P-3",
-          "description": "Follows lab safety considerations for operating all kinds of heat exchangers and electrical heating devices and apply them consistently to maintain a safe working environment.",
-          "concepts": [
-            "heat exchanger",
-            "heat exchanger design",
-            "heat transfer",
-            "lab safety",
-            "laboratory practice",
-            "radiation"
-          ]
-        },
-        {
-          "code": "CLO-7",
-          "plo": "PLO-4",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Recall the standard experimental procedures and analyze and interpret the results, comparing them with theoretical concepts learned in class to identify any discrepancies and derive valid conclusions",
-          "concepts": [
-            "experimental design"
-          ]
-        }
-      ],
-      "concepts": [
-        "conduction",
-        "convection",
-        "experimental design",
-        "heat exchanger",
-        "heat exchanger design",
-        "heat transfer",
-        "lab safety",
-        "laboratory practice",
-        "process control",
-        "radiation"
-      ]
-    },
-    {
-      "code": "CHE-346",
-      "title": "Particulate Technology",
-      "batch": "2024F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-1",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Relate the fundamentals of particulate systems to size reduction, transportation and storage of solids",
-          "concepts": [
-            "particle size analysis",
-            "size reduction",
-            "solids handling"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-1",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Extend the concepts of particulate behavior to illustrate the mechanism of mixing and separation of solids",
-          "concepts": [
-            "separation processes",
-            "solids handling"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-5",
-          "emphasis": "Medium",
-          "domain": "P-3",
-          "description": "Follows Equipment’s standard operating procedure (SOP) for particle size reduction, separation and handling.",
-          "concepts": [
-            "particle size analysis",
-            "separation processes",
-            "size reduction"
-          ]
-        },
-        {
-          "code": "CLO-4",
-          "plo": "PLO-4",
-          "emphasis": "Medium",
-          "domain": "C-4",
-          "description": "Analyze the effect of attrition, impact and compression on particle size reduction and determine efficiency of equipment.",
-          "concepts": [
-            "particle size analysis",
-            "size reduction"
-          ]
-        },
-        {
-          "code": "CLO-5",
-          "plo": "PLO-1",
-          "emphasis": "Medium",
-          "domain": "P-4",
-          "description": "Grind solid particles and perform distribution analysis by use of standards (Tyler mesh standard) for particle size analysis.",
-          "concepts": [
-            "particle size analysis",
-            "size reduction",
-            "solids handling"
-          ]
-        },
-        {
-          "code": "CLO-6",
-          "plo": "PLO-8",
-          "emphasis": "Medium",
-          "domain": "A-3",
-          "description": "Initiate experiment by following equipment procedure and safety SOP’s.",
-          "concepts": [
-            "process safety",
-            "safety management"
-          ]
-        }
-      ],
-      "concepts": [
-        "particle size analysis",
-        "process safety",
-        "safety management",
-        "separation processes",
-        "size reduction",
-        "solids handling"
-      ]
-    },
-    {
-      "code": "MATH-243",
-      "title": "Vector Calculus",
-      "batch": "2024F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-2",
-          "emphasis": "Low",
-          "domain": "C-2",
-          "description": "Comprehend the characterization of differential equations and select the appropriate method for solution",
-          "concepts": [
-            "calculus",
-            "differential equations"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Choose and apply the methods for analytic and approximate solutions of Ordinary and Partial differential equations",
-          "concepts": [
-            "calculus",
-            "differential equations",
-            "vector calculus"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Relate the knowledge for Mathematical formulation of physical problems and their solutions",
-          "concepts": [
-            "differential equations"
-          ]
-        }
-      ],
-      "concepts": [
-        "calculus",
-        "differential equations",
-        "vector calculus"
-      ]
-    },
-    {
-      "code": "QR-101",
-      "title": "Quantitative Reasoning-II",
-      "batch": "2024F",
-      "clos": [
-        {
-          "code": "CLO-1",
-          "plo": "PLO-2",
-          "emphasis": "Low",
-          "domain": "C-2",
-          "description": "Understanding of logic and logical reasoning",
-          "concepts": [
-            "logical reasoning"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-2",
-          "emphasis": "Low",
-          "domain": "C-2",
-          "description": "Understanding of basic quantitative modeling and analyses",
-          "concepts": [
-            "mathematical modelling"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-2",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Logical reasoning skills and abilities to apply them to solve quantitative problems and evaluate arguments",
-          "concepts": [
-            "logical reasoning",
-            "mathematical modelling"
-          ]
-        },
-        {
-          "code": "CLO-4",
-          "plo": "PLO-2",
-          "emphasis": "High",
-          "domain": "C-5",
-          "description": "Ability to critically evaluate quantitative information to make evidence  based decisions through appropriate computational tools",
-          "concepts": [
-            "mathematical modelling",
-            "numerical methods"
-          ]
-        }
-      ],
-      "concepts": [
-        "calculus",
-        "logical reasoning",
-        "mathematical modelling",
-        "numerical methods"
+        "laboratory techniques",
+        "manufacturing",
+        "manufacturing techniques",
+        "process principles",
+        "solution fabrication",
+        "team collaboration",
+        "workshop protocols"
       ]
     },
     {
       "code": "CH-113",
       "title": "Inorganic & Organic Chemistry",
       "batch": "2025F",
+      "semester": 2,
+      "lec": 3,
+      "lab": 0,
       "clos": [
         {
           "code": "CLO-1",
@@ -1033,8 +382,9 @@
           "domain": "C-2",
           "description": "Explain the fundamentals of organic and inorganic chemistry.",
           "concepts": [
-            "inorganic chemistry",
-            "organic chemistry"
+            "inorganic reactions",
+            "organic chemistry",
+            "polymer synthesis"
           ]
         },
         {
@@ -1044,10 +394,11 @@
           "domain": "C-2",
           "description": "Explain the chemical reactions involved in organic and inorganic synthesis.",
           "concepts": [
-            "chemical synthesis",
-            "inorganic chemistry",
+            "chemical analysis",
+            "inorganic reactions",
             "organic chemistry",
-            "reaction kinetics"
+            "polymer synthesis",
+            "reaction mechanisms"
           ]
         },
         {
@@ -1057,10 +408,10 @@
           "domain": "C-3",
           "description": "Apply organic or inorganic synthesis reactions in industrial applications",
           "concepts": [
-            "chemical synthesis",
-            "inorganic chemistry",
+            "inorganic reactions",
             "organic chemistry",
-            "reaction kinetics"
+            "polymer synthesis",
+            "reaction mechanisms"
           ]
         },
         {
@@ -1070,12 +421,18 @@
           "domain": "P-4",
           "description": "Execute inorganic and organic chemistry laboratory procedures, including titration, salt analysis, recrystallization, liquid-liquid extraction, etc. and qualitative analysis by applying appropriate techniques and recording experimental data accurately.",
           "concepts": [
+            "chemical analysis",
             "crystallization",
             "extraction",
-            "inorganic chemistry",
+            "inorganic reactions",
             "laboratory practice",
+            "mass transfer",
             "organic chemistry",
-            "titration"
+            "polymer synthesis",
+            "recrystallization methods",
+            "salt formation",
+            "titration",
+            "titration procedures"
           ]
         },
         {
@@ -1096,7 +453,7 @@
           "domain": "A-3",
           "description": "Practice laboratory safety protocols by properly handling chemicals, glassware, and analytical instruments, while identifying and minimizing risks associated with toxic, corrosive, and flammable substances.",
           "concepts": [
-            "chemical synthesis",
+            "chemical analysis",
             "laboratory practice",
             "safety management"
           ]
@@ -1108,30 +465,118 @@
           "domain": "C-4",
           "description": "Analyze and interpret experimental observations and calculated results from inorganic and organic chemistry experiments to compare theoretical concepts, identify discrepancies, and draw valid scientific conclusions.",
           "concepts": [
-            "inorganic chemistry",
-            "organic chemistry"
+            "inorganic reactions",
+            "organic chemistry",
+            "polymer synthesis"
+          ]
+        }
+      ],
+      "concepts": [
+        "chemical analysis",
+        "crystallization",
+        "extraction",
+        "inorganic reactions",
+        "laboratory practice",
+        "mass transfer",
+        "organic chemistry",
+        "polymer synthesis",
+        "reaction mechanisms",
+        "recrystallization methods",
+        "safety management",
+        "salt formation",
+        "teamwork",
+        "titration",
+        "titration procedures"
+      ]
+    },
+    {
+      "code": "CH-114",
+      "title": "Physical and Analytical Chemistry",
+      "batch": "2025F",
+      "semester": 2,
+      "lec": 2,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Explain the fundamentals of physical and analytical chemistry",
+          "concepts": []
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Demonstrate understanding of instrumental techniques",
+          "concepts": [
+            "instrumental analysis"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Execute the experimental procedures by applying appropriate techniques, following the established protocols, and demonstrating precision in measurements and observations.",
+          "concepts": [
+            "experimental design"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-8",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Demonstrate an eagerness to work in a team during the lab activities.",
+          "concepts": [
+            "laboratory practice"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-6",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Follow lab safety protocols attentively and apply them consistently to maintain a safe working environment.",
+          "concepts": [
+            "laboratory practice",
+            "process safety",
+            "safety management"
+          ]
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Analyze experimental results, comparing them with theoretical concepts learned in class to identify any discrepancies and derive valid conclusions.",
+          "concepts": [
+            "experimental design"
           ]
         }
       ],
       "concepts": [
         "chemical synthesis",
-        "crystallization",
-        "extraction",
+        "data analysis",
+        "experimental design",
         "heat transfer",
-        "inorganic chemistry",
+        "instrumental analysis",
         "laboratory practice",
-        "organic chemistry",
-        "polymer processing",
-        "reaction kinetics",
-        "safety management",
-        "teamwork",
-        "titration"
+        "process safety",
+        "reaction mechanisms",
+        "safety management"
       ]
     },
     {
       "code": "CHE-115",
       "title": "Chemical Process Industries",
       "batch": "2025F",
+      "semester": 2,
+      "lec": 3,
+      "lab": 0,
       "clos": [
         {
           "code": "CLO-1",
@@ -1140,9 +585,11 @@
           "domain": "C-2",
           "description": "Comprehend the synthesis of a compound in specific chemical industry using basic principles of process flow",
           "concepts": [
-            "instrumentation",
+            "chemical industry overview",
+            "chemical synthesis",
             "process design",
-            "reaction kinetics"
+            "process variables",
+            "process visualization"
           ]
         },
         {
@@ -1152,17 +599,24 @@
           "domain": "C-2",
           "description": "Explains the interrelation of process variables and yield of desired product in a certain manufacturing process",
           "concepts": [
-            "instrumentation",
             "manufacturing",
             "process design",
+            "process variables",
+            "process visualization",
             "yield optimization"
           ]
         }
       ],
       "concepts": [
+        "chemical industry overview",
+        "chemical synthesis",
+        "heat transfer",
         "instrumentation",
         "manufacturing",
+        "mass balance calculations",
         "process design",
+        "process variables",
+        "process visualization",
         "reaction kinetics",
         "yield optimization"
       ]
@@ -1171,6 +625,9 @@
       "code": "ENGL-101",
       "title": "Expository Writing",
       "batch": "2025F",
+      "semester": 2,
+      "lec": 3,
+      "lab": 0,
       "clos": [
         {
           "code": "CLO-1",
@@ -1180,7 +637,9 @@
           "description": "Understand research methods to locate and integrate credible sources into writing.",
           "concepts": [
             "academic writing",
-            "research methods"
+            "research methods",
+            "source integration",
+            "writing strategy"
           ]
         },
         {
@@ -1191,19 +650,24 @@
           "description": "Analyse the rhetorical situation and use effective writing strategies and techniques to persuade readers.",
           "concepts": [
             "academic writing",
-            "research methods"
+            "writing strategy"
           ]
         }
       ],
       "concepts": [
         "academic writing",
-        "research methods"
+        "research methods",
+        "source integration",
+        "writing strategy"
       ]
     },
     {
       "code": "HU-127",
       "title": "Ideology and Constitution of Pakistan",
       "batch": "2025F",
+      "semester": 2,
+      "lec": 2,
+      "lab": 0,
       "clos": [
         {
           "code": "CLO-1",
@@ -1233,6 +697,9 @@
       "code": "HU-132",
       "title": "Understanding of Quran-II",
       "batch": "2025F",
+      "semester": 2,
+      "lec": 0,
+      "lab": 1,
       "clos": [
         {
           "code": "CLO-1",
@@ -1240,19 +707,21 @@
           "emphasis": "Low",
           "domain": "C-2",
           "description": "Discuss and explain the meanings of the words of Quran, its phrases and sentences",
-          "concepts": [
-            "Quranic studies"
-          ]
+          "concepts": []
         }
       ],
       "concepts": [
-        "Quranic studies"
+        "language processing",
+        "text analysis"
       ]
     },
     {
       "code": "ME-124",
       "title": "Engineering Drawing and Graphics",
       "batch": "2025F",
+      "semester": 2,
+      "lec": 0,
+      "lab": 1,
       "clos": [
         {
           "code": "CLO-1",
@@ -1261,10 +730,11 @@
           "domain": "C-2",
           "description": "Interpret basic components of engineering drawings and understanding the projection theory",
           "concepts": [
-            "CAD",
+            "cad drawing construction",
             "engineering drawing",
-            "mathematical modelling",
-            "projection methods"
+            "engineering drawings",
+            "engineering economics",
+            "projection"
           ]
         },
         {
@@ -1274,9 +744,14 @@
           "domain": "C-4",
           "description": "Analyse the hidden information in the drawings and breakdown in simpler single view projections",
           "concepts": [
-            "CAD",
+            "cad drawing construction",
+            "data analysis",
             "engineering drawing",
-            "projection methods"
+            "engineering drawings",
+            "engineering economics",
+            "projection",
+            "simplified projections",
+            "single view projections"
           ]
         },
         {
@@ -1287,22 +762,34 @@
           "description": "Display the ability to construct engineering drawings and models using computer aided drawing (CAD)",
           "concepts": [
             "CAD",
+            "cad drawing construction",
+            "cad models",
             "engineering drawing",
-            "mathematical modelling"
+            "engineering drawings",
+            "engineering economics"
           ]
         }
       ],
       "concepts": [
         "CAD",
+        "cad drawing construction",
+        "cad models",
+        "data analysis",
         "engineering drawing",
-        "mathematical modelling",
-        "projection methods"
+        "engineering drawings",
+        "engineering economics",
+        "projection",
+        "simplified projections",
+        "single view projections"
       ]
     },
     {
       "code": "PHY-102",
       "title": "Applied Physics",
       "batch": "2025F",
+      "semester": 2,
+      "lec": 2,
+      "lab": 1,
       "clos": [
         {
           "code": "CLO-1",
@@ -1311,6 +798,52 @@
           "domain": "C-3",
           "description": "Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics",
           "concepts": [
+            "material properties",
+            "mechanics"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Discuss the fundamentals of electromagnetic induction and thermometry to demonstrate the working principle of related equipment",
+          "concepts": [
+            "electromagnetic induction"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-3",
+          "description": "Realize the experiment by following instructions by the teacher",
+          "concepts": []
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-9",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Exhibit capability to work in team during the lab activities",
+          "concepts": []
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-3",
+          "description": "Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class.",
+          "concepts": []
+        },
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics",
+          "concepts": [
+            "material properties",
             "mechanics"
           ]
         },
@@ -1351,16 +884,21 @@
       ],
       "concepts": [
         "electromagnetic induction",
-        "heat transfer",
+        "electromagnetism",
         "instrumentation",
-        "mass balance",
-        "mechanics"
+        "linear algebra",
+        "material properties",
+        "mechanics",
+        "momentum transfer"
       ]
     },
     {
       "code": "QR-100",
       "title": "Quantitative Reasoning-I",
       "batch": "2025F",
+      "semester": 2,
+      "lec": 3,
+      "lab": 0,
       "clos": [
         {
           "code": "CLO-1",
@@ -1370,7 +908,8 @@
           "description": "Applies fundamental numerical literacy to compute values, demonstrate numerical relationships, and construct accurate data representations.",
           "concepts": [
             "data analysis",
-            "quantitative reasoning"
+            "data interpretation",
+            "numeric methods"
           ]
         },
         {
@@ -1380,8 +919,8 @@
           "domain": "C-3",
           "description": "Solves problems using fundamental mathematical and statistical concepts, demonstrates their applications, and relates them to real-world scenarios.",
           "concepts": [
-            "calculus",
-            "statistical analysis"
+            "mathematical modelling",
+            "statistical methods"
           ]
         },
         {
@@ -1391,35 +930,2639 @@
           "domain": "C-3",
           "description": "Interprets and modifies data presented in various formats, including but not limited to tables, graphs, charts, and equations, to produce meaningful insights.",
           "concepts": [
-            "calculus",
-            "data analysis"
+            "chart comprehension",
+            "data analysis",
+            "data interpretation",
+            "mathematical operations",
+            "table analysis"
           ]
         }
       ],
       "concepts": [
-        "calculus",
+        "chart comprehension",
         "data analysis",
+        "data interpretation",
+        "mathematical modelling",
+        "mathematical operations",
+        "numeric methods",
         "quantitative reasoning",
-        "statistical analysis"
+        "statistical methods",
+        "table analysis"
+      ]
+    },
+    {
+      "code": "CCE-401",
+      "title": "Civic and Community Engagement",
+      "batch": "2024F",
+      "semester": 3,
+      "lec": 1,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-6",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Students will become familiar with various areas of community service (such as community service learning, community service development and community service empowerment), and become aware of relevant ongoing philanthropic activities in the community and social Consciousness.",
+          "concepts": [
+            "community challenges",
+            "community service",
+            "compassion and empathy",
+            "philanthropic activities",
+            "service learning",
+            "social consciousness",
+            "sustainable development approaches"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-6",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Students will be able to provide different sustainable development approaches to address local or global community challenges.",
+          "concepts": [
+            "community challenges",
+            "community service",
+            "service learning",
+            "sustainable development approaches"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-10",
+          "emphasis": "Low",
+          "domain": "A-2",
+          "description": "Students will develop sense of responsibility, compassion and empathy towards society and through different community service projects contribute to have a discernible impact on the community.",
+          "concepts": [
+            "community challenges",
+            "community service",
+            "compassion and empathy",
+            "service learning"
+          ]
+        }
+      ],
+      "concepts": [
+        "community challenges",
+        "community service",
+        "compassion and empathy",
+        "philanthropic activities",
+        "service learning",
+        "social consciousness",
+        "sustainability",
+        "sustainable development approaches"
+      ]
+    },
+    {
+      "code": "CHE-214",
+      "title": "Fluid Mechanics-I",
+      "batch": "2024F",
+      "semester": 3,
+      "lec": 2,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the flow parameters for compressible and incompressible fluids and select suitable transport system for industrial applications.",
+          "concepts": [
+            "compressible flow",
+            "fluid flow",
+            "fluid mechanics",
+            "incompressible flow",
+            "transport systems"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Apply the principles of dimensional analysis and similitude to establish functional relations between important relevant parameters and apply these to design.",
+          "concepts": [
+            "dimensional analysis"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Relates the working mechanism of flow measuring devices and pressure losses across these devices when installed in circular pipe.",
+          "concepts": [
+            "compressible flow",
+            "fluid flow",
+            "incompressible flow",
+            "process efficiency"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Execute the experimental procedures by applying appropriate techniques, following the established protocols, and demonstrating precision in measurements and observations.",
+          "concepts": [
+            "fluid flow"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-9",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Demonstrate an eagerness to work in a team during the lab activities.",
+          "concepts": [
+            "laboratory practice"
+          ]
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-6",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Follow lab safety protocols attentively and apply them consistently to maintain a safe working environment.",
+          "concepts": [
+            "laboratory practice",
+            "safety management"
+          ]
+        },
+        {
+          "code": "CLO-7",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Analyze experimental results, comparing them with theoretical concepts learned in class to identify and derive valid conclusions.",
+          "concepts": []
+        }
+      ],
+      "concepts": [
+        "compressible flow",
+        "dimensional analysis",
+        "fluid flow",
+        "fluid mechanics",
+        "incompressible flow",
+        "laboratory practice",
+        "process efficiency",
+        "safety management",
+        "transport systems"
+      ]
+    },
+    {
+      "code": "CHE-222",
+      "title": "Chemical Engineering Principles-II",
+      "batch": "2024F",
+      "semester": 3,
+      "lec": 2,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the basic concepts of energy balance and extend them to chemical engineering calculations.",
+          "concepts": [
+            "energy balance",
+            "momentum transport"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Apply the concepts of process principles to solve energy balance problems for single and multiple units.",
+          "concepts": [
+            "energy balance",
+            "momentum transport",
+            "multiple unit operations",
+            "process principles",
+            "single unit operations"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Solve and analyze complex engineering problems pertaining to energy balance of unit operations and processes",
+          "concepts": [
+            "energy balance",
+            "momentum transport",
+            "multiple unit operations",
+            "process principles",
+            "single unit operations"
+          ]
+        }
+      ],
+      "concepts": [
+        "energy balance",
+        "heat transfer",
+        "mass transfer",
+        "momentum transport",
+        "multiple unit operations",
+        "process principles",
+        "reaction mechanisms",
+        "single unit operations"
+      ]
+    },
+    {
+      "code": "CHE-223",
+      "title": "Chemical Engineering Thermodynamics-I",
+      "batch": "2024F",
+      "semester": 3,
+      "lec": 2,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Explain the basics of thermodynamics, the state variables and law of thermodynamics to describe the state of a system.",
+          "concepts": [
+            "equation of state",
+            "state variables",
+            "thermodynamic laws",
+            "thermodynamics"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Solve and analyze the problem related to thermodynamic behavior and heat effects of pure fluids in various processes using equation of state.",
+          "concepts": [
+            "equation of state",
+            "heat effects",
+            "pure fluids",
+            "state variables",
+            "thermodynamic laws"
+          ]
+        }
+      ],
+      "concepts": [
+        "equation of state",
+        "heat effects",
+        "pure fluids",
+        "state variables",
+        "thermochemical properties",
+        "thermodynamic laws",
+        "thermodynamics"
+      ]
+    },
+    {
+      "code": "CHE-226",
+      "title": "Programming and Data Science",
+      "batch": "2024F",
+      "semester": 3,
+      "lec": 2,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-5",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the fundamentals of introductory programming, data science concepts, and the application of associated tools.",
+          "concepts": [
+            "Python",
+            "data analysis",
+            "data science"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Compute Engineering problems and mathematical results using Python for chemical engineering data.",
+          "concepts": [
+            "Python",
+            "chemical processes",
+            "data analysis",
+            "data science",
+            "mathematical results"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-5",
+          "emphasis": "High",
+          "domain": "C-6",
+          "description": "Write Python programs for data analysis and visualization of chemical processes data sets.",
+          "concepts": [
+            "Python",
+            "chemical processes",
+            "data analysis",
+            "data science",
+            "process visualization"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-9",
+          "emphasis": "Low",
+          "domain": "A-2",
+          "description": "Perform assigned programming and data analysis lab tasks effectively.",
+          "concepts": [
+            "Python",
+            "data analysis",
+            "data science"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "P-3",
+          "description": "Follow standard algorithms and coding practices in chemical engineering applications.",
+          "concepts": [
+            "algorithm development",
+            "algorithms",
+            "chemical processes"
+          ]
+        }
+      ],
+      "concepts": [
+        "Python",
+        "algorithm development",
+        "algorithms",
+        "chemical processes",
+        "data analysis",
+        "data science",
+        "mathematical results",
+        "process visualization"
+      ]
+    },
+    {
+      "code": "MATH-121",
+      "title": "Linear Algebra & ODEs",
+      "batch": "2024F",
+      "semester": 3,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Comprehend the concept of multivariable functions and partial derivative and recognize the techniques to solve the equation of several variables.",
+          "concepts": [
+            "numeric methods",
+            "partial differential"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Relate the use of differentiation and integration of several variable functions and implement them to find the area and volume of different geometrical shapes.",
+          "concepts": [
+            "numeric methods"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Comprehend the concept of first order and higher order differential equations and solve the mathematical models of physical systems.",
+          "concepts": [
+            "differential equations",
+            "mathematical modelling",
+            "ordinary differential equations"
+          ]
+        }
+      ],
+      "concepts": [
+        "differential equations",
+        "linear transformations",
+        "mathematical modelling",
+        "numeric methods",
+        "ordinary differential equations",
+        "partial differential",
+        "vector calculus"
+      ]
+    },
+    {
+      "code": "MSE-226",
+      "title": "Engineering Materials",
+      "batch": "2024F",
+      "semester": 3,
+      "lec": 2,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the classification of the materials and explain crystallographic planes and directions as well as imperfections in materials.",
+          "concepts": [
+            "crystal structures",
+            "material imperfections",
+            "plane directions"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Explain the mechanical properties of the materials.",
+          "concepts": [
+            "material imperfections",
+            "material properties"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Interpret the binary phase diagram.",
+          "concepts": [
+            "binary phase"
+          ]
+        }
+      ],
+      "concepts": [
+        "analytical techniques",
+        "binary phase",
+        "crystal structures",
+        "defect types",
+        "material imperfections",
+        "material properties",
+        "plane directions"
+      ]
+    },
+    {
+      "code": "CHE-220",
+      "title": "Mass Transfer",
+      "batch": "2024F",
+      "semester": 4,
+      "lec": 3,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Comprehend the basic concepts and theories of mass transfer to apply for process separation related problems",
+          "concepts": [
+            "absorption and distillation",
+            "mass transfer",
+            "mass transfer operations",
+            "mass transport phenomena",
+            "process separation principles",
+            "separation methods"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Apply the knowledge of separation principles for basic design calculations related to gas-liquid absorption and distillation processes",
+          "concepts": [
+            "absorption",
+            "absorption and distillation",
+            "distillation",
+            "mass transfer",
+            "process separation principles",
+            "separation methods",
+            "separation processes"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Solve and analyze engineering problems pertaining to mass transfer operation",
+          "concepts": [
+            "absorption and distillation",
+            "mass transfer",
+            "mass transfer operations",
+            "mass transport phenomena"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-3",
+          "description": "Realize experiment by following instructions by the teacher",
+          "concepts": []
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-9",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Exhibit capability to work in team during the lab activities",
+          "concepts": []
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-7",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Follows lab instructions to ensure safe environment in the lab",
+          "concepts": []
+        },
+        {
+          "code": "CLO-7",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class",
+          "concepts": [
+            "absorption and distillation"
+          ]
+        }
+      ],
+      "concepts": [
+        "absorption",
+        "absorption and distillation",
+        "distillation",
+        "mass transfer",
+        "mass transfer operations",
+        "mass transport phenomena",
+        "process separation principles",
+        "separation methods",
+        "separation processes",
+        "transport mechanisms"
+      ]
+    },
+    {
+      "code": "CHE-242",
+      "title": "Heat Transfer",
+      "batch": "2024F",
+      "semester": 4,
+      "lec": 3,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the fundamentals of heat transfer related to steady state conduction, convection, and radiation",
+          "concepts": [
+            "conduction",
+            "convection",
+            "heat exchanger",
+            "heat transfer",
+            "radiation",
+            "steady state conduction"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Use the knowledge of heat transfer model equations to solve problems related to heat transfer systems",
+          "concepts": [
+            "heat exchanger",
+            "heat transfer"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Solve and analyze engineering problems pertaining to heat transfer operations",
+          "concepts": [
+            "heat exchanger",
+            "heat transfer"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Execute the standard startup procedure and set the requisite temperature, flows and pressures by following the established protocols, and collecting data at the appropriate time.",
+          "concepts": [
+            "standard startup procedure"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-9",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Demonstrate punctuality and attentive demeanor as an individual or in a team during the whole lab session to improve productivity and meet deadlines",
+          "concepts": [
+            "lab safety",
+            "laboratory practice"
+          ]
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-6",
+          "emphasis": "Medium",
+          "domain": "P-3",
+          "description": "Follows lab safety considerations for operating all kinds of heat exchangers and electrical heating devices and apply them consistently to maintain a safe working environment.",
+          "concepts": [
+            "heat exchanger",
+            "heat transfer",
+            "lab safety",
+            "laboratory practice"
+          ]
+        },
+        {
+          "code": "CLO-7",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Recall the standard experimental procedures and analyze and interpret the results, comparing them with theoretical concepts learned in class to identify any discrepancies and derive valid conclusions",
+          "concepts": [
+            "laboratory techniques",
+            "standard startup procedure"
+          ]
+        }
+      ],
+      "concepts": [
+        "conduction",
+        "convection",
+        "heat exchanger",
+        "heat transfer",
+        "lab safety",
+        "laboratory practice",
+        "laboratory techniques",
+        "process control",
+        "radiation",
+        "standard startup procedure",
+        "steady state conduction"
+      ]
+    },
+    {
+      "code": "CHE-346",
+      "title": "Particulate Technology",
+      "batch": "2024F",
+      "semester": 4,
+      "lec": 3,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Relate the fundamentals of particulate systems to size reduction, transportation and storage of solids",
+          "concepts": [
+            "particle size analysis",
+            "size reduction",
+            "solid grinding"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Extend the concepts of particulate behavior to illustrate the mechanism of mixing and separation of solids",
+          "concepts": [
+            "particle mixing",
+            "separation methods",
+            "solid grinding"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-3",
+          "description": "Follows Equipment’s standard operating procedure (SOP) for particle size reduction, separation and handling.",
+          "concepts": [
+            "particle mixing",
+            "particle size analysis",
+            "separation methods",
+            "size reduction"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Analyze the effect of attrition, impact and compression on particle size reduction and determine efficiency of equipment.",
+          "concepts": [
+            "attrition processes",
+            "particle mixing",
+            "particle size analysis",
+            "process efficiency",
+            "size reduction"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Grind solid particles and perform distribution analysis by use of standards (Tyler mesh standard) for particle size analysis.",
+          "concepts": [
+            "particle mixing",
+            "particle size analysis",
+            "size reduction",
+            "solid grinding"
+          ]
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-8",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Initiate experiment by following equipment procedure and safety SOP’s.",
+          "concepts": [
+            "safety management",
+            "safety procedures"
+          ]
+        }
+      ],
+      "concepts": [
+        "attrition processes",
+        "particle mixing",
+        "particle size analysis",
+        "process efficiency",
+        "safety management",
+        "safety procedures",
+        "separation methods",
+        "size reduction",
+        "solid grinding"
+      ]
+    },
+    {
+      "code": "MATH-243",
+      "title": "Vector Calculus",
+      "batch": "2024F",
+      "semester": 4,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-2",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the characterization of differential equations and select the appropriate method for solution",
+          "concepts": [
+            "differential equations",
+            "ordinary differential equations",
+            "partial differential",
+            "solution methods"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Choose and apply the methods for analytic and approximate solutions of Ordinary and Partial differential equations",
+          "concepts": [
+            "analytic solutions",
+            "approximate solutions",
+            "differential equations",
+            "ordinary differential equations",
+            "partial differential",
+            "solution methods"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Relate the knowledge for Mathematical formulation of physical problems and their solutions",
+          "concepts": [
+            "analytic solutions",
+            "approximate solutions",
+            "mathematical modelling",
+            "process principles",
+            "solution methods"
+          ]
+        }
+      ],
+      "concepts": [
+        "analytic solutions",
+        "approximate solutions",
+        "differential equations",
+        "mathematical modelling",
+        "ordinary differential equations",
+        "partial differential",
+        "process principles",
+        "solution methods"
+      ]
+    },
+    {
+      "code": "QR-101",
+      "title": "Quantitative Reasoning-II",
+      "batch": "2024F",
+      "semester": 4,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-2",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Understanding of logic and logical reasoning",
+          "concepts": [
+            "logical reasoning"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Understanding of basic quantitative modeling and analyses",
+          "concepts": [
+            "model validation",
+            "quantitative modeling"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Logical reasoning skills and abilities to apply them to solve quantitative problems and evaluate arguments",
+          "concepts": [
+            "argument evaluation",
+            "logical reasoning",
+            "quantitative modeling"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-2",
+          "emphasis": "High",
+          "domain": "C-5",
+          "description": "Ability to critically evaluate quantitative information to make evidence  based decisions through appropriate computational tools",
+          "concepts": [
+            "computational tools",
+            "quantitative modeling"
+          ]
+        }
+      ],
+      "concepts": [
+        "argument evaluation",
+        "computational tools",
+        "logical reasoning",
+        "mathematical modelling",
+        "model validation",
+        "process simulation",
+        "quantitative modeling"
+      ]
+    },
+    {
+      "code": "CHE-332",
+      "title": "Chemical Engineering Thermodynamics-II",
+      "batch": "2023F",
+      "semester": 5,
+      "lec": 3,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Explain the thermodynamics of flow processes and infer the fundamental property relations for different processes and systems.",
+          "concepts": [
+            "fluid flow",
+            "process industry",
+            "process simulation",
+            "thermodynamic properties",
+            "thermodynamics"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Demonstrate and apply the complete energy balance of different flow processes along with their thermodynamic diagrams.",
+          "concepts": [
+            "energy balance",
+            "fluid flow",
+            "process industry",
+            "process simulation",
+            "thermodynamic properties"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Illustrate thermodynamic analysis of gas mixtures, liquid solutions and two-phase mixtures in order to relate solution properties.",
+          "concepts": [
+            "chemical processing",
+            "mass transport phenomena",
+            "process simulation",
+            "thermodynamic properties"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Solve and analyse complex engineering problems pertaining to thermodynamics of flow processes in process industries.",
+          "concepts": [
+            "fluid flow",
+            "process industry",
+            "process simulation",
+            "thermodynamic properties",
+            "thermodynamics"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Execute the experimental procedures by applying appropriate techniques, following the established protocols, and demonstrating precision in measurements and observations.",
+          "concepts": []
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-9",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Demonstrate an eagerness to work in a team during the lab activities.",
+          "concepts": [
+            "laboratory practice"
+          ]
+        },
+        {
+          "code": "CLO-7",
+          "plo": "PLO-6",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Follow lab safety protocols attentively and apply them consistently to maintain a safe working environment.",
+          "concepts": [
+            "laboratory practice",
+            "safety management"
+          ]
+        },
+        {
+          "code": "CLO-8",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Analyze experimental results, comparing them with theoretical concepts learned in class to identify and derive valid conclusions.",
+          "concepts": []
+        }
+      ],
+      "concepts": [
+        "chemical processing",
+        "energy balance",
+        "fluid flow",
+        "laboratory practice",
+        "mass transport phenomena",
+        "process industry",
+        "process simulation",
+        "safety management",
+        "thermodynamic properties",
+        "thermodynamics"
+      ]
+    },
+    {
+      "code": "CHE-344",
+      "title": "Separation Processes I",
+      "batch": "2023F",
+      "semester": 5,
+      "lec": 3,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the principles of advance separation processes and extend their applications in chemical engineering processes theoretically as well as experimentally.",
+          "concepts": [
+            "mass transfer",
+            "process design",
+            "separation",
+            "separation methods"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Apply principles of separation process to design the equipment.",
+          "concepts": [
+            "process design",
+            "process equipment",
+            "separation",
+            "separation methods"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Solve and analyze engineering problems pertaining to Separation Processes",
+          "concepts": [
+            "mass transfer",
+            "process design",
+            "separation",
+            "separation methods"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Execute the experimental procedures by applying appropriate techniques, following the established protocols, and demonstrating precision in measurements and observations.",
+          "concepts": [
+            "distillation techniques"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-9",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Demonstrate an eagerness to work in a team during the lab activities.",
+          "concepts": [
+            "laboratory practice"
+          ]
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-6",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Follow lab safety protocols attentively and apply them consistently to maintain a safe working environment.",
+          "concepts": [
+            "laboratory practice",
+            "safety management"
+          ]
+        },
+        {
+          "code": "CLO-7",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Analyze experimental results, comparing them with theoretical concepts learned in class to identify and derive valid conclusions.",
+          "concepts": []
+        }
+      ],
+      "concepts": [
+        "distillation techniques",
+        "filtration methods",
+        "heat transfer",
+        "laboratory practice",
+        "mass transfer",
+        "process design",
+        "process equipment",
+        "safety management",
+        "separation",
+        "separation methods"
+      ]
+    },
+    {
+      "code": "MATH-351",
+      "title": "Numerical Methods",
+      "batch": "2023F",
+      "semester": 5,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-2",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "State the consequences of finite precision and estimate the amount of error inherent in Numerical methods",
+          "concepts": [
+            "numerical methods"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Apply different computational/numerical techniques to solve Mathematical problems arising in engineering and sciences",
+          "concepts": [
+            "numerical methods"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Apply algorithms for different Numerical techniques",
+          "concepts": [
+            "algorithms",
+            "numerical methods"
+          ]
+        }
+      ],
+      "concepts": [
+        "algorithms",
+        "numerical methods"
+      ]
+    },
+    {
+      "code": "MGT-271",
+      "title": "Entrepreneurship",
+      "batch": "2023F",
+      "semester": 5,
+      "lec": 2,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-12",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Screen and examine opportunities for new ventures that add value to the overall economy of the country.",
+          "concepts": [
+            "venture capital"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-12",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Elucidate the factors which can affect the performance of a new venture and assess strategies to overcome those",
+          "concepts": [
+            "venture capital"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-12",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Conceptualize of business models for sustainable investment opportunities through creation of managerial, financial, operational, marketing and planning strategies for the new venture.",
+          "concepts": [
+            "business planning",
+            "engineering economics",
+            "investment evaluation",
+            "managerial decision",
+            "market analysis",
+            "process control",
+            "sustainability models",
+            "venture capital"
+          ]
+        }
+      ],
+      "concepts": [
+        "business planning",
+        "engineering economics",
+        "investment evaluation",
+        "managerial decision",
+        "market analysis",
+        "process control",
+        "sustainability models",
+        "venture capital"
+      ]
+    },
+    {
+      "code": "CHE-323",
+      "title": "Instrumentation & Process Control",
+      "batch": "2023F",
+      "semester": 6,
+      "lec": 3,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend open/closed loop control systems based on the fundamentals of process dynamics",
+          "concepts": [
+            "PID control",
+            "control loops",
+            "level control",
+            "process control",
+            "process dynamics",
+            "temperature control"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Solve problems related to open/closed control loop systems",
+          "concepts": [
+            "PID control",
+            "control loops",
+            "level control",
+            "process control",
+            "temperature control"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-4",
+          "emphasis": "High",
+          "domain": "C-6",
+          "description": "Design and explain control loops for process variables, i.e., temperature, pressure, level, etc., of a given industrial process.",
+          "concepts": [
+            "PID control",
+            "control loops",
+            "level control",
+            "process control",
+            "process dynamics",
+            "temperature control"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Calibrates automatic process control sensors (flow, pressure, temperature, level) using manual instruments as reference standards.",
+          "concepts": [
+            "PID control",
+            "automatic calibration",
+            "control loops",
+            "level control",
+            "process control",
+            "process dynamics",
+            "temperature control"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "P-3",
+          "description": "Follows procedures to apply ON/OFF, PI, and PID control modes for achieving set points and accurately adjusts input parameters",
+          "concepts": [
+            "PID control",
+            "control loops",
+            "level control",
+            "process control",
+            "temperature control"
+          ]
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-8",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Analyzes and interprets process response curves (time vs. level, pressure, etc.) in relation to control theory to evaluate performance of control strategies.",
+          "concepts": [
+            "PID control",
+            "control loops",
+            "level control",
+            "process control",
+            "process dynamics",
+            "response curves",
+            "temperature control"
+          ]
+        },
+        {
+          "code": "CLO-7",
+          "plo": "PLO-8",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Demonstrates responsible handling of control equipment and participates effectively in group-based experimentation and troubleshooting.",
+          "concepts": [
+            "PID control",
+            "control loops",
+            "level control",
+            "process control",
+            "temperature control"
+          ]
+        }
+      ],
+      "concepts": [
+        "PID control",
+        "automatic calibration",
+        "control loops",
+        "instrumentation",
+        "level control",
+        "process control",
+        "process dynamics",
+        "response curves",
+        "temperature control"
+      ]
+    },
+    {
+      "code": "CHE-345",
+      "title": "Transport Phenomena",
+      "batch": "2023F",
+      "semester": 6,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Comprehend mechanisms of momentum, heat and mass transport and identify their applications for steady and transient flow systems",
+          "concepts": [
+            "heat transfer",
+            "mass transfer",
+            "mass transport phenomena",
+            "momentum transport",
+            "steady flow systems",
+            "transient flow systems"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Express microscopic and macroscopic mass/energy/momentum balances equation and solve them for several systems applying appropriate conservation statements and boundary conditions",
+          "concepts": [
+            "boundary conditions",
+            "conservation statements",
+            "mass transport phenomena",
+            "momentum transport",
+            "steady flow systems",
+            "transient flow systems"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-4",
+          "emphasis": "High",
+          "domain": "C-5",
+          "description": "Analyze and solve engineering problems pertaining to transport phenomena in industrial processes.",
+          "concepts": [
+            "engineering problems",
+            "industrial processes",
+            "mass transfer",
+            "mass transport phenomena",
+            "momentum transport"
+          ]
+        }
+      ],
+      "concepts": [
+        "boundary conditions",
+        "conservation statements",
+        "engineering problems",
+        "heat transfer",
+        "industrial processes",
+        "mass transfer",
+        "mass transport phenomena",
+        "momentum transport",
+        "steady flow systems",
+        "transient flow systems"
+      ]
+    },
+    {
+      "code": "CHE-347",
+      "title": "Chemical Reaction Engineering",
+      "batch": "2023F",
+      "semester": 6,
+      "lec": 3,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the concepts of reaction engineering fundamentals",
+          "concepts": [
+            "reaction kinetics",
+            "reaction mechanisms"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Apply design equations of ideal reactors to study their performance for homogenous single and multiple reactions.",
+          "concepts": [
+            "chemical engineering",
+            "chemical kinetics",
+            "chemical reactors",
+            "multiple unit operations",
+            "reaction kinetics",
+            "reaction mechanisms",
+            "reactor design",
+            "single reactions"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Differentiate homogeneous and heterogeneous reactions, and modify the design parameters for reactor calculations.",
+          "concepts": [
+            "chemical kinetics",
+            "heterogeneous catalysis",
+            "multiple unit operations",
+            "reaction kinetics",
+            "reaction mechanisms",
+            "reactor design",
+            "single reactions"
+          ]
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-4",
+          "emphasis": "High",
+          "domain": "C-6",
+          "description": "Design chemical reactors for various industrial chemical problems.",
+          "concepts": [
+            "chemical engineering",
+            "chemical reactors",
+            "reactor design"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Execute the reactor startup procedures by applying appropriate conditions and trace the concentration-time data with precision.",
+          "concepts": [
+            "reactor design"
+          ]
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-9",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Demonstrate punctuality and attentive demeanor as an individual or in a team during the lab conduct to improve productivity and meet deadlines.",
+          "concepts": [
+            "lab safety",
+            "laboratory practice"
+          ]
+        },
+        {
+          "code": "CLO-7",
+          "plo": "PLO-6",
+          "emphasis": "Medium",
+          "domain": "P-3",
+          "description": "Practice lab safety considerations while preparing reactants and collecting products for any toxic or corrosive substances. Identify any signs of runaway reaction reacting for its mitigation.",
+          "concepts": [
+            "lab safety",
+            "laboratory practice",
+            "reaction kinetics",
+            "reaction mechanisms"
+          ]
+        },
+        {
+          "code": "CLO-8",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Recall the standard experimental procedures and analyze and interpret the results, comparing them with theoretical concepts learned in class to identify any discrepancies and derive valid conclusions",
+          "concepts": []
+        }
+      ],
+      "concepts": [
+        "chemical engineering",
+        "chemical kinetics",
+        "chemical reactors",
+        "heterogeneous catalysis",
+        "lab safety",
+        "laboratory practice",
+        "multiple unit operations",
+        "reaction kinetics",
+        "reaction mechanisms",
+        "reactor design",
+        "single reactions"
+      ]
+    },
+    {
+      "code": "CHE-349",
+      "title": "Separation Processes II",
+      "batch": "2023F",
+      "semester": 6,
+      "lec": 3,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the principles of simultaneous heat and mass transfer and extend their applications in chemical engineering processes theoretically as well as experimentally.",
+          "concepts": [
+            "heat transfer",
+            "mass transfer operations",
+            "plant wide design",
+            "simultaneous heat transfer"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Describe the coupled heat and mass transfer equations and apply to design the process equipment’s.",
+          "concepts": [
+            "heat transfer",
+            "mass transfer operations",
+            "plant wide design",
+            "simultaneous heat transfer"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Solve and analyze complex engineering problems pertaining to SHMT operation",
+          "concepts": []
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Measures key process variables such as temperature, flow rate, and composition during operation of separation process equipment.",
+          "concepts": [
+            "drying rate analysis",
+            "plant wide design",
+            "separation"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Computes and analyze performance metrics (e.g., drying rate, extraction efficiency) from collected experimental data.",
+          "concepts": [
+            "drying",
+            "drying rate analysis",
+            "extraction",
+            "separation processes"
+          ]
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-10",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Participate actively and responsibly in teamwork while conducting separation experiments and handling equipment.",
+          "concepts": [
+            "plant wide design",
+            "separation",
+            "teamwork"
+          ]
+        },
+        {
+          "code": "CLO-7",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-3",
+          "description": "Adjusts and operates experimental units such as evaporators, dryers, and extraction columns under supervision.",
+          "concepts": [
+            "drying rate analysis",
+            "extraction",
+            "separation processes"
+          ]
+        }
+      ],
+      "concepts": [
+        "drying",
+        "drying rate analysis",
+        "extraction",
+        "heat transfer",
+        "instrumentation",
+        "mass transfer operations",
+        "plant wide design",
+        "separation",
+        "separation processes",
+        "simultaneous heat transfer",
+        "teamwork"
+      ]
+    },
+    {
+      "code": "ECO-130",
+      "title": "Engineering Economics",
+      "batch": "2023F",
+      "semester": 6,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Comprehend the concepts of Engineering Economics",
+          "concepts": [
+            "engineering economics",
+            "return on investment"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-11",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Gain a working knowledge of money management and analyse how to make economics comparisons of alternative engineering projects",
+          "concepts": [
+            "engineering economics",
+            "investment evaluation",
+            "project evaluation",
+            "return on investment"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-12",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Apply alternatives based on taxable income and market structure",
+          "concepts": [
+            "market structure analysis",
+            "project evaluation",
+            "return on investment",
+            "taxable income analysis"
+          ]
+        }
+      ],
+      "concepts": [
+        "engineering economics",
+        "investment evaluation",
+        "market structure analysis",
+        "project evaluation",
+        "return on investment",
+        "taxable income analysis"
+      ]
+    },
+    {
+      "code": "CHE-350",
+      "title": "Petroleum Refinery Process",
+      "batch": "2022F",
+      "semester": 7,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the compositions, properties, and standard tests to characterize crude oil and refinery products",
+          "concepts": [
+            "crude oil analysis",
+            "petrochemical synthesis",
+            "product development"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-3",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Apply the role of various processing/ axillary units in a refinery for the production of different products.",
+          "concepts": [
+            "petrochemical synthesis",
+            "petroleum refining",
+            "process control",
+            "product development"
+          ]
+        }
+      ],
+      "concepts": [
+        "catalytic cracking",
+        "chemical reactions",
+        "crude oil analysis",
+        "distillation columns",
+        "heat transfer",
+        "petrochemical synthesis",
+        "petroleum refining",
+        "polymer synthesis",
+        "process control",
+        "product development",
+        "sulfur removal methods"
+      ]
+    },
+    {
+      "code": "CHE-423",
+      "title": "Fuel Engineering",
+      "batch": "2022F",
+      "semester": 7,
+      "lec": 3,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the properties of different conventional fuels, and describe, compare, and evaluate key fuel properties such as energy density, polluting effect, cost, and availability. Students should be able to evaluate the various advantages and disadvantages of each, forming hypotheses on the likelihood of continued usage.",
+          "concepts": [
+            "energy density",
+            "laboratory practice",
+            "petroleum engineering"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Demonstrate a comprehensive understanding of complex combustion features, being able to describe in detail the following: combustion modes; equilibrium products of combustion; economy-emissions compromises; pollutant compromises; important chemical mechanisms; conservation equations; laminar and turbulent flames.",
+          "concepts": [
+            "chemical equilibrium",
+            "combustion modes",
+            "conservation equations",
+            "flame dynamics",
+            "reactor design"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Execute the experimental procedures by applying appropriate techniques, following the established protocols, and demonstrating precision in measurements and observations.",
+          "concepts": []
+        },
+        {
+          "code": "CLO-4",
+          "plo": "PLO-10",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Demonstrate an eagerness to work in a team during the lab activities.",
+          "concepts": [
+            "laboratory practice"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-6",
+          "emphasis": "Medium",
+          "domain": "A-3",
+          "description": "Follow lab safety protocols attentively and apply them consistently to maintain a safe working environment.",
+          "concepts": [
+            "laboratory practice",
+            "safety management"
+          ]
+        },
+        {
+          "code": "CLO-6",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Analyze experimental results, comparing them with theoretical concepts learned in class to identify and derive valid conclusions.",
+          "concepts": []
+        }
+      ],
+      "concepts": [
+        "chemical equilibrium",
+        "combustion modes",
+        "conservation equations",
+        "energy density",
+        "flame dynamics",
+        "laboratory practice",
+        "petroleum engineering",
+        "process safety",
+        "reactor design",
+        "safety management"
+      ]
+    },
+    {
+      "code": "CHE-442",
+      "title": "Membrane Technology",
+      "batch": "2022F",
+      "semester": 7,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Explain the fundamentals of membrane technology for separation processes and classify membranes based on materials and preparation methods.",
+          "concepts": [
+            "mass transfer operations",
+            "separation",
+            "separation performance"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Interpret the membrane transport mechanisms and distinguish different membrane modules for their separation performance.",
+          "concepts": [
+            "filtration mechanisms",
+            "mass transfer operations",
+            "module design",
+            "separation",
+            "separation performance",
+            "transport kinetics"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Outline the applications of membrane technology and identify membrane process problems (polarization and fouling).",
+          "concepts": [
+            "fouling mitigation",
+            "mass transfer operations",
+            "polarization issues"
+          ]
+        }
+      ],
+      "concepts": [
+        "filtration mechanisms",
+        "fouling mitigation",
+        "mass transfer operations",
+        "module design",
+        "polarization issues",
+        "separation",
+        "separation performance",
+        "transport kinetics"
+      ]
+    },
+    {
+      "code": "CHE-451",
+      "title": "Chemical Engineering Plant Design",
+      "batch": "2022F",
+      "semester": 7,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend and infer the parameters which influence the Chemical Process Plant Design.",
+          "concepts": [
+            "process dynamics",
+            "process safety",
+            "process simulation",
+            "safety design"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "High",
+          "domain": "C-6",
+          "description": "Apply the engineering concepts for selection, specification and design of process equipment.",
+          "concepts": [
+            "engineering economics",
+            "process dynamics",
+            "process safety",
+            "process simulation",
+            "safety design"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-4",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Compute and Analyze the costing, profitability, and safety parameters of a chemical process plant.",
+          "concepts": [
+            "cost analysis",
+            "process dynamics",
+            "process safety",
+            "process simulation",
+            "safety design"
+          ]
+        }
+      ],
+      "concepts": [
+        "cost analysis",
+        "engineering economics",
+        "heat transfer",
+        "mass balance calculations",
+        "mass transfer",
+        "process control",
+        "process dynamics",
+        "process safety",
+        "process simulation",
+        "reaction mechanisms",
+        "safety design"
+      ]
+    },
+    {
+      "code": "CHE-452",
+      "title": "Chemical Process Design & Simulation",
+      "batch": "2022F",
+      "semester": 7,
+      "lec": 2,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Compute process flowsheets comprising of various equipment, i.e., pump, compressor, reactor, distillation column, etc., in Aspen HYSYS environment.",
+          "concepts": [
+            "aspen hysys",
+            "distillation",
+            "process control",
+            "process design",
+            "process equipment",
+            "process industry",
+            "process simulation"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Analyze dynamic mode of process models for temperature, pressure, flowrate, and composition control loops.",
+          "concepts": [
+            "control loops",
+            "dynamic modeling",
+            "process control",
+            "process design",
+            "process industry",
+            "process simulation"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-6",
+          "emphasis": "High",
+          "domain": "C-6",
+          "description": "Design and evaluate a plant wide model of a process industry.",
+          "concepts": [
+            "process control",
+            "process design",
+            "process industry",
+            "process simulation"
+          ]
+        }
+      ],
+      "concepts": [
+        "aspen hysys",
+        "control loops",
+        "distillation",
+        "dynamic modeling",
+        "process control",
+        "process design",
+        "process equipment",
+        "process industry",
+        "process simulation",
+        "simulation analysis"
+      ]
+    },
+    {
+      "code": "CHE-464",
+      "title": "Computational Fluid Dynamics in Chemical Engineering",
+      "batch": "2022F",
+      "semester": 7,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-3",
+          "emphasis": "High",
+          "domain": "C-5",
+          "description": "Develop 2D/3D fluid-flow models by using CFD software.",
+          "concepts": [
+            "CFD",
+            "cfd simulations",
+            "fluid mechanics",
+            "mass transfer",
+            "predictive models",
+            "simulated flow"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-5",
+          "emphasis": "High",
+          "domain": "C-6",
+          "description": "Generate hydrodynamic profiles via CFD-Post processing.",
+          "concepts": [
+            "CFD",
+            "cfd simulations"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-5",
+          "emphasis": "High",
+          "domain": "C-6",
+          "description": "A substantial amount of experience using modern CFD software to predict the complex fluid-flow systems behavior is to be given to the student.",
+          "concepts": [
+            "CFD",
+            "cfd simulations",
+            "fluid mechanics",
+            "mass transfer",
+            "predictive models",
+            "simulated flow"
+          ]
+        }
+      ],
+      "concepts": [
+        "CFD",
+        "cfd simulations",
+        "fluid mechanics",
+        "mass transfer",
+        "mass transport phenomena",
+        "numeric methods",
+        "predictive models",
+        "simulated flow",
+        "turbulence modeling"
+      ]
+    },
+    {
+      "code": "CSL-402",
+      "title": "Community Service Learning Course",
+      "batch": "2022F",
+      "semester": 7,
+      "lec": 0,
+      "lab": 1,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-6",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Demonstrate ethical, social, and professional responsibilities while applying critical thinking, engineering knowledge, and problem-solving skills to address real-world community challenges, recognizing the importance of lifelong learning and sustainable development.",
+          "concepts": [
+            "critical thinking",
+            "engineering knowledge",
+            "lifelong learning",
+            "sustainable development"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-9",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Work effectively in diverse teams, communicate ideas clearly and professionally, and engage collaboratively with community members to develop practical and impactful solutions.",
+          "concepts": [
+            "team collaboration"
+          ]
+        }
+      ],
+      "concepts": [
+        "critical thinking",
+        "engineering knowledge",
+        "lifelong learning",
+        "process management",
+        "sustainability",
+        "sustainable development",
+        "team collaboration"
+      ]
+    },
+    {
+      "code": "CHE-360",
+      "title": "Fundamentals Of Polymer Engineering",
+      "batch": "2022F",
+      "semester": 8,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Explain the fundamentals of polymer engineering: polymer classification, rheology, colligative, thermal, and mechanical properties of the polymers.",
+          "concepts": [
+            "colligative properties",
+            "material properties",
+            "polymer chemistry",
+            "polymer engineering",
+            "polymer synthesis",
+            "rheology",
+            "thermodynamics"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-1",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Relate the fundamental concepts of polymer engineering to study the techniques for the synthesis and processing of polymeric materials.",
+          "concepts": [
+            "polymer engineering",
+            "polymer synthesis",
+            "reactor design"
+          ]
+        }
+      ],
+      "concepts": [
+        "colligative properties",
+        "material properties",
+        "polymer chemistry",
+        "polymer engineering",
+        "polymer synthesis",
+        "reactor design",
+        "rheology",
+        "thermodynamics"
+      ]
+    },
+    {
+      "code": "CHE-425",
+      "title": "Maintenance & Process Safety",
+      "batch": "2022F",
+      "semester": 8,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Describe the key principles of process safety and maintenance of industrial operations",
+          "concepts": [
+            "industrial processes",
+            "maintenance practices",
+            "process industry",
+            "process safety"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Explain the practical application of safety and risk management in process industry",
+          "concepts": [
+            "process industry",
+            "process safety",
+            "risk management"
+          ]
+        }
+      ],
+      "concepts": [
+        "failure analysis",
+        "industrial processes",
+        "maintenance practices",
+        "process industry",
+        "process safety",
+        "risk management",
+        "safety and risk",
+        "safety engineering"
+      ]
+    },
+    {
+      "code": "CHE-465",
+      "title": "Data Science and Machine Learning in Chemical Engineering",
+      "batch": "2022F",
+      "semester": 8,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Describe and apply the concepts of linear algebra, probability, and statistics used for data distributions.",
+          "concepts": [
+            "data analysis",
+            "data distributions",
+            "data science",
+            "data science techniques",
+            "linear algebra",
+            "probability",
+            "quantitative modeling",
+            "statistical analysis"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Use mathematical and statistical theory for decision-making and problem solution.",
+          "concepts": [
+            "decision making",
+            "decision-making methods",
+            "mathematical models",
+            "statistical theory"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Apply algorithms of data science and machine learning using Python",
+          "concepts": [
+            "Python",
+            "algorithms",
+            "data analysis",
+            "data distributions",
+            "data science",
+            "data science techniques",
+            "machine learning",
+            "machine learning algorithms"
+          ]
+        }
+      ],
+      "concepts": [
+        "Python",
+        "algorithms",
+        "data analysis",
+        "data distributions",
+        "data science",
+        "data science techniques",
+        "decision making",
+        "decision-making methods",
+        "linear algebra",
+        "machine learning",
+        "machine learning algorithms",
+        "mathematical models",
+        "probability",
+        "quantitative modeling",
+        "statistical analysis",
+        "statistical theory"
+      ]
+    },
+    {
+      "code": "CHE-484",
+      "title": "Natural Gas Engineering",
+      "batch": "2022F",
+      "semester": 8,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-1",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Infer the basic knowledge about gas processing and gas drilling.",
+          "concepts": [
+            "chemical processing",
+            "gas engineering",
+            "petroleum engineering",
+            "process design"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the understanding of gas storage and transmission operations.",
+          "concepts": [
+            "chemical processing",
+            "gas engineering",
+            "petroleum engineering",
+            "reaction conditions",
+            "storage operations",
+            "transmission operations"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-3",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Analyze and design gas processing and purification operations.",
+          "concepts": [
+            "chemical processing",
+            "gas engineering",
+            "petroleum engineering",
+            "process design",
+            "reaction conditions",
+            "storage operations",
+            "transmission operations"
+          ]
+        }
+      ],
+      "concepts": [
+        "chemical processing",
+        "gas engineering",
+        "petroleum engineering",
+        "process design",
+        "reaction conditions",
+        "storage operations",
+        "transmission operations"
+      ]
+    },
+    {
+      "code": "CHE-499",
+      "title": "Final Year Design Project-II",
+      "batch": "2022F",
+      "semester": 8,
+      "lec": 0,
+      "lab": 4,
+      "clos": [
+        {
+          "code": "CLO-2",
+          "plo": "PLO-2",
+          "emphasis": "Low",
+          "domain": "P-1",
+          "description": "Ability to identify, formulate, research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences and engineering sciences.",
+          "concepts": [
+            "polymer engineering"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-3",
+          "emphasis": "Low",
+          "domain": "P-2",
+          "description": "Ability to design solutions for complex engineering problems and design systems, components, or processes that meet specified needs with appropriate consideration for public health and safety, cultural, societal, and electrical considerations.",
+          "concepts": [
+            "polymer engineering",
+            "process design",
+            "process safety"
+          ]
+        },
+        {
+          "code": "CLO-5",
+          "plo": "PLO-5",
+          "emphasis": "Medium",
+          "domain": "P-3",
+          "description": "Ability to create, select and apply appropriate techniques, resources, and modern engineering and IT tools, including prediction and modeling, to complex engineering activities, with an understanding of the limitations.",
+          "concepts": [
+            "polymer engineering"
+          ]
+        },
+        {
+          "code": "CLO-7",
+          "plo": "PLO-7",
+          "emphasis": "Medium",
+          "domain": "P-4",
+          "description": "Ability to understand the impact of professional engineering solutions in societal and electrical contexts and demonstrate knowledge of and need for sustainable development.",
+          "concepts": [
+            "polymer engineering"
+          ]
+        },
+        {
+          "code": "CLO-9",
+          "plo": "PLO-9",
+          "emphasis": "High",
+          "domain": "P-5",
+          "description": "Ability to work effectively, as an individual or in a team, on multifaceted and/or multidisciplinary settings.",
+          "concepts": []
+        },
+        {
+          "code": "CLO-10",
+          "plo": "PLO-10",
+          "emphasis": "High",
+          "domain": "P-6",
+          "description": "Ability to communicate effectively, orally as well as in writing on complex engineering activities with the engineering community and with society at large, such as being able to comprehend and write effective reports and design documentations, make effective presentations, and give and receive clear instructions",
+          "concepts": [
+            "polymer engineering",
+            "process design"
+          ]
+        },
+        {
+          "code": "CLO-11",
+          "plo": "PLO-11",
+          "emphasis": "High",
+          "domain": "P-7",
+          "description": "Ability to demonstrate management skills and apply engineering principles to one’s own work, as a member and/or leader in a team to manage projects in a multidisciplinary environment.",
+          "concepts": [
+            "polymer engineering"
+          ]
+        },
+        {
+          "code": "CLO-12",
+          "plo": "PLO-12",
+          "emphasis": "High",
+          "domain": "P-7",
+          "description": "Ability to recognize importance of, and pursue lifelong learning in the broader context of innovation and technological developments.",
+          "concepts": []
+        }
+      ],
+      "concepts": [
+        "heat transfer",
+        "polymer engineering",
+        "process design",
+        "process safety",
+        "reaction mechanisms",
+        "solids handling",
+        "sustainability"
+      ]
+    },
+    {
+      "code": "HU-115",
+      "title": "Principles of Sociology",
+      "batch": "2022F",
+      "semester": 8,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-6",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the fundamental theories of sociology pertaining to human behaviors",
+          "concepts": [
+            "human behavior analysis",
+            "human behaviour",
+            "sociology"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-12",
+          "emphasis": "High",
+          "domain": "C-6",
+          "description": "Devise the practical applications of the theories to human behavior in day-to-day life",
+          "concepts": [
+            "human behavior analysis",
+            "human behaviour",
+            "social theory application"
+          ]
+        }
+      ],
+      "concepts": [
+        "behavioral contextualization",
+        "behavioral patterns identification",
+        "human behavior analysis",
+        "human behaviour",
+        "social structure analysis",
+        "social theory application",
+        "societal dynamics understanding",
+        "sociology"
+      ]
+    },
+    {
+      "code": "OTM-456",
+      "title": "Production & Operations Management",
+      "batch": "2022F",
+      "semester": 8,
+      "lec": 3,
+      "lab": 0,
+      "clos": [
+        {
+          "code": "CLO-1",
+          "plo": "PLO-12",
+          "emphasis": "Low",
+          "domain": "C-2",
+          "description": "Comprehend the process of transforming resources into products and development of its operational strategy.",
+          "concepts": [
+            "process control",
+            "process management",
+            "product development"
+          ]
+        },
+        {
+          "code": "CLO-2",
+          "plo": "PLO-12",
+          "emphasis": "Medium",
+          "domain": "C-3",
+          "description": "Use of a variety of problem-solving and forecasting techniques to aid in effective decision making and quality control.",
+          "concepts": [
+            "decision making",
+            "forecasting",
+            "predictive analytics",
+            "process control"
+          ]
+        },
+        {
+          "code": "CLO-3",
+          "plo": "PLO-11",
+          "emphasis": "Medium",
+          "domain": "C-4",
+          "description": "Apply project management tools, techniques and inventory management methods",
+          "concepts": [
+            "inventory management",
+            "predictive analytics",
+            "project management",
+            "project planning"
+          ]
+        }
+      ],
+      "concepts": [
+        "decision making",
+        "forecasting",
+        "inventory management",
+        "predictive analytics",
+        "process control",
+        "process management",
+        "product development",
+        "project management",
+        "project planning",
+        "risk assessment"
       ]
     }
   ],
   "concept_index": {
     "heat transfer": [
-      "CH-113",
+      "CH-114",
+      "CHE-103",
+      "CHE-115",
+      "CHE-222",
       "CHE-242",
+      "CHE-344",
       "CHE-345",
       "CHE-349",
-      "CHE-360",
-      "CHE-484",
-      "PHY-102"
+      "CHE-350",
+      "CHE-451",
+      "CHE-499"
     ],
-    "reaction kinetics": [
+    "laboratory practice": [
       "CH-113",
-      "CHE-115",
-      "CHE-220",
+      "CH-114",
+      "CHE-214",
+      "CHE-242",
+      "CHE-332",
+      "CHE-344",
       "CHE-347",
-      "CHE-484"
+      "CHE-423"
+    ],
+    "mass transfer": [
+      "CH-113",
+      "CHE-220",
+      "CHE-222",
+      "CHE-344",
+      "CHE-345",
+      "CHE-451",
+      "CHE-464"
+    ],
+    "process control": [
+      "CHE-242",
+      "CHE-323",
+      "CHE-350",
+      "CHE-451",
+      "CHE-452",
+      "MGT-271",
+      "OTM-456"
+    ],
+    "safety management": [
+      "CH-113",
+      "CH-114",
+      "CHE-214",
+      "CHE-332",
+      "CHE-344",
+      "CHE-346",
+      "CHE-423"
+    ],
+    "data analysis": [
+      "CH-114",
+      "CHE-226",
+      "CHE-465",
+      "CS-117",
+      "ME-124",
+      "QR-100"
+    ],
+    "reaction mechanisms": [
+      "CH-113",
+      "CH-114",
+      "CHE-222",
+      "CHE-347",
+      "CHE-451",
+      "CHE-499"
+    ],
+    "process design": [
+      "CHE-115",
+      "CHE-344",
+      "CHE-452",
+      "CHE-484",
+      "CHE-499"
+    ],
+    "process safety": [
+      "CH-114",
+      "CHE-423",
+      "CHE-425",
+      "CHE-451",
+      "CHE-499"
+    ],
+    "engineering economics": [
+      "CHE-451",
+      "ECO-130",
+      "ME-124",
+      "MGT-271"
     ],
     "instrumentation": [
       "CHE-115",
@@ -1427,130 +3570,381 @@
       "CHE-349",
       "PHY-102"
     ],
-    "mass transfer": [
+    "mass transport phenomena": [
       "CHE-220",
+      "CHE-332",
       "CHE-345",
-      "CHE-349",
-      "CHE-484"
+      "CHE-464"
     ],
-    "process design": [
-      "CHE-115",
-      "CHE-349",
-      "CHE-425",
-      "OTM-456"
-    ],
-    "process safety": [
-      "CHE-346",
-      "CHE-347",
-      "CHE-425",
-      "OTM-456"
-    ],
-    "calculus": [
+    "mathematical modelling": [
+      "MATH-121",
       "MATH-243",
       "QR-100",
       "QR-101"
     ],
-    "data analysis": [
-      "CHE-465",
-      "OTM-456",
+    "numeric methods": [
+      "CHE-464",
+      "MATH-101",
+      "MATH-121",
       "QR-100"
     ],
-    "laboratory practice": [
-      "CH-113",
-      "CHE-242",
-      "CHE-347"
+    "process principles": [
+      "CHE-103",
+      "CHE-222",
+      "MATH-243",
+      "ME-105"
     ],
-    "mass balance": [
-      "CHE-220",
-      "CHE-345",
-      "PHY-102"
-    ],
-    "mathematical modelling": [
-      "CHE-465",
-      "ME-124",
+    "process simulation": [
+      "CHE-332",
+      "CHE-451",
+      "CHE-452",
       "QR-101"
     ],
-    "process control": [
-      "CHE-242",
-      "CHE-323",
-      "CHE-425"
+    "algorithms": [
+      "CHE-226",
+      "CHE-465",
+      "MATH-351"
     ],
-    "separation processes": [
+    "language processing": [
+      "HU-114",
+      "HU-131",
+      "HU-132"
+    ],
+    "mass balance calculations": [
+      "CHE-103",
+      "CHE-115",
+      "CHE-451"
+    ],
+    "mass transfer operations": [
       "CHE-220",
-      "CHE-346",
-      "CHE-349"
+      "CHE-349",
+      "CHE-442"
     ],
-    "chemical synthesis": [
+    "material properties": [
+      "CHE-360",
+      "MSE-226",
+      "PHY-102"
+    ],
+    "multiple unit operations": [
+      "CHE-103",
+      "CHE-222",
+      "CHE-347"
+    ],
+    "polymer synthesis": [
       "CH-113",
+      "CHE-350",
       "CHE-360"
     ],
+    "process industry": [
+      "CHE-332",
+      "CHE-425",
+      "CHE-452"
+    ],
+    "reactor design": [
+      "CHE-347",
+      "CHE-360",
+      "CHE-423"
+    ],
+    "separation": [
+      "CHE-344",
+      "CHE-349",
+      "CHE-442"
+    ],
+    "separation methods": [
+      "CHE-220",
+      "CHE-344",
+      "CHE-346"
+    ],
+    "sustainability": [
+      "CCE-401",
+      "CHE-499",
+      "CSL-402"
+    ],
+    "thermodynamics": [
+      "CHE-223",
+      "CHE-332",
+      "CHE-360"
+    ],
+    "Python": [
+      "CHE-226",
+      "CHE-465"
+    ],
+    "chemical equilibrium": [
+      "CHE-103",
+      "CHE-423"
+    ],
+    "chemical processing": [
+      "CHE-332",
+      "CHE-484"
+    ],
+    "chemical reactions": [
+      "CHE-103",
+      "CHE-350"
+    ],
+    "chemical synthesis": [
+      "CH-114",
+      "CHE-115"
+    ],
+    "control loops": [
+      "CHE-323",
+      "CHE-452"
+    ],
+    "data science": [
+      "CHE-226",
+      "CHE-465"
+    ],
+    "decision making": [
+      "CHE-465",
+      "OTM-456"
+    ],
     "differential equations": [
-      "CHE-345",
+      "MATH-121",
       "MATH-243"
+    ],
+    "distillation": [
+      "CHE-220",
+      "CHE-452"
+    ],
+    "energy balance": [
+      "CHE-222",
+      "CHE-332"
     ],
     "extraction": [
       "CH-113",
       "CHE-349"
     ],
+    "fluid flow": [
+      "CHE-214",
+      "CHE-332"
+    ],
     "fluid mechanics": [
+      "CHE-214",
+      "CHE-464"
+    ],
+    "industrial processes": [
       "CHE-345",
-      "CHE-484"
+      "CHE-425"
+    ],
+    "investment evaluation": [
+      "ECO-130",
+      "MGT-271"
     ],
     "lab safety": [
       "CHE-242",
       "CHE-347"
     ],
-    "polymer processing": [
-      "CH-113",
-      "CHE-360"
+    "laboratory techniques": [
+      "CHE-242",
+      "ME-105"
     ],
-    "project management": [
-      "ECO-130",
-      "OTM-456"
+    "linear algebra": [
+      "CHE-465",
+      "PHY-102"
     ],
-    "risk assessment": [
-      "CHE-425",
+    "manufacturing": [
+      "CHE-115",
+      "ME-105"
+    ],
+    "mathematical operations": [
+      "MATH-101",
+      "QR-100"
+    ],
+    "momentum transport": [
+      "CHE-222",
+      "CHE-345"
+    ],
+    "ordinary differential equations": [
+      "MATH-121",
+      "MATH-243"
+    ],
+    "partial differential": [
+      "MATH-121",
+      "MATH-243"
+    ],
+    "petroleum engineering": [
+      "CHE-423",
       "CHE-484"
     ],
-    "safety management": [
-      "CH-113",
+    "polymer engineering": [
+      "CHE-360",
+      "CHE-499"
+    ],
+    "process dynamics": [
+      "CHE-323",
+      "CHE-451"
+    ],
+    "process efficiency": [
+      "CHE-214",
       "CHE-346"
     ],
-    "statistical analysis": [
+    "process equipment": [
+      "CHE-344",
+      "CHE-452"
+    ],
+    "process management": [
+      "CSL-402",
+      "OTM-456"
+    ],
+    "process visualization": [
+      "CHE-115",
+      "CHE-226"
+    ],
+    "product development": [
+      "CHE-350",
+      "OTM-456"
+    ],
+    "quantitative modeling": [
       "CHE-465",
-      "QR-100"
+      "QR-101"
+    ],
+    "reaction kinetics": [
+      "CHE-115",
+      "CHE-347"
+    ],
+    "separation processes": [
+      "CHE-220",
+      "CHE-349"
+    ],
+    "team collaboration": [
+      "CSL-402",
+      "ME-105"
     ],
     "teamwork": [
       "CH-113",
       "CHE-349"
     ],
-    "yield optimization": [
-      "CHE-115",
-      "OTM-456"
+    "text interpretation": [
+      "HU-114",
+      "HU-131"
     ],
     "CAD": [
       "ME-124"
     ],
+    "CFD": [
+      "CHE-464"
+    ],
     "PID control": [
       "CHE-323"
     ],
-    "Python": [
-      "CHE-465"
-    ],
-    "Quranic studies": [
-      "HU-132"
-    ],
     "absorption": [
+      "CHE-220"
+    ],
+    "absorption and distillation": [
       "CHE-220"
     ],
     "academic writing": [
       "ENGL-101"
     ],
-    "catalysis": [
+    "algorithm development": [
+      "CHE-226"
+    ],
+    "algorithmic thinking": [
+      "CS-117"
+    ],
+    "analytic solutions": [
+      "MATH-243"
+    ],
+    "analytic solving": [
+      "MATH-101"
+    ],
+    "analytical techniques": [
+      "MSE-226"
+    ],
+    "approximate solutions": [
+      "MATH-243"
+    ],
+    "argument evaluation": [
+      "QR-101"
+    ],
+    "aspen hysys": [
+      "CHE-452"
+    ],
+    "attrition processes": [
+      "CHE-346"
+    ],
+    "automatic calibration": [
+      "CHE-323"
+    ],
+    "behavioral contextualization": [
+      "HU-115"
+    ],
+    "behavioral patterns identification": [
+      "HU-115"
+    ],
+    "binary phase": [
+      "MSE-226"
+    ],
+    "boundary conditions": [
+      "CHE-345"
+    ],
+    "business planning": [
+      "MGT-271"
+    ],
+    "cad drawing construction": [
+      "ME-124"
+    ],
+    "cad models": [
+      "ME-124"
+    ],
+    "catalytic cracking": [
+      "CHE-350"
+    ],
+    "cfd simulations": [
+      "CHE-464"
+    ],
+    "chart comprehension": [
+      "QR-100"
+    ],
+    "chemical analysis": [
+      "CH-113"
+    ],
+    "chemical engineering": [
       "CHE-347"
+    ],
+    "chemical industry overview": [
+      "CHE-115"
+    ],
+    "chemical kinetics": [
+      "CHE-347"
+    ],
+    "chemical processes": [
+      "CHE-226"
+    ],
+    "chemical reactors": [
+      "CHE-347"
+    ],
+    "colligative properties": [
+      "CHE-360"
+    ],
+    "combustion modes": [
+      "CHE-423"
+    ],
+    "communication networks": [
+      "CS-117"
+    ],
+    "community challenges": [
+      "CCE-401"
+    ],
+    "community service": [
+      "CCE-401"
+    ],
+    "compassion and empathy": [
+      "CCE-401"
+    ],
+    "compressible flow": [
+      "CHE-214"
+    ],
+    "computational tools": [
+      "QR-101"
     ],
     "conduction": [
       "CHE-242"
+    ],
+    "conservation equations": [
+      "CHE-423"
+    ],
+    "conservation statements": [
+      "CHE-345"
     ],
     "constitutional law": [
       "HU-127"
@@ -1558,56 +3952,173 @@
     "convection": [
       "CHE-242"
     ],
+    "cost analysis": [
+      "CHE-451"
+    ],
+    "critical thinking": [
+      "CSL-402"
+    ],
+    "crude oil analysis": [
+      "CHE-350"
+    ],
+    "crystal structures": [
+      "MSE-226"
+    ],
     "crystallization": [
       "CH-113"
     ],
-    "data science": [
+    "data distributions": [
       "CHE-465"
     ],
-    "distillation": [
-      "CHE-220"
+    "data interpretation": [
+      "QR-100"
+    ],
+    "data science techniques": [
+      "CHE-465"
+    ],
+    "decision-making methods": [
+      "CHE-465"
+    ],
+    "defect types": [
+      "MSE-226"
+    ],
+    "derivative techniques": [
+      "MATH-101"
+    ],
+    "digital tools": [
+      "CS-117"
+    ],
+    "dimensional analysis": [
+      "CHE-214"
+    ],
+    "distillation columns": [
+      "CHE-350"
+    ],
+    "distillation techniques": [
+      "CHE-344"
     ],
     "drying": [
       "CHE-349"
     ],
+    "drying rate analysis": [
+      "CHE-349"
+    ],
+    "dynamic modeling": [
+      "CHE-452"
+    ],
     "electromagnetic induction": [
       "PHY-102"
+    ],
+    "electromagnetism": [
+      "PHY-102"
+    ],
+    "energy density": [
+      "CHE-423"
     ],
     "engineering drawing": [
       "ME-124"
     ],
-    "engineering economics": [
-      "ECO-130"
+    "engineering drawings": [
+      "ME-124"
+    ],
+    "engineering knowledge": [
+      "CSL-402"
+    ],
+    "engineering problems": [
+      "CHE-345"
+    ],
+    "equation of state": [
+      "CHE-223"
+    ],
+    "essays communication": [
+      "HU-114"
+    ],
+    "ethical principles": [
+      "HU-101"
     ],
     "experimental design": [
-      "CHE-242"
+      "CH-114"
+    ],
+    "failure analysis": [
+      "CHE-425"
+    ],
+    "filtration mechanisms": [
+      "CHE-442"
+    ],
+    "filtration methods": [
+      "CHE-344"
+    ],
+    "flame dynamics": [
+      "CHE-423"
     ],
     "forecasting": [
       "OTM-456"
     ],
+    "fouling mitigation": [
+      "CHE-442"
+    ],
     "gas engineering": [
       "CHE-484"
     ],
-    "gas processing": [
-      "CHE-484"
+    "gender roles": [
+      "HU-101"
+    ],
+    "heat effects": [
+      "CHE-223"
     ],
     "heat exchanger": [
       "CHE-242"
     ],
-    "heat exchanger design": [
-      "CHE-242"
+    "heterogeneous catalysis": [
+      "CHE-347"
     ],
-    "human behavior": [
+    "human behavior analysis": [
+      "HU-115"
+    ],
+    "human behaviour": [
       "HU-115"
     ],
     "ideology": [
       "HU-127"
     ],
-    "inorganic chemistry": [
+    "incompressible flow": [
+      "CHE-214"
+    ],
+    "information systems": [
+      "CS-117"
+    ],
+    "information technology": [
+      "CS-117"
+    ],
+    "inorganic reactions": [
       "CH-113"
+    ],
+    "instrumental analysis": [
+      "CH-114"
+    ],
+    "interfaith interactions": [
+      "HU-101"
     ],
     "inventory management": [
       "OTM-456"
+    ],
+    "islamic principles": [
+      "HU-101"
+    ],
+    "law sources": [
+      "HU-101"
+    ],
+    "level control": [
+      "CHE-323"
+    ],
+    "lifelong learning": [
+      "CSL-402"
+    ],
+    "limit concepts": [
+      "MATH-101"
+    ],
+    "linear transformations": [
+      "MATH-121"
     ],
     "logical reasoning": [
       "QR-101"
@@ -1615,47 +4126,113 @@
     "machine learning": [
       "CHE-465"
     ],
-    "manufacturing": [
-      "CHE-115"
+    "machine learning algorithms": [
+      "CHE-465"
     ],
-    "material properties": [
-      "CHE-360"
+    "main idea": [
+      "HU-114"
+    ],
+    "maintenance practices": [
+      "CHE-425"
+    ],
+    "managerial decision": [
+      "MGT-271"
+    ],
+    "manufacturing techniques": [
+      "ME-105"
+    ],
+    "market analysis": [
+      "MGT-271"
+    ],
+    "market structure analysis": [
+      "ECO-130"
+    ],
+    "material imperfections": [
+      "MSE-226"
+    ],
+    "mathematical models": [
+      "CHE-465"
+    ],
+    "mathematical results": [
+      "CHE-226"
     ],
     "mechanics": [
       "PHY-102"
     ],
-    "momentum balance": [
-      "CHE-345"
-    ],
-    "numerical methods": [
+    "model validation": [
       "QR-101"
     ],
-    "operations management": [
-      "OTM-456"
+    "module design": [
+      "CHE-442"
+    ],
+    "momentum transfer": [
+      "PHY-102"
+    ],
+    "numerical methods": [
+      "MATH-351"
     ],
     "organic chemistry": [
       "CH-113"
     ],
+    "paragraph structure": [
+      "HU-114"
+    ],
+    "particle mixing": [
+      "CHE-346"
+    ],
     "particle size analysis": [
       "CHE-346"
+    ],
+    "petrochemical synthesis": [
+      "CHE-350"
+    ],
+    "petroleum refining": [
+      "CHE-350"
+    ],
+    "philanthropic activities": [
+      "CCE-401"
+    ],
+    "plane directions": [
+      "MSE-226"
+    ],
+    "plant wide design": [
+      "CHE-349"
+    ],
+    "polarization issues": [
+      "CHE-442"
     ],
     "polymer chemistry": [
       "CHE-360"
     ],
-    "predictive maintenance": [
-      "CHE-425"
+    "predictive analytics": [
+      "OTM-456"
+    ],
+    "predictive models": [
+      "CHE-464"
     ],
     "probability": [
       "CHE-465"
     ],
-    "process dynamics": [
-      "CHE-323"
+    "process separation principles": [
+      "CHE-220"
     ],
-    "projection methods": [
+    "process variables": [
+      "CHE-115"
+    ],
+    "project evaluation": [
+      "ECO-130"
+    ],
+    "project management": [
+      "OTM-456"
+    ],
+    "project planning": [
+      "OTM-456"
+    ],
+    "projection": [
       "ME-124"
     ],
-    "quality control": [
-      "OTM-456"
+    "pure fluids": [
+      "CHE-223"
     ],
     "quantitative reasoning": [
       "QR-100"
@@ -1663,36 +4240,294 @@
     "radiation": [
       "CHE-242"
     ],
-    "reactor design": [
-      "CHE-347"
+    "rate processes": [
+      "CHE-103"
+    ],
+    "reaction conditions": [
+      "CHE-484"
+    ],
+    "recrystallization methods": [
+      "CH-113"
     ],
     "research methods": [
       "ENGL-101"
     ],
+    "response curves": [
+      "CHE-323"
+    ],
+    "return on investment": [
+      "ECO-130"
+    ],
     "rheology": [
       "CHE-360"
     ],
-    "separation": [
+    "risk assessment": [
+      "OTM-456"
+    ],
+    "risk management": [
+      "CHE-425"
+    ],
+    "safety and risk": [
+      "CHE-425"
+    ],
+    "safety design": [
+      "CHE-451"
+    ],
+    "safety engineering": [
+      "CHE-425"
+    ],
+    "safety procedures": [
+      "CHE-346"
+    ],
+    "salt formation": [
+      "CH-113"
+    ],
+    "scriptural analysis": [
+      "HU-131"
+    ],
+    "separation performance": [
+      "CHE-442"
+    ],
+    "service learning": [
+      "CCE-401"
+    ],
+    "simplified projections": [
+      "ME-124"
+    ],
+    "simulated flow": [
+      "CHE-464"
+    ],
+    "simulation analysis": [
+      "CHE-452"
+    ],
+    "simultaneous heat transfer": [
       "CHE-349"
+    ],
+    "single reactions": [
+      "CHE-347"
+    ],
+    "single unit operations": [
+      "CHE-222"
+    ],
+    "single units": [
+      "CHE-103"
+    ],
+    "single variable functions": [
+      "MATH-101"
+    ],
+    "single view projections": [
+      "ME-124"
     ],
     "size reduction": [
       "CHE-346"
     ],
+    "social consciousness": [
+      "CCE-401"
+    ],
+    "social issues": [
+      "HU-101"
+    ],
+    "social structure analysis": [
+      "HU-115"
+    ],
+    "social theory application": [
+      "HU-115"
+    ],
+    "societal dynamics understanding": [
+      "HU-115"
+    ],
     "sociology": [
       "HU-115"
     ],
-    "solids handling": [
+    "software development": [
+      "CS-117"
+    ],
+    "solid grinding": [
       "CHE-346"
     ],
-    "thermodynamics": [
-      "CHE-360"
+    "solids handling": [
+      "CHE-499"
+    ],
+    "solution fabrication": [
+      "ME-105"
+    ],
+    "solution methods": [
+      "MATH-243"
+    ],
+    "source integration": [
+      "ENGL-101"
+    ],
+    "spiritual values": [
+      "HU-101"
+    ],
+    "standard startup procedure": [
+      "CHE-242"
+    ],
+    "state variables": [
+      "CHE-223"
+    ],
+    "statistical analysis": [
+      "CHE-465"
+    ],
+    "statistical methods": [
+      "QR-100"
+    ],
+    "statistical theory": [
+      "CHE-465"
+    ],
+    "steady flow systems": [
+      "CHE-345"
+    ],
+    "steady state": [
+      "CHE-103"
+    ],
+    "steady state conduction": [
+      "CHE-242"
+    ],
+    "storage operations": [
+      "CHE-484"
+    ],
+    "sulfur removal methods": [
+      "CHE-350"
+    ],
+    "sustainability models": [
+      "MGT-271"
+    ],
+    "sustainable development": [
+      "CSL-402"
+    ],
+    "sustainable development approaches": [
+      "CCE-401"
+    ],
+    "table analysis": [
+      "QR-100"
+    ],
+    "taxable income analysis": [
+      "ECO-130"
+    ],
+    "temperature control": [
+      "CHE-323"
+    ],
+    "text analysis": [
+      "HU-132"
+    ],
+    "thermochemical properties": [
+      "CHE-223"
+    ],
+    "thermodynamic laws": [
+      "CHE-223"
+    ],
+    "thermodynamic properties": [
+      "CHE-332"
     ],
     "titration": [
       "CH-113"
     ],
+    "titration procedures": [
+      "CH-113"
+    ],
+    "transient flow systems": [
+      "CHE-345"
+    ],
+    "transmission operations": [
+      "CHE-484"
+    ],
+    "transport kinetics": [
+      "CHE-442"
+    ],
+    "transport mechanisms": [
+      "CHE-220"
+    ],
+    "transport systems": [
+      "CHE-214"
+    ],
+    "turbulence modeling": [
+      "CHE-464"
+    ],
     "vector calculus": [
-      "MATH-243"
+      "MATH-121"
+    ],
+    "venture capital": [
+      "MGT-271"
+    ],
+    "workshop protocols": [
+      "ME-105"
+    ],
+    "writing strategy": [
+      "ENGL-101"
+    ],
+    "yield optimization": [
+      "CHE-115"
     ]
   },
-  "concept_mode": "both"
+  "concept_mode": "both",
+  "semesters": {
+    "1": [
+      "CHE-103",
+      "CS-117",
+      "HU-101",
+      "HU-114",
+      "HU-131",
+      "MATH-101",
+      "ME-105"
+    ],
+    "2": [
+      "CH-113",
+      "CH-114",
+      "CHE-115",
+      "ENGL-101",
+      "HU-127",
+      "HU-132",
+      "ME-124",
+      "PHY-102",
+      "QR-100"
+    ],
+    "3": [
+      "CCE-401",
+      "CHE-214",
+      "CHE-222",
+      "CHE-223",
+      "CHE-226",
+      "MATH-121",
+      "MSE-226"
+    ],
+    "4": [
+      "CHE-220",
+      "CHE-242",
+      "CHE-346",
+      "MATH-243",
+      "QR-101"
+    ],
+    "5": [
+      "CHE-332",
+      "CHE-344",
+      "MATH-351",
+      "MGT-271"
+    ],
+    "6": [
+      "CHE-323",
+      "CHE-345",
+      "CHE-347",
+      "CHE-349",
+      "ECO-130"
+    ],
+    "7": [
+      "CHE-350",
+      "CHE-423",
+      "CHE-442",
+      "CHE-451",
+      "CHE-452",
+      "CHE-464",
+      "CSL-402"
+    ],
+    "8": [
+      "CHE-360",
+      "CHE-425",
+      "CHE-465",
+      "CHE-484",
+      "CHE-499",
+      "HU-115",
+      "OTM-456"
+    ]
+  }
 }
