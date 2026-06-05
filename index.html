@@ -488,10 +488,122 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
 
-@media(max-width:700px){
-  header,.tabbar,#tab-dash{padding-left:1rem;padding-right:1rem;}
+/* ── MOBILE HAMBURGER ──────────────────────────────────────── */
+.ham-btn{
+  display:none;width:38px;height:38px;background:none;border:1px solid var(--bdr);
+  border-radius:8px;cursor:pointer;flex-direction:column;align-items:center;
+  justify-content:center;gap:5px;flex-shrink:0;transition:all .15s;margin-left:auto;
+}
+.ham-btn:hover{background:#f0f3fa;border-color:var(--bdr2);}
+.ham-line{width:18px;height:2px;background:var(--mu);border-radius:1px;transition:all .22s;}
+.ham-btn.open .ham-line:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.ham-btn.open .ham-line:nth-child(2){opacity:0;transform:scaleX(0);}
+.ham-btn.open .ham-line:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Mobile nav drawer */
+.mobile-nav{
+  display:none;position:fixed;top:60px;left:0;right:0;z-index:100;
+  background:var(--sf);border-bottom:1.5px solid var(--bdr);
+  box-shadow:0 8px 32px rgba(30,50,90,.13);padding:.5rem .75rem;
+  flex-direction:column;gap:.25rem;
+}
+.mobile-nav.open{display:flex;}
+.mobile-nav .tab-btn{
+  width:100%;text-align:left;padding:.75rem 1rem;border-radius:8px;
+  border-bottom:none;font-size:.85rem;
+}
+.mobile-nav .tab-btn:hover{background:#f7f9fd;}
+.mobile-nav .tab-btn.active{background:rgba(184,146,14,.1);color:var(--goldd);}
+.mobile-nav-filters{
+  display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem .25rem .35rem;
+  border-top:1px solid var(--bdr);margin-top:.25rem;
+}
+
+/* Overlay to close nav on outside tap */
+.nav-overlay{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.18);}
+.nav-overlay.open{display:block;}
+
+@media(max-width:720px){
+  /* Header */
+  header{padding:0 .75rem;height:54px;gap:.6rem;}
   .hdr-stats{display:none;}
-  .cg-panel{width:100%;}
+  .hdr-text h1{font-size:1rem;}
+  .hdr-text p{display:none;}
+  .vsep:first-of-type{display:none;}
+
+  /* Show hamburger, hide desktop tabbar */
+  .ham-btn{display:flex;}
+  .tabbar{display:none;}
+
+  /* Body shifts down for 54px header */
+  .body-wrap{top:54px;}
+  #tab-dash{padding:.85rem .75rem 4rem;}
+  #cg-canvas{padding:1rem .75rem 3rem;}
+  #cm-body{padding:.85rem .75rem 3rem;}
+
+  /* Heatmap smaller text on mobile */
+  table.hm thead th{font-size:.52rem;padding:.4rem .18rem;}
+  table.hm tbody td{font-size:.65rem;}
+  .hm-dot{width:26px;height:26px;font-size:.58rem;}
+  .hm-course-code{font-size:.68rem;}
+  .hm-course-title{font-size:.56rem;}
+  .sem-badge{font-size:.5rem;padding:.05rem .22rem;}
+
+  /* Domain legend wraps tighter */
+  .dom-leg{gap:.35rem;padding:.55rem .65rem;}
+  .dl-i{font-size:.62rem;}
+
+  /* Chart shorter */
+  #domChart{max-height:280px !important;}
+
+  /* Course cards full-width */
+  .course-grid{grid-template-columns:1fr;}
+  .cc-title{font-size:.9rem;}
+
+  /* Curriculum graph columns narrower */
+  .cg-col{width:160px;}
+  .cg-grid{gap:1rem;}
+  #cg-canvas{overflow:auto;}
+
+  /* Side panel full-width overlay on mobile */
+  .cg-panel{
+    position:fixed;right:0;top:54px;bottom:0;z-index:50;
+    width:92vw !important;max-width:380px;
+    box-shadow:-4px 0 24px rgba(30,50,90,.18);
+  }
+  .cg-panel.hidden{width:0!important;opacity:0;}
+
+  /* CG toolbar wraps */
+  .cg-toolbar{padding:.4rem .75rem;gap:.5rem;font-size:.62rem;}
+  .cg-toolbar > div:last-child{display:none;}
+
+  /* CM toolbar stacks */
+  .cm-toolbar{flex-direction:column;align-items:flex-start;gap:.5rem;padding:.55rem .75rem;}
+  .cm-toolbar-left,.cm-toolbar-right{flex-wrap:wrap;gap:.4rem;}
+  .cm-seg-btn{font-size:.68rem;padding:.28rem .55rem;}
+  .cm-input{width:120px;}
+  .cm-fit-btn{font-size:.68rem;}
+
+  /* CM list grid single col */
+  .cm-list-grid{grid-template-columns:1fr;}
+
+  /* Topic heatmap scroll hint */
+  .cm-hm-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .cm-hm-row-th{font-size:.58rem;}
+  .cm-hm-dot{width:24px;height:24px;font-size:.56rem;}
+
+  /* Network SVG min-height */
+  #cmv-network{height:calc(100vh - 175px);min-height:360px;}
+
+  /* PLO grid smaller */
+  .plo-grid{grid-template-columns:1fr 1fr;}
+  .plo-name-t{font-size:.58rem;}
+
+  /* Concept detail panel */
+  .cm-detail{right:.5rem;bottom:.5rem;left:.5rem;max-width:none;}
+
+  /* Tip hidden on mobile (too cramped) */
+  #tip{display:none !important;}
 }
 </style>
 </head>
@@ -506,13 +618,28 @@ table.cm-hm th,table.cm-hm td{padding:0;}
   </div>
   <div class="vsep"></div>
   <div class="hdr-stats" id="hdr-stats"></div>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+  </button>
 </header>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeNav()"></div>
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="tab-btn active" id="mnbtn-dash"     onclick="switchTab('dash');closeNav()">📊 Dashboard</button>
+  <button class="tab-btn"        id="mnbtn-graph"    onclick="switchTab('graph');closeNav()">🗂 Curriculum Graph</button>
+  <button class="tab-btn"        id="mnbtn-concepts" onclick="switchTab('concepts');closeNav()">🔬 Topic Overlap</button>
+  <div class="mobile-nav-filters" id="mobile-filters"></div>
+</div>
 
 <!-- TABBAR -->
 <div class="tabbar">
   <button class="tab-btn active" id="tbtn-dash"     onclick="switchTab('dash')">📊 Dashboard</button>
   <button class="tab-btn"        id="tbtn-graph"    onclick="switchTab('graph')">🗂 Curriculum Graph</button>
-  <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🔬 Concept Map</button>
+  <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🔬 Topic Overlap</button>
   <div class="vsep" style="margin:0 .6rem;"></div>
   <div class="tabbar-filters" id="filters"></div>
 </div>
@@ -588,10 +715,10 @@ table.cm-hm th,table.cm-hm td{padding:0;}
       <div class="cm-toolbar-left">
         <span class="cm-label">View:</span>
         <div class="cm-seg" id="cm-view-seg">
-          <button class="cm-seg-btn active" data-view="curriculum" onclick="cmSetView('curriculum')">Curriculum Graph</button>
-          <button class="cm-seg-btn"        data-view="heatmap"    onclick="cmSetView('heatmap')">Overlap Heatmap</button>
-          <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Concept Network</button>
-          <button class="cm-seg-btn"        data-view="list"       onclick="cmSetView('list')">Course Concepts</button>
+          <button class="cm-seg-btn active" data-view="curriculum" onclick="cmSetView('curriculum')">Curriculum View</button>
+          <button class="cm-seg-btn"        data-view="heatmap"    onclick="cmSetView('heatmap')">Topic Heatmap</button>
+          <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Topic Network</button>
+          <button class="cm-seg-btn"        data-view="list"       onclick="cmSetView('list')">By Course</button>
         </div>
       </div>
       <div class="cm-toolbar-right">
@@ -602,7 +729,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
           <option value="3">≥ 3 courses</option>
         </select>
         <span class="cm-label" style="margin-left:.9rem">Search:</span>
-        <input id="cm-search" class="cm-input" placeholder="filter concepts…" oninput="cmRender()">
+        <input id="cm-search" class="cm-input" placeholder="filter topics…" oninput="cmRender()">
         <div id="cm-force-controls" style="display:none;align-items:center;gap:.4rem;">
           <span class="cm-label">Spread:</span>
           <input type="range" id="cm-force-slider" min="1" max="10" value="5" step="1"
@@ -717,6 +844,8 @@ window.switchTab = function(tab) {
   ["dash","graph","concepts"].forEach(t => {
     document.getElementById("tab-"+t).classList.toggle("hidden", t!==tab);
     document.getElementById("tbtn-"+t).classList.toggle("active", t===tab);
+    const mb = document.getElementById("mnbtn-"+t);
+    if(mb) mb.classList.toggle("active", t===tab);
   });
   if (tab === "graph")    { buildCurriculumGraph(); }
   if (tab === "concepts") { cmRender(); }
@@ -728,13 +857,16 @@ window.switchTab = function(tab) {
 function buildFilters() {
   const sems = allSemesters();
   const opts = ["All", ...sems.map(String)];
-  document.getElementById("filters").innerHTML = opts.map(s => {
+  const filterHtml = opts.map(s => {
     const label = s === "All" ? "All Semesters" : `Semester ${s}`;
     const col   = s === "All" ? "" : `color:${semColor(Number(s))};border-color:${semColor(Number(s))}40;`;
     const act   = activeSemFilter === s;
     return `<button class="fbtn${act?" active":""}" style="${act?`background:${semColor(Number(s))}18;border-color:${semColor(Number(s))};color:${semColor(Number(s))};`:`${col}`}"
       onclick="setFilter('${s}')">${label}</button>`;
   }).join("");
+  document.getElementById("filters").innerHTML = filterHtml;
+  const mf = document.getElementById("mobile-filters");
+  if (mf) mf.innerHTML = filterHtml;
 }
 
 window.setFilter = function(s) {
@@ -1205,7 +1337,7 @@ function cmRenderCurriculum(courses,sortedConcepts,idx) {
         onclick="cmCurrSelectCourse('${course.code}',event)">
         <div class="cm-curr-code" style="color:${sc};">${course.code}</div>
         <div class="cm-curr-title">${course.title}</div>
-        <div class="cm-curr-concepts">${tags||'<span style="font-size:.6rem;color:var(--dim);">No concepts extracted</span>'}</div>
+        <div class="cm-curr-concepts">${tags||'<span style="font-size:.6rem;color:var(--dim);">No topics extracted</span>'}</div>
       </div>`;
     });
     html+=`</div>`;
@@ -1235,9 +1367,9 @@ function cmRenderHeatmap(courses,sortedConcepts,idx){
   courses.forEach(c=>{if(bySem[c.semester]) bySem[c.semester].push(c);});
 
   const legendHtml=`<div style="margin-bottom:1rem;">
-    <h2 class="cm-hm-section-hd">Concept Overlap Heatmap</h2>
+    <h2 class="cm-hm-section-hd">Knowledge Topic Overlap</h2>
     <p style="font-size:.73rem;color:var(--mu);margin-bottom:.75rem;">
-      Each cell shows whether a course covers a concept. Colour = concept category · Click any concept to see details.
+      Each cell shows whether a course covers a knowledge topic. Colour = topic category · Click any topic to see details.
     </p>
     <div class="cm-concept-strip" id="cm-legend-strip">
       ${sortedConcepts.map(([concept,codes])=>{
@@ -1284,7 +1416,7 @@ function cmRenderHeatmap(courses,sortedConcepts,idx){
 
   el.innerHTML=legendHtml+`<div class="cm-hm-wrap">
     <table class="cm-hm"><thead><tr>
-      <th class="cm-hm-corner">Course ↓ · Concept →</th>${colHeaders}
+      <th class="cm-hm-corner">Course ↓ · Topic →</th>${colHeaders}
     </tr></thead><tbody>${tableRows}</tbody></table>
   </div>`;
 }
@@ -1295,7 +1427,7 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   if(!courses.length){el.innerHTML=`<div style="padding:3rem;text-align:center;color:var(--mu);">No courses to display.</div>`;return;}
   if(cmNetSim){cmNetSim.stop();cmNetSim=null;}
   el.innerHTML=`<svg id="cm-net-svg" style="width:100%;height:100%;display:block;"></svg>
-    <div class="cm-net-hint">Drag any node · Scroll to zoom · Click concept for details</div>
+    <div class="cm-net-hint">Drag any node · Scroll to zoom · Click topic for details</div>
     <div class="cm-net-legend" id="cm-net-legend"></div>`;
 
   const W=el.clientWidth||960,H=el.clientHeight||620;
@@ -1452,8 +1584,8 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
       `<div style="border-top:1px solid var(--bdr);margin:.4rem 0 .3rem;"></div>
        <div class="cm-net-legend-title">Nodes</div>
        <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="8" fill="none" stroke="#64748b" stroke-width="2"/></svg><span style="color:var(--mu);">Course bubble</span></div>
-       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="4" fill="#64748b" fill-opacity=".75"/></svg><span style="color:var(--mu);">Unique concept</span></div>
-       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="7" fill="#2563eb" fill-opacity=".85" stroke="#fff" stroke-width="1.5"/></svg><span style="color:var(--mu);">Shared concept</span></div>`;
+       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="4" fill="#64748b" fill-opacity=".75"/></svg><span style="color:var(--mu);">Unique topic</span></div>
+       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="7" fill="#2563eb" fill-opacity=".85" stroke="#fff" stroke-width="1.5"/></svg><span style="color:var(--mu);">Shared topic</span></div>`;
   }
 }
 
@@ -1490,12 +1622,12 @@ function cmRenderList(courses,sortedConcepts,idx){
   }).join("");
   const cnt=sortedConcepts.length;
   const sh=sortedConcepts.filter(([,v])=>v.length>1).length;
-  el.innerHTML=`<h2 class="cm-hm-section-hd">Course Concept Cards</h2>
+  el.innerHTML=`<h2 class="cm-hm-section-hd">Course Knowledge Topics</h2>
     <p style="font-size:.73rem;color:var(--mu);margin-bottom:.85rem;">
       Outlined tags are shared across ≥ 1 other course — click for details.
-      Showing <strong>${cnt}</strong> concepts, <strong>${sh}</strong> shared.
+      Showing <strong>${cnt}</strong> knowledge topics, <strong>${sh}</strong> shared.
     </p>
-    <div class="cm-list-grid">${cards||'<div style="color:var(--mu);font-size:.83rem;">No concepts found.</div>'}</div>`;
+    <div class="cm-list-grid">${cards||'<div style="color:var(--mu);font-size:.83rem;">No topics found.</div>'}</div>`;
 }
 
 /* ── Concept detail panel ── */
@@ -1538,6 +1670,23 @@ window.cmCloseDetail=function(){
 };
 
 function showTip(e,html){tip.innerHTML=html;tip.style.display="block";moveTip(e);}
+
+/* ================================================================
+   MOBILE NAV
+================================================================ */
+window.toggleNav = function() {
+  const nav = document.getElementById("mobile-nav");
+  const ov  = document.getElementById("nav-overlay");
+  const btn = document.getElementById("ham-btn");
+  const open = nav.classList.toggle("open");
+  ov.classList.toggle("open", open);
+  btn.classList.toggle("open", open);
+};
+window.closeNav = function() {
+  document.getElementById("mobile-nav").classList.remove("open");
+  document.getElementById("nav-overlay").classList.remove("open");
+  document.getElementById("ham-btn").classList.remove("open");
+};
 
 /* ================================================================
    BOOT
