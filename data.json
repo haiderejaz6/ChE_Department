@@ -836,51 +836,6 @@
           "description": "Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class.",
           "concepts": []
         },
-        {
-          "code": "CLO-1",
-          "plo": "PLO-1",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics",
-          "concepts": [
-            "material properties",
-            "mechanics"
-          ]
-        },
-        {
-          "code": "CLO-2",
-          "plo": "PLO-1",
-          "emphasis": "Medium",
-          "domain": "C-3",
-          "description": "Discuss the fundamentals of electromagnetic induction and thermometry to demonstrate the working principle of related equipment",
-          "concepts": [
-            "electromagnetic induction"
-          ]
-        },
-        {
-          "code": "CLO-3",
-          "plo": "PLO-5",
-          "emphasis": "Medium",
-          "domain": "P-3",
-          "description": "Realize the experiment by following instructions by the teacher",
-          "concepts": []
-        },
-        {
-          "code": "CLO-4",
-          "plo": "PLO-9",
-          "emphasis": "Medium",
-          "domain": "A-3",
-          "description": "Exhibit capability to work in team during the lab activities",
-          "concepts": []
-        },
-        {
-          "code": "CLO-5",
-          "plo": "PLO-5",
-          "emphasis": "Medium",
-          "domain": "P-3",
-          "description": "Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class.",
-          "concepts": []
-        }
       ],
       "concepts": [
         "electromagnetic induction",
