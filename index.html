@@ -768,6 +768,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
       <div id="cmv-heatmap"   class="hidden"></div>
       <div id="cmv-network"   class="hidden"></div>
       <div id="cmv-list"      class="hidden"></div>
+      <div id="cmv-compare"   class="hidden"></div>
     </div>
   </div><!-- /tab-concepts -->
 
@@ -1318,7 +1319,6 @@ window.cmRender = function() {
   if(cmView==="heatmap")    cmRenderHeatmap(courses,sortedConcepts,idx);
   if(cmView==="network")    cmRenderNetwork(courses,sortedConcepts,idx);
   if(cmView==="list")       cmRenderList(courses,sortedConcepts,idx);
-  if (cmView === "compare") cmRenderCompare(courses);
   if(cmView==="compare")    cmRenderCompare(courses,sortedConcepts,idx);
 };
 
