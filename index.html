@@ -605,6 +605,28 @@ table.cm-hm th,table.cm-hm td{padding:0;}
   /* Tip hidden on mobile (too cramped) */
   #tip{display:none !important;}
 }
+/* ── Compare Courses View ─────────────────────────────── */
+.cm-cmp-container { padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.cm-cmp-controls { 
+  display: flex; gap: 1.2rem; align-items: center; justify-content: center;
+  background: var(--sf); padding: 1rem 1.5rem; border-radius: 12px; 
+  border: 1px solid var(--bdr); box-shadow: var(--shadow); 
+}
+.cm-cmp-select { 
+  flex: 1; max-width: 350px; padding: 0.5rem; border-radius: 6px; 
+  border: 1px solid var(--bdr); font-family: 'Outfit', sans-serif; font-size: .85rem;
+}
+.cm-cmp-grid { 
+  display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 1.5rem; align-items: start; 
+}
+.cm-cmp-col { 
+  background: var(--sf); border: 1px solid var(--bdr); border-radius: 12px; 
+  padding: 1.2rem; box-shadow: var(--shadow); min-height: 200px;
+}
+.cm-cmp-col-title { 
+  font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; 
+  text-align: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--bdr); 
+}
 </style>
 </head>
 <body>
@@ -719,6 +741,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
           <button class="cm-seg-btn"        data-view="heatmap"    onclick="cmSetView('heatmap')">Topic Heatmap</button>
           <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Topic Network</button>
           <button class="cm-seg-btn"        data-view="list"       onclick="cmSetView('list')">By Course</button>
+          <button class="cm-seg-btn" data-view="compare" onclick="cmSetView('compare')">Compare</button>
         </div>
       </div>
       <div class="cm-toolbar-right">
@@ -1288,13 +1311,15 @@ window.cmRender = function() {
   const sortedConcepts=Object.entries(idx).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0]));
   sortedConcepts.forEach(([c])=>getCMConceptColor(c));
 
-  ["curriculum","heatmap","network","list"].forEach(v=>{
+  ["curriculum", "heatmap", "network", "list", "compare"].forEach(v => {
     document.getElementById("cmv-"+v).classList.toggle("hidden",cmView!==v);
   });
   if(cmView==="curriculum") cmRenderCurriculum(courses,sortedConcepts,idx);
   if(cmView==="heatmap")    cmRenderHeatmap(courses,sortedConcepts,idx);
   if(cmView==="network")    cmRenderNetwork(courses,sortedConcepts,idx);
   if(cmView==="list")       cmRenderList(courses,sortedConcepts,idx);
+  if (cmView === "compare") cmRenderCompare(courses);
+  if(cmView==="compare")    cmRenderCompare(courses,sortedConcepts,idx);
 };
 
 /* ── Curriculum Concept Graph (UCSD-style with concept tags) ── */
@@ -1667,6 +1692,94 @@ window.cmCloseDetail=function(){
   const d=document.getElementById("cm-detail-panel");
   if(d)d.classList.remove("show");
   cmSelectedConcept=null;
+};
+
+/* ── Course Comparison Logic ── */
+let cmCompareSelection = []; 
+
+window.cmRenderCompare = function(courses) {
+  const el = document.getElementById("cmv-compare");
+  
+  // Default to the first two available courses if empty
+  if(cmCompareSelection.length !== 2 && courses.length >= 2) {
+    cmCompareSelection = [courses[0].code, courses[1].code];
+  }
+
+  // Generate the UI if it hasn't been built yet
+  if (!el.querySelector('.cm-cmp-container')) {
+    el.innerHTML = `
+      <div class="cm-cmp-container">
+        <div class="cm-cmp-controls">
+          <select id="cm-cmp-sel1" class="cm-cmp-select" onchange="cmUpdateCompare(0, this.value)"></select>
+          <div style="font-weight:800;color:var(--dim);font-size:.8rem;">VS</div>
+          <select id="cm-cmp-sel2" class="cm-cmp-select" onchange="cmUpdateCompare(1, this.value)"></select>
+        </div>
+        <div id="cm-cmp-results"></div>
+      </div>
+    `;
+  }
+  
+  // Update Dropdown Options (in case filters changed available courses)
+  const buildOpts = (selectedCode) => courses.map(c => 
+    `<option value="${c.code}" ${c.code === selectedCode ? 'selected' : ''}>${c.code} - ${c.title}</option>`
+  ).join("");
+  
+  document.getElementById("cm-cmp-sel1").innerHTML = buildOpts(cmCompareSelection[0]);
+  document.getElementById("cm-cmp-sel2").innerHTML = buildOpts(cmCompareSelection[1]);
+  
+  cmDrawCompareResults();
+};
+
+window.cmUpdateCompare = function(index, value) {
+  cmCompareSelection[index] = value;
+  cmDrawCompareResults();
+};
+
+window.cmDrawCompareResults = function() {
+  const resEl = document.getElementById("cm-cmp-results");
+  if(!resEl) return;
+  
+  const c1 = cmCompareSelection[0];
+  const c2 = cmCompareSelection[1];
+  
+  if(!c1 || !c2) {
+    resEl.innerHTML = `<div style="text-align:center;color:var(--mu);padding:2rem;">Please select two courses to compare.</div>`;
+    return;
+  }
+  
+  // Fetch concepts
+  const con1 = getConceptsForCourse(c1) || [];
+  const con2 = getConceptsForCourse(c2) || [];
+  
+  const set1 = new Set(con1);
+  const set2 = new Set(con2);
+  
+  // Calculate overlaps and differences
+  const only1 = con1.filter(c => !set2.has(c));
+  const only2 = con2.filter(c => !set1.has(c));
+  const shared = con1.filter(c => set2.has(c));
+  
+  const renderTags = (tags) => tags.map(c => {
+    const col = window.getCMConceptColor ? getCMConceptColor(c) : 'var(--mu)';
+    return `<span class="cm-ctag" style="background:${col}15;color:${col};border:1px solid ${col}40;" onclick="cmClickConcept('${c.replace(/'/g,"\\'")}')">${c}</span>`;
+  }).join("");
+  
+  resEl.innerHTML = `
+    <div class="cm-cmp-grid">
+      <div class="cm-cmp-col">
+        <div class="cm-cmp-col-title" style="color:var(--col-s1);">Only in ${c1} <span style="opacity:0.6">(${only1.length})</span></div>
+        <div class="cm-cc-tags">${renderTags(only1) || '<span style="color:var(--dim);font-size:.8rem;font-style:italic;">No unique topics</span>'}</div>
+      </div>
+      <div class="cm-cmp-col" style="border-color:var(--gold);box-shadow:0 0 0 1px rgba(184,146,14,.2), var(--shadow);">
+        <div class="cm-cmp-col-title" style="color:var(--goldd);">Shared Topics <span style="opacity:0.6">(${shared.length})</span></div>
+        <div class="cm-cc-tags" style="justify-content:center;">${renderTags(shared) || '<span style="color:var(--dim);font-size:.8rem;font-style:italic;">No overlap</span>'}</div>
+      </div>
+      <div class="cm-cmp-col">
+        <div class="cm-cmp-col-title" style="color:var(--col-s8);">Only in ${c2} <span style="opacity:0.6">(${only2.length})</span></div>
+        <div class="cm-cc-tags">${renderTags(only2) || '<span style="color:var(--dim);font-size:.8rem;font-style:italic;">No unique topics</span>'}</div>
+      </div>
+    </div>
+  `;
 };
 
 function showTip(e,html){tip.innerHTML=html;tip.style.display="block";moveTip(e);}
