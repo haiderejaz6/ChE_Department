@@ -856,7 +856,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 <div id="tip"></div>
 
 <!-- MD Viewer Modal -->
-<div class="md-modal hidden" id="md-modal" onclick="mdModalClose(event)">
+<div class="md-modal hidden" id="md-modal" onclick="onMdModalOverlayClick(event)">
   <div class="md-modal-box" onclick="event.stopPropagation()">
     <div class="md-modal-hdr">
       <div class="md-modal-title" id="md-modal-title">Course Content</div>
@@ -908,6 +908,10 @@ const DOMAIN_CFG = {
   "A-3":{color:"#f97316",label:"A3 · Valuing"}
 };
 const EMPHASIS_ORDER = {None:0,Low:1,Medium:2,High:3};
+
+/* ── HTML escaping helpers ────────────────────────────────── */
+function escH(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escA(s){ return escH(s).replace(/'/g,'&#39;'); }
 
 /* ── Prerequisite graph edges ─────────────────────────────── */
 const PREREQ_EDGES = [
@@ -1275,6 +1279,7 @@ function buildCurriculumGraph() {
   });
 
   // Draw prerequisite arrows as SVG overlay after layout
+  // Delay to allow the browser to complete layout before reading getBoundingClientRect
   setTimeout(drawPrereqArrows, 60);
 }
 
@@ -1387,7 +1392,8 @@ function cgOpenPanel(course) {  if (cgSelectedCode) {
      ${buildDepSection(course)}
      <div><div class="psec-hd">${course.clos.length} CLOs</div>${cloHtml}</div>
      <div style="margin-top:.75rem;border-top:1px solid var(--bdr);padding-top:.75rem;">
-       <button class="md-view-btn" onclick="openMdModal('${course.code}','${course.title.replace(/'/g,"\\'")}')">
+       <button class="md-view-btn" data-code="${escH(course.code)}" data-title="${escA(course.title)}"
+         onclick="openMdModal(this.dataset.code,this.dataset.title)">
          📄 View Course Content (.md)
        </button>
      </div>`;
@@ -1906,7 +1912,8 @@ function cmDrawMultiCompare(courses) {
     return `<tr class="${rowClass}">
       <td class="topic-cell">
         <span style="background:${col}18;color:${col};padding:.1rem .4rem;border-radius:10px;font-size:.67rem;font-weight:600;cursor:pointer;"
-          onclick="cmClickConcept('${topic.replace(/'/g,"\\'")}')">${topic}</span>
+          data-concept="${escA(topic)}"
+          onclick="cmClickConcept(this.dataset.concept)">${escH(topic)}</span>
       </td>${cells}
     </tr>`;
   }).join("");
@@ -2024,7 +2031,7 @@ window.openMdModal = async function(code, title) {
 window.closeMdModal = function() {
   document.getElementById("md-modal").classList.add("hidden");
 };
-window.mdModalClose = function(e) {
+window.onMdModalOverlayClick = function(e) {
   if (e.target === document.getElementById("md-modal")) closeMdModal();
 };
 
