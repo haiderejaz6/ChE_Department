@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OBE Dashboard · SCME, NUST</title>
+<title>ChE Curriculum · SCME, NUST</title>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -488,6 +488,85 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
 
+/* ── Curriculum Graph prerequisite arrows overlay ────────── */
+#cg-canvas{position:relative;}
+#prereq-svg{position:absolute;top:0;left:0;pointer-events:none;overflow:visible;z-index:0;}
+.prereq-legend{display:flex;align-items:center;gap:.4rem;font-size:.67rem;color:var(--mu);}
+.prereq-leg-line{width:28px;height:0;border-top:2px dashed rgba(184,146,14,.65);}
+
+/* ── Multi-course compare ─────────────────────────────────── */
+.cm-cmp-pills{display:flex;flex-wrap:wrap;gap:.38rem;padding:.7rem 1rem;
+  background:var(--sf);border:1px solid var(--bdr);border-radius:12px;
+  box-shadow:var(--shadow);margin-bottom:1rem;align-items:center;}
+.cm-cmp-heading{font-size:.7rem;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.07em;margin-right:.3rem;flex-shrink:0;}
+.cm-cmp-pill{padding:.25rem .65rem;border:1.5px solid var(--bdr);border-radius:20px;
+  font-family:'DM Mono',monospace;font-size:.67rem;font-weight:700;cursor:pointer;
+  transition:all .15s;background:var(--sf);color:var(--mu);}
+.cm-cmp-pill:hover{border-color:var(--bdr2);color:var(--tx);}
+.cm-cmp-table-wrap{background:var(--sf);border:1px solid var(--bdr);border-radius:12px;
+  overflow:hidden;box-shadow:var(--shadow);overflow-x:auto;}
+.cm-cmp-tbl{border-collapse:collapse;min-width:100%;}
+.cm-cmp-tbl th{padding:.45rem .7rem;font-size:.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;border-bottom:1.5px solid var(--bdr);background:#f7f9fd;
+  white-space:nowrap;text-align:center;}
+.cm-cmp-tbl th.topic-col{text-align:left;min-width:160px;}
+.cm-cmp-tbl td{padding:.35rem .7rem;font-size:.71rem;border-bottom:1px solid rgba(0,0,0,.04);
+  vertical-align:middle;text-align:center;}
+.cm-cmp-tbl td.topic-cell{text-align:left;font-family:'Outfit',sans-serif;color:var(--tx);}
+.cm-cmp-tbl tr:last-child td{border-bottom:none;}
+.cm-cmp-tbl tr:hover td{background:#fafbff;}
+.cm-cmp-chk{display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:5px;font-size:.7rem;}
+.cm-cmp-shared-all{background:rgba(184,146,14,.12);border-left:3px solid var(--gold);}
+.cm-cmp-info{font-size:.72rem;color:var(--mu);margin:.6rem 0 .85rem;}
+.cm-cmp-info strong{color:var(--tx);}
+
+/* ── MD Viewer modal ──────────────────────────────────────── */
+.md-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;
+  justify-content:center;background:rgba(0,0,0,.45);}
+.md-modal.hidden{display:none!important;}
+.md-modal-box{background:var(--sf);border-radius:16px;box-shadow:var(--shadow-lg);
+  width:min(800px,92vw);max-height:87vh;display:flex;flex-direction:column;
+  border:1.5px solid var(--bdr2);}
+.md-modal-hdr{display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem 1.2rem;border-bottom:1px solid var(--bdr);flex-shrink:0;}
+.md-modal-title{font-family:'Crimson Pro',serif;font-size:1.1rem;font-weight:700;color:var(--tx);}
+.md-modal-body{flex:1;overflow-y:auto;padding:1.2rem 1.5rem;}
+.md-body h1{font-family:'Crimson Pro',serif;font-size:1.55rem;font-weight:700;margin:1rem 0 .45rem;color:var(--tx);}
+.md-body h2{font-family:'Crimson Pro',serif;font-size:1.25rem;font-weight:700;margin:.9rem 0 .4rem;color:var(--tx);}
+.md-body h3{font-family:'Crimson Pro',serif;font-size:1.05rem;font-weight:700;margin:.75rem 0 .35rem;color:var(--tx);}
+.md-body p{font-size:.82rem;color:var(--mu);line-height:1.68;margin-bottom:.6rem;}
+.md-body ul,.md-body ol{padding-left:1.4rem;margin-bottom:.6rem;}
+.md-body li{font-size:.82rem;color:var(--mu);line-height:1.65;margin-bottom:.18rem;}
+.md-body code{font-family:'DM Mono',monospace;font-size:.78rem;background:#f0f3fa;
+  padding:.07rem .3rem;border-radius:3px;color:var(--gold);}
+.md-body pre{background:#f0f3fa;border-radius:8px;padding:.85rem 1rem;overflow-x:auto;margin-bottom:.65rem;}
+.md-body pre code{background:none;padding:0;color:var(--tx);}
+.md-body strong{font-weight:700;color:var(--tx);}
+.md-body em{font-style:italic;}
+.md-body blockquote{border-left:3px solid var(--gold);padding:.35rem .85rem;
+  margin:.6rem 0;font-style:italic;color:var(--mu);background:rgba(184,146,14,.04);border-radius:0 6px 6px 0;}
+.md-body hr{border:none;border-top:1.5px solid var(--bdr);margin:1rem 0;}
+.md-body table{border-collapse:collapse;width:100%;margin-bottom:.7rem;font-size:.79rem;}
+.md-body th{background:#f7f9fd;font-weight:700;padding:.35rem .6rem;border:1px solid var(--bdr);}
+.md-body td{padding:.3rem .6rem;border:1px solid var(--bdr);color:var(--mu);}
+.md-view-btn{
+  display:inline-flex;align-items:center;gap:.32rem;padding:.28rem .7rem;
+  border:1px solid var(--bdr);border-radius:6px;font-family:'Outfit',sans-serif;
+  font-size:.7rem;font-weight:600;color:var(--mu);background:none;cursor:pointer;
+  transition:all .14s;margin-top:.6rem;
+}
+.md-view-btn:hover{background:rgba(184,146,14,.08);color:var(--goldd);border-color:var(--gold);}
+
+/* ── Prereq / unlocks tags in panel ─────────────────────── */
+.cg-dep-tag{
+  display:inline-flex;align-items:center;gap:.25rem;padding:.2rem .52rem;
+  border-radius:12px;font-family:'DM Mono',monospace;font-size:.64rem;font-weight:700;
+  border:1px solid;cursor:pointer;transition:all .14s;
+}
+.cg-dep-tag:hover{filter:brightness(.92);}
+
 /* ── MOBILE HAMBURGER ──────────────────────────────────────── */
 .ham-btn{
   display:none;width:38px;height:38px;background:none;border:1px solid var(--bdr);
@@ -651,16 +730,16 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 <div class="nav-overlay" id="nav-overlay" onclick="closeNav()"></div>
 <!-- MOBILE NAV DRAWER -->
 <div class="mobile-nav" id="mobile-nav">
-  <button class="tab-btn active" id="mnbtn-dash"     onclick="switchTab('dash');closeNav()">📊 Dashboard</button>
-  <button class="tab-btn"        id="mnbtn-graph"    onclick="switchTab('graph');closeNav()">🗂 Curriculum Graph</button>
+  <button class="tab-btn active" id="mnbtn-graph"    onclick="switchTab('graph');closeNav()">🗂 Curriculum Graph</button>
+  <button class="tab-btn"        id="mnbtn-dash"     onclick="switchTab('dash');closeNav()">📊 OBE Dashboard</button>
   <button class="tab-btn"        id="mnbtn-concepts" onclick="switchTab('concepts');closeNav()">🔬 Topic Overlap</button>
   <div class="mobile-nav-filters" id="mobile-filters"></div>
 </div>
 
 <!-- TABBAR -->
 <div class="tabbar">
-  <button class="tab-btn active" id="tbtn-dash"     onclick="switchTab('dash')">📊 Dashboard</button>
-  <button class="tab-btn"        id="tbtn-graph"    onclick="switchTab('graph')">🗂 Curriculum Graph</button>
+  <button class="tab-btn active" id="tbtn-graph"    onclick="switchTab('graph')">🗂 Curriculum Graph</button>
+  <button class="tab-btn"        id="tbtn-dash"     onclick="switchTab('dash')">📊 OBE Dashboard</button>
   <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🔬 Topic Overlap</button>
   <div class="vsep" style="margin:0 .6rem;"></div>
   <div class="tabbar-filters" id="filters"></div>
@@ -669,8 +748,39 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 <!-- BODY -->
 <div class="body-wrap">
 
+  <!-- ── CURRICULUM GRAPH TAB (hero — default view) ── -->
+  <div id="tab-graph">
+    <!-- Toolbar -->
+    <div class="cg-toolbar">
+      <span class="cg-label">Semester colours:</span>
+      <div class="cg-legend" id="cg-legend"></div>
+      <div class="prereq-legend" style="margin-left:.8rem;">
+        <div class="prereq-leg-line"></div>
+        Prerequisite
+      </div>
+      <div style="margin-left:auto;font-size:.68rem;color:var(--mu);">
+        Click any course card to inspect CLOs · Credits shown as Lec+Lab
+      </div>
+    </div>
+    <!-- Grid + side panel -->
+    <div style="flex:1;display:flex;overflow:hidden;">
+      <div id="cg-canvas"></div>
+      <div class="cg-panel hidden" id="cg-panel">
+        <div class="cg-phdr">
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--mu);margin-bottom:.25rem;" id="cgp-type">—</div>
+            <div style="font-family:'Crimson Pro',serif;font-size:1.1rem;font-weight:700;color:var(--tx);line-height:1.25;" id="cgp-name">—</div>
+            <div style="font-size:.72rem;color:var(--mu);margin-top:.2rem;" id="cgp-sub"></div>
+          </div>
+          <button class="close-btn" onclick="cgClosePanel()">✕</button>
+        </div>
+        <div id="cg-panel-inner"></div>
+      </div>
+    </div>
+  </div><!-- /tab-graph -->
+
   <!-- ── DASHBOARD TAB ── -->
-  <div id="tab-dash">
+  <div id="tab-dash" class="hidden">
     <div class="section">
       <h2 class="sec-hd">PLO Coverage Matrix</h2>
       <p style="font-size:.74rem;color:var(--mu);margin-bottom:.75rem;">
@@ -704,33 +814,6 @@ table.cm-hm th,table.cm-hm td{padding:0;}
     </div>
   </div><!-- /tab-dash -->
 
-  <!-- ── CURRICULUM GRAPH TAB (UCSD-style) ── -->
-  <div id="tab-graph" class="hidden">
-    <!-- Toolbar -->
-    <div class="cg-toolbar">
-      <span class="cg-label">Semester colours:</span>
-      <div class="cg-legend" id="cg-legend"></div>
-      <div style="margin-left:auto;font-size:.68rem;color:var(--mu);">
-        Click any course card to inspect CLOs · Credits shown as Lec+Lab
-      </div>
-    </div>
-    <!-- Grid + side panel -->
-    <div style="flex:1;display:flex;overflow:hidden;">
-      <div id="cg-canvas"></div>
-      <div class="cg-panel hidden" id="cg-panel">
-        <div class="cg-phdr">
-          <div style="flex:1;min-width:0;">
-            <div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--mu);margin-bottom:.25rem;" id="cgp-type">—</div>
-            <div style="font-family:'Crimson Pro',serif;font-size:1.1rem;font-weight:700;color:var(--tx);line-height:1.25;" id="cgp-name">—</div>
-            <div style="font-size:.72rem;color:var(--mu);margin-top:.2rem;" id="cgp-sub"></div>
-          </div>
-          <button class="close-btn" onclick="cgClosePanel()">✕</button>
-        </div>
-        <div id="cg-panel-inner"></div>
-      </div>
-    </div>
-  </div><!-- /tab-graph -->
-
   <!-- ── CONCEPT MAP TAB ── -->
   <div id="tab-concepts" class="hidden">
     <div class="cm-toolbar">
@@ -738,10 +821,8 @@ table.cm-hm th,table.cm-hm td{padding:0;}
         <span class="cm-label">View:</span>
         <div class="cm-seg" id="cm-view-seg">
           <button class="cm-seg-btn active" data-view="curriculum" onclick="cmSetView('curriculum')">Curriculum View</button>
-          <button class="cm-seg-btn"        data-view="heatmap"    onclick="cmSetView('heatmap')">Topic Heatmap</button>
           <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Topic Network</button>
-          <button class="cm-seg-btn"        data-view="list"       onclick="cmSetView('list')">By Course</button>
-          <button class="cm-seg-btn" data-view="compare" onclick="cmSetView('compare')">Compare</button>
+          <button class="cm-seg-btn" data-view="compare" onclick="cmSetView('compare')">Compare Courses</button>
         </div>
       </div>
       <div class="cm-toolbar-right">
@@ -765,9 +846,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
     </div>
     <div id="cm-body">
       <div id="cmv-curriculum"></div>
-      <div id="cmv-heatmap"   class="hidden"></div>
       <div id="cmv-network"   class="hidden"></div>
-      <div id="cmv-list"      class="hidden"></div>
       <div id="cmv-compare"   class="hidden"></div>
     </div>
   </div><!-- /tab-concepts -->
@@ -775,6 +854,21 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 </div><!-- /body-wrap -->
 
 <div id="tip"></div>
+
+<!-- MD Viewer Modal -->
+<div class="md-modal hidden" id="md-modal" onclick="mdModalClose(event)">
+  <div class="md-modal-box" onclick="event.stopPropagation()">
+    <div class="md-modal-hdr">
+      <div class="md-modal-title" id="md-modal-title">Course Content</div>
+      <button class="close-btn" onclick="closeMdModal()" style="font-size:1rem;">✕</button>
+    </div>
+    <div class="md-modal-body">
+      <div class="md-body" id="md-modal-body">
+        <p style="color:var(--dim);font-style:italic;">Loading…</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 /* ================================================================
@@ -815,6 +909,19 @@ const DOMAIN_CFG = {
 };
 const EMPHASIS_ORDER = {None:0,Low:1,Medium:2,High:3};
 
+/* ── Prerequisite graph edges ─────────────────────────────── */
+const PREREQ_EDGES = [
+  ["HU-131",  "HU-132"],
+  ["QR-100",  "QR-101"],
+  ["MATH-101","MATH-243"],
+  ["CHE-103", "CHE-222"],
+  ["CHE-222", "CHE-451"],
+  ["CHE-223", "CHE-332"],
+  ["CHE-214", "CHE-224"],
+  ["CHE-220", "CHE-345"],
+  ["CHE-220", "CHE-451"],
+];
+
 /* ── Static embedded courses (fallback if data.json absent) ── */
 const COURSES_EMBEDDED = [
   {code:"CHE-425",title:"Maintenance & Process Safety",semester:8,lec:3,lab:0,clos:[
@@ -831,7 +938,7 @@ const COURSES_EMBEDDED = [
    APP STATE
 ================================================================ */
 let activeSemFilter = "All";
-let activeTab = "dash";
+let activeTab = "graph";
 let DATA = { plos: PLOS_DEF, courses: COURSES_EMBEDDED };
 let domChart = null;
 
@@ -845,7 +952,8 @@ async function init() {
   } catch(e) {}
   buildFilters();
   renderStats();
-  renderDash();
+  renderDash();      // pre-render dashboard in background
+  switchTab('graph'); // hero: start on curriculum graph
 }
 
 /* ================================================================
@@ -1165,10 +1273,66 @@ function buildCurriculumGraph() {
 
     grid.appendChild(col);
   });
+
+  // Draw prerequisite arrows as SVG overlay after layout
+  setTimeout(drawPrereqArrows, 60);
 }
 
-function cgOpenPanel(course) {
-  if (cgSelectedCode) {
+function drawPrereqArrows() {
+  const canvas = document.getElementById("cg-canvas");
+  if (!canvas) return;
+
+  // Remove old overlay
+  const old = document.getElementById("prereq-svg");
+  if (old) old.remove();
+
+  const svgNS = "http://www.w3.org/2000/svg";
+  const svgEl = document.createElementNS(svgNS, "svg");
+  svgEl.id = "prereq-svg";
+  svgEl.style.cssText =
+    `position:absolute;top:0;left:0;` +
+    `width:${canvas.scrollWidth}px;height:${canvas.scrollHeight}px;` +
+    `pointer-events:none;overflow:visible;z-index:0;`;
+
+  const defs = document.createElementNS(svgNS, "defs");
+  defs.innerHTML =
+    `<marker id="arr-end" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="rgba(184,146,14,0.75)"/>
+    </marker>`;
+  svgEl.appendChild(defs);
+
+  const canvasRect = canvas.getBoundingClientRect();
+
+  PREREQ_EDGES.forEach(([from, to]) => {
+    const fromEl = document.getElementById("cgn-" + from);
+    const toEl   = document.getElementById("cgn-" + to);
+    if (!fromEl || !toEl) return;
+
+    const fr = fromEl.getBoundingClientRect();
+    const tr = toEl.getBoundingClientRect();
+    const sl = canvas.scrollLeft, st = canvas.scrollTop;
+
+    // right-center of source → left-center of target
+    const x1 = fr.right  - canvasRect.left + sl;
+    const y1 = fr.top    + fr.height / 2 - canvasRect.top + st;
+    const x2 = tr.left   - canvasRect.left + sl - 2;
+    const y2 = tr.top    + tr.height / 2 - canvasRect.top + st;
+
+    const pathEl = document.createElementNS(svgNS, "path");
+    const cx = (x1 + x2) / 2;
+    pathEl.setAttribute("d", `M${x1},${y1} C${cx},${y1} ${cx},${y2} ${x2},${y2}`);
+    pathEl.setAttribute("stroke", "rgba(184,146,14,0.6)");
+    pathEl.setAttribute("stroke-width", "1.8");
+    pathEl.setAttribute("stroke-dasharray", "5,3");
+    pathEl.setAttribute("fill", "none");
+    pathEl.setAttribute("marker-end", "url(#arr-end)");
+    svgEl.appendChild(pathEl);
+  });
+
+  canvas.insertBefore(svgEl, canvas.firstChild);
+}
+
+function cgOpenPanel(course) {  if (cgSelectedCode) {
     const prev = document.getElementById("cgn-"+cgSelectedCode);
     if (prev) prev.classList.remove("selected");
   }
@@ -1220,7 +1384,40 @@ function cgOpenPanel(course) {
 
   document.getElementById("cg-panel-inner").innerHTML =
     `<div style="margin-bottom:1rem;"><div class="psec-hd">PLO Connections</div>${ploHtml}</div>
-     <div><div class="psec-hd">${course.clos.length} CLOs</div>${cloHtml}</div>`;
+     ${buildDepSection(course)}
+     <div><div class="psec-hd">${course.clos.length} CLOs</div>${cloHtml}</div>
+     <div style="margin-top:.75rem;border-top:1px solid var(--bdr);padding-top:.75rem;">
+       <button class="md-view-btn" onclick="openMdModal('${course.code}','${course.title.replace(/'/g,"\\'")}')">
+         📄 View Course Content (.md)
+       </button>
+     </div>`;
+}
+
+function buildDepSection(course) {
+  const prereqs  = PREREQ_EDGES.filter(([,t])=>t===course.code).map(([f])=>f);
+  const unlocks  = PREREQ_EDGES.filter(([f])=>f===course.code).map(([,t])=>t);
+  if (!prereqs.length && !unlocks.length) return "";
+  let html = `<div style="margin-bottom:1rem;">`;
+  if (prereqs.length) {
+    html += `<div class="psec-hd">Prerequisites</div>`;
+    html += prereqs.map(code => {
+      const c = DATA.courses.find(x=>x.code===code);
+      const sc = semColor(c?.semester||0);
+      return `<span class="cg-dep-tag" style="background:${sc}12;color:${sc};border-color:${sc}40;margin:.18rem .18rem 0 0;"
+        onclick="cgJumpTo('${code}')">← ${code}</span>`;
+    }).join("");
+  }
+  if (unlocks.length) {
+    html += `<div class="psec-hd" style="margin-top:.55rem;">Unlocks</div>`;
+    html += unlocks.map(code => {
+      const c = DATA.courses.find(x=>x.code===code);
+      const sc = semColor(c?.semester||0);
+      return `<span class="cg-dep-tag" style="background:${sc}12;color:${sc};border-color:${sc}40;margin:.18rem .18rem 0 0;"
+        onclick="cgJumpTo('${code}')">${code} →</span>`;
+    }).join("");
+  }
+  html += `</div>`;
+  return html;
 }
 
 window.cgClosePanel = function() {
@@ -1230,6 +1427,15 @@ window.cgClosePanel = function() {
     if (prev) prev.classList.remove("selected");
     cgSelectedCode = null;
   }
+};
+
+window.cgJumpTo = function(code) {
+  const course = DATA.courses.find(c=>c.code===code);
+  if (!course) return;
+  // Scroll the node into view
+  const el = document.getElementById("cgn-"+code);
+  if (el) el.scrollIntoView({behavior:"smooth",block:"center",inline:"center"});
+  cgOpenPanel(course);
 };
 
 /* ================================================================
@@ -1280,6 +1486,8 @@ window.cmUpdateForce = function(val) {
 };
 
 window.cmSetView = function(v) {
+  // Only allow remaining views
+  if(!["curriculum","network","compare"].includes(v)) v="curriculum";
   cmView=v;
   document.querySelectorAll(".cm-seg-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
   const fc=document.getElementById("cm-force-controls");
@@ -1312,13 +1520,11 @@ window.cmRender = function() {
   const sortedConcepts=Object.entries(idx).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0]));
   sortedConcepts.forEach(([c])=>getCMConceptColor(c));
 
-  ["curriculum", "heatmap", "network", "list", "compare"].forEach(v => {
+  ["curriculum", "network", "compare"].forEach(v => {
     document.getElementById("cmv-"+v).classList.toggle("hidden",cmView!==v);
   });
   if(cmView==="curriculum") cmRenderCurriculum(courses,sortedConcepts,idx);
-  if(cmView==="heatmap")    cmRenderHeatmap(courses,sortedConcepts,idx);
   if(cmView==="network")    cmRenderNetwork(courses,sortedConcepts,idx);
-  if(cmView==="list")       cmRenderList(courses,sortedConcepts,idx);
   if(cmView==="compare")    cmRenderCompare(courses,sortedConcepts,idx);
 };
 
@@ -1379,72 +1585,6 @@ window.cmCurrSelectCourse = function(code, e) {
   if(el) el.classList.add("highlight");
 };
 
-/* ── Overlap heatmap view ── */
-function cmRenderHeatmap(courses,sortedConcepts,idx){
-  const el=document.getElementById("cmv-heatmap");
-  if(!sortedConcepts.length){
-    el.innerHTML=`<div style="padding:3rem;text-align:center;color:var(--mu);">No concepts match the current filters.</div>`;
-    return;
-  }
-  const sems=allSemesters().filter(s=>courses.some(c=>c.semester===s));
-  const bySem={};
-  sems.forEach(s=>bySem[s]=[]);
-  courses.forEach(c=>{if(bySem[c.semester]) bySem[c.semester].push(c);});
-
-  const legendHtml=`<div style="margin-bottom:1rem;">
-    <h2 class="cm-hm-section-hd">Knowledge Topic Overlap</h2>
-    <p style="font-size:.73rem;color:var(--mu);margin-bottom:.75rem;">
-      Each cell shows whether a course covers a knowledge topic. Colour = topic category · Click any topic to see details.
-    </p>
-    <div class="cm-concept-strip" id="cm-legend-strip">
-      ${sortedConcepts.map(([concept,codes])=>{
-        const col=getCMConceptColor(concept);
-        return `<span class="cc-tag" style="background:${col}1a;color:${col};"
-          onclick="cmClickConcept('${concept.replace(/'/g,"\\'")}',this)"
-          title="${codes.length} courses: ${codes.join(', ')}">
-          ${concept}<span class="cm-overlap-badge" style="background:${col};">${codes.length}</span>
-        </span>`;
-      }).join("")}
-    </div>
-  </div>`;
-
-  let tableRows="";
-  sems.forEach(sem=>{
-    const sc=semColor(sem);
-    tableRows+=`<tr><td colspan="${sortedConcepts.length+1}" style="padding:.4rem 0 .15rem;background:none;">
-      <div style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-        color:${sc};padding:.25rem .65rem;background:${sc}12;border-radius:4px;display:inline-block;">
-        Semester ${sem}
-      </div></td></tr>`;
-    (bySem[sem]||[]).forEach(course=>{
-      const courseConceptSet=new Set(getConceptsForCourse(course.code));
-      const cells=sortedConcepts.map(([concept,codes])=>{
-        const has=courseConceptSet.has(concept);
-        const col=getCMConceptColor(concept);
-        if(!has) return `<td class="cm-hm-cell"><div class="cm-hm-dot empty" title="${concept}: not covered">·</div></td>`;
-        const si=Math.min(0.9,0.25+(codes.length/Math.max(...Object.values(idx).map(v=>v.length)))*0.65);
-        return `<td class="cm-hm-cell"><div class="cm-hm-dot"
-          style="background:${col};opacity:${si};color:#fff;"
-          onclick="cmClickConcept('${concept.replace(/'/g,"\\'")}',null)"
-          title="${concept} — ${codes.length} courses">✓</div></td>`;
-      }).join("");
-      tableRows+=`<tr style="border-bottom:1px solid rgba(0,0,0,.03);">
-        <td class="cm-hm-row-th">${course.code}<span>${course.title.length>28?course.title.substring(0,26)+"…":course.title}</span></td>
-        ${cells}
-      </tr>`;
-    });
-  });
-
-  const colHeaders=sortedConcepts.map(([concept])=>
-    `<th class="cm-hm-col-th"><span title="${concept}">${concept}</span></th>`
-  ).join("");
-
-  el.innerHTML=legendHtml+`<div class="cm-hm-wrap">
-    <table class="cm-hm"><thead><tr>
-      <th class="cm-hm-corner">Course ↓ · Topic →</th>${colHeaders}
-    </tr></thead><tbody>${tableRows}</tbody></table>
-  </div>`;
-}
 
 /* ── Network view ── */
 function cmRenderNetwork(courses,sortedConcepts,idx){
@@ -1614,47 +1754,6 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   }
 }
 
-/* ── List view ── */
-function cmRenderList(courses,sortedConcepts,idx){
-  const el=document.getElementById("cmv-list");
-  const sharedSet=new Set(sortedConcepts.map(([c])=>c));
-  const cards=courses.map(course=>{
-    const concepts=getConceptsForCourse(course.code);
-    if(!concepts.length)return"";
-    const sc=semColor(course.semester);
-    const tags=concepts.map(c=>{
-      const col=getCMConceptColor(c);
-      const shared=sharedSet.has(c);
-      const cnt=(idx[c]||[]).length;
-      return`<span class="cm-ctag${shared?" shared":""}" style="background:${col}18;color:${col};${shared?"outline-color:"+col+"55;":""}"
-        onclick="cmClickConcept('${c.replace(/'/g,"\\'")}',null)"
-        title="${shared?cnt+" courses share this":"unique to this course"}">
-        ${c}${shared?`<span class="cm-overlap-badge" style="background:${col};margin-left:.2rem;">${cnt}</span>`:""}
-      </span>`;
-    }).join("");
-    return`<div class="cm-course-card" style="border-top:3px solid ${sc};">
-      <div class="cm-cc-head">
-        <div>
-          <div class="cm-cc-code" style="color:${sc};">${course.code}
-            <span class="sem-badge" style="background:${sc}18;color:${sc};">${semLabel(course.semester)}</span>
-          </div>
-          <div class="cm-cc-title">${course.title}</div>
-        </div>
-        <div style="font-family:'Crimson Pro',serif;font-size:1.5rem;font-weight:700;color:var(--dim);flex-shrink:0;padding-left:.8rem;line-height:1;">${concepts.length}</div>
-      </div>
-      <div class="cm-cc-tags">${tags}</div>
-    </div>`;
-  }).join("");
-  const cnt=sortedConcepts.length;
-  const sh=sortedConcepts.filter(([,v])=>v.length>1).length;
-  el.innerHTML=`<h2 class="cm-hm-section-hd">Course Knowledge Topics</h2>
-    <p style="font-size:.73rem;color:var(--mu);margin-bottom:.85rem;">
-      Outlined tags are shared across ≥ 1 other course — click for details.
-      Showing <strong>${cnt}</strong> knowledge topics, <strong>${sh}</strong> shared.
-    </p>
-    <div class="cm-list-grid">${cards||'<div style="color:var(--mu);font-size:.83rem;">No topics found.</div>'}</div>`;
-}
-
 /* ── Concept detail panel ── */
 window.cmClickConcept = function(concept,tagEl) {
   cmSelectedConcept=concept;
@@ -1694,92 +1793,239 @@ window.cmCloseDetail=function(){
   cmSelectedConcept=null;
 };
 
-/* ── Course Comparison Logic ── */
-let cmCompareSelection = []; 
+/* ── Course Comparison Logic (3+ courses) ── */
+let cmCompareSelection = [];
 
 window.cmRenderCompare = function(courses) {
   const el = document.getElementById("cmv-compare");
-  
-  // Default to the first two available courses if empty
-  if(cmCompareSelection.length !== 2 && courses.length >= 2) {
-    cmCompareSelection = [courses[0].code, courses[1].code];
-  }
 
-  // Generate the UI if it hasn't been built yet
-  if (!el.querySelector('.cm-cmp-container')) {
-    el.innerHTML = `
-      <div class="cm-cmp-container">
-        <div class="cm-cmp-controls">
-          <select id="cm-cmp-sel1" class="cm-cmp-select" onchange="cmUpdateCompare(0, this.value)"></select>
-          <div style="font-weight:800;color:var(--dim);font-size:.8rem;">VS</div>
-          <select id="cm-cmp-sel2" class="cm-cmp-select" onchange="cmUpdateCompare(1, this.value)"></select>
-        </div>
-        <div id="cm-cmp-results"></div>
+  // Seed selection with first 3 courses if empty
+  if (cmCompareSelection.length === 0 && courses.length >= 2) {
+    cmCompareSelection = courses.slice(0, Math.min(3, courses.length)).map(c => c.code);
+  }
+  // Remove codes no longer in current filter
+  cmCompareSelection = cmCompareSelection.filter(code => courses.some(c => c.code === code));
+
+  const pills = courses.map(c => {
+    const sc = semColor(c.semester);
+    const sel = cmCompareSelection.includes(c.code);
+    return `<button class="cm-cmp-pill${sel ? ' active' : ''}"
+      id="cmpill-${c.code}"
+      style="${sel ? `background:${sc}18;border-color:${sc};color:${sc};` : ''}"
+      onclick="cmToggleCompare('${c.code}','${sc}')"
+      title="${c.title}">${c.code}</button>`;
+  }).join("");
+
+  el.innerHTML = `
+    <div class="cm-cmp-container">
+      <div class="cm-cmp-pills">
+        <span class="cm-cmp-heading">Select courses:</span>
+        ${pills}
       </div>
-    `;
+      <div id="cm-cmp-results"></div>
+    </div>`;
+
+  cmDrawMultiCompare(courses);
+};
+
+window.cmToggleCompare = function(code, color) {
+  const i = cmCompareSelection.indexOf(code);
+  const btn = document.getElementById("cmpill-" + code);
+  if (i >= 0) {
+    cmCompareSelection.splice(i, 1);
+    if (btn) { btn.classList.remove("active"); btn.style = ""; }
+  } else {
+    cmCompareSelection.push(code);
+    if (btn) {
+      btn.classList.add("active");
+      btn.style.cssText = `background:${color}18;border-color:${color};color:${color};`;
+    }
   }
-  
-  // Update Dropdown Options (in case filters changed available courses)
-  const buildOpts = (selectedCode) => courses.map(c => 
-    `<option value="${c.code}" ${c.code === selectedCode ? 'selected' : ''}>${c.code} - ${c.title}</option>`
-  ).join("");
-  
-  document.getElementById("cm-cmp-sel1").innerHTML = buildOpts(cmCompareSelection[0]);
-  document.getElementById("cm-cmp-sel2").innerHTML = buildOpts(cmCompareSelection[1]);
-  
-  cmDrawCompareResults();
+  const courses = filtered();
+  cmDrawMultiCompare(courses);
 };
 
-window.cmUpdateCompare = function(index, value) {
-  cmCompareSelection[index] = value;
-  cmDrawCompareResults();
-};
-
-window.cmDrawCompareResults = function() {
+function cmDrawMultiCompare(courses) {
   const resEl = document.getElementById("cm-cmp-results");
-  if(!resEl) return;
-  
-  const c1 = cmCompareSelection[0];
-  const c2 = cmCompareSelection[1];
-  
-  if(!c1 || !c2) {
-    resEl.innerHTML = `<div style="text-align:center;color:var(--mu);padding:2rem;">Please select two courses to compare.</div>`;
+  if (!resEl) return;
+
+  const sel = cmCompareSelection.filter(code => courses.some(c => c.code === code));
+
+  if (sel.length < 2) {
+    resEl.innerHTML = `<div style="text-align:center;color:var(--mu);padding:2rem;">
+      Select at least <strong>2</strong> courses above to compare their topics.
+    </div>`;
     return;
   }
-  
-  // Fetch concepts
-  const con1 = getConceptsForCourse(c1) || [];
-  const con2 = getConceptsForCourse(c2) || [];
-  
-  const set1 = new Set(con1);
-  const set2 = new Set(con2);
-  
-  // Calculate overlaps and differences
-  const only1 = con1.filter(c => !set2.has(c));
-  const only2 = con2.filter(c => !set1.has(c));
-  const shared = con1.filter(c => set2.has(c));
-  
-  const renderTags = (tags) => tags.map(c => {
-    const col = window.getCMConceptColor ? getCMConceptColor(c) : 'var(--mu)';
-    return `<span class="cm-ctag" style="background:${col}15;color:${col};border:1px solid ${col}40;" onclick="cmClickConcept('${c.replace(/'/g,"\\'")}')">${c}</span>`;
+
+  // Build concept sets per selected course
+  const selCourses = sel.map(code => ({
+    code,
+    course: courses.find(c => c.code === code),
+    concepts: new Set(getConceptsForCourse(code))
+  }));
+
+  // Collect all topics covered by any selected course
+  const allTopics = [...new Set(selCourses.flatMap(s => [...s.concepts]))].sort();
+
+  if (!allTopics.length) {
+    resEl.innerHTML = `<div style="text-align:center;color:var(--mu);padding:2rem;">
+      No topics extracted for the selected courses.
+    </div>`;
+    return;
+  }
+
+  // Count how many selected courses cover each topic
+  const topicCoverage = allTopics.map(t => ({
+    topic: t,
+    count: selCourses.filter(s => s.concepts.has(t)).length,
+    courses: selCourses.filter(s => s.concepts.has(t)).map(s => s.code)
+  }));
+
+  // Sort: most shared first, then alphabetical
+  topicCoverage.sort((a, b) => b.count - a.count || a.topic.localeCompare(b.topic));
+
+  const sharedAll = topicCoverage.filter(t => t.count === sel.length);
+  const shared    = topicCoverage.filter(t => t.count > 1 && t.count < sel.length);
+  const unique    = topicCoverage.filter(t => t.count === 1);
+
+  const colHeaders = sel.map(code => {
+    const c = selCourses.find(s => s.code === code);
+    const sc = semColor(c.course?.semester || 0);
+    return `<th style="color:${sc};">${code}</th>`;
   }).join("");
-  
+
+  const renderRows = (rows, rowClass) => rows.map(({topic, courses: cCodes}) => {
+    const col = getCMConceptColor(topic);
+    const cells = sel.map(code => {
+      const has = cCodes.includes(code);
+      const sc2 = semColor(selCourses.find(s=>s.code===code)?.course?.semester || 0);
+      return `<td><span class="cm-cmp-chk" style="${has
+        ? `background:${sc2}18;color:${sc2};` : 'color:var(--dim);'}">${has ? "✓" : "·"}</span></td>`;
+    }).join("");
+    return `<tr class="${rowClass}">
+      <td class="topic-cell">
+        <span style="background:${col}18;color:${col};padding:.1rem .4rem;border-radius:10px;font-size:.67rem;font-weight:600;cursor:pointer;"
+          onclick="cmClickConcept('${topic.replace(/'/g,"\\'")}')">${topic}</span>
+      </td>${cells}
+    </tr>`;
+  }).join("");
+
+  const totalShared = sharedAll.length + shared.length;
   resEl.innerHTML = `
-    <div class="cm-cmp-grid">
-      <div class="cm-cmp-col">
-        <div class="cm-cmp-col-title" style="color:var(--col-s1);">Only in ${c1} <span style="opacity:0.6">(${only1.length})</span></div>
-        <div class="cm-cc-tags">${renderTags(only1) || '<span style="color:var(--dim);font-size:.8rem;font-style:italic;">No unique topics</span>'}</div>
-      </div>
-      <div class="cm-cmp-col" style="border-color:var(--gold);box-shadow:0 0 0 1px rgba(184,146,14,.2), var(--shadow);">
-        <div class="cm-cmp-col-title" style="color:var(--goldd);">Shared Topics <span style="opacity:0.6">(${shared.length})</span></div>
-        <div class="cm-cc-tags" style="justify-content:center;">${renderTags(shared) || '<span style="color:var(--dim);font-size:.8rem;font-style:italic;">No overlap</span>'}</div>
-      </div>
-      <div class="cm-cmp-col">
-        <div class="cm-cmp-col-title" style="color:var(--col-s8);">Only in ${c2} <span style="opacity:0.6">(${only2.length})</span></div>
-        <div class="cm-cc-tags">${renderTags(only2) || '<span style="color:var(--dim);font-size:.8rem;font-style:italic;">No unique topics</span>'}</div>
-      </div>
-    </div>
-  `;
+    <p class="cm-cmp-info">
+      Comparing <strong>${sel.length} courses</strong> ·
+      <strong>${allTopics.length}</strong> topics total ·
+      <strong style="color:var(--goldd);">${sharedAll.length}</strong> shared by all ·
+      <strong>${totalShared}</strong> shared by any two+
+    </p>
+    <div class="cm-cmp-table-wrap">
+      <table class="cm-cmp-tbl">
+        <thead><tr><th class="topic-col">Topic</th>${colHeaders}</tr></thead>
+        <tbody>
+          ${sharedAll.length ? `<tr><td colspan="${sel.length+1}"
+            style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
+              color:var(--goldd);padding:.4rem .7rem .15rem;background:#fdf8ee;">
+            ★ Shared by all ${sel.length} courses (${sharedAll.length})
+          </td></tr>${renderRows(sharedAll,'cm-cmp-shared-all')}` : ''}
+          ${shared.length ? `<tr><td colspan="${sel.length+1}"
+            style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
+              color:var(--mu);padding:.4rem .7rem .15rem;background:#f7f9fd;">
+            Shared by some courses (${shared.length})
+          </td></tr>${renderRows(shared,'')}` : ''}
+          ${unique.length ? `<tr><td colspan="${sel.length+1}"
+            style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
+              color:var(--dim);padding:.4rem .7rem .15rem;background:#f7f9fd;">
+            Unique to one course (${unique.length})
+          </td></tr>${renderRows(unique,'')}` : ''}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+/* ================================================================
+   MD FILE VIEWER
+================================================================ */
+function parseMd(raw) {
+  // Escape HTML first
+  let s = raw.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Fenced code blocks
+  s = s.replace(/```([^`]*?)```/gs,
+    (_,c)=>`<pre><code>${c.replace(/^[^\n]*\n?/,'')}</code></pre>`);
+  // Headings
+  s = s.replace(/^#### (.+)$/gm,'<h4>$1</h4>');
+  s = s.replace(/^### (.+)$/gm,'<h3>$1</h3>');
+  s = s.replace(/^## (.+)$/gm,'<h2>$1</h2>');
+  s = s.replace(/^# (.+)$/gm,'<h1>$1</h1>');
+  // Horizontal rule
+  s = s.replace(/^---+$/gm,'<hr>');
+  // Bold / italic
+  s = s.replace(/\*\*\*(.+?)\*\*\*/g,'<strong><em>$1</em></strong>');
+  s = s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  s = s.replace(/\*(.+?)\*/g,'<em>$1</em>');
+  // Inline code
+  s = s.replace(/`([^`\n]+)`/g,'<code>$1</code>');
+  // Blockquote
+  s = s.replace(/^&gt; (.+)$/gm,'<blockquote>$1</blockquote>');
+  // Tables (simple: | col | col |)
+  s = s.replace(/(\|.+\|\n\|[-| :]+\|\n(?:\|.+\|\n?)*)/g, m => {
+    const rows = m.trim().split('\n');
+    const hCells = rows[0].split('|').filter(c=>c.trim()).map(c=>`<th>${c.trim()}</th>`).join('');
+    const body = rows.slice(2).map(r => {
+      const cells = r.split('|').filter(c=>c.trim()).map(c=>`<td>${c.trim()}</td>`).join('');
+      return `<tr>${cells}</tr>`;
+    }).join('');
+    return `<table><thead><tr>${hCells}</tr></thead><tbody>${body}</tbody></table>`;
+  });
+  // Ordered/unordered lists
+  s = s.replace(/^(\d+)\. (.+)$/gm,'<li>$2</li>');
+  s = s.replace(/^[*-] (.+)$/gm,'<li>$1</li>');
+  // Wrap consecutive <li> tags in <ul>
+  s = s.replace(/((?:<li>.*<\/li>\n?)+)/g,'<ul>$1</ul>');
+  // Paragraphs: double newline → <p>
+  s = s.replace(/\n\n([^<\n][^\n]*)/g,'\n<p>$1</p>');
+  // Line breaks
+  s = s.replace(/([^>])\n([^<\n])/g,'$1 $2');
+  return s;
+}
+
+window.openMdModal = async function(code, title) {
+  const modal   = document.getElementById("md-modal");
+  const titleEl = document.getElementById("md-modal-title");
+  const bodyEl  = document.getElementById("md-modal-body");
+
+  titleEl.textContent = `${code} — ${title}`;
+  bodyEl.innerHTML = `<p style="color:var(--dim);font-style:italic;">Loading ${code}.md…</p>`;
+  modal.classList.remove("hidden");
+
+  // Try common locations
+  const paths = [`./${code}.md`, `./courses/${code}.md`, `./md/${code}.md`];
+  let loaded = false;
+  for (const p of paths) {
+    try {
+      const r = await fetch(p);
+      if (r.ok) {
+        const text = await r.text();
+        bodyEl.innerHTML = parseMd(text);
+        loaded = true;
+        break;
+      }
+    } catch(e) {}
+  }
+  if (!loaded) {
+    bodyEl.innerHTML = `<p style="color:var(--mu);">No content file found for <strong>${code}</strong>.</p>
+      <p style="font-size:.76rem;color:var(--dim);">
+        Place a file named <code>${code}.md</code> in the same directory as <code>index.html</code>
+        (or in a <code>courses/</code> subdirectory) to display it here.
+      </p>`;
+  }
+};
+
+window.closeMdModal = function() {
+  document.getElementById("md-modal").classList.add("hidden");
+};
+window.mdModalClose = function(e) {
+  if (e.target === document.getElementById("md-modal")) closeMdModal();
 };
 
 function showTip(e,html){tip.innerHTML=html;tip.style.display="block";moveTip(e);}
