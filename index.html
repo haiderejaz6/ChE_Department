@@ -540,7 +540,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 .kb-legend-row{display:flex;align-items:center;gap:.45rem;margin-bottom:.22rem;}
 .cm-cloud-selection-status{font-size:.68rem;color:var(--mu);line-height:1.45;margin-left:auto;}
 .cm-cloud-selection-status strong{color:var(--tx);}
-.cm-cloud-selection-status.warn{color:var(--goldd);}
+.cm-cloud-selection-status.empty-selection{color:var(--goldd);}
 .kc-cloud-pill text{pointer-events:none;}
 
 /* ── MD Viewer modal ──────────────────────────────────────── */
@@ -1523,7 +1523,7 @@ function getConceptsForCourse(courseCode) {
   return [...s].sort();
 }
 
-function getDefaultCloudSelectionForFilter(courses) {
+function getSemesterFilteredDefaultCloudSelection(courses) {
   if (activeSemFilter === "All") return [];
   return courses.slice(0, CM_CLOUD_MAX_COURSES).map(c => c.code);
 }
@@ -1532,7 +1532,7 @@ function normalizeCloudSelection(courses) {
   const visibleCodes = new Set(courses.map(c => c.code));
   cmCloudSelection = cmCloudSelection.filter(code => visibleCodes.has(code)).slice(0, CM_CLOUD_MAX_COURSES);
   if (!cmCloudSelectionTouched && !cmCloudSelection.length) {
-    cmCloudSelection = getDefaultCloudSelectionForFilter(courses);
+    cmCloudSelection = getSemesterFilteredDefaultCloudSelection(courses);
   }
   return [...cmCloudSelection];
 }
@@ -1544,8 +1544,10 @@ function syncCloudPinnedCourse(selectedCodes) {
   return cmCloudPinnedCourseCode;
 }
 
+const DEFAULT_COURSE_COLOR = "#64748b";
+
 function sanitizeCssColor(color) {
-  return /^#[0-9a-f]{6}$/i.test(String(color || "")) ? color : "#64748b";
+  return /^#[0-9a-f]{6}$/i.test(String(color || "")) ? color : DEFAULT_COURSE_COLOR;
 }
 
 function calculateAnchorOrbit(canvasSize, courseCount, config) {
@@ -2079,6 +2081,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const ANCHOR_RADIUS_MIN = 88;
   const ANCHOR_RADIUS_MAX = 156;
   const ANCHOR_RADIUS_SCALE_OFFSET = 1.6;
+  const ANCHOR_HEADER_OFFSET = 90;
   const DISJOINT_PILL_SPACING = 26;
   const HEADER_X = 16;
   const HEADER_Y = 22;
@@ -2164,7 +2167,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     anchorSim.tick();
     anchorNodes.forEach(anchor => {
       anchor.x = Math.max(EDGE_PAD * 2, Math.min(canvasW - EDGE_PAD * 2, anchor.x));
-      anchor.y = Math.max(HEADER_Y + 90, Math.min(canvasH - EDGE_PAD * 2, anchor.y));
+      anchor.y = Math.max(HEADER_Y + ANCHOR_HEADER_OFFSET, Math.min(canvasH - EDGE_PAD * 2, anchor.y));
     });
   }
   const anchorByCode = new Map(anchorNodes.map(anchor => [anchor.code, anchor]));
@@ -2246,7 +2249,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   function disjointCourseRepel(strength) {
     let simNodes = [];
     let sharedCoursePairs = new Set();
-    const pairKey = (a, b) => `${a.id}::${b.id}`;
+    const pairKey = (a, b) => JSON.stringify([a.id, b.id]);
     function force(alpha) {
       for (let i = 0; i < simNodes.length; i++) {
         const a = simNodes[i];
@@ -2404,7 +2407,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       cloudNote = `Selected <strong>${selectedCourses.length}</strong> courses; <strong>${courseGroups.length}</strong> currently have visible coverage.`;
     }
   }
-  const cloudSelectionStatusClass = `cm-cloud-selection-status${selectedCourses.length ? "" : " warn"}`;
+  const cloudSelectionStatusClass = `cm-cloud-selection-status${selectedCourses.length ? "" : " empty-selection"}`;
 
   el.innerHTML = `
     <div class="cm-cmp-pills">
