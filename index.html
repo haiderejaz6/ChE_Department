@@ -2073,9 +2073,6 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
      ${disabled ? "disabled" : ""}
      title="${course.title}">${course.code}</button>`;
   }).join("");
-  const cloudNote = selectedCourses.length
-   ? `Showing <strong>${selectedCourses.length}</strong> of up to <strong>${CM_CLOUD_MAX_COURSES}</strong> course blobs.`
-   : `Select up to <strong>${CM_CLOUD_MAX_COURSES}</strong> courses to see their concept coverage.`;
 
   function measurePill(concept, count) {
    const fontSize = Math.max(
@@ -2339,6 +2336,11 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       path: blobPoints.length >= 3 ? line(blobPoints) : null,
     };
   }).filter(group => group.nodes.length);
+  const cloudNote = !selectedCourses.length
+    ? `Select up to <strong>${CM_CLOUD_MAX_COURSES}</strong> courses to see their concept coverage.`
+    : courseGroups.length === selectedCourses.length
+      ? `Showing <strong>${selectedCourses.length}</strong> of up to <strong>${CM_CLOUD_MAX_COURSES}</strong> course blobs.`
+      : `Selected <strong>${selectedCourses.length}</strong> courses; <strong>${courseGroups.length}</strong> currently have visible coverage.`;
 
   el.innerHTML = `
     <div class="cm-cmp-pills">
