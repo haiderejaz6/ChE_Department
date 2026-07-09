@@ -1986,12 +1986,19 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const LABEL_MIN = 9;
   const LABEL_MAX = 18;
   const LABEL_SCALE = 110;
+  const SHARED_TOPIC_BONUS = 4;
   const PILL_PAD_X = 16;
   const PILL_PAD_Y = 9;
   const COURSE_PULL = 0.045;
-  const TICKS = 180;
+  const SIMULATION_TICKS = 180;
+  const MAX_PLACEMENT_ATTEMPTS = 2600;
   const EDGE_PAD = 68;
   const BLOB_PAD = 14;
+  const CENTER_PRIORITY_MIN = 0.7;
+  const CENTER_PRIORITY_BASE = 1.18;
+  const CENTER_PRIORITY_SCALE = 0.34;
+  const SPIRAL_ANGLE_STEP = 0.34;
+  const BLOB_CURVE_ALPHA = 0.72;
   const containerW = Math.max(860, el.clientWidth || 1100);
   const approxCols = Math.max(4, Math.floor(containerW / 180));
   const canvasW = Math.max(containerW, approxCols * 180);
@@ -2005,7 +2012,10 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const centerWeight = sortedConcepts[0]?.[1]?.length || 1;
 
   function measurePill(concept, count) {
-    const fontSize = Math.max(LABEL_MIN, Math.min(LABEL_MAX, LABEL_SCALE / Math.max(1, concept.length) + Math.min(4, count - 1)));
+    const fontSize = Math.max(
+      LABEL_MIN,
+      Math.min(LABEL_MAX, LABEL_SCALE / Math.max(1, concept.length) + Math.min(SHARED_TOPIC_BONUS, count - 1))
+    );
     if (measureCtx) measureCtx.font = `600 ${fontSize}px Outfit, sans-serif`;
     const textW = measureCtx ? measureCtx.measureText(concept).width : concept.length * fontSize * 0.58;
     const width = Math.max(70, textW + PILL_PAD_X * 2);
@@ -2035,11 +2045,12 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       baseX: centerX,
       baseY: centerY,
     };
-    const compactness = Math.max(0.7, 1.18 - (codes.length / Math.max(1, centerWeight)) * 0.34);
+    // Topics shared by more courses start closer to the center so the densest overlap stays in the middle.
+    const compactness = Math.max(CENTER_PRIORITY_MIN, CENTER_PRIORITY_BASE - (codes.length / Math.max(1, centerWeight)) * CENTER_PRIORITY_SCALE);
     let angle = i * 0.58;
     let step = 0;
     let found = false;
-    while (step < 2600) {
+    while (step < MAX_PLACEMENT_ATTEMPTS) {
       const spiralR = compactness * (8 + step * 1.55);
       const candidate = {
         x: centerX + Math.cos(angle) * spiralR,
@@ -2054,7 +2065,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
         found = true;
         break;
       }
-      angle += 0.34;
+      angle += SPIRAL_ANGLE_STEP;
       step += 1;
     }
     if (!found) {
@@ -2109,7 +2120,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     .force("anchorY", d3.forceY(d => d.baseY).strength(0.03))
     .force("cluster", courseClusterForce(COURSE_PULL))
     .stop();
-  for (let i = 0; i < TICKS; i++) sim.tick();
+  for (let i = 0; i < SIMULATION_TICKS; i++) sim.tick();
 
   const minX = d3.min(nodes, d => d.x - d.width / 2) || 0;
   const maxX = d3.max(nodes, d => d.x + d.width / 2) || canvasW;
@@ -2157,7 +2168,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     });
   }
 
-  const line = d3.line().x(d => d.x).y(d => d.y).curve(d3.curveCatmullRomClosed.alpha(0.72));
+  const line = d3.line().x(d => d.x).y(d => d.y).curve(d3.curveCatmullRomClosed.alpha(BLOB_CURVE_ALPHA));
   function twoPointBlob(points) {
     const [a, b] = points;
     const dx = b.x - a.x;
