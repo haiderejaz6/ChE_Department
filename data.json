@@ -29,9 +29,8 @@
           "domain": "C-2",
           "description": "Comprehend the basic concepts of chemical engineering principles and relate them to chemical engineering calculations.",
           "concepts": [
-            "chemical equilibrium",
-            "chemical reactions",
-            "process principles"
+            "process principles",
+            "stoichiometric calculations"
           ]
         },
         {
@@ -41,23 +40,26 @@
           "domain": "C-4",
           "description": "Extend the concepts of process principles to solve material balance problems for single and multiple units.",
           "concepts": [
-            "mass balance calculations",
-            "multiple unit operations",
-            "process principles",
-            "single units"
+            "energy balance",
+            "material balances",
+            "mechanical energy balance",
+            "process principles"
           ]
         }
       ],
       "concepts": [
-        "chemical equilibrium",
-        "chemical reactions",
-        "heat transfer",
-        "mass balance calculations",
-        "multiple unit operations",
+        "energy balance",
+        "energy systems",
+        "enthalpy changes",
+        "heat capacity",
+        "material balances",
+        "mechanical energy balance",
         "process principles",
-        "rate processes",
-        "single units",
-        "steady state"
+        "reactive systems",
+        "stoichiometric calculations",
+        "stoichiometry",
+        "thermodynamic properties",
+        "thermodynamics"
       ]
     },
     {
@@ -74,11 +76,7 @@
           "emphasis": "Low",
           "domain": "C-2",
           "description": "Understand the fundamental concepts, components, and scope of Information and Communications Technologies (ICT) in various fields and industries.",
-          "concepts": [
-            "communication networks",
-            "information systems",
-            "information technology"
-          ]
+          "concepts": []
         },
         {
           "code": "CLO-2",
@@ -86,9 +84,7 @@
           "emphasis": "Medium",
           "domain": "C-4",
           "description": "Analyze the problem by application of ICT techniques.",
-          "concepts": [
-            "information technology"
-          ]
+          "concepts": []
         },
         {
           "code": "CLO-3",
@@ -96,10 +92,7 @@
           "emphasis": "Medium",
           "domain": "C-3",
           "description": "Apply ICT platforms and tools for different purposes to address basic needs in different domains of daily, academic, and professional life.",
-          "concepts": [
-            "digital tools",
-            "information technology"
-          ]
+          "concepts": []
         },
         {
           "code": "CLO-4",
@@ -107,10 +100,7 @@
           "emphasis": "Medium",
           "domain": "A-3",
           "description": "Demonstrate the ethical and legal considerations in use of ICT platform tools.",
-          "concepts": [
-            "digital tools",
-            "information technology"
-          ]
+          "concepts": []
         },
         {
           "code": "CLO-5",
@@ -122,13 +112,16 @@
         }
       ],
       "concepts": [
-        "algorithmic thinking",
-        "communication networks",
+        "Python",
+        "artificial intelligence",
+        "cloud computing",
+        "computer systems",
         "data analysis",
-        "digital tools",
-        "information systems",
-        "information technology",
-        "software development"
+        "ethics",
+        "machine learning",
+        "regression",
+        "statistical analysis",
+        "web development"
       ]
     },
     {
@@ -146,9 +139,10 @@
           "domain": "C-3",
           "description": "Demonstrate enhanced knowledge. of Islamic foundational beliefs, practices, historical development, spiritual values and ethical principles.",
           "concepts": [
-            "ethical principles",
-            "islamic principles",
-            "spiritual values"
+            "islamic ethics framework",
+            "professional ethics",
+            "spiritual self-accountability",
+            "tawheed principles"
           ]
         },
         {
@@ -158,8 +152,7 @@
           "domain": "C-5",
           "description": "Describe basic sources of Islamic law and their application in daily life.",
           "concepts": [
-            "islamic principles",
-            "law sources"
+            "islamic ethics framework"
           ]
         },
         {
@@ -169,20 +162,21 @@
           "domain": "C-4",
           "description": "ldentify and discuss contemporary issues within the Muslim world including social challenges, gender roles and interfaith interactions.",
           "concepts": [
-            "gender roles",
-            "interfaith interactions",
-            "social issues"
+            "social media analysis"
           ]
         }
       ],
       "concepts": [
-        "ethical principles",
-        "gender roles",
-        "interfaith interactions",
-        "islamic principles",
-        "law sources",
-        "social issues",
-        "spiritual values"
+        "engineering economics",
+        "ethics",
+        "extraction",
+        "islamic ethics framework",
+        "islamic republic",
+        "professional ethics",
+        "prophetic leadership lessons",
+        "social media analysis",
+        "spiritual self-accountability",
+        "tawheed principles"
       ]
     },
     {
@@ -198,10 +192,8 @@
           "plo": "PLO-9",
           "emphasis": "Low",
           "domain": "C-2",
-          "description": "Interpret and discuss various texts according to oneâs own understanding and viewpoint, as well as that of the author or speaker.",
-          "concepts": [
-            "text interpretation"
-          ]
+          "description": "Interpret and discuss various texts according to one’s own understanding and viewpoint, as well as that of the author or speaker.",
+          "concepts": []
         },
         {
           "code": "CLO-2",
@@ -209,9 +201,7 @@
           "emphasis": "Low",
           "domain": "C-2",
           "description": "Demonstrate a firm command on the use of language in expressing and arguing convincingly.",
-          "concepts": [
-            "language processing"
-          ]
+          "concepts": []
         },
         {
           "code": "CLO-3",
@@ -219,20 +209,10 @@
           "emphasis": "High",
           "domain": "C-5",
           "description": "Compose well-structured paragraphs and relate short essays communicating the main idea effectively.",
-          "concepts": [
-            "essays communication",
-            "main idea",
-            "paragraph structure"
-          ]
+          "concepts": []
         }
       ],
-      "concepts": [
-        "essays communication",
-        "language processing",
-        "main idea",
-        "paragraph structure",
-        "text interpretation"
-      ]
+      "concepts": []
     },
     {
       "code": "HU-131",
@@ -249,14 +229,22 @@
           "domain": "C-2",
           "description": "Discuss and explain the meanings of the words of Quran, its phrases and sentences.",
           "concepts": [
-            "language processing"
+            "linguistic rules",
+            "phonology and syntax",
+            "sentence structure analysis",
+            "tafsir and explanation techniques",
+            "vocabulary and phrase comprehension"
           ]
         }
       ],
       "concepts": [
-        "language processing",
-        "scriptural analysis",
-        "text interpretation"
+        "arabic grammatical terminology",
+        "linguistic rules",
+        "phonology and syntax",
+        "quranic linguistic styles",
+        "sentence structure analysis",
+        "tafsir and explanation techniques",
+        "vocabulary and phrase comprehension"
       ]
     },
     {
@@ -274,10 +262,11 @@
           "domain": "C-3",
           "description": "Comprehend the concept of functions, limits and derivative, and recognize the techniques to solve the equation of single variables.",
           "concepts": [
-            "derivative techniques",
-            "limit concepts",
-            "mathematical operations",
-            "single variable functions"
+            "area and volume calculations",
+            "integration techniques",
+            "linear algebra",
+            "linear functions",
+            "single-variable functions"
           ]
         },
         {
@@ -287,9 +276,12 @@
           "domain": "C-3",
           "description": "Relate the use of differentiation and integration of single variable functions and implement them to find the area and volume applicable to different engineering problems.",
           "concepts": [
-            "mathematical operations",
-            "numeric methods",
-            "single variable functions"
+            "area and volume calculations",
+            "engineering problem-solving",
+            "integration techniques",
+            "linear algebra",
+            "linear functions",
+            "single-variable functions"
           ]
         },
         {
@@ -299,18 +291,23 @@
           "domain": "C-3",
           "description": "Comprehend the concept of series and limit comparison tests and solve the mathematical problems.",
           "concepts": [
-            "limit concepts",
-            "numeric methods"
+            "area and volume calculations",
+            "convergence tests",
+            "linear algebra",
+            "linear functions"
           ]
         }
       ],
       "concepts": [
-        "analytic solving",
-        "derivative techniques",
-        "limit concepts",
-        "mathematical operations",
-        "numeric methods",
-        "single variable functions"
+        "area and volume calculations",
+        "calculus",
+        "convergence tests",
+        "engineering problem-solving",
+        "integration techniques",
+        "linear algebra",
+        "linear functions",
+        "optimization",
+        "single-variable functions"
       ]
     },
     {
@@ -328,10 +325,10 @@
           "domain": "P-2",
           "description": "Learn and display fundamental manufacturing processes through demonstration and practice for solutions in the field of manufacturing.",
           "concepts": [
+            "machining processes",
             "manufacturing",
-            "manufacturing techniques",
-            "process principles",
-            "solution fabrication"
+            "manufacturing processes",
+            "welding processes"
           ]
         },
         {
@@ -341,9 +338,10 @@
           "domain": "P-3",
           "description": "Should perform a given task under supervision in response to learnt manufacturing processes, through hands on technique to reproduce.",
           "concepts": [
+            "machining processes",
             "manufacturing",
-            "manufacturing techniques",
-            "process principles"
+            "manufacturing processes",
+            "welding processes"
           ]
         },
         {
@@ -353,18 +351,25 @@
           "domain": "P-2",
           "description": "Display and demonstrate the ability to work in a team by performing in group tasks.",
           "concepts": [
-            "team collaboration"
+            "industrial operations"
           ]
         }
       ],
       "concepts": [
-        "laboratory techniques",
+        "bench fitting",
+        "electrical engineering",
+        "industrial operations",
+        "machining processes",
         "manufacturing",
-        "manufacturing techniques",
-        "process principles",
-        "solution fabrication",
-        "team collaboration",
-        "workshop protocols"
+        "manufacturing process",
+        "manufacturing processes",
+        "measuring techniques",
+        "pattern making",
+        "quality control",
+        "size reduction",
+        "surface treatment",
+        "teamwork",
+        "welding processes"
       ]
     },
     {
@@ -382,9 +387,7 @@
           "domain": "C-2",
           "description": "Explain the fundamentals of organic and inorganic chemistry.",
           "concepts": [
-            "inorganic reactions",
-            "organic chemistry",
-            "polymer synthesis"
+            "organic chemistry"
           ]
         },
         {
@@ -394,11 +397,8 @@
           "domain": "C-2",
           "description": "Explain the chemical reactions involved in organic and inorganic synthesis.",
           "concepts": [
-            "chemical analysis",
-            "inorganic reactions",
             "organic chemistry",
-            "polymer synthesis",
-            "reaction mechanisms"
+            "reaction kinetics"
           ]
         },
         {
@@ -408,10 +408,8 @@
           "domain": "C-3",
           "description": "Apply organic or inorganic synthesis reactions in industrial applications",
           "concepts": [
-            "inorganic reactions",
             "organic chemistry",
-            "polymer synthesis",
-            "reaction mechanisms"
+            "reaction kinetics"
           ]
         },
         {
@@ -421,18 +419,11 @@
           "domain": "P-4",
           "description": "Execute inorganic and organic chemistry laboratory procedures, including titration, salt analysis, recrystallization, liquid-liquid extraction, etc. and qualitative analysis by applying appropriate techniques and recording experimental data accurately.",
           "concepts": [
-            "chemical analysis",
             "crystallization",
             "extraction",
-            "inorganic reactions",
             "laboratory practice",
-            "mass transfer",
             "organic chemistry",
-            "polymer synthesis",
-            "recrystallization methods",
-            "salt formation",
-            "titration",
-            "titration procedures"
+            "titration"
           ]
         },
         {
@@ -453,7 +444,6 @@
           "domain": "A-3",
           "description": "Practice laboratory safety protocols by properly handling chemicals, glassware, and analytical instruments, while identifying and minimizing risks associated with toxic, corrosive, and flammable substances.",
           "concepts": [
-            "chemical analysis",
             "laboratory practice",
             "safety management"
           ]
@@ -465,28 +455,21 @@
           "domain": "C-4",
           "description": "Analyze and interpret experimental observations and calculated results from inorganic and organic chemistry experiments to compare theoretical concepts, identify discrepancies, and draw valid scientific conclusions.",
           "concepts": [
-            "inorganic reactions",
-            "organic chemistry",
-            "polymer synthesis"
+            "organic chemistry"
           ]
         }
       ],
       "concepts": [
-        "chemical analysis",
         "crystallization",
         "extraction",
-        "inorganic reactions",
         "laboratory practice",
-        "mass transfer",
         "organic chemistry",
-        "polymer synthesis",
-        "reaction mechanisms",
-        "recrystallization methods",
+        "polymer chemistry",
+        "process industry",
+        "reaction kinetics",
         "safety management",
-        "salt formation",
         "teamwork",
-        "titration",
-        "titration procedures"
+        "titration"
       ]
     },
     {
@@ -503,7 +486,11 @@
           "emphasis": "Low",
           "domain": "C-2",
           "description": "Explain the fundamentals of physical and analytical chemistry",
-          "concepts": []
+          "concepts": [
+            "colloidal chemistry",
+            "inorganic chemistry",
+            "organic chemistry"
+          ]
         },
         {
           "code": "CLO-2",
@@ -512,7 +499,7 @@
           "domain": "C-3",
           "description": "Demonstrate understanding of instrumental techniques",
           "concepts": [
-            "instrumental analysis"
+            "instrumental techniques"
           ]
         },
         {
@@ -522,7 +509,7 @@
           "domain": "P-4",
           "description": "Execute the experimental procedures by applying appropriate techniques, following the established protocols, and demonstrating precision in measurements and observations.",
           "concepts": [
-            "experimental design"
+            "instrumental techniques"
           ]
         },
         {
@@ -543,7 +530,6 @@
           "description": "Follow lab safety protocols attentively and apply them consistently to maintain a safe working environment.",
           "concepts": [
             "laboratory practice",
-            "process safety",
             "safety management"
           ]
         },
@@ -553,21 +539,27 @@
           "emphasis": "Medium",
           "domain": "C-4",
           "description": "Analyze experimental results, comparing them with theoretical concepts learned in class to identify any discrepancies and derive valid conclusions.",
-          "concepts": [
-            "experimental design"
-          ]
+          "concepts": []
         }
       ],
       "concepts": [
-        "chemical synthesis",
-        "data analysis",
-        "experimental design",
-        "heat transfer",
-        "instrumental analysis",
+        "adsorption",
+        "adsorption catalysis",
+        "catalysis",
+        "chemical equilibrium",
+        "chromatography",
+        "colloidal chemistry",
+        "inorganic chemistry",
+        "instrumental techniques",
+        "kinetic theory gases",
         "laboratory practice",
-        "process safety",
-        "reaction mechanisms",
-        "safety management"
+        "organic chemistry",
+        "reaction kinetics",
+        "relative volatility",
+        "safety management",
+        "spectroscopy",
+        "spectroscopy basics",
+        "surface phenomena"
       ]
     },
     {
@@ -585,11 +577,13 @@
           "domain": "C-2",
           "description": "Comprehend the synthesis of a compound in specific chemical industry using basic principles of process flow",
           "concepts": [
-            "chemical industry overview",
-            "chemical synthesis",
+            "cement industry operations",
+            "flow synthesis",
+            "linear algebra",
             "process design",
-            "process variables",
-            "process visualization"
+            "process industry",
+            "process safety management",
+            "sodium compound industrial applications"
           ]
         },
         {
@@ -599,25 +593,35 @@
           "domain": "C-2",
           "description": "Explains the interrelation of process variables and yield of desired product in a certain manufacturing process",
           "concepts": [
+            "flow synthesis",
+            "kinetic theory gases",
+            "linear algebra",
             "manufacturing",
             "process design",
-            "process variables",
-            "process visualization",
+            "process industry",
+            "process safety management",
+            "pulp and paper processing",
             "yield optimization"
           ]
         }
       ],
       "concepts": [
-        "chemical industry overview",
-        "chemical synthesis",
-        "heat transfer",
+        "cement industry operations",
+        "chemical process engineering",
+        "chemical processes",
+        "energy conversion",
+        "flow synthesis",
         "instrumentation",
+        "kinetic theory gases",
+        "linear algebra",
         "manufacturing",
-        "mass balance calculations",
         "process design",
-        "process variables",
-        "process visualization",
-        "reaction kinetics",
+        "process industry",
+        "process safety management",
+        "pulp and paper processing",
+        "sodium compound industrial applications",
+        "sugar fermentation processes",
+        "sustainability",
         "yield optimization"
       ]
     },
@@ -637,9 +641,11 @@
           "description": "Understand research methods to locate and integrate credible sources into writing.",
           "concepts": [
             "academic writing",
+            "clear concise writing",
+            "credibility sources",
+            "persuasive writing",
             "research methods",
-            "source integration",
-            "writing strategy"
+            "writing process"
           ]
         },
         {
@@ -650,15 +656,24 @@
           "description": "Analyse the rhetorical situation and use effective writing strategies and techniques to persuade readers.",
           "concepts": [
             "academic writing",
-            "writing strategy"
+            "clear concise writing",
+            "persuasive writing",
+            "rhetorical situation",
+            "writing process"
           ]
         }
       ],
       "concepts": [
         "academic writing",
+        "clear concise writing",
+        "coherent texts",
+        "credibility sources",
+        "critical thinking",
+        "original ideas",
+        "persuasive writing",
         "research methods",
-        "source integration",
-        "writing strategy"
+        "rhetorical situation",
+        "writing process"
       ]
     },
     {
@@ -676,7 +691,9 @@
           "domain": "C-2",
           "description": "Explain the ideology of Pakistan with reference to contributions of the founding fathers of Pakistan",
           "concepts": [
-            "ideology"
+            "founding fathers",
+            "ideology",
+            "pakistan's ideology"
           ]
         },
         {
@@ -685,12 +702,22 @@
           "emphasis": "Medium",
           "domain": "C-3",
           "description": "Demonstrate fundamental knowledge about the Constitution of Pakistan 1973 and its evolutionary phases with reference to state structure. Effectively explain about the guiding principles on rights and responsibilities of Pakistani citizens as enshrined in the Constitution of Pakistan 1973",
-          "concepts": []
+          "concepts": [
+            "citizen rights",
+            "constitution evolution",
+            "state structure"
+          ]
         }
       ],
       "concepts": [
+        "citizen rights",
+        "constitution evolution",
         "constitutional law",
-        "ideology"
+        "founding fathers",
+        "ideology",
+        "islamic republic",
+        "pakistan's ideology",
+        "state structure"
       ]
     },
     {
@@ -707,12 +734,23 @@
           "emphasis": "Low",
           "domain": "C-2",
           "description": "Discuss and explain the meanings of the words of Quran, its phrases and sentences",
-          "concepts": []
+          "concepts": [
+            "conditional sentences",
+            "sentence comprehension"
+          ]
         }
       ],
       "concepts": [
-        "language processing",
-        "text analysis"
+        "arabic grammar",
+        "arabic linguistics",
+        "conditional sentences",
+        "linguistic rules",
+        "masdar mu'awwal",
+        "pascent tense study",
+        "present tense analysis",
+        "sentence comprehension",
+        "textual interpretation",
+        "writing process"
       ]
     },
     {
@@ -730,11 +768,13 @@
           "domain": "C-2",
           "description": "Interpret basic components of engineering drawings and understanding the projection theory",
           "concepts": [
-            "cad drawing construction",
+            "computer-aided drawing",
+            "engineering design",
             "engineering drawing",
-            "engineering drawings",
-            "engineering economics",
-            "projection"
+            "engineering geometry",
+            "projection",
+            "sectioning and development",
+            "tolerances and specifications"
           ]
         },
         {
@@ -744,14 +784,14 @@
           "domain": "C-4",
           "description": "Analyse the hidden information in the drawings and breakdown in simpler single view projections",
           "concepts": [
-            "cad drawing construction",
-            "data analysis",
+            "computer-aided drawing",
+            "engineering design",
             "engineering drawing",
-            "engineering drawings",
-            "engineering economics",
+            "engineering geometry",
+            "orthographic projections",
             "projection",
-            "simplified projections",
-            "single view projections"
+            "sectioning and development",
+            "tolerances and specifications"
           ]
         },
         {
@@ -762,25 +802,28 @@
           "description": "Display the ability to construct engineering drawings and models using computer aided drawing (CAD)",
           "concepts": [
             "CAD",
-            "cad drawing construction",
-            "cad models",
+            "computer-aided drawing",
+            "engineering design",
             "engineering drawing",
-            "engineering drawings",
-            "engineering economics"
+            "engineering geometry",
+            "sectioning and development",
+            "tolerances and specifications"
           ]
         }
       ],
       "concepts": [
         "CAD",
-        "cad drawing construction",
-        "cad models",
-        "data analysis",
+        "computer-aided drawing",
+        "engineering design",
         "engineering drawing",
-        "engineering drawings",
-        "engineering economics",
+        "engineering geometry",
+        "inventory control",
+        "logical reasoning",
+        "mechanical systems",
+        "orthographic projections",
         "projection",
-        "simplified projections",
-        "single view projections"
+        "sectioning and development",
+        "tolerances and specifications"
       ]
     },
     {
@@ -798,8 +841,8 @@
           "domain": "C-3",
           "description": "Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics",
           "concepts": [
-            "material properties",
-            "mechanics"
+            "mechanics",
+            "moment of inertia"
           ]
         },
         {
@@ -809,7 +852,9 @@
           "domain": "C-3",
           "description": "Discuss the fundamentals of electromagnetic induction and thermometry to demonstrate the working principle of related equipment",
           "concepts": [
-            "electromagnetic induction"
+            "electromagnetic induction",
+            "magnetic force",
+            "moment of inertia"
           ]
         },
         {
@@ -834,7 +879,9 @@
           "emphasis": "Medium",
           "domain": "P-3",
           "description": "Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class.",
-          "concepts": []
+          "concepts": [
+            "moment of inertia"
+          ]
         },
         {
           "code": "CLO-1",
@@ -843,8 +890,8 @@
           "domain": "C-3",
           "description": "Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics",
           "concepts": [
-            "material properties",
-            "mechanics"
+            "mechanics",
+            "moment of inertia"
           ]
         },
         {
@@ -854,7 +901,9 @@
           "domain": "C-3",
           "description": "Discuss the fundamentals of electromagnetic induction and thermometry to demonstrate the working principle of related equipment",
           "concepts": [
-            "electromagnetic induction"
+            "electromagnetic induction",
+            "magnetic force",
+            "moment of inertia"
           ]
         },
         {
@@ -879,17 +928,23 @@
           "emphasis": "Medium",
           "domain": "P-3",
           "description": "Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class.",
-          "concepts": []
+          "concepts": [
+            "moment of inertia"
+          ]
         }
       ],
       "concepts": [
+        "coulomb's law",
+        "electrical fundamentals",
         "electromagnetic induction",
         "electromagnetism",
         "instrumentation",
-        "linear algebra",
-        "material properties",
+        "magnetic force",
         "mechanics",
-        "momentum transfer"
+        "moment of inertia",
+        "oscillations energy",
+        "resistance resistivity",
+        "waves propagation"
       ]
     },
     {
@@ -907,9 +962,7 @@
           "domain": "C-3",
           "description": "Applies fundamental numerical literacy to compute values, demonstrate numerical relationships, and construct accurate data representations.",
           "concepts": [
-            "data analysis",
-            "data interpretation",
-            "numeric methods"
+            "data analysis"
           ]
         },
         {
@@ -918,36 +971,37 @@
           "emphasis": "Medium",
           "domain": "C-3",
           "description": "Solves problems using fundamental mathematical and statistical concepts, demonstrates their applications, and relates them to real-world scenarios.",
-          "concepts": [
-            "mathematical modelling",
-            "statistical methods"
-          ]
+          "concepts": []
         },
         {
           "code": "CLO-3",
           "plo": "PLO-2",
           "emphasis": "Medium",
           "domain": "C-3",
-          "description": "Interprets and modifies data presented in various formats, including but not limited to tables, graphs, charts, and equations, to produce meaningfulÂ insights.",
+          "description": "Interprets and modifies data presented in various formats, including but not limited to tables, graphs, charts, and equations, to produce meaningful insights.",
           "concepts": [
-            "chart comprehension",
             "data analysis",
-            "data interpretation",
-            "mathematical operations",
-            "table analysis"
+            "linear equations",
+            "quadratic equations"
           ]
         }
       ],
       "concepts": [
-        "chart comprehension",
+        "algebraic methods",
         "data analysis",
-        "data interpretation",
-        "mathematical modelling",
-        "mathematical operations",
-        "numeric methods",
+        "linear algebra",
+        "linear equations",
+        "measurement scales",
+        "number systems",
+        "probability",
+        "probability distributions",
+        "probability theory",
+        "quadratic equations",
+        "quantitative exercises",
         "quantitative reasoning",
-        "statistical methods",
-        "table analysis"
+        "random variables",
+        "statistical analysis",
+        "units conversion"
       ]
     },
     {
@@ -965,12 +1019,13 @@
           "domain": "C-2",
           "description": "Students will become familiar with various areas of community service (such as community service learning, community service development and community service empowerment), and become aware of relevant ongoing philanthropic activities in the community and social Consciousness.",
           "concepts": [
-            "community challenges",
+            "community needs analysis",
             "community service",
-            "compassion and empathy",
-            "philanthropic activities",
-            "service learning",
-            "social consciousness",
+            "community service learning",
+            "leadership development",
+            "public service management",
+            "social innovation strategies",
+            "societal consciousness",
             "sustainable development approaches"
           ]
         },
@@ -981,9 +1036,9 @@
           "domain": "C-2",
           "description": "Students will be able to provide different sustainable development approaches to address local or global community challenges.",
           "concepts": [
-            "community challenges",
+            "community needs analysis",
             "community service",
-            "service learning",
+            "community service learning",
             "sustainable development approaches"
           ]
         },
@@ -994,20 +1049,26 @@
           "domain": "A-2",
           "description": "Students will develop sense of responsibility, compassion and empathy towards society and through different community service projects contribute to have a discernible impact on the community.",
           "concepts": [
-            "community challenges",
+            "community needs analysis",
             "community service",
-            "compassion and empathy",
-            "service learning"
+            "community service learning",
+            "project management",
+            "public service management"
           ]
         }
       ],
       "concepts": [
-        "community challenges",
+        "civic responsibilities",
+        "community needs analysis",
         "community service",
-        "compassion and empathy",
-        "philanthropic activities",
-        "service learning",
-        "social consciousness",
+        "community service learning",
+        "leadership development",
+        "project management",
+        "public service management",
+        "resource management techniques",
+        "risk assessment",
+        "social innovation strategies",
+        "societal consciousness",
         "sustainability",
         "sustainable development approaches"
       ]
@@ -1027,11 +1088,15 @@
           "domain": "C-2",
           "description": "Comprehend the flow parameters for compressible and incompressible fluids and select suitable transport system for industrial applications.",
           "concepts": [
-            "compressible flow",
+            "compressible fluids",
+            "fluid dynamics",
             "fluid flow",
             "fluid mechanics",
-            "incompressible flow",
-            "transport systems"
+            "newtonian fluids",
+            "non-newtonian fluids",
+            "pipes and channels",
+            "process control",
+            "turbulent flow"
           ]
         },
         {
@@ -1041,7 +1106,7 @@
           "domain": "C-3",
           "description": "Apply the principles of dimensional analysis and similitude to establish functional relations between important relevant parameters and apply these to design.",
           "concepts": [
-            "dimensional analysis"
+            "pipes and channels"
           ]
         },
         {
@@ -1051,10 +1116,11 @@
           "domain": "C-3",
           "description": "Relates the working mechanism of flow measuring devices and pressure losses across these devices when installed in circular pipe.",
           "concepts": [
-            "compressible flow",
+            "fluid dynamics",
             "fluid flow",
-            "incompressible flow",
-            "process efficiency"
+            "pipes and channels",
+            "process control",
+            "turbulent flow"
           ]
         },
         {
@@ -1064,7 +1130,8 @@
           "domain": "P-4",
           "description": "Execute the experimental procedures by applying appropriate techniques, following the established protocols, and demonstrating precision in measurements and observations.",
           "concepts": [
-            "fluid flow"
+            "pipes and channels",
+            "process control"
           ]
         },
         {
@@ -1085,6 +1152,7 @@
           "description": "Follow lab safety protocols attentively and apply them consistently to maintain a safe working environment.",
           "concepts": [
             "laboratory practice",
+            "pipes and channels",
             "safety management"
           ]
         },
@@ -1094,19 +1162,27 @@
           "emphasis": "Medium",
           "domain": "C-4",
           "description": "Analyze experimental results, comparing them with theoretical concepts learned in class to identify and derive valid conclusions.",
-          "concepts": []
+          "concepts": [
+            "pipes and channels"
+          ]
         }
       ],
       "concepts": [
-        "compressible flow",
-        "dimensional analysis",
+        "bernoulli's equation",
+        "compressible fluids",
+        "fluid dynamics",
         "fluid flow",
         "fluid mechanics",
-        "incompressible flow",
+        "instrumentation",
         "laboratory practice",
-        "process efficiency",
+        "mass balance",
+        "newtonian fluids",
+        "non-newtonian fluids",
+        "pipes and channels",
+        "process control",
         "safety management",
-        "transport systems"
+        "shear stress",
+        "turbulent flow"
       ]
     },
     {
@@ -1124,8 +1200,9 @@
           "domain": "C-2",
           "description": "Comprehend the basic concepts of energy balance and extend them to chemical engineering calculations.",
           "concepts": [
+            "chemical processes",
             "energy balance",
-            "momentum transport"
+            "energy science"
           ]
         },
         {
@@ -1136,10 +1213,9 @@
           "description": "Apply the concepts of process principles to solve energy balance problems for single and multiple units.",
           "concepts": [
             "energy balance",
-            "momentum transport",
-            "multiple unit operations",
+            "energy science",
             "process principles",
-            "single unit operations"
+            "unit operations"
           ]
         },
         {
@@ -1149,23 +1225,28 @@
           "domain": "C-4",
           "description": "Solve and analyze complex engineering problems pertaining to energy balance of unit operations and processes",
           "concepts": [
+            "chemical processes",
             "energy balance",
-            "momentum transport",
-            "multiple unit operations",
+            "energy science",
             "process principles",
-            "single unit operations"
+            "unit operations"
           ]
         }
       ],
       "concepts": [
+        "chemical processes",
         "energy balance",
+        "energy science",
+        "enthalpy changes",
         "heat transfer",
-        "mass transfer",
-        "momentum transport",
-        "multiple unit operations",
         "process principles",
-        "reaction mechanisms",
-        "single unit operations"
+        "reactive systems",
+        "steady state",
+        "stoichiometry",
+        "thermodynamic properties",
+        "thermodynamics",
+        "unit operations",
+        "unsteady state"
       ]
     },
     {
@@ -1183,9 +1264,10 @@
           "domain": "C-2",
           "description": "Explain the basics of thermodynamics, the state variables and law of thermodynamics to describe the state of a system.",
           "concepts": [
-            "equation of state",
+            "chemical thermodynamics",
+            "laws of thermodynamics",
             "state variables",
-            "thermodynamic laws",
+            "thermodynamic equilibrium",
             "thermodynamics"
           ]
         },
@@ -1196,21 +1278,30 @@
           "domain": "C-4",
           "description": "Solve and analyze the problem related to thermodynamic behavior and heat effects of pure fluids in various processes using equation of state.",
           "concepts": [
-            "equation of state",
-            "heat effects",
-            "pure fluids",
+            "chemical thermodynamics",
+            "heat transfer",
+            "kinetic theory gases",
+            "laws of thermodynamics",
+            "reversible processes",
             "state variables",
-            "thermodynamic laws"
+            "thermodynamic equilibrium"
           ]
         }
       ],
       "concepts": [
-        "equation of state",
-        "heat effects",
-        "pure fluids",
+        "chemical thermodynamics",
+        "clausius inequality",
+        "energy balance",
+        "entropy balance",
+        "heat capacity",
+        "heat transfer",
+        "kinetic theory gases",
+        "laws of thermodynamics",
+        "phase equilibrium",
+        "pvt relationships",
+        "reversible processes",
         "state variables",
-        "thermochemical properties",
-        "thermodynamic laws",
+        "thermodynamic equilibrium",
         "thermodynamics"
       ]
     },
@@ -1230,8 +1321,8 @@
           "description": "Comprehend the fundamentals of introductory programming, data science concepts, and the application of associated tools.",
           "concepts": [
             "Python",
-            "data analysis",
-            "data science"
+            "array-oriented programming",
+            "data analysis"
           ]
         },
         {
@@ -1242,10 +1333,7 @@
           "description": "Compute Engineering problems and mathematical results using Python for chemical engineering data.",
           "concepts": [
             "Python",
-            "chemical processes",
-            "data analysis",
-            "data science",
-            "mathematical results"
+            "data analysis"
           ]
         },
         {
@@ -1256,10 +1344,7 @@
           "description": "Write Python programs for data analysis and visualization of chemical processes data sets.",
           "concepts": [
             "Python",
-            "chemical processes",
-            "data analysis",
-            "data science",
-            "process visualization"
+            "data analysis"
           ]
         },
         {
@@ -1270,8 +1355,8 @@
           "description": "Perform assigned programming and data analysis lab tasks effectively.",
           "concepts": [
             "Python",
-            "data analysis",
-            "data science"
+            "array-oriented programming",
+            "data analysis"
           ]
         },
         {
@@ -1282,8 +1367,7 @@
           "description": "Follow standard algorithms and coding practices in chemical engineering applications.",
           "concepts": [
             "algorithm development",
-            "algorithms",
-            "chemical processes"
+            "algorithms"
           ]
         }
       ],
@@ -1291,11 +1375,13 @@
         "Python",
         "algorithm development",
         "algorithms",
-        "chemical processes",
+        "array-oriented programming",
+        "computer science",
+        "conditional statements",
         "data analysis",
-        "data science",
-        "mathematical results",
-        "process visualization"
+        "numpy calculation methods",
+        "software development",
+        "string manipulation"
       ]
     },
     {
@@ -1313,8 +1399,8 @@
           "domain": "C-3",
           "description": "Comprehend the concept of multivariable functions and partial derivative and recognize the techniques to solve the equation of several variables.",
           "concepts": [
-            "numeric methods",
-            "partial differential"
+            "multivariable functions",
+            "partial derivatives"
           ]
         },
         {
@@ -1324,7 +1410,7 @@
           "domain": "C-3",
           "description": "Relate the use of differentiation and integration of several variable functions and implement them to find the area and volume of different geometrical shapes.",
           "concepts": [
-            "numeric methods"
+            "multivariable functions"
           ]
         },
         {
@@ -1334,20 +1420,19 @@
           "domain": "C-3",
           "description": "Comprehend the concept of first order and higher order differential equations and solve the mathematical models of physical systems.",
           "concepts": [
-            "differential equations",
             "mathematical modelling",
             "ordinary differential equations"
           ]
         }
       ],
       "concepts": [
-        "differential equations",
-        "linear transformations",
+        "laplace transforms",
+        "linear algebra",
         "mathematical modelling",
-        "numeric methods",
+        "multivariable functions",
         "ordinary differential equations",
-        "partial differential",
-        "vector calculus"
+        "partial derivatives",
+        "process control"
       ]
     },
     {
@@ -1365,9 +1450,9 @@
           "domain": "C-2",
           "description": "Comprehend the classification of the materials and explain crystallographic planes and directions as well as imperfections in materials.",
           "concepts": [
-            "crystal structures",
-            "material imperfections",
-            "plane directions"
+            "ceramic materials",
+            "crytalline imperfections",
+            "material characterization"
           ]
         },
         {
@@ -1377,8 +1462,11 @@
           "domain": "C-2",
           "description": "Explain the mechanical properties of the materials.",
           "concepts": [
-            "material imperfections",
-            "material properties"
+            "ceramic materials",
+            "material characterization",
+            "material properties",
+            "polymer properties",
+            "thermodynamics"
           ]
         },
         {
@@ -1388,18 +1476,25 @@
           "domain": "C-2",
           "description": "Interpret the binary phase diagram.",
           "concepts": [
-            "binary phase"
+            "phase diagrams"
           ]
         }
       ],
       "concepts": [
-        "analytical techniques",
-        "binary phase",
-        "crystal structures",
-        "defect types",
-        "material imperfections",
+        "ceramic materials",
+        "corrosion protection",
+        "crytalline imperfections",
+        "mass transfer",
+        "material characterization",
         "material properties",
-        "plane directions"
+        "mechanics",
+        "metal alloys",
+        "phase diagrams",
+        "polymer properties",
+        "stress-strain behavior",
+        "surface treatment",
+        "thermal insulation",
+        "thermodynamics"
       ]
     },
     {
@@ -1415,14 +1510,13 @@
           "plo": "PLO-1",
           "emphasis": "Medium",
           "domain": "C-3",
-          "description": "Comprehend the basic concepts and theories of mass transfer toÂ applyÂ for process separation related problems",
+          "description": "Comprehend the basic concepts and theories of mass transfer to apply for process separation related problems",
           "concepts": [
-            "absorption and distillation",
             "mass transfer",
             "mass transfer operations",
-            "mass transport phenomena",
-            "process separation principles",
-            "separation methods"
+            "resistance to mass transfer",
+            "separation processes",
+            "transfer units"
           ]
         },
         {
@@ -1430,15 +1524,14 @@
           "plo": "PLO-2",
           "emphasis": "Medium",
           "domain": "C-3",
-          "description": "ApplyÂ the knowledge of separation principles for basic design calculations related to gas-liquid absorption and distillation processes",
+          "description": "Apply the knowledge of separation principles for basic design calculations related to gas-liquid absorption and distillation processes",
           "concepts": [
             "absorption",
-            "absorption and distillation",
             "distillation",
-            "mass transfer",
-            "process separation principles",
-            "separation methods",
-            "separation processes"
+            "gas-liquid absorption",
+            "resistance to mass transfer",
+            "separation processes",
+            "separations process"
           ]
         },
         {
@@ -1446,12 +1539,12 @@
           "plo": "PLO-4",
           "emphasis": "Medium",
           "domain": "C-4",
-          "description": "Solve andÂ analyzeÂ engineering problems pertaining to mass transfer operation",
+          "description": "Solve and analyze engineering problems pertaining to mass transfer operation",
           "concepts": [
-            "absorption and distillation",
             "mass transfer",
             "mass transfer operations",
-            "mass transport phenomena"
+            "resistance to mass transfer",
+            "transfer units"
           ]
         },
         {
@@ -1468,7 +1561,9 @@
           "emphasis": "Medium",
           "domain": "A-3",
           "description": "Exhibit capability to work in team during the lab activities",
-          "concepts": []
+          "concepts": [
+            "resistance to mass transfer"
+          ]
         },
         {
           "code": "CLO-6",
@@ -1476,7 +1571,9 @@
           "emphasis": "Medium",
           "domain": "A-3",
           "description": "Follows lab instructions to ensure safe environment in the lab",
-          "concepts": []
+          "concepts": [
+            "resistance to mass transfer"
+          ]
         },
         {
           "code": "CLO-7",
@@ -1484,22 +1581,24 @@
           "emphasis": "Medium",
           "domain": "C-4",
           "description": "Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class",
-          "concepts": [
-            "absorption and distillation"
-          ]
+          "concepts": []
         }
       ],
       "concepts": [
         "absorption",
-        "absorption and distillation",
+        "adsorption",
+        "adsorption basics",
         "distillation",
+        "gas-liquid absorption",
         "mass transfer",
         "mass transfer operations",
-        "mass transport phenomena",
-        "process separation principles",
-        "separation methods",
+        "molecular diffusion",
+        "phase equilibrium",
+        "resistance to mass transfer",
         "separation processes",
-        "transport mechanisms"
+        "separations process",
+        "thermodynamics",
+        "transfer units"
       ]
     },
     {
@@ -1521,7 +1620,13 @@
             "convection",
             "heat exchanger",
             "heat transfer",
+            "heat transfer coefficients",
+            "mass transfer",
+            "natural convection circulation",
+            "one dimension heat transfer",
             "radiation",
+            "radiation intensity",
+            "radiation transfer",
             "steady state conduction"
           ]
         },
@@ -1533,7 +1638,10 @@
           "description": "Use the knowledge of heat transfer model equations to solve problems related to heat transfer systems",
           "concepts": [
             "heat exchanger",
-            "heat transfer"
+            "heat transfer",
+            "heat transfer coefficients",
+            "mass transfer",
+            "one dimension heat transfer"
           ]
         },
         {
@@ -1544,7 +1652,10 @@
           "description": "Solve and analyze engineering problems pertaining to heat transfer operations",
           "concepts": [
             "heat exchanger",
-            "heat transfer"
+            "heat transfer",
+            "heat transfer coefficients",
+            "mass transfer",
+            "one dimension heat transfer"
           ]
         },
         {
@@ -1554,7 +1665,7 @@
           "domain": "P-4",
           "description": "Execute the standard startup procedure and set the requisite temperature, flows and pressures by following the established protocols, and collecting data at the appropriate time.",
           "concepts": [
-            "standard startup procedure"
+            "flow boiling unit"
           ]
         },
         {
@@ -1577,8 +1688,10 @@
           "concepts": [
             "heat exchanger",
             "heat transfer",
+            "heat transfer coefficients",
             "lab safety",
-            "laboratory practice"
+            "laboratory practice",
+            "one dimension heat transfer"
           ]
         },
         {
@@ -1587,23 +1700,25 @@
           "emphasis": "Medium",
           "domain": "C-4",
           "description": "Recall the standard experimental procedures and analyze and interpret the results, comparing them with theoretical concepts learned in class to identify any discrepancies and derive valid conclusions",
-          "concepts": [
-            "laboratory techniques",
-            "standard startup procedure"
-          ]
+          "concepts": []
         }
       ],
       "concepts": [
         "conduction",
         "convection",
+        "evaporation",
+        "flow boiling unit",
         "heat exchanger",
         "heat transfer",
+        "heat transfer coefficients",
         "lab safety",
         "laboratory practice",
-        "laboratory techniques",
-        "process control",
+        "mass transfer",
+        "natural convection circulation",
+        "one dimension heat transfer",
         "radiation",
-        "standard startup procedure",
+        "radiation intensity",
+        "radiation transfer",
         "steady state conduction"
       ]
     },
@@ -1622,9 +1737,14 @@
           "domain": "C-3",
           "description": "Relate the fundamentals of particulate systems to size reduction, transportation and storage of solids",
           "concepts": [
+            "attrition and impact effects",
             "particle size analysis",
+            "particle size reduction",
+            "particle transport and storage",
+            "separations process",
+            "size enlargement techniques",
             "size reduction",
-            "solid grinding"
+            "solid mixing and separation"
           ]
         },
         {
@@ -1634,9 +1754,12 @@
           "domain": "C-3",
           "description": "Extend the concepts of particulate behavior to illustrate the mechanism of mixing and separation of solids",
           "concepts": [
-            "particle mixing",
-            "separation methods",
-            "solid grinding"
+            "attrition and impact effects",
+            "magnetic separation efficiency",
+            "mechanical separation methods",
+            "particle transport and storage",
+            "separations process",
+            "solid mixing and separation"
           ]
         },
         {
@@ -1644,12 +1767,19 @@
           "plo": "PLO-5",
           "emphasis": "Medium",
           "domain": "P-3",
-          "description": "Follows Equipmentâs standard operating procedure (SOP) for particle size reduction, separation and handling.",
+          "description": "Follows Equipment’s standard operating procedure (SOP) for particle size reduction, separation and handling.",
           "concepts": [
-            "particle mixing",
+            "attrition and impact effects",
+            "magnetic separation efficiency",
+            "mechanical separation methods",
             "particle size analysis",
-            "separation methods",
-            "size reduction"
+            "particle size reduction",
+            "particle technology",
+            "particle transport and storage",
+            "separations process",
+            "size enlargement techniques",
+            "size reduction",
+            "solid mixing and separation"
           ]
         },
         {
@@ -1659,11 +1789,16 @@
           "domain": "C-4",
           "description": "Analyze the effect of attrition, impact and compression on particle size reduction and determine efficiency of equipment.",
           "concepts": [
-            "attrition processes",
-            "particle mixing",
+            "attrition and impact effects",
+            "magnetic separation efficiency",
             "particle size analysis",
-            "process efficiency",
-            "size reduction"
+            "particle size reduction",
+            "particle technology",
+            "particle transport and storage",
+            "separations process",
+            "size enlargement techniques",
+            "size reduction",
+            "solid mixing and separation"
           ]
         },
         {
@@ -1673,10 +1808,15 @@
           "domain": "P-4",
           "description": "Grind solid particles and perform distribution analysis by use of standards (Tyler mesh standard) for particle size analysis.",
           "concepts": [
-            "particle mixing",
+            "attrition and impact effects",
             "particle size analysis",
+            "particle size reduction",
+            "particle technology",
+            "particle transport and storage",
+            "separations process",
+            "size enlargement techniques",
             "size reduction",
-            "solid grinding"
+            "solid mixing and separation"
           ]
         },
         {
@@ -1684,23 +1824,34 @@
           "plo": "PLO-8",
           "emphasis": "Medium",
           "domain": "A-3",
-          "description": "Initiate experiment by following equipment procedure and safety SOPâs.",
+          "description": "Initiate experiment by following equipment procedure and safety SOP’s.",
           "concepts": [
+            "attrition and impact effects",
+            "particle transport and storage",
             "safety management",
-            "safety procedures"
+            "separations process",
+            "solid mixing and separation"
           ]
         }
       ],
       "concepts": [
-        "attrition processes",
-        "particle mixing",
+        "attrition and impact effects",
+        "crystallization",
+        "cyclone separator operation",
+        "filtration",
+        "fluid mechanics",
+        "gravity settling processes",
+        "magnetic separation efficiency",
+        "mechanical separation methods",
         "particle size analysis",
-        "process efficiency",
+        "particle size reduction",
+        "particle technology",
+        "particle transport and storage",
         "safety management",
-        "safety procedures",
-        "separation methods",
+        "separations process",
+        "size enlargement techniques",
         "size reduction",
-        "solid grinding"
+        "solid mixing and separation"
       ]
     },
     {
@@ -1718,10 +1869,9 @@
           "domain": "C-2",
           "description": "Comprehend the characterization of differential equations and select the appropriate method for solution",
           "concepts": [
-            "differential equations",
+            "mathematical modelling",
             "ordinary differential equations",
-            "partial differential",
-            "solution methods"
+            "partial differential equations"
           ]
         },
         {
@@ -1733,10 +1883,9 @@
           "concepts": [
             "analytic solutions",
             "approximate solutions",
-            "differential equations",
+            "mathematical modelling",
             "ordinary differential equations",
-            "partial differential",
-            "solution methods"
+            "partial differential equations"
           ]
         },
         {
@@ -1747,22 +1896,25 @@
           "description": "Relate the knowledge for Mathematical formulation of physical problems and their solutions",
           "concepts": [
             "analytic solutions",
-            "approximate solutions",
-            "mathematical modelling",
-            "process principles",
-            "solution methods"
+            "approximate solutions"
           ]
         }
       ],
       "concepts": [
         "analytic solutions",
         "approximate solutions",
-        "differential equations",
+        "calculus",
+        "curl operator",
+        "directional derivatives",
+        "line integrals",
         "mathematical modelling",
         "ordinary differential equations",
-        "partial differential",
-        "process principles",
-        "solution methods"
+        "parametric curves",
+        "partial differential equations",
+        "quadric surfaces",
+        "surface integrals",
+        "triple integrals",
+        "vector calculus"
       ]
     },
     {
@@ -1780,7 +1932,8 @@
           "domain": "C-2",
           "description": "Understanding of logic and logical reasoning",
           "concepts": [
-            "logical reasoning"
+            "logical reasoning",
+            "quantitative reasoning"
           ]
         },
         {
@@ -1790,8 +1943,9 @@
           "domain": "C-2",
           "description": "Understanding of basic quantitative modeling and analyses",
           "concepts": [
-            "model validation",
-            "quantitative modeling"
+            "quantitative modeling",
+            "quantitative reasoning",
+            "statistical analysis"
           ]
         },
         {
@@ -1801,9 +1955,9 @@
           "domain": "C-3",
           "description": "Logical reasoning skills and abilities to apply them to solve quantitative problems and evaluate arguments",
           "concepts": [
-            "argument evaluation",
             "logical reasoning",
-            "quantitative modeling"
+            "quantitative modeling",
+            "quantitative reasoning"
           ]
         },
         {
@@ -1813,19 +1967,24 @@
           "domain": "C-5",
           "description": "Ability to critically evaluate quantitative information to make evidence  based decisions through appropriate computational tools",
           "concepts": [
-            "computational tools",
-            "quantitative modeling"
+            "decision making",
+            "quantitative modeling",
+            "quantitative reasoning"
           ]
         }
       ],
       "concepts": [
-        "argument evaluation",
-        "computational tools",
+        "decision making",
+        "linear functions",
         "logical reasoning",
         "mathematical modelling",
-        "model validation",
-        "process simulation",
-        "quantitative modeling"
+        "probabilistic models",
+        "quantitative modeling",
+        "quantitative reasoning",
+        "regression",
+        "simple linear regression",
+        "statistical analysis",
+        "statistical inference"
       ]
     },
     {
@@ -1843,10 +2002,11 @@
           "domain": "C-2",
           "description": "Explain the thermodynamics of flow processes and infer the fundamental property relations for different processes and systems.",
           "concepts": [
-            "fluid flow",
+            "heat and mass transfer",
+            "mixture thermodynamics",
             "process industry",
-            "process simulation",
-            "thermodynamic properties",
+            "solutions thermodynamics",
+            "thermodynamic diagrams",
             "thermodynamics"
           ]
         },
@@ -1858,10 +2018,11 @@
           "description": "Demonstrate and apply the complete energy balance of different flow processes along with their thermodynamic diagrams.",
           "concepts": [
             "energy balance",
-            "fluid flow",
+            "energy systems",
+            "gibbs free energy",
+            "heat and mass transfer",
             "process industry",
-            "process simulation",
-            "thermodynamic properties"
+            "thermodynamic diagrams"
           ]
         },
         {
@@ -1871,10 +2032,11 @@
           "domain": "C-3",
           "description": "Illustrate thermodynamic analysis of gas mixtures, liquid solutions and two-phase mixtures in order to relate solution properties.",
           "concepts": [
-            "chemical processing",
-            "mass transport phenomena",
-            "process simulation",
-            "thermodynamic properties"
+            "energy systems",
+            "gibbs free energy",
+            "mixture thermodynamics",
+            "solutions thermodynamics",
+            "thermodynamic diagrams"
           ]
         },
         {
@@ -1884,10 +2046,11 @@
           "domain": "C-4",
           "description": "Solve and analyse complex engineering problems pertaining to thermodynamics of flow processes in process industries.",
           "concepts": [
-            "fluid flow",
+            "heat and mass transfer",
+            "mixture thermodynamics",
             "process industry",
-            "process simulation",
-            "thermodynamic properties",
+            "solutions thermodynamics",
+            "thermodynamic diagrams",
             "thermodynamics"
           ]
         },
@@ -1930,16 +2093,26 @@
         }
       ],
       "concepts": [
-        "chemical processing",
+        "chemical engineering",
+        "distillation",
         "energy balance",
-        "fluid flow",
+        "energy systems",
+        "evaporation",
+        "gibbs free energy",
+        "heat and mass transfer",
+        "heat transfer",
         "laboratory practice",
-        "mass transport phenomena",
+        "laplace transforms",
+        "mixture thermodynamics",
+        "partial molar quantities",
         "process industry",
-        "process simulation",
+        "refrigeration cycles",
         "safety management",
-        "thermodynamic properties",
-        "thermodynamics"
+        "solutions thermodynamics",
+        "thermodynamic diagrams",
+        "thermodynamics",
+        "vapor-liquid equilibrium",
+        "yield optimization"
       ]
     },
     {
@@ -1959,8 +2132,7 @@
           "concepts": [
             "mass transfer",
             "process design",
-            "separation",
-            "separation methods"
+            "separation"
           ]
         },
         {
@@ -1970,10 +2142,10 @@
           "domain": "C-3",
           "description": "Apply principles of separation process to design the equipment.",
           "concepts": [
+            "engineering design",
+            "mass transfer",
             "process design",
-            "process equipment",
-            "separation",
-            "separation methods"
+            "separation"
           ]
         },
         {
@@ -1983,10 +2155,8 @@
           "domain": "C-4",
           "description": "Solve and analyze engineering problems pertaining to Separation Processes",
           "concepts": [
-            "mass transfer",
             "process design",
-            "separation",
-            "separation methods"
+            "separation"
           ]
         },
         {
@@ -1996,7 +2166,7 @@
           "domain": "P-4",
           "description": "Execute the experimental procedures by applying appropriate techniques, following the established protocols, and demonstrating precision in measurements and observations.",
           "concepts": [
-            "distillation techniques"
+            "separations process"
           ]
         },
         {
@@ -2030,16 +2200,15 @@
         }
       ],
       "concepts": [
-        "distillation techniques",
-        "filtration methods",
-        "heat transfer",
+        "engineering design",
+        "heat transfer operations",
         "laboratory practice",
         "mass transfer",
+        "particle size control",
         "process design",
-        "process equipment",
         "safety management",
         "separation",
-        "separation methods"
+        "separations process"
       ]
     },
     {
@@ -2057,7 +2226,11 @@
           "domain": "C-2",
           "description": "State the consequences of finite precision and estimate the amount of error inherent in Numerical methods",
           "concepts": [
-            "numerical methods"
+            "integration techniques",
+            "numerical differentiation",
+            "numerical integration",
+            "numerical methods",
+            "runge-kutta methods"
           ]
         },
         {
@@ -2067,6 +2240,8 @@
           "domain": "C-3",
           "description": "Apply different computational/numerical techniques to solve Mathematical problems arising in engineering and sciences",
           "concepts": [
+            "numerical differentiation",
+            "numerical integration",
             "numerical methods"
           ]
         },
@@ -2078,13 +2253,25 @@
           "description": "Apply algorithms for different Numerical techniques",
           "concepts": [
             "algorithms",
+            "numerical differentiation",
+            "numerical integration",
             "numerical methods"
           ]
         }
       ],
       "concepts": [
         "algorithms",
-        "numerical methods"
+        "calculus",
+        "integration techniques",
+        "linear algebra",
+        "mathematical modelling",
+        "non-linear equations",
+        "numerical differentiation",
+        "numerical integration",
+        "numerical methods",
+        "ordinary differential equations",
+        "partial differential equations",
+        "runge-kutta methods"
       ]
     },
     {
@@ -2101,9 +2288,7 @@
           "emphasis": "Low",
           "domain": "C-2",
           "description": "Screen and examine opportunities for new ventures that add value to the overall economy of the country.",
-          "concepts": [
-            "venture capital"
-          ]
+          "concepts": []
         },
         {
           "code": "CLO-2",
@@ -2112,7 +2297,7 @@
           "domain": "C-4",
           "description": "Elucidate the factors which can affect the performance of a new venture and assess strategies to overcome those",
           "concepts": [
-            "venture capital"
+            "managerial strategies"
           ]
         },
         {
@@ -2122,26 +2307,24 @@
           "domain": "C-2",
           "description": "Conceptualize of business models for sustainable investment opportunities through creation of managerial, financial, operational, marketing and planning strategies for the new venture.",
           "concepts": [
-            "business planning",
-            "engineering economics",
-            "investment evaluation",
-            "managerial decision",
+            "business development",
+            "business feasibility",
+            "managerial strategies",
             "market analysis",
-            "process control",
-            "sustainability models",
-            "venture capital"
+            "operational planning",
+            "sustainable investment"
           ]
         }
       ],
       "concepts": [
-        "business planning",
-        "engineering economics",
-        "investment evaluation",
-        "managerial decision",
+        "business development",
+        "business feasibility",
+        "logical reasoning",
+        "managerial strategies",
         "market analysis",
-        "process control",
-        "sustainability models",
-        "venture capital"
+        "operational planning",
+        "strategic management",
+        "sustainable investment"
       ]
     },
     {
@@ -2161,10 +2344,9 @@
           "concepts": [
             "PID control",
             "control loops",
-            "level control",
             "process control",
             "process dynamics",
-            "temperature control"
+            "process industry"
           ]
         },
         {
@@ -2176,9 +2358,7 @@
           "concepts": [
             "PID control",
             "control loops",
-            "level control",
-            "process control",
-            "temperature control"
+            "process control"
           ]
         },
         {
@@ -2190,10 +2370,9 @@
           "concepts": [
             "PID control",
             "control loops",
-            "level control",
             "process control",
             "process dynamics",
-            "temperature control"
+            "process industry"
           ]
         },
         {
@@ -2204,12 +2383,10 @@
           "description": "Calibrates automatic process control sensors (flow, pressure, temperature, level) using manual instruments as reference standards.",
           "concepts": [
             "PID control",
-            "automatic calibration",
             "control loops",
-            "level control",
             "process control",
             "process dynamics",
-            "temperature control"
+            "process industry"
           ]
         },
         {
@@ -2221,9 +2398,7 @@
           "concepts": [
             "PID control",
             "control loops",
-            "level control",
-            "process control",
-            "temperature control"
+            "process control"
           ]
         },
         {
@@ -2235,11 +2410,9 @@
           "concepts": [
             "PID control",
             "control loops",
-            "level control",
             "process control",
             "process dynamics",
-            "response curves",
-            "temperature control"
+            "process industry"
           ]
         },
         {
@@ -2251,22 +2424,22 @@
           "concepts": [
             "PID control",
             "control loops",
-            "level control",
-            "process control",
-            "temperature control"
+            "process control"
           ]
         }
       ],
       "concepts": [
         "PID control",
-        "automatic calibration",
+        "block diagrams",
         "control loops",
+        "control systems",
         "instrumentation",
-        "level control",
+        "mathematical modelling",
         "process control",
         "process dynamics",
-        "response curves",
-        "temperature control"
+        "process industry",
+        "thermodynamics",
+        "transfer functions"
       ]
     },
     {
@@ -2285,11 +2458,8 @@
           "description": "Comprehend mechanisms of momentum, heat and mass transport and identify their applications for steady and transient flow systems",
           "concepts": [
             "heat transfer",
-            "mass transfer",
-            "mass transport phenomena",
-            "momentum transport",
-            "steady flow systems",
-            "transient flow systems"
+            "mass balance",
+            "mass transfer"
           ]
         },
         {
@@ -2299,12 +2469,9 @@
           "domain": "C-4",
           "description": "Express microscopic and macroscopic mass/energy/momentum balances equation and solve them for several systems applying appropriate conservation statements and boundary conditions",
           "concepts": [
-            "boundary conditions",
-            "conservation statements",
-            "mass transport phenomena",
-            "momentum transport",
-            "steady flow systems",
-            "transient flow systems"
+            "energy balance",
+            "mass balance",
+            "mass transfer"
           ]
         },
         {
@@ -2314,25 +2481,20 @@
           "domain": "C-5",
           "description": "Analyze and solve engineering problems pertaining to transport phenomena in industrial processes.",
           "concepts": [
-            "engineering problems",
-            "industrial processes",
-            "mass transfer",
-            "mass transport phenomena",
-            "momentum transport"
+            "mass transfer"
           ]
         }
       ],
       "concepts": [
-        "boundary conditions",
-        "conservation statements",
-        "engineering problems",
+        "conduction",
+        "convection",
+        "energy balance",
+        "fluid mechanics",
         "heat transfer",
-        "industrial processes",
+        "mass balance",
         "mass transfer",
-        "mass transport phenomena",
-        "momentum transport",
-        "steady flow systems",
-        "transient flow systems"
+        "radiation",
+        "reaction kinetics"
       ]
     },
     {
@@ -2350,8 +2512,7 @@
           "domain": "C-2",
           "description": "Comprehend the concepts of reaction engineering fundamentals",
           "concepts": [
-            "reaction kinetics",
-            "reaction mechanisms"
+            "reaction kinetics"
           ]
         },
         {
@@ -2361,14 +2522,8 @@
           "domain": "C-3",
           "description": "Apply design equations of ideal reactors to study their performance for homogenous single and multiple reactions.",
           "concepts": [
-            "chemical engineering",
-            "chemical kinetics",
-            "chemical reactors",
-            "multiple unit operations",
             "reaction kinetics",
-            "reaction mechanisms",
-            "reactor design",
-            "single reactions"
+            "reactor design"
           ]
         },
         {
@@ -2378,13 +2533,9 @@
           "domain": "C-4",
           "description": "Differentiate homogeneous and heterogeneous reactions, and modify the design parameters for reactor calculations.",
           "concepts": [
-            "chemical kinetics",
             "heterogeneous catalysis",
-            "multiple unit operations",
             "reaction kinetics",
-            "reaction mechanisms",
-            "reactor design",
-            "single reactions"
+            "reactor design"
           ]
         },
         {
@@ -2394,8 +2545,6 @@
           "domain": "C-6",
           "description": "Design chemical reactors for various industrial chemical problems.",
           "concepts": [
-            "chemical engineering",
-            "chemical reactors",
             "reactor design"
           ]
         },
@@ -2429,8 +2578,7 @@
           "concepts": [
             "lab safety",
             "laboratory practice",
-            "reaction kinetics",
-            "reaction mechanisms"
+            "reaction kinetics"
           ]
         },
         {
@@ -2443,17 +2591,15 @@
         }
       ],
       "concepts": [
-        "chemical engineering",
-        "chemical kinetics",
-        "chemical reactors",
+        "calculus",
         "heterogeneous catalysis",
         "lab safety",
         "laboratory practice",
-        "multiple unit operations",
+        "optimization",
         "reaction kinetics",
-        "reaction mechanisms",
         "reactor design",
-        "single reactions"
+        "thermodynamics",
+        "yield optimization"
       ]
     },
     {
@@ -2471,10 +2617,10 @@
           "domain": "C-2",
           "description": "Comprehend the principles of simultaneous heat and mass transfer and extend their applications in chemical engineering processes theoretically as well as experimentally.",
           "concepts": [
+            "equipment design",
+            "heat and mass transfer",
             "heat transfer",
-            "mass transfer operations",
-            "plant wide design",
-            "simultaneous heat transfer"
+            "simultaneous operations"
           ]
         },
         {
@@ -2482,12 +2628,12 @@
           "plo": "PLO-2",
           "emphasis": "Medium",
           "domain": "C-3",
-          "description": "Describe the coupled heat and mass transfer equations and apply to design the process equipmentâs.",
+          "description": "Describe the coupled heat and mass transfer equations and apply to design the process equipment’s.",
           "concepts": [
-            "heat transfer",
-            "mass transfer operations",
-            "plant wide design",
-            "simultaneous heat transfer"
+            "coupled equations",
+            "equipment design",
+            "heat and mass transfer",
+            "heat transfer"
           ]
         },
         {
@@ -2496,7 +2642,11 @@
           "emphasis": "Medium",
           "domain": "C-4",
           "description": "Solve and analyze complex engineering problems pertaining to SHMT operation",
-          "concepts": []
+          "concepts": [
+            "complex problem solving",
+            "heat and mass transfer",
+            "shmt operation"
+          ]
         },
         {
           "code": "CLO-4",
@@ -2505,9 +2655,10 @@
           "domain": "P-4",
           "description": "Measures key process variables such as temperature, flow rate, and composition during operation of separation process equipment.",
           "concepts": [
-            "drying rate analysis",
-            "plant wide design",
-            "separation"
+            "equipment design",
+            "heat and mass transfer",
+            "separation",
+            "shmt operation"
           ]
         },
         {
@@ -2518,9 +2669,8 @@
           "description": "Computes and analyze performance metrics (e.g., drying rate, extraction efficiency) from collected experimental data.",
           "concepts": [
             "drying",
-            "drying rate analysis",
             "extraction",
-            "separation processes"
+            "heat and mass transfer"
           ]
         },
         {
@@ -2530,7 +2680,8 @@
           "domain": "A-3",
           "description": "Participate actively and responsibly in teamwork while conducting separation experiments and handling equipment.",
           "concepts": [
-            "plant wide design",
+            "equipment design",
+            "heat and mass transfer",
             "separation",
             "teamwork"
           ]
@@ -2542,23 +2693,23 @@
           "domain": "P-3",
           "description": "Adjusts and operates experimental units such as evaporators, dryers, and extraction columns under supervision.",
           "concepts": [
-            "drying rate analysis",
             "extraction",
-            "separation processes"
+            "heat and mass transfer"
           ]
         }
       ],
       "concepts": [
+        "complex problem solving",
+        "coupled equations",
         "drying",
-        "drying rate analysis",
+        "equipment design",
         "extraction",
+        "heat and mass transfer",
         "heat transfer",
         "instrumentation",
-        "mass transfer operations",
-        "plant wide design",
         "separation",
-        "separation processes",
-        "simultaneous heat transfer",
+        "shmt operation",
+        "simultaneous operations",
         "teamwork"
       ]
     },
@@ -2577,8 +2728,8 @@
           "domain": "C-3",
           "description": "Comprehend the concepts of Engineering Economics",
           "concepts": [
-            "engineering economics",
-            "return on investment"
+            "economic evaluation",
+            "engineering economics"
           ]
         },
         {
@@ -2588,10 +2739,10 @@
           "domain": "C-4",
           "description": "Gain a working knowledge of money management and analyse how to make economics comparisons of alternative engineering projects",
           "concepts": [
+            "economic evaluation",
             "engineering economics",
-            "investment evaluation",
-            "project evaluation",
-            "return on investment"
+            "revenue management",
+            "time value money"
           ]
         },
         {
@@ -2600,21 +2751,17 @@
           "emphasis": "Medium",
           "domain": "C-3",
           "description": "Apply alternatives based on taxable income and market structure",
-          "concepts": [
-            "market structure analysis",
-            "project evaluation",
-            "return on investment",
-            "taxable income analysis"
-          ]
+          "concepts": []
         }
       ],
       "concepts": [
+        "cash flow diagrams",
+        "cost analysis",
+        "economic evaluation",
         "engineering economics",
-        "investment evaluation",
-        "market structure analysis",
-        "project evaluation",
-        "return on investment",
-        "taxable income analysis"
+        "interest calculations",
+        "revenue management",
+        "time value money"
       ]
     },
     {
@@ -2632,9 +2779,10 @@
           "domain": "C-2",
           "description": "Comprehend the compositions, properties, and standard tests to characterize crude oil and refinery products",
           "concepts": [
-            "crude oil analysis",
-            "petrochemical synthesis",
-            "product development"
+            "crude oil properties",
+            "petroleum product tests",
+            "product characterization",
+            "refinery processes"
           ]
         },
         {
@@ -2644,25 +2792,24 @@
           "domain": "C-3",
           "description": "Apply the role of various processing/ axillary units in a refinery for the production of different products.",
           "concepts": [
-            "petrochemical synthesis",
-            "petroleum refining",
-            "process control",
-            "product development"
+            "axillary equipment",
+            "petroleum product tests",
+            "processing units",
+            "product characterization",
+            "refinery processes"
           ]
         }
       ],
       "concepts": [
-        "catalytic cracking",
-        "chemical reactions",
-        "crude oil analysis",
-        "distillation columns",
-        "heat transfer",
-        "petrochemical synthesis",
+        "axillary equipment",
+        "crude oil properties",
+        "petroleum product tests",
         "petroleum refining",
-        "polymer synthesis",
-        "process control",
-        "product development",
-        "sulfur removal methods"
+        "processing units",
+        "product characterization",
+        "reaction pathways",
+        "refinery processes",
+        "standardization methods"
       ]
     },
     {
@@ -2680,9 +2827,8 @@
           "domain": "C-2",
           "description": "Comprehend the properties of different conventional fuels, and describe, compare, and evaluate key fuel properties such as energy density, polluting effect, cost, and availability. Students should be able to evaluate the various advantages and disadvantages of each, forming hypotheses on the likelihood of continued usage.",
           "concepts": [
-            "energy density",
-            "laboratory practice",
-            "petroleum engineering"
+            "heat transfer coefficients",
+            "laboratory practice"
           ]
         },
         {
@@ -2692,11 +2838,11 @@
           "domain": "C-3",
           "description": "Demonstrate a comprehensive understanding of complex combustion features, being able to describe in detail the following: combustion modes; equilibrium products of combustion; economy-emissions compromises; pollutant compromises; important chemical mechanisms; conservation equations; laminar and turbulent flames.",
           "concepts": [
-            "chemical equilibrium",
+            "chemical reaction kinetics",
             "combustion modes",
-            "conservation equations",
-            "flame dynamics",
-            "reactor design"
+            "economy-emissions compromises",
+            "fluid dynamics",
+            "turbulent flow"
           ]
         },
         {
@@ -2738,16 +2884,14 @@
         }
       ],
       "concepts": [
-        "chemical equilibrium",
+        "chemical reaction kinetics",
         "combustion modes",
-        "conservation equations",
-        "energy density",
-        "flame dynamics",
+        "economy-emissions compromises",
+        "fluid dynamics",
+        "heat transfer coefficients",
         "laboratory practice",
-        "petroleum engineering",
-        "process safety",
-        "reactor design",
-        "safety management"
+        "safety management",
+        "turbulent flow"
       ]
     },
     {
@@ -2765,7 +2909,9 @@
           "domain": "C-2",
           "description": "Explain the fundamentals of membrane technology for separation processes and classify membranes based on materials and preparation methods.",
           "concepts": [
-            "mass transfer operations",
+            "material properties",
+            "membrane materials",
+            "membrane preparation",
             "separation",
             "separation performance"
           ]
@@ -2777,12 +2923,13 @@
           "domain": "C-2",
           "description": "Interpret the membrane transport mechanisms and distinguish different membrane modules for their separation performance.",
           "concepts": [
-            "filtration mechanisms",
-            "mass transfer operations",
+            "membrane materials",
+            "membrane preparation",
             "module design",
+            "module types",
             "separation",
             "separation performance",
-            "transport kinetics"
+            "transport mechanisms"
           ]
         },
         {
@@ -2792,21 +2939,24 @@
           "domain": "C-4",
           "description": "Outline the applications of membrane technology and identify membrane process problems (polarization and fouling).",
           "concepts": [
-            "fouling mitigation",
-            "mass transfer operations",
-            "polarization issues"
+            "fouling issues",
+            "membrane materials",
+            "membrane preparation",
+            "polarization effects"
           ]
         }
       ],
       "concepts": [
-        "filtration mechanisms",
-        "fouling mitigation",
-        "mass transfer operations",
+        "fouling issues",
+        "material properties",
+        "membrane materials",
+        "membrane preparation",
         "module design",
-        "polarization issues",
+        "module types",
+        "polarization effects",
         "separation",
         "separation performance",
-        "transport kinetics"
+        "transport mechanisms"
       ]
     },
     {
@@ -2824,10 +2974,8 @@
           "domain": "C-2",
           "description": "Comprehend and infer the parameters which influence the Chemical Process Plant Design.",
           "concepts": [
-            "process dynamics",
-            "process safety",
-            "process simulation",
-            "safety design"
+            "piping and pipeline",
+            "process design"
           ]
         },
         {
@@ -2837,11 +2985,12 @@
           "domain": "C-6",
           "description": "Apply the engineering concepts for selection, specification and design of process equipment.",
           "concepts": [
-            "engineering economics",
-            "process dynamics",
-            "process safety",
-            "process simulation",
-            "safety design"
+            "heat transfer operations",
+            "mass transfer equipment",
+            "material selection",
+            "piping and pipeline",
+            "process design",
+            "rotating equipment"
           ]
         },
         {
@@ -2851,26 +3000,29 @@
           "domain": "C-4",
           "description": "Compute and Analyze the costing, profitability, and safety parameters of a chemical process plant.",
           "concepts": [
-            "cost analysis",
-            "process dynamics",
-            "process safety",
-            "process simulation",
-            "safety design"
+            "cost indexing",
+            "piping and pipeline",
+            "process design",
+            "safety reviews"
           ]
         }
       ],
       "concepts": [
-        "cost analysis",
-        "engineering economics",
+        "cost indexing",
+        "economic evaluation",
+        "energy balance",
+        "ethics",
         "heat transfer",
-        "mass balance calculations",
+        "heat transfer operations",
         "mass transfer",
-        "process control",
-        "process dynamics",
-        "process safety",
-        "process simulation",
-        "reaction mechanisms",
-        "safety design"
+        "mass transfer equipment",
+        "material selection",
+        "optimization",
+        "piping and pipeline",
+        "process design",
+        "risk management",
+        "rotating equipment",
+        "safety reviews"
       ]
     },
     {
@@ -2888,11 +3040,11 @@
           "domain": "C-3",
           "description": "Compute process flowsheets comprising of various equipment, i.e., pump, compressor, reactor, distillation column, etc., in Aspen HYSYS environment.",
           "concepts": [
-            "aspen hysys",
             "distillation",
+            "fluid flow",
             "process control",
             "process design",
-            "process equipment",
+            "process dynamics",
             "process industry",
             "process simulation"
           ]
@@ -2905,9 +3057,10 @@
           "description": "Analyze dynamic mode of process models for temperature, pressure, flowrate, and composition control loops.",
           "concepts": [
             "control loops",
-            "dynamic modeling",
+            "fluid flow",
             "process control",
             "process design",
+            "process dynamics",
             "process industry",
             "process simulation"
           ]
@@ -2919,24 +3072,28 @@
           "domain": "C-6",
           "description": "Design and evaluate a plant wide model of a process industry.",
           "concepts": [
+            "plant design",
             "process control",
             "process design",
+            "process dynamics",
             "process industry",
             "process simulation"
           ]
         }
       ],
       "concepts": [
-        "aspen hysys",
+        "chemical kinetics",
         "control loops",
         "distillation",
-        "dynamic modeling",
+        "fluid flow",
+        "heat transfer",
+        "plant design",
         "process control",
         "process design",
-        "process equipment",
+        "process dynamics",
         "process industry",
         "process simulation",
-        "simulation analysis"
+        "reaction kinetics"
       ]
     },
     {
@@ -2955,11 +3112,8 @@
           "description": "Develop 2D/3D fluid-flow models by using CFD software.",
           "concepts": [
             "CFD",
-            "cfd simulations",
-            "fluid mechanics",
-            "mass transfer",
-            "predictive models",
-            "simulated flow"
+            "cfd modeling",
+            "fluid dynamics"
           ]
         },
         {
@@ -2970,7 +3124,8 @@
           "description": "Generate hydrodynamic profiles via CFD-Post processing.",
           "concepts": [
             "CFD",
-            "cfd simulations"
+            "cfd modeling",
+            "fluid dynamics"
           ]
         },
         {
@@ -2981,24 +3136,17 @@
           "description": "A substantial amount of experience using modern CFD software to predict the complex fluid-flow systems behavior is to be given to the student.",
           "concepts": [
             "CFD",
-            "cfd simulations",
-            "fluid mechanics",
-            "mass transfer",
-            "predictive models",
-            "simulated flow"
+            "cfd modeling",
+            "fluid dynamics"
           ]
         }
       ],
       "concepts": [
         "CFD",
-        "cfd simulations",
-        "fluid mechanics",
-        "mass transfer",
-        "mass transport phenomena",
-        "numeric methods",
-        "predictive models",
-        "simulated flow",
-        "turbulence modeling"
+        "cfd modeling",
+        "computational simulation",
+        "fluid dynamics",
+        "mass balance"
       ]
     },
     {
@@ -3017,9 +3165,8 @@
           "description": "Demonstrate ethical, social, and professional responsibilities while applying critical thinking, engineering knowledge, and problem-solving skills to address real-world community challenges, recognizing the importance of lifelong learning and sustainable development.",
           "concepts": [
             "critical thinking",
-            "engineering knowledge",
-            "lifelong learning",
-            "sustainable development"
+            "engineering principles",
+            "problem-solving skills"
           ]
         },
         {
@@ -3028,19 +3175,18 @@
           "emphasis": "Medium",
           "domain": "C-3",
           "description": "Work effectively in diverse teams, communicate ideas clearly and professionally, and engage collaboratively with community members to develop practical and impactful solutions.",
-          "concepts": [
-            "team collaboration"
-          ]
+          "concepts": []
         }
       ],
       "concepts": [
         "critical thinking",
-        "engineering knowledge",
-        "lifelong learning",
-        "process management",
-        "sustainability",
-        "sustainable development",
-        "team collaboration"
+        "engineering principles",
+        "mass balance",
+        "mass transfer",
+        "problem-solving skills",
+        "process safety",
+        "reaction kinetics",
+        "sustainability"
       ]
     },
     {
@@ -3060,11 +3206,14 @@
           "concepts": [
             "colligative properties",
             "material properties",
+            "mechanical processing",
             "polymer chemistry",
+            "polymer classification",
             "polymer engineering",
-            "polymer synthesis",
+            "polymer properties",
             "rheology",
-            "thermodynamics"
+            "rheology techniques",
+            "thermal analysis"
           ]
         },
         {
@@ -3074,21 +3223,29 @@
           "domain": "C-4",
           "description": "Relate the fundamental concepts of polymer engineering to study the techniques for the synthesis and processing of polymeric materials.",
           "concepts": [
+            "mechanical processing",
+            "polymer classification",
             "polymer engineering",
-            "polymer synthesis",
-            "reactor design"
+            "polymer properties",
+            "processing routes",
+            "rheology techniques",
+            "synthesis methods"
           ]
         }
       ],
       "concepts": [
         "colligative properties",
         "material properties",
+        "mechanical processing",
         "polymer chemistry",
+        "polymer classification",
         "polymer engineering",
-        "polymer synthesis",
-        "reactor design",
+        "polymer properties",
+        "processing routes",
         "rheology",
-        "thermodynamics"
+        "rheology techniques",
+        "synthesis methods",
+        "thermal analysis"
       ]
     },
     {
@@ -3106,8 +3263,8 @@
           "domain": "C-2",
           "description": "Describe the key principles of process safety and maintenance of industrial operations",
           "concepts": [
-            "industrial processes",
-            "maintenance practices",
+            "industrial operations",
+            "maintenance strategies",
             "process industry",
             "process safety"
           ]
@@ -3126,14 +3283,15 @@
         }
       ],
       "concepts": [
-        "failure analysis",
-        "industrial processes",
-        "maintenance practices",
+        "hazard analysis",
+        "industrial operations",
+        "maintenance strategies",
+        "mechanical systems",
+        "operator training",
         "process industry",
         "process safety",
-        "risk management",
-        "safety and risk",
-        "safety engineering"
+        "reliability engineering",
+        "risk management"
       ]
     },
     {
@@ -3152,12 +3310,10 @@
           "description": "Describe and apply the concepts of linear algebra, probability, and statistics used for data distributions.",
           "concepts": [
             "data analysis",
-            "data distributions",
-            "data science",
-            "data science techniques",
+            "data distribution",
             "linear algebra",
             "probability",
-            "quantitative modeling",
+            "probability theory",
             "statistical analysis"
           ]
         },
@@ -3169,9 +3325,9 @@
           "description": "Use mathematical and statistical theory for decision-making and problem solution.",
           "concepts": [
             "decision making",
-            "decision-making methods",
-            "mathematical models",
-            "statistical theory"
+            "mathematical modelling",
+            "probability theory",
+            "statistical analysis"
           ]
         },
         {
@@ -3182,33 +3338,27 @@
           "description": "Apply algorithms of data science and machine learning using Python",
           "concepts": [
             "Python",
+            "algorithm development",
             "algorithms",
             "data analysis",
-            "data distributions",
-            "data science",
-            "data science techniques",
-            "machine learning",
-            "machine learning algorithms"
+            "data distribution",
+            "machine learning"
           ]
         }
       ],
       "concepts": [
         "Python",
+        "algorithm development",
         "algorithms",
         "data analysis",
-        "data distributions",
-        "data science",
-        "data science techniques",
+        "data distribution",
         "decision making",
-        "decision-making methods",
         "linear algebra",
         "machine learning",
-        "machine learning algorithms",
-        "mathematical models",
+        "mathematical modelling",
         "probability",
-        "quantitative modeling",
-        "statistical analysis",
-        "statistical theory"
+        "probability theory",
+        "statistical analysis"
       ]
     },
     {
@@ -3226,10 +3376,10 @@
           "domain": "C-2",
           "description": "Infer the basic knowledge about gas processing and gas drilling.",
           "concepts": [
-            "chemical processing",
             "gas engineering",
-            "petroleum engineering",
-            "process design"
+            "gas processing",
+            "oil and gas engineering",
+            "processing design"
           ]
         },
         {
@@ -3239,12 +3389,11 @@
           "domain": "C-2",
           "description": "Comprehend the understanding of gas storage and transmission operations.",
           "concepts": [
-            "chemical processing",
             "gas engineering",
-            "petroleum engineering",
-            "reaction conditions",
-            "storage operations",
-            "transmission operations"
+            "gas processing",
+            "oil and gas engineering",
+            "storage facilities",
+            "transmission systems"
           ]
         },
         {
@@ -3254,24 +3403,22 @@
           "domain": "C-4",
           "description": "Analyze and design gas processing and purification operations.",
           "concepts": [
-            "chemical processing",
             "gas engineering",
-            "petroleum engineering",
-            "process design",
-            "reaction conditions",
-            "storage operations",
-            "transmission operations"
+            "gas processing",
+            "oil and gas engineering",
+            "processing design",
+            "purification methods"
           ]
         }
       ],
       "concepts": [
-        "chemical processing",
         "gas engineering",
-        "petroleum engineering",
-        "process design",
-        "reaction conditions",
-        "storage operations",
-        "transmission operations"
+        "gas processing",
+        "oil and gas engineering",
+        "processing design",
+        "purification methods",
+        "storage facilities",
+        "transmission systems"
       ]
     },
     {
@@ -3289,7 +3436,7 @@
           "domain": "P-1",
           "description": "Ability to identify, formulate, research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences and engineering sciences.",
           "concepts": [
-            "polymer engineering"
+            "reaction kinetics"
           ]
         },
         {
@@ -3299,9 +3446,9 @@
           "domain": "P-2",
           "description": "Ability to design solutions for complex engineering problems and design systems, components, or processes that meet specified needs with appropriate consideration for public health and safety, cultural, societal, and electrical considerations.",
           "concepts": [
-            "polymer engineering",
             "process design",
-            "process safety"
+            "reaction kinetics",
+            "system analysis"
           ]
         },
         {
@@ -3311,7 +3458,7 @@
           "domain": "P-3",
           "description": "Ability to create, select and apply appropriate techniques, resources, and modern engineering and IT tools, including prediction and modeling, to complex engineering activities, with an understanding of the limitations.",
           "concepts": [
-            "polymer engineering"
+            "reaction kinetics"
           ]
         },
         {
@@ -3321,7 +3468,7 @@
           "domain": "P-4",
           "description": "Ability to understand the impact of professional engineering solutions in societal and electrical contexts and demonstrate knowledge of and need for sustainable development.",
           "concepts": [
-            "polymer engineering"
+            "reaction kinetics"
           ]
         },
         {
@@ -3339,8 +3486,8 @@
           "domain": "P-6",
           "description": "Ability to communicate effectively, orally as well as in writing on complex engineering activities with the engineering community and with society at large, such as being able to comprehend and write effective reports and design documentations, make effective presentations, and give and receive clear instructions",
           "concepts": [
-            "polymer engineering",
-            "process design"
+            "process design",
+            "reaction kinetics"
           ]
         },
         {
@@ -3348,9 +3495,9 @@
           "plo": "PLO-11",
           "emphasis": "High",
           "domain": "P-7",
-          "description": "Ability to demonstrate management skills and apply engineering principles to oneâs own work, as a member and/or leader in a team to manage projects in a multidisciplinary environment.",
+          "description": "Ability to demonstrate management skills and apply engineering principles to one’s own work, as a member and/or leader in a team to manage projects in a multidisciplinary environment.",
           "concepts": [
-            "polymer engineering"
+            "reaction kinetics"
           ]
         },
         {
@@ -3363,13 +3510,13 @@
         }
       ],
       "concepts": [
-        "heat transfer",
-        "polymer engineering",
+        "mass balance",
+        "mass transfer",
+        "process control",
         "process design",
-        "process safety",
-        "reaction mechanisms",
-        "solids handling",
-        "sustainability"
+        "reaction kinetics",
+        "sustainability",
+        "system analysis"
       ]
     },
     {
@@ -3387,7 +3534,6 @@
           "domain": "C-2",
           "description": "Comprehend the fundamental theories of sociology pertaining to human behaviors",
           "concepts": [
-            "human behavior analysis",
             "human behaviour",
             "sociology"
           ]
@@ -3399,20 +3545,12 @@
           "domain": "C-6",
           "description": "Devise the practical applications of the theories to human behavior in day-to-day life",
           "concepts": [
-            "human behavior analysis",
-            "human behaviour",
-            "social theory application"
+            "human behaviour"
           ]
         }
       ],
       "concepts": [
-        "behavioral contextualization",
-        "behavioral patterns identification",
-        "human behavior analysis",
         "human behaviour",
-        "social structure analysis",
-        "social theory application",
-        "societal dynamics understanding",
         "sociology"
       ]
     },
@@ -3431,9 +3569,8 @@
           "domain": "C-2",
           "description": "Comprehend the process of transforming resources into products and development of its operational strategy.",
           "concepts": [
-            "process control",
-            "process management",
-            "product development"
+            "operational strategy",
+            "process optimization"
           ]
         },
         {
@@ -3445,8 +3582,10 @@
           "concepts": [
             "decision making",
             "forecasting",
-            "predictive analytics",
-            "process control"
+            "integration techniques",
+            "inventory control",
+            "problem-solving methods",
+            "quality control"
           ]
         },
         {
@@ -3456,40 +3595,45 @@
           "domain": "C-4",
           "description": "Apply project management tools, techniques and inventory management methods",
           "concepts": [
+            "integration techniques",
+            "inventory control",
             "inventory management",
-            "predictive analytics",
+            "problem-solving methods",
             "project management",
-            "project planning"
+            "project planning",
+            "supply chain management"
           ]
         }
       ],
       "concepts": [
         "decision making",
         "forecasting",
+        "heat transfer",
+        "integration techniques",
+        "inventory control",
         "inventory management",
-        "predictive analytics",
-        "process control",
-        "process management",
-        "product development",
+        "mass balance",
+        "operational strategy",
+        "problem-solving methods",
+        "process optimization",
         "project management",
         "project planning",
-        "risk assessment"
+        "quality control",
+        "supply chain management"
       ]
     }
   ],
   "concept_index": {
     "heat transfer": [
-      "CH-114",
-      "CHE-103",
-      "CHE-115",
       "CHE-222",
+      "CHE-223",
       "CHE-242",
-      "CHE-344",
+      "CHE-332",
       "CHE-345",
       "CHE-349",
-      "CHE-350",
       "CHE-451",
-      "CHE-499"
+      "CHE-452",
+      "OTM-456"
     ],
     "laboratory practice": [
       "CH-113",
@@ -3502,22 +3646,33 @@
       "CHE-423"
     ],
     "mass transfer": [
-      "CH-113",
       "CHE-220",
-      "CHE-222",
+      "CHE-242",
       "CHE-344",
       "CHE-345",
       "CHE-451",
-      "CHE-464"
+      "CHE-499",
+      "CSL-402",
+      "MSE-226"
     ],
-    "process control": [
-      "CHE-242",
+    "thermodynamics": [
+      "CHE-103",
+      "CHE-220",
+      "CHE-222",
+      "CHE-223",
       "CHE-323",
-      "CHE-350",
-      "CHE-451",
+      "CHE-332",
+      "CHE-347",
+      "MSE-226"
+    ],
+    "reaction kinetics": [
+      "CH-113",
+      "CH-114",
+      "CHE-345",
+      "CHE-347",
       "CHE-452",
-      "MGT-271",
-      "OTM-456"
+      "CHE-499",
+      "CSL-402"
     ],
     "safety management": [
       "CH-113",
@@ -3528,294 +3683,392 @@
       "CHE-346",
       "CHE-423"
     ],
-    "data analysis": [
-      "CH-114",
-      "CHE-226",
+    "energy balance": [
+      "CHE-103",
+      "CHE-222",
+      "CHE-223",
+      "CHE-332",
+      "CHE-345",
+      "CHE-451"
+    ],
+    "linear algebra": [
+      "CHE-115",
       "CHE-465",
-      "CS-117",
-      "ME-124",
+      "MATH-101",
+      "MATH-121",
+      "MATH-351",
       "QR-100"
     ],
-    "reaction mechanisms": [
+    "mass balance": [
+      "CHE-214",
+      "CHE-345",
+      "CHE-464",
+      "CHE-499",
+      "CSL-402",
+      "OTM-456"
+    ],
+    "mathematical modelling": [
+      "CHE-323",
+      "CHE-465",
+      "MATH-121",
+      "MATH-243",
+      "MATH-351",
+      "QR-101"
+    ],
+    "process industry": [
       "CH-113",
-      "CH-114",
-      "CHE-222",
-      "CHE-347",
-      "CHE-451",
-      "CHE-499"
-    ],
-    "process design": [
       "CHE-115",
-      "CHE-344",
-      "CHE-452",
-      "CHE-484",
-      "CHE-499"
-    ],
-    "process safety": [
-      "CH-114",
-      "CHE-423",
+      "CHE-323",
+      "CHE-332",
       "CHE-425",
-      "CHE-451",
-      "CHE-499"
-    ],
-    "engineering economics": [
-      "CHE-451",
-      "ECO-130",
-      "ME-124",
-      "MGT-271"
+      "CHE-452"
     ],
     "instrumentation": [
       "CHE-115",
+      "CHE-214",
       "CHE-323",
       "CHE-349",
       "PHY-102"
     ],
-    "mass transport phenomena": [
-      "CHE-220",
-      "CHE-332",
-      "CHE-345",
-      "CHE-464"
+    "process control": [
+      "CHE-214",
+      "CHE-323",
+      "CHE-452",
+      "CHE-499",
+      "MATH-121"
     ],
-    "mathematical modelling": [
-      "MATH-121",
+    "process design": [
+      "CHE-115",
+      "CHE-344",
+      "CHE-451",
+      "CHE-452",
+      "CHE-499"
+    ],
+    "calculus": [
+      "CHE-347",
+      "MATH-101",
       "MATH-243",
+      "MATH-351"
+    ],
+    "data analysis": [
+      "CHE-226",
+      "CHE-465",
+      "CS-117",
+      "QR-100"
+    ],
+    "statistical analysis": [
+      "CHE-465",
+      "CS-117",
       "QR-100",
       "QR-101"
     ],
-    "numeric methods": [
-      "CHE-464",
-      "MATH-101",
-      "MATH-121",
-      "QR-100"
+    "sustainability": [
+      "CCE-401",
+      "CHE-115",
+      "CHE-499",
+      "CSL-402"
     ],
-    "process principles": [
-      "CHE-103",
-      "CHE-222",
-      "MATH-243",
-      "ME-105"
-    ],
-    "process simulation": [
-      "CHE-332",
-      "CHE-451",
-      "CHE-452",
-      "QR-101"
+    "Python": [
+      "CHE-226",
+      "CHE-465",
+      "CS-117"
     ],
     "algorithms": [
       "CHE-226",
       "CHE-465",
       "MATH-351"
     ],
-    "language processing": [
-      "HU-114",
-      "HU-131",
-      "HU-132"
+    "decision making": [
+      "CHE-465",
+      "OTM-456",
+      "QR-101"
     ],
-    "mass balance calculations": [
-      "CHE-103",
-      "CHE-115",
-      "CHE-451"
-    ],
-    "mass transfer operations": [
+    "distillation": [
       "CHE-220",
+      "CHE-332",
+      "CHE-452"
+    ],
+    "ethics": [
+      "CHE-451",
+      "CS-117",
+      "HU-101"
+    ],
+    "extraction": [
+      "CH-113",
       "CHE-349",
-      "CHE-442"
+      "HU-101"
+    ],
+    "fluid dynamics": [
+      "CHE-214",
+      "CHE-423",
+      "CHE-464"
+    ],
+    "fluid mechanics": [
+      "CHE-214",
+      "CHE-345",
+      "CHE-346"
+    ],
+    "integration techniques": [
+      "MATH-101",
+      "MATH-351",
+      "OTM-456"
+    ],
+    "kinetic theory gases": [
+      "CH-114",
+      "CHE-115",
+      "CHE-223"
+    ],
+    "logical reasoning": [
+      "ME-124",
+      "MGT-271",
+      "QR-101"
     ],
     "material properties": [
       "CHE-360",
-      "MSE-226",
-      "PHY-102"
+      "CHE-442",
+      "MSE-226"
     ],
-    "multiple unit operations": [
-      "CHE-103",
-      "CHE-222",
-      "CHE-347"
-    ],
-    "polymer synthesis": [
-      "CH-113",
-      "CHE-350",
-      "CHE-360"
-    ],
-    "process industry": [
-      "CHE-332",
-      "CHE-425",
-      "CHE-452"
-    ],
-    "reactor design": [
+    "optimization": [
       "CHE-347",
-      "CHE-360",
-      "CHE-423"
+      "CHE-451",
+      "MATH-101"
+    ],
+    "ordinary differential equations": [
+      "MATH-121",
+      "MATH-243",
+      "MATH-351"
     ],
     "separation": [
       "CHE-344",
       "CHE-349",
       "CHE-442"
     ],
-    "separation methods": [
+    "separations process": [
       "CHE-220",
       "CHE-344",
       "CHE-346"
     ],
-    "sustainability": [
-      "CCE-401",
-      "CHE-499",
-      "CSL-402"
+    "teamwork": [
+      "CH-113",
+      "CHE-349",
+      "ME-105"
     ],
-    "thermodynamics": [
-      "CHE-223",
+    "yield optimization": [
+      "CHE-115",
       "CHE-332",
-      "CHE-360"
+      "CHE-347"
     ],
-    "Python": [
+    "adsorption": [
+      "CH-114",
+      "CHE-220"
+    ],
+    "algorithm development": [
       "CHE-226",
       "CHE-465"
     ],
-    "chemical equilibrium": [
-      "CHE-103",
-      "CHE-423"
+    "chemical processes": [
+      "CHE-115",
+      "CHE-222"
     ],
-    "chemical processing": [
-      "CHE-332",
-      "CHE-484"
-    ],
-    "chemical reactions": [
-      "CHE-103",
-      "CHE-350"
-    ],
-    "chemical synthesis": [
-      "CH-114",
-      "CHE-115"
+    "conduction": [
+      "CHE-242",
+      "CHE-345"
     ],
     "control loops": [
       "CHE-323",
       "CHE-452"
     ],
-    "data science": [
-      "CHE-226",
-      "CHE-465"
+    "convection": [
+      "CHE-242",
+      "CHE-345"
     ],
-    "decision making": [
-      "CHE-465",
-      "OTM-456"
+    "critical thinking": [
+      "CSL-402",
+      "ENGL-101"
     ],
-    "differential equations": [
-      "MATH-121",
-      "MATH-243"
+    "crystallization": [
+      "CH-113",
+      "CHE-346"
     ],
-    "distillation": [
-      "CHE-220",
-      "CHE-452"
+    "economic evaluation": [
+      "CHE-451",
+      "ECO-130"
     ],
-    "energy balance": [
-      "CHE-222",
+    "energy systems": [
+      "CHE-103",
       "CHE-332"
     ],
-    "extraction": [
-      "CH-113",
-      "CHE-349"
+    "engineering design": [
+      "CHE-344",
+      "ME-124"
+    ],
+    "engineering economics": [
+      "ECO-130",
+      "HU-101"
+    ],
+    "enthalpy changes": [
+      "CHE-103",
+      "CHE-222"
+    ],
+    "evaporation": [
+      "CHE-242",
+      "CHE-332"
     ],
     "fluid flow": [
       "CHE-214",
-      "CHE-332"
+      "CHE-452"
     ],
-    "fluid mechanics": [
-      "CHE-214",
-      "CHE-464"
+    "heat and mass transfer": [
+      "CHE-332",
+      "CHE-349"
     ],
-    "industrial processes": [
-      "CHE-345",
-      "CHE-425"
+    "heat capacity": [
+      "CHE-103",
+      "CHE-223"
     ],
-    "investment evaluation": [
-      "ECO-130",
-      "MGT-271"
+    "heat transfer coefficients": [
+      "CHE-242",
+      "CHE-423"
+    ],
+    "heat transfer operations": [
+      "CHE-344",
+      "CHE-451"
+    ],
+    "industrial operations": [
+      "CHE-425",
+      "ME-105"
+    ],
+    "inventory control": [
+      "ME-124",
+      "OTM-456"
+    ],
+    "islamic republic": [
+      "HU-101",
+      "HU-127"
     ],
     "lab safety": [
       "CHE-242",
       "CHE-347"
     ],
-    "laboratory techniques": [
-      "CHE-242",
-      "ME-105"
+    "laplace transforms": [
+      "CHE-332",
+      "MATH-121"
     ],
-    "linear algebra": [
+    "linear functions": [
+      "MATH-101",
+      "QR-101"
+    ],
+    "linguistic rules": [
+      "HU-131",
+      "HU-132"
+    ],
+    "machine learning": [
       "CHE-465",
-      "PHY-102"
+      "CS-117"
     ],
     "manufacturing": [
       "CHE-115",
       "ME-105"
     ],
-    "mathematical operations": [
-      "MATH-101",
+    "mechanical systems": [
+      "CHE-425",
+      "ME-124"
+    ],
+    "mechanics": [
+      "MSE-226",
+      "PHY-102"
+    ],
+    "organic chemistry": [
+      "CH-113",
+      "CH-114"
+    ],
+    "partial differential equations": [
+      "MATH-243",
+      "MATH-351"
+    ],
+    "phase equilibrium": [
+      "CHE-220",
+      "CHE-223"
+    ],
+    "polymer chemistry": [
+      "CH-113",
+      "CHE-360"
+    ],
+    "polymer properties": [
+      "CHE-360",
+      "MSE-226"
+    ],
+    "probability": [
+      "CHE-465",
       "QR-100"
     ],
-    "momentum transport": [
-      "CHE-222",
-      "CHE-345"
-    ],
-    "ordinary differential equations": [
-      "MATH-121",
-      "MATH-243"
-    ],
-    "partial differential": [
-      "MATH-121",
-      "MATH-243"
-    ],
-    "petroleum engineering": [
-      "CHE-423",
-      "CHE-484"
-    ],
-    "polymer engineering": [
-      "CHE-360",
-      "CHE-499"
+    "probability theory": [
+      "CHE-465",
+      "QR-100"
     ],
     "process dynamics": [
       "CHE-323",
-      "CHE-451"
-    ],
-    "process efficiency": [
-      "CHE-214",
-      "CHE-346"
-    ],
-    "process equipment": [
-      "CHE-344",
       "CHE-452"
     ],
-    "process management": [
-      "CSL-402",
+    "process principles": [
+      "CHE-103",
+      "CHE-222"
+    ],
+    "process safety": [
+      "CHE-425",
+      "CSL-402"
+    ],
+    "project management": [
+      "CCE-401",
       "OTM-456"
     ],
-    "process visualization": [
-      "CHE-115",
-      "CHE-226"
-    ],
-    "product development": [
-      "CHE-350",
+    "quality control": [
+      "ME-105",
       "OTM-456"
     ],
-    "quantitative modeling": [
-      "CHE-465",
+    "quantitative reasoning": [
+      "QR-100",
       "QR-101"
     ],
-    "reaction kinetics": [
-      "CHE-115",
-      "CHE-347"
+    "radiation": [
+      "CHE-242",
+      "CHE-345"
     ],
-    "separation processes": [
-      "CHE-220",
-      "CHE-349"
+    "reactive systems": [
+      "CHE-103",
+      "CHE-222"
     ],
-    "team collaboration": [
-      "CSL-402",
+    "regression": [
+      "CS-117",
+      "QR-101"
+    ],
+    "risk management": [
+      "CHE-425",
+      "CHE-451"
+    ],
+    "size reduction": [
+      "CHE-346",
       "ME-105"
     ],
-    "teamwork": [
-      "CH-113",
-      "CHE-349"
+    "stoichiometry": [
+      "CHE-103",
+      "CHE-222"
     ],
-    "text interpretation": [
-      "HU-114",
-      "HU-131"
+    "surface treatment": [
+      "ME-105",
+      "MSE-226"
+    ],
+    "thermodynamic properties": [
+      "CHE-103",
+      "CHE-222"
+    ],
+    "turbulent flow": [
+      "CHE-214",
+      "CHE-423"
+    ],
+    "writing process": [
+      "ENGL-101",
+      "HU-132"
     ],
     "CAD": [
       "ME-124"
@@ -3829,182 +4082,218 @@
     "absorption": [
       "CHE-220"
     ],
-    "absorption and distillation": [
-      "CHE-220"
-    ],
     "academic writing": [
       "ENGL-101"
     ],
-    "algorithm development": [
-      "CHE-226"
+    "adsorption basics": [
+      "CHE-220"
     ],
-    "algorithmic thinking": [
-      "CS-117"
+    "adsorption catalysis": [
+      "CH-114"
+    ],
+    "algebraic methods": [
+      "QR-100"
     ],
     "analytic solutions": [
       "MATH-243"
     ],
-    "analytic solving": [
-      "MATH-101"
-    ],
-    "analytical techniques": [
-      "MSE-226"
-    ],
     "approximate solutions": [
       "MATH-243"
     ],
-    "argument evaluation": [
-      "QR-101"
+    "arabic grammar": [
+      "HU-132"
     ],
-    "aspen hysys": [
-      "CHE-452"
+    "arabic grammatical terminology": [
+      "HU-131"
     ],
-    "attrition processes": [
-      "CHE-346"
+    "arabic linguistics": [
+      "HU-132"
     ],
-    "automatic calibration": [
-      "CHE-323"
+    "area and volume calculations": [
+      "MATH-101"
     ],
-    "behavioral contextualization": [
-      "HU-115"
-    ],
-    "behavioral patterns identification": [
-      "HU-115"
-    ],
-    "binary phase": [
-      "MSE-226"
-    ],
-    "boundary conditions": [
-      "CHE-345"
-    ],
-    "business planning": [
-      "MGT-271"
-    ],
-    "cad drawing construction": [
-      "ME-124"
-    ],
-    "cad models": [
-      "ME-124"
-    ],
-    "catalytic cracking": [
-      "CHE-350"
-    ],
-    "cfd simulations": [
-      "CHE-464"
-    ],
-    "chart comprehension": [
-      "QR-100"
-    ],
-    "chemical analysis": [
-      "CH-113"
-    ],
-    "chemical engineering": [
-      "CHE-347"
-    ],
-    "chemical industry overview": [
-      "CHE-115"
-    ],
-    "chemical kinetics": [
-      "CHE-347"
-    ],
-    "chemical processes": [
+    "array-oriented programming": [
       "CHE-226"
     ],
-    "chemical reactors": [
-      "CHE-347"
+    "artificial intelligence": [
+      "CS-117"
+    ],
+    "attrition and impact effects": [
+      "CHE-346"
+    ],
+    "axillary equipment": [
+      "CHE-350"
+    ],
+    "bench fitting": [
+      "ME-105"
+    ],
+    "bernoulli's equation": [
+      "CHE-214"
+    ],
+    "block diagrams": [
+      "CHE-323"
+    ],
+    "business development": [
+      "MGT-271"
+    ],
+    "business feasibility": [
+      "MGT-271"
+    ],
+    "cash flow diagrams": [
+      "ECO-130"
+    ],
+    "catalysis": [
+      "CH-114"
+    ],
+    "cement industry operations": [
+      "CHE-115"
+    ],
+    "ceramic materials": [
+      "MSE-226"
+    ],
+    "cfd modeling": [
+      "CHE-464"
+    ],
+    "chemical engineering": [
+      "CHE-332"
+    ],
+    "chemical equilibrium": [
+      "CH-114"
+    ],
+    "chemical kinetics": [
+      "CHE-452"
+    ],
+    "chemical process engineering": [
+      "CHE-115"
+    ],
+    "chemical reaction kinetics": [
+      "CHE-423"
+    ],
+    "chemical thermodynamics": [
+      "CHE-223"
+    ],
+    "chromatography": [
+      "CH-114"
+    ],
+    "citizen rights": [
+      "HU-127"
+    ],
+    "civic responsibilities": [
+      "CCE-401"
+    ],
+    "clausius inequality": [
+      "CHE-223"
+    ],
+    "clear concise writing": [
+      "ENGL-101"
+    ],
+    "cloud computing": [
+      "CS-117"
+    ],
+    "coherent texts": [
+      "ENGL-101"
     ],
     "colligative properties": [
       "CHE-360"
     ],
+    "colloidal chemistry": [
+      "CH-114"
+    ],
     "combustion modes": [
       "CHE-423"
     ],
-    "communication networks": [
-      "CS-117"
-    ],
-    "community challenges": [
+    "community needs analysis": [
       "CCE-401"
     ],
     "community service": [
       "CCE-401"
     ],
-    "compassion and empathy": [
+    "community service learning": [
       "CCE-401"
     ],
-    "compressible flow": [
+    "complex problem solving": [
+      "CHE-349"
+    ],
+    "compressible fluids": [
       "CHE-214"
     ],
-    "computational tools": [
-      "QR-101"
+    "computational simulation": [
+      "CHE-464"
     ],
-    "conduction": [
-      "CHE-242"
+    "computer science": [
+      "CHE-226"
     ],
-    "conservation equations": [
-      "CHE-423"
+    "computer systems": [
+      "CS-117"
     ],
-    "conservation statements": [
-      "CHE-345"
+    "computer-aided drawing": [
+      "ME-124"
+    ],
+    "conditional sentences": [
+      "HU-132"
+    ],
+    "conditional statements": [
+      "CHE-226"
+    ],
+    "constitution evolution": [
+      "HU-127"
     ],
     "constitutional law": [
       "HU-127"
     ],
-    "convection": [
-      "CHE-242"
+    "control systems": [
+      "CHE-323"
     ],
-    "cost analysis": [
-      "CHE-451"
-    ],
-    "critical thinking": [
-      "CSL-402"
-    ],
-    "crude oil analysis": [
-      "CHE-350"
-    ],
-    "crystal structures": [
-      "MSE-226"
-    ],
-    "crystallization": [
-      "CH-113"
-    ],
-    "data distributions": [
-      "CHE-465"
-    ],
-    "data interpretation": [
-      "QR-100"
-    ],
-    "data science techniques": [
-      "CHE-465"
-    ],
-    "decision-making methods": [
-      "CHE-465"
-    ],
-    "defect types": [
-      "MSE-226"
-    ],
-    "derivative techniques": [
+    "convergence tests": [
       "MATH-101"
     ],
-    "digital tools": [
-      "CS-117"
+    "corrosion protection": [
+      "MSE-226"
     ],
-    "dimensional analysis": [
-      "CHE-214"
+    "cost analysis": [
+      "ECO-130"
     ],
-    "distillation columns": [
+    "cost indexing": [
+      "CHE-451"
+    ],
+    "coulomb's law": [
+      "PHY-102"
+    ],
+    "coupled equations": [
+      "CHE-349"
+    ],
+    "credibility sources": [
+      "ENGL-101"
+    ],
+    "crude oil properties": [
       "CHE-350"
     ],
-    "distillation techniques": [
-      "CHE-344"
+    "crytalline imperfections": [
+      "MSE-226"
+    ],
+    "curl operator": [
+      "MATH-243"
+    ],
+    "cyclone separator operation": [
+      "CHE-346"
+    ],
+    "data distribution": [
+      "CHE-465"
+    ],
+    "directional derivatives": [
+      "MATH-243"
     ],
     "drying": [
       "CHE-349"
     ],
-    "drying rate analysis": [
-      "CHE-349"
+    "economy-emissions compromises": [
+      "CHE-423"
     ],
-    "dynamic modeling": [
-      "CHE-452"
+    "electrical engineering": [
+      "ME-105"
+    ],
+    "electrical fundamentals": [
+      "PHY-102"
     ],
     "electromagnetic induction": [
       "PHY-102"
@@ -4012,59 +4301,65 @@
     "electromagnetism": [
       "PHY-102"
     ],
-    "energy density": [
-      "CHE-423"
+    "energy conversion": [
+      "CHE-115"
+    ],
+    "energy science": [
+      "CHE-222"
     ],
     "engineering drawing": [
       "ME-124"
     ],
-    "engineering drawings": [
+    "engineering geometry": [
       "ME-124"
     ],
-    "engineering knowledge": [
+    "engineering principles": [
       "CSL-402"
     ],
-    "engineering problems": [
-      "CHE-345"
+    "engineering problem-solving": [
+      "MATH-101"
     ],
-    "equation of state": [
+    "entropy balance": [
       "CHE-223"
     ],
-    "essays communication": [
-      "HU-114"
+    "equipment design": [
+      "CHE-349"
     ],
-    "ethical principles": [
-      "HU-101"
+    "filtration": [
+      "CHE-346"
     ],
-    "experimental design": [
-      "CH-114"
+    "flow boiling unit": [
+      "CHE-242"
     ],
-    "failure analysis": [
-      "CHE-425"
-    ],
-    "filtration mechanisms": [
-      "CHE-442"
-    ],
-    "filtration methods": [
-      "CHE-344"
-    ],
-    "flame dynamics": [
-      "CHE-423"
+    "flow synthesis": [
+      "CHE-115"
     ],
     "forecasting": [
       "OTM-456"
     ],
-    "fouling mitigation": [
+    "fouling issues": [
       "CHE-442"
+    ],
+    "founding fathers": [
+      "HU-127"
     ],
     "gas engineering": [
       "CHE-484"
     ],
-    "gender roles": [
-      "HU-101"
+    "gas processing": [
+      "CHE-484"
     ],
-    "heat effects": [
-      "CHE-223"
+    "gas-liquid absorption": [
+      "CHE-220"
+    ],
+    "gibbs free energy": [
+      "CHE-332"
+    ],
+    "gravity settling processes": [
+      "CHE-346"
+    ],
+    "hazard analysis": [
+      "CHE-425"
     ],
     "heat exchanger": [
       "CHE-242"
@@ -4072,158 +4367,278 @@
     "heterogeneous catalysis": [
       "CHE-347"
     ],
-    "human behavior analysis": [
-      "HU-115"
-    ],
     "human behaviour": [
       "HU-115"
     ],
     "ideology": [
       "HU-127"
     ],
-    "incompressible flow": [
-      "CHE-214"
-    ],
-    "information systems": [
-      "CS-117"
-    ],
-    "information technology": [
-      "CS-117"
-    ],
-    "inorganic reactions": [
-      "CH-113"
-    ],
-    "instrumental analysis": [
+    "inorganic chemistry": [
       "CH-114"
     ],
-    "interfaith interactions": [
-      "HU-101"
+    "instrumental techniques": [
+      "CH-114"
+    ],
+    "interest calculations": [
+      "ECO-130"
     ],
     "inventory management": [
       "OTM-456"
     ],
-    "islamic principles": [
+    "islamic ethics framework": [
       "HU-101"
     ],
-    "law sources": [
-      "HU-101"
+    "laws of thermodynamics": [
+      "CHE-223"
     ],
-    "level control": [
-      "CHE-323"
+    "leadership development": [
+      "CCE-401"
     ],
-    "lifelong learning": [
-      "CSL-402"
+    "line integrals": [
+      "MATH-243"
     ],
-    "limit concepts": [
-      "MATH-101"
+    "linear equations": [
+      "QR-100"
     ],
-    "linear transformations": [
-      "MATH-121"
+    "machining processes": [
+      "ME-105"
     ],
-    "logical reasoning": [
-      "QR-101"
+    "magnetic force": [
+      "PHY-102"
     ],
-    "machine learning": [
-      "CHE-465"
+    "magnetic separation efficiency": [
+      "CHE-346"
     ],
-    "machine learning algorithms": [
-      "CHE-465"
-    ],
-    "main idea": [
-      "HU-114"
-    ],
-    "maintenance practices": [
+    "maintenance strategies": [
       "CHE-425"
     ],
-    "managerial decision": [
+    "managerial strategies": [
       "MGT-271"
     ],
-    "manufacturing techniques": [
+    "manufacturing process": [
+      "ME-105"
+    ],
+    "manufacturing processes": [
       "ME-105"
     ],
     "market analysis": [
       "MGT-271"
     ],
-    "market structure analysis": [
-      "ECO-130"
+    "masdar mu'awwal": [
+      "HU-132"
     ],
-    "material imperfections": [
+    "mass transfer equipment": [
+      "CHE-451"
+    ],
+    "mass transfer operations": [
+      "CHE-220"
+    ],
+    "material balances": [
+      "CHE-103"
+    ],
+    "material characterization": [
       "MSE-226"
     ],
-    "mathematical models": [
-      "CHE-465"
+    "material selection": [
+      "CHE-451"
     ],
-    "mathematical results": [
-      "CHE-226"
+    "measurement scales": [
+      "QR-100"
     ],
-    "mechanics": [
-      "PHY-102"
+    "measuring techniques": [
+      "ME-105"
     ],
-    "model validation": [
-      "QR-101"
+    "mechanical energy balance": [
+      "CHE-103"
+    ],
+    "mechanical processing": [
+      "CHE-360"
+    ],
+    "mechanical separation methods": [
+      "CHE-346"
+    ],
+    "membrane materials": [
+      "CHE-442"
+    ],
+    "membrane preparation": [
+      "CHE-442"
+    ],
+    "metal alloys": [
+      "MSE-226"
+    ],
+    "mixture thermodynamics": [
+      "CHE-332"
     ],
     "module design": [
       "CHE-442"
     ],
-    "momentum transfer": [
+    "module types": [
+      "CHE-442"
+    ],
+    "molecular diffusion": [
+      "CHE-220"
+    ],
+    "moment of inertia": [
       "PHY-102"
+    ],
+    "multivariable functions": [
+      "MATH-121"
+    ],
+    "natural convection circulation": [
+      "CHE-242"
+    ],
+    "newtonian fluids": [
+      "CHE-214"
+    ],
+    "non-linear equations": [
+      "MATH-351"
+    ],
+    "non-newtonian fluids": [
+      "CHE-214"
+    ],
+    "number systems": [
+      "QR-100"
+    ],
+    "numerical differentiation": [
+      "MATH-351"
+    ],
+    "numerical integration": [
+      "MATH-351"
     ],
     "numerical methods": [
       "MATH-351"
     ],
-    "organic chemistry": [
-      "CH-113"
+    "numpy calculation methods": [
+      "CHE-226"
     ],
-    "paragraph structure": [
-      "HU-114"
+    "oil and gas engineering": [
+      "CHE-484"
     ],
-    "particle mixing": [
-      "CHE-346"
+    "one dimension heat transfer": [
+      "CHE-242"
+    ],
+    "operational planning": [
+      "MGT-271"
+    ],
+    "operational strategy": [
+      "OTM-456"
+    ],
+    "operator training": [
+      "CHE-425"
+    ],
+    "original ideas": [
+      "ENGL-101"
+    ],
+    "orthographic projections": [
+      "ME-124"
+    ],
+    "oscillations energy": [
+      "PHY-102"
+    ],
+    "pakistan's ideology": [
+      "HU-127"
+    ],
+    "parametric curves": [
+      "MATH-243"
+    ],
+    "partial derivatives": [
+      "MATH-121"
+    ],
+    "partial molar quantities": [
+      "CHE-332"
     ],
     "particle size analysis": [
       "CHE-346"
     ],
-    "petrochemical synthesis": [
+    "particle size control": [
+      "CHE-344"
+    ],
+    "particle size reduction": [
+      "CHE-346"
+    ],
+    "particle technology": [
+      "CHE-346"
+    ],
+    "particle transport and storage": [
+      "CHE-346"
+    ],
+    "pascent tense study": [
+      "HU-132"
+    ],
+    "pattern making": [
+      "ME-105"
+    ],
+    "persuasive writing": [
+      "ENGL-101"
+    ],
+    "petroleum product tests": [
       "CHE-350"
     ],
     "petroleum refining": [
       "CHE-350"
     ],
-    "philanthropic activities": [
-      "CCE-401"
-    ],
-    "plane directions": [
+    "phase diagrams": [
       "MSE-226"
     ],
-    "plant wide design": [
-      "CHE-349"
+    "phonology and syntax": [
+      "HU-131"
     ],
-    "polarization issues": [
+    "pipes and channels": [
+      "CHE-214"
+    ],
+    "piping and pipeline": [
+      "CHE-451"
+    ],
+    "plant design": [
+      "CHE-452"
+    ],
+    "polarization effects": [
       "CHE-442"
     ],
-    "polymer chemistry": [
+    "polymer classification": [
       "CHE-360"
     ],
-    "predictive analytics": [
+    "polymer engineering": [
+      "CHE-360"
+    ],
+    "present tense analysis": [
+      "HU-132"
+    ],
+    "probabilistic models": [
+      "QR-101"
+    ],
+    "probability distributions": [
+      "QR-100"
+    ],
+    "problem-solving methods": [
       "OTM-456"
     ],
-    "predictive models": [
-      "CHE-464"
+    "problem-solving skills": [
+      "CSL-402"
     ],
-    "probability": [
-      "CHE-465"
+    "process optimization": [
+      "OTM-456"
     ],
-    "process separation principles": [
-      "CHE-220"
-    ],
-    "process variables": [
+    "process safety management": [
       "CHE-115"
     ],
-    "project evaluation": [
-      "ECO-130"
+    "process simulation": [
+      "CHE-452"
     ],
-    "project management": [
-      "OTM-456"
+    "processing design": [
+      "CHE-484"
+    ],
+    "processing routes": [
+      "CHE-360"
+    ],
+    "processing units": [
+      "CHE-350"
+    ],
+    "product characterization": [
+      "CHE-350"
+    ],
+    "professional ethics": [
+      "HU-101"
     ],
     "project planning": [
       "OTM-456"
@@ -4231,233 +4646,296 @@
     "projection": [
       "ME-124"
     ],
-    "pure fluids": [
-      "CHE-223"
+    "prophetic leadership lessons": [
+      "HU-101"
     ],
-    "quantitative reasoning": [
-      "QR-100"
+    "public service management": [
+      "CCE-401"
     ],
-    "radiation": [
-      "CHE-242"
+    "pulp and paper processing": [
+      "CHE-115"
     ],
-    "rate processes": [
-      "CHE-103"
-    ],
-    "reaction conditions": [
+    "purification methods": [
       "CHE-484"
     ],
-    "recrystallization methods": [
-      "CH-113"
+    "pvt relationships": [
+      "CHE-223"
+    ],
+    "quadratic equations": [
+      "QR-100"
+    ],
+    "quadric surfaces": [
+      "MATH-243"
+    ],
+    "quantitative exercises": [
+      "QR-100"
+    ],
+    "quantitative modeling": [
+      "QR-101"
+    ],
+    "quranic linguistic styles": [
+      "HU-131"
+    ],
+    "radiation intensity": [
+      "CHE-242"
+    ],
+    "radiation transfer": [
+      "CHE-242"
+    ],
+    "random variables": [
+      "QR-100"
+    ],
+    "reaction pathways": [
+      "CHE-350"
+    ],
+    "reactor design": [
+      "CHE-347"
+    ],
+    "refinery processes": [
+      "CHE-350"
+    ],
+    "refrigeration cycles": [
+      "CHE-332"
+    ],
+    "relative volatility": [
+      "CH-114"
+    ],
+    "reliability engineering": [
+      "CHE-425"
     ],
     "research methods": [
       "ENGL-101"
     ],
-    "response curves": [
-      "CHE-323"
+    "resistance resistivity": [
+      "PHY-102"
     ],
-    "return on investment": [
+    "resistance to mass transfer": [
+      "CHE-220"
+    ],
+    "resource management techniques": [
+      "CCE-401"
+    ],
+    "revenue management": [
       "ECO-130"
+    ],
+    "reversible processes": [
+      "CHE-223"
     ],
     "rheology": [
       "CHE-360"
     ],
+    "rheology techniques": [
+      "CHE-360"
+    ],
+    "rhetorical situation": [
+      "ENGL-101"
+    ],
     "risk assessment": [
-      "OTM-456"
+      "CCE-401"
     ],
-    "risk management": [
-      "CHE-425"
-    ],
-    "safety and risk": [
-      "CHE-425"
-    ],
-    "safety design": [
+    "rotating equipment": [
       "CHE-451"
     ],
-    "safety engineering": [
-      "CHE-425"
+    "runge-kutta methods": [
+      "MATH-351"
     ],
-    "safety procedures": [
-      "CHE-346"
+    "safety reviews": [
+      "CHE-451"
     ],
-    "salt formation": [
-      "CH-113"
+    "sectioning and development": [
+      "ME-124"
     ],
-    "scriptural analysis": [
+    "sentence comprehension": [
+      "HU-132"
+    ],
+    "sentence structure analysis": [
       "HU-131"
     ],
     "separation performance": [
       "CHE-442"
     ],
-    "service learning": [
-      "CCE-401"
+    "separation processes": [
+      "CHE-220"
     ],
-    "simplified projections": [
-      "ME-124"
+    "shear stress": [
+      "CHE-214"
     ],
-    "simulated flow": [
-      "CHE-464"
-    ],
-    "simulation analysis": [
-      "CHE-452"
-    ],
-    "simultaneous heat transfer": [
+    "shmt operation": [
       "CHE-349"
     ],
-    "single reactions": [
-      "CHE-347"
+    "simple linear regression": [
+      "QR-101"
     ],
-    "single unit operations": [
-      "CHE-222"
+    "simultaneous operations": [
+      "CHE-349"
     ],
-    "single units": [
-      "CHE-103"
-    ],
-    "single variable functions": [
+    "single-variable functions": [
       "MATH-101"
     ],
-    "single view projections": [
-      "ME-124"
-    ],
-    "size reduction": [
+    "size enlargement techniques": [
       "CHE-346"
     ],
-    "social consciousness": [
+    "social innovation strategies": [
       "CCE-401"
     ],
-    "social issues": [
+    "social media analysis": [
       "HU-101"
     ],
-    "social structure analysis": [
-      "HU-115"
-    ],
-    "social theory application": [
-      "HU-115"
-    ],
-    "societal dynamics understanding": [
-      "HU-115"
+    "societal consciousness": [
+      "CCE-401"
     ],
     "sociology": [
       "HU-115"
     ],
-    "software development": [
-      "CS-117"
+    "sodium compound industrial applications": [
+      "CHE-115"
     ],
-    "solid grinding": [
+    "software development": [
+      "CHE-226"
+    ],
+    "solid mixing and separation": [
       "CHE-346"
     ],
-    "solids handling": [
-      "CHE-499"
+    "solutions thermodynamics": [
+      "CHE-332"
     ],
-    "solution fabrication": [
-      "ME-105"
+    "spectroscopy": [
+      "CH-114"
     ],
-    "solution methods": [
-      "MATH-243"
+    "spectroscopy basics": [
+      "CH-114"
     ],
-    "source integration": [
-      "ENGL-101"
-    ],
-    "spiritual values": [
+    "spiritual self-accountability": [
       "HU-101"
     ],
-    "standard startup procedure": [
-      "CHE-242"
+    "standardization methods": [
+      "CHE-350"
+    ],
+    "state structure": [
+      "HU-127"
     ],
     "state variables": [
       "CHE-223"
     ],
-    "statistical analysis": [
-      "CHE-465"
-    ],
-    "statistical methods": [
-      "QR-100"
-    ],
-    "statistical theory": [
-      "CHE-465"
-    ],
-    "steady flow systems": [
-      "CHE-345"
+    "statistical inference": [
+      "QR-101"
     ],
     "steady state": [
-      "CHE-103"
+      "CHE-222"
     ],
     "steady state conduction": [
       "CHE-242"
     ],
-    "storage operations": [
+    "stoichiometric calculations": [
+      "CHE-103"
+    ],
+    "storage facilities": [
       "CHE-484"
     ],
-    "sulfur removal methods": [
-      "CHE-350"
-    ],
-    "sustainability models": [
+    "strategic management": [
       "MGT-271"
     ],
-    "sustainable development": [
-      "CSL-402"
+    "stress-strain behavior": [
+      "MSE-226"
+    ],
+    "string manipulation": [
+      "CHE-226"
+    ],
+    "sugar fermentation processes": [
+      "CHE-115"
+    ],
+    "supply chain management": [
+      "OTM-456"
+    ],
+    "surface integrals": [
+      "MATH-243"
+    ],
+    "surface phenomena": [
+      "CH-114"
     ],
     "sustainable development approaches": [
       "CCE-401"
     ],
-    "table analysis": [
-      "QR-100"
+    "sustainable investment": [
+      "MGT-271"
     ],
-    "taxable income analysis": [
-      "ECO-130"
+    "synthesis methods": [
+      "CHE-360"
     ],
-    "temperature control": [
-      "CHE-323"
+    "system analysis": [
+      "CHE-499"
     ],
-    "text analysis": [
+    "tafsir and explanation techniques": [
+      "HU-131"
+    ],
+    "tawheed principles": [
+      "HU-101"
+    ],
+    "textual interpretation": [
       "HU-132"
     ],
-    "thermochemical properties": [
-      "CHE-223"
+    "thermal analysis": [
+      "CHE-360"
     ],
-    "thermodynamic laws": [
-      "CHE-223"
+    "thermal insulation": [
+      "MSE-226"
     ],
-    "thermodynamic properties": [
+    "thermodynamic diagrams": [
       "CHE-332"
+    ],
+    "thermodynamic equilibrium": [
+      "CHE-223"
+    ],
+    "time value money": [
+      "ECO-130"
     ],
     "titration": [
       "CH-113"
     ],
-    "titration procedures": [
-      "CH-113"
+    "tolerances and specifications": [
+      "ME-124"
     ],
-    "transient flow systems": [
-      "CHE-345"
+    "transfer functions": [
+      "CHE-323"
     ],
-    "transmission operations": [
-      "CHE-484"
-    ],
-    "transport kinetics": [
-      "CHE-442"
-    ],
-    "transport mechanisms": [
+    "transfer units": [
       "CHE-220"
     ],
-    "transport systems": [
-      "CHE-214"
+    "transmission systems": [
+      "CHE-484"
     ],
-    "turbulence modeling": [
-      "CHE-464"
+    "transport mechanisms": [
+      "CHE-442"
+    ],
+    "triple integrals": [
+      "MATH-243"
+    ],
+    "unit operations": [
+      "CHE-222"
+    ],
+    "units conversion": [
+      "QR-100"
+    ],
+    "unsteady state": [
+      "CHE-222"
+    ],
+    "vapor-liquid equilibrium": [
+      "CHE-332"
     ],
     "vector calculus": [
-      "MATH-121"
+      "MATH-243"
     ],
-    "venture capital": [
-      "MGT-271"
+    "vocabulary and phrase comprehension": [
+      "HU-131"
     ],
-    "workshop protocols": [
+    "waves propagation": [
+      "PHY-102"
+    ],
+    "web development": [
+      "CS-117"
+    ],
+    "welding processes": [
       "ME-105"
-    ],
-    "writing strategy": [
-      "ENGL-101"
-    ],
-    "yield optimization": [
-      "CHE-115"
     ]
   },
   "concept_mode": "both",
