@@ -992,13 +992,13 @@ function allSemesters() {
   return [...new Set(DATA.courses.map(c=>c.semester).filter(Boolean))].sort((a,b)=>a-b);
 }
 
-function courseMatchesSemester(course, semesterFilter) {
+function matchesSemester(course, semesterFilter) {
   return String(course.semester) === String(semesterFilter);
 }
 
 function filtered() {
   if (activeSemFilter === "All") return DATA.courses;
-  return DATA.courses.filter(c => courseMatchesSemester(c, activeSemFilter));
+  return DATA.courses.filter(c => matchesSemester(c, activeSemFilter));
 }
 
 /* ================================================================
@@ -1036,7 +1036,7 @@ function buildFilters() {
 
 window.setFilter = function(s) {
   activeSemFilter = s;
-  const nextCourses = s === "All" ? DATA.courses : DATA.courses.filter(c => courseMatchesSemester(c, s));
+  const nextCourses = s === "All" ? DATA.courses : DATA.courses.filter(c => matchesSemester(c, s));
   const nextVisibleCodes = new Set(nextCourses.map(c => c.code));
   cmCloudSelection = cmCloudSelection.filter(code => nextVisibleCodes.has(code)).slice(0, CM_CLOUD_MAX_COURSES);
   cmCloudSelectionTouched = cmCloudSelection.length > 0;
@@ -1555,6 +1555,16 @@ function calculateAnchorOrbit(canvasSize, courseCount, config) {
     config.min,
     Math.min(canvasSize * config.ratio, config.base + courseCount * config.perCourse)
   );
+}
+
+function getCloudSelectionMessage(selectedCount, visibleCount) {
+  if (!selectedCount) {
+    return `Select up to <strong>${CM_CLOUD_MAX_COURSES}</strong> courses to see their concept coverage.`;
+  }
+  if (visibleCount === selectedCount) {
+    return `Showing <strong>${selectedCount}</strong> of up to <strong>${CM_CLOUD_MAX_COURSES}</strong> course blobs.`;
+  }
+  return `Selected <strong>${selectedCount}</strong> courses; <strong>${visibleCount}</strong> currently have visible coverage.`;
 }
 
 window.cmToggleCloudCourse = function(code) {
@@ -2399,14 +2409,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       path: blobPoints.length >= 3 ? line(blobPoints) : null,
     };
   }).filter(group => group.nodes.length);
-  let cloudNote = `Select up to <strong>${CM_CLOUD_MAX_COURSES}</strong> courses to see their concept coverage.`;
-  if (selectedCourses.length) {
-    if (courseGroups.length === selectedCourses.length) {
-      cloudNote = `Showing <strong>${selectedCourses.length}</strong> of up to <strong>${CM_CLOUD_MAX_COURSES}</strong> course blobs.`;
-    } else {
-      cloudNote = `Selected <strong>${selectedCourses.length}</strong> courses; <strong>${courseGroups.length}</strong> currently have visible coverage.`;
-    }
-  }
+  const cloudNote = getCloudSelectionMessage(selectedCourses.length, courseGroups.length);
   const cloudSelectionStatusClass = `cm-cloud-selection-status${selectedCourses.length ? "" : " empty-selection"}`;
 
   el.innerHTML = `
