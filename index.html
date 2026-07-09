@@ -839,7 +839,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
           <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Topic Network</button>
           <button class="cm-seg-btn" data-view="compare" onclick="cmSetView('compare')">Compare Courses</button>
           <button class="cm-seg-btn" data-view="bubble" onclick="cmSetView('bubble')">Bubble Overlay</button>
-          <button class="cm-seg-btn" data-view="cloud" onclick="cmSetView('cloud')" aria-label="Switch to Cloud Overlay view">Cloud Overlay</button>
+          <button class="cm-seg-btn" data-view="cloud" onclick="cmSetView('cloud')">Cloud Overlay</button>
         </div>
       </div>
       <div class="cm-toolbar-right">
@@ -1991,7 +1991,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const PILL_PAD_Y = 9;
   const COURSE_PULL = 0.045;
   const SIMULATION_TICKS = 180;
-  // Prevents the spiral search from running indefinitely while still covering dense datasets comfortably.
+  // Caps spiral retries after several full turns around the canvas so dense datasets still place cleanly without runaway loops.
   const MAX_PLACEMENT_ATTEMPTS = 2600;
   const EDGE_PAD = 68;
   const BLOB_PAD = 14;
@@ -2000,6 +2000,9 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const CENTER_PRIORITY_SCALE = 0.34;
   const SPIRAL_ANGLE_STEP = 0.34;
   const BLOB_CURVE_ALPHA = 0.72;
+  const HEADER_X = 16;
+  const HEADER_Y = 22;
+  const SUBHEADER_Y = 38;
   const containerW = Math.max(860, el.clientWidth || 1100);
   const approxCols = Math.max(4, Math.floor(containerW / 180));
   const canvasW = Math.max(containerW, approxCols * 180);
@@ -2009,7 +2012,8 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const measureCanvas = document.createElement("canvas");
   const measureCtx = measureCanvas.getContext("2d");
   const courseByCode = Object.fromEntries(courses.map(c => [c.code, c]));
-  const courseColor = code => CM_PALETTE[courses.findIndex(c => c.code === code) % CM_PALETTE.length] || semColor(courseByCode[code]?.semester || 0);
+  const courseIndexByCode = new Map(courses.map((course, i) => [course.code, i]));
+  const courseColor = code => CM_PALETTE[(courseIndexByCode.get(code) ?? 0) % CM_PALETTE.length] || semColor(courseByCode[code]?.semester || 0);
   const centerWeight = sortedConcepts[0]?.[1]?.length || 1;
 
   function measurePill(concept, count) {
@@ -2141,13 +2145,16 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   function hullPoints(points) {
     const sorted = [...points].sort((a, b) => a.x - b.x || a.y - b.y);
     if (sorted.length <= 1) return sorted;
+    // Positive cross products keep the boundary turning counter-clockwise; non-positive turns fall inside the hull.
     const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
     const lower = [];
+    // Sweep left-to-right to build the lower hull.
     sorted.forEach(p => {
       while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], p) <= 0) lower.pop();
       lower.push(p);
     });
     const upper = [];
+    // Sweep back right-to-left to build the upper hull, then join both chains into one perimeter.
     for (let i = sorted.length - 1; i >= 0; i--) {
       const p = sorted[i];
       while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], p) <= 0) upper.pop();
@@ -2226,8 +2233,8 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
         </div>
       </div>
       <svg id="cm-cloud-svg" width="${svgW}" height="${svgH}" style="display:block;">
-        <text x="16" y="22" font-family="'Crimson Pro',serif" font-size="14px" font-weight="700" fill="var(--tx)">Knowledge Concept Cloud</text>
-        <text x="16" y="38" font-family="'Outfit',sans-serif" font-size="10.5px" fill="var(--mu)">Concept pills cluster by course coverage while shared topics settle between overlapping course blobs.</text>
+        <text x="${HEADER_X}" y="${HEADER_Y}" font-family="'Crimson Pro',serif" font-size="14px" font-weight="700" fill="var(--tx)">Knowledge Concept Cloud</text>
+        <text x="${HEADER_X}" y="${SUBHEADER_Y}" font-family="'Outfit',sans-serif" font-size="10.5px" fill="var(--mu)">Concept pills cluster by course coverage while shared topics settle between overlapping course blobs.</text>
       </svg>
     </div>`;
 
@@ -2267,8 +2274,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   });
 
   function blobTooltip(group) {
-    const countLabel = `${group.nodes.length} concept${group.nodes.length !== 1 ? "s" : ""} in current view`;
-    return `<div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div><div class="tm"><strong>${escH(countLabel)}</strong></div>`;
+    return `<div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div><div class="tm"><strong>${group.nodes.length} concept${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`;
   }
 
   function applyBlobState(focusCode, pinnedCode) {
