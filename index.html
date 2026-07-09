@@ -2158,6 +2158,24 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   }
 
   const line = d3.line().x(d => d.x).y(d => d.y).curve(d3.curveCatmullRomClosed.alpha(0.72));
+  function twoPointBlob(points) {
+    const [a, b] = points;
+    const dx = b.x - a.x;
+    const dy = b.y - a.y;
+    const len = Math.hypot(dx, dy) || 1;
+    const ux = dx / len;
+    const uy = dy / len;
+    const px = -uy;
+    const py = ux;
+    const pad = (((a.radius || 0) + (b.radius || 0)) / 2) * 0.58 + BLOB_PAD;
+    const cap = pad * 0.4;
+    return [
+      { x: a.x - ux * cap + px * pad, y: a.y - uy * cap + py * pad },
+      { x: b.x + ux * cap + px * pad, y: b.y + uy * cap + py * pad },
+      { x: b.x + ux * cap - px * pad, y: b.y + uy * cap - py * pad },
+      { x: a.x - ux * cap - px * pad, y: a.y - uy * cap - py * pad },
+    ];
+  }
   const conceptNodeMap = new Map(nodes.map(node => [node.concept, node]));
   const courseGroups = courses.map(course => {
     const conceptNodes = (getConceptsForCourse(course.code) || [])
@@ -2171,14 +2189,16 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
           y: conceptNodes.reduce((sum, n) => sum + n.y, 0) / conceptNodes.length,
         }
       : null;
-    const hull = conceptNodes.length >= 3 ? hullPoints(conceptNodes.map(n => ({ x: n.x, y: n.y, radius: n.radius }))) : [];
+    const hullSource = conceptNodes.map(n => ({ x: n.x, y: n.y, radius: n.radius }));
+    const hull = conceptNodes.length >= 3 ? hullPoints(hullSource) : [];
+    const blobPoints = conceptNodes.length >= 3 ? inflateHull(hull) : conceptNodes.length === 2 ? twoPointBlob(hullSource) : [];
     return {
       course,
       color,
       nodes: conceptNodes,
       centroid,
       hull,
-      path: hull.length >= 3 ? line(inflateHull(hull)) : null,
+      path: blobPoints.length >= 3 ? line(blobPoints) : null,
     };
   }).filter(group => group.nodes.length);
 
@@ -2315,6 +2335,14 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     .attr("font-weight", "600")
     .attr("fill", d => d.color)
     .text(d => d.concept);
+
+  window._cmFitFn = () => {
+    el.scrollTo({
+      left: Math.max(0, (svgW - el.clientWidth) / 2),
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 
   applyBlobState(null, cloudState.pinned);
 }
