@@ -2050,7 +2050,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       baseX: centerX,
       baseY: centerY,
     };
-    // Topics shared by more courses start closer to the center so the densest overlap stays in the middle.
+    // Higher overlap reduces compactness from the base toward the minimum, which places widely shared topics closer to the center.
     const compactness = Math.max(CENTER_PRIORITY_MIN, CENTER_PRIORITY_BASE - (codes.length / Math.max(1, centerWeight)) * CENTER_PRIORITY_SCALE);
     let angle = i * 0.58;
     let step = 0;
@@ -2284,7 +2284,9 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   });
 
   function blobTooltip(group) {
-    return `<div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div><div class="tm"><strong>${group.nodes.length} concept${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`;
+    return `
+      <div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div>
+      <div class="tm"><strong>${group.nodes.length} concept${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`;
   }
 
   function applyBlobState(focusCode, pinnedCode) {
