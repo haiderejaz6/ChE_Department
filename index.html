@@ -2145,19 +2145,29 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   function hullPoints(points) {
     const sorted = [...points].sort((a, b) => a.x - b.x || a.y - b.y);
     if (sorted.length <= 1) return sorted;
-    // Positive cross products keep the boundary turning counter-clockwise; non-positive turns fall inside the hull.
+    // Positive cross products keep the boundary turning counterclockwise; non-positive turns fall inside the hull.
     const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
     const lower = [];
     // Sweep left-to-right to build the lower hull.
     sorted.forEach(p => {
-      while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], p) <= 0) lower.pop();
+      while (lower.length >= 2) {
+        const secondLastLower = lower[lower.length - 2];
+        const lastLower = lower[lower.length - 1];
+        if (cross(secondLastLower, lastLower, p) > 0) break;
+        lower.pop();
+      }
       lower.push(p);
     });
     const upper = [];
     // Sweep back right-to-left to build the upper hull, then join both chains into one perimeter.
     for (let i = sorted.length - 1; i >= 0; i--) {
       const p = sorted[i];
-      while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], p) <= 0) upper.pop();
+      while (upper.length >= 2) {
+        const secondLastUpper = upper[upper.length - 2];
+        const lastUpper = upper[upper.length - 1];
+        if (cross(secondLastUpper, lastUpper, p) > 0) break;
+        upper.pop();
+      }
       upper.push(p);
     }
     lower.pop();
@@ -2227,7 +2237,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       <div class="kb-legend-box">
         <div class="kb-legend-title">Cloud Overlay</div>
         <div class="kb-legend-row"><span style="width:28px;height:16px;border-radius:999px;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.5);display:inline-block;"></span><span style="color:var(--mu);">pill = concept</span></div>
-        <div class="kb-legend-row"><span style="width:28px;height:16px;border-radius:999px;background:rgba(14,165,233,.16);display:inline-block;"></span><span style="color:var(--mu);">colored blob = one course's coverage</span></div>
+        <div class="kb-legend-row"><span style="width:28px;height:16px;border-radius:999px;background:rgba(14,165,233,.16);display:inline-block;"></span><span style="color:var(--mu);">colored blob = one course's concept coverage</span></div>
         <div style="font-size:.59rem;color:var(--dim);margin-top:.35rem;line-height:1.45;">
           Overlapping blobs =<br>shared concepts.
         </div>
