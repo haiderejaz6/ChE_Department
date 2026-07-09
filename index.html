@@ -1475,7 +1475,7 @@ let conceptColorMap = {};
 let cmView = "curriculum";
 let cmSelectedConcept = null;
 let cmNetSim = null;
-let cmCloudPinnedCourse = null;
+let cmCloudPinnedCourseCode = null;
 
 function getCMConceptColor(concept) {
   if (!conceptColorMap[concept]) {
@@ -1991,7 +1991,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const PILL_PAD_Y = 9;
   const COURSE_PULL = 0.045;
   const SIMULATION_TICKS = 180;
-  // Caps spiral retries after several full turns around the canvas so dense datasets still place cleanly without runaway loops.
+  // Caps spiral retries after roughly a few thousand outward spiral samples, enough for this dataset size without risking runaway loops.
   const MAX_PLACEMENT_ATTEMPTS = 2600;
   const EDGE_PAD = 68;
   const BLOB_PAD = 14;
@@ -1999,6 +1999,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const CENTER_PRIORITY_BASE = 1.18;
   const CENTER_PRIORITY_SCALE = 0.34;
   const SPIRAL_ANGLE_STEP = 0.34;
+  // Higher alpha keeps the Catmull-Rom spline a bit tighter around the inflated hull so blobs stay compact.
   const BLOB_CURVE_ALPHA = 0.72;
   const HEADER_X = 16;
   const HEADER_Y = 22;
@@ -2050,7 +2051,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       baseX: centerX,
       baseY: centerY,
     };
-    // Higher overlap reduces compactness from the base toward the minimum, which places widely shared topics closer to the center.
+    // Higher overlap reduces compactness from the base toward the minimum, tightening the spiral and pulling widely shared topics closer to center.
     const compactness = Math.max(CENTER_PRIORITY_MIN, CENTER_PRIORITY_BASE - (codes.length / Math.max(1, centerWeight)) * CENTER_PRIORITY_SCALE);
     let angle = i * 0.58;
     let step = 0;
@@ -2145,7 +2146,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   function hullPoints(points) {
     const sorted = [...points].sort((a, b) => a.x - b.x || a.y - b.y);
     if (sorted.length <= 1) return sorted;
-    // Positive cross products keep the boundary turning counterclockwise; non-positive turns fall inside the hull.
+    // Positive cross products indicate a counterclockwise turn; non-positive turns fall inside the hull and are removed.
     const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
     const lower = [];
     // Sweep left-to-right to build the lower hull.
@@ -2251,7 +2252,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const svg = d3.select("#cm-cloud-svg");
   const blobLayer = svg.append("g").attr("transform", "translate(0,18)");
   const pillLayer = svg.append("g").attr("transform", "translate(0,18)");
-  const cloudState = { pinned: cmCloudPinnedCourse };
+  const cloudState = { pinned: cmCloudPinnedCourseCode };
 
   const blobSel = blobLayer.selectAll("g.kc-blob")
     .data(courseGroups)
@@ -2283,12 +2284,6 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     }
   });
 
-  function blobTooltip(group) {
-    return `
-      <div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div>
-      <div class="tm"><strong>${group.nodes.length} concept${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`;
-  }
-
   function applyBlobState(focusCode, pinnedCode) {
     blobSel.each(function(group) {
       const activeCode = pinnedCode || focusCode;
@@ -2305,7 +2300,9 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   blobSel
     .on("mouseenter", function(e, group) {
       if (!cloudState.pinned) applyBlobState(group.course.code, null);
-      showTip(e, blobTooltip(group));
+      showTip(e, `
+        <div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div>
+        <div class="tm"><strong>${group.nodes.length} concept${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`);
     })
     .on("mousemove", moveTip)
     .on("mouseleave", function() {
@@ -2315,9 +2312,11 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     .on("click", function(e, group) {
       e.stopPropagation();
       cloudState.pinned = cloudState.pinned === group.course.code ? null : group.course.code;
-      cmCloudPinnedCourse = cloudState.pinned;
+      cmCloudPinnedCourseCode = cloudState.pinned;
       applyBlobState(null, cloudState.pinned);
-      if (cloudState.pinned) showTip(e, blobTooltip(group));
+      if (cloudState.pinned) showTip(e, `
+        <div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div>
+        <div class="tm"><strong>${group.nodes.length} concept${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`);
       else hideTip();
     });
 
@@ -2340,7 +2339,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     .on("click", (e, d) => {
       e.stopPropagation();
       cloudState.pinned = null;
-      cmCloudPinnedCourse = null;
+      cmCloudPinnedCourseCode = null;
       applyBlobState(null, null);
       cmClickConcept(d.concept, null);
     });
