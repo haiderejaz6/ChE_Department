@@ -1031,9 +1031,11 @@ function buildFilters() {
 
 window.setFilter = function(s) {
   activeSemFilter = s;
-  cmCloudSelectionTouched = false;
-  cmCloudSelection = [];
-  cmCloudPinnedCourseCode = null;
+  const nextCourses = s === "All" ? DATA.courses : DATA.courses.filter(c => c.semester === Number(s));
+  const nextVisibleCodes = new Set(nextCourses.map(c => c.code));
+  cmCloudSelection = cmCloudSelection.filter(code => nextVisibleCodes.has(code)).slice(0, CM_CLOUD_MAX_COURSES);
+  cmCloudSelectionTouched = cmCloudSelection.length > 0;
+  syncCloudPinnedCourse(cmCloudSelection);
   buildFilters();
   renderStats();
   renderDash();
@@ -1530,6 +1532,13 @@ function normalizeCloudSelection(courses) {
   return [...cmCloudSelection];
 }
 
+function syncCloudPinnedCourse(selectedCodes) {
+  if (cmCloudPinnedCourseCode && !selectedCodes.includes(cmCloudPinnedCourseCode)) {
+    cmCloudPinnedCourseCode = null;
+  }
+  return cmCloudPinnedCourseCode;
+}
+
 window.cmToggleCloudCourse = function(code) {
   const courses = filtered();
   if (!courses.some(c => c.code === code)) return;
@@ -1537,9 +1546,7 @@ window.cmToggleCloudCourse = function(code) {
   cmCloudSelectionTouched = true;
   if (i >= 0) cmCloudSelection.splice(i, 1);
   else if (cmCloudSelection.length < CM_CLOUD_MAX_COURSES) cmCloudSelection.push(code);
-  if (cmCloudPinnedCourseCode && !cmCloudSelection.includes(cmCloudPinnedCourseCode)) {
-    cmCloudPinnedCourseCode = null;
-  }
+  syncCloudPinnedCourse(cmCloudSelection);
   cmRender();
 };
 
@@ -2044,6 +2051,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const BLOB_DIM_FILL_OPACITY = 0.04;
   const BLOB_ACTIVE_STROKE_OPACITY = 0.24;
   const BLOB_DIM_STROKE_OPACITY = 0.08;
+  const ANCHOR_CHARGE_MULTIPLIER = 11;
   const ANCHOR_ORBIT_MIN_X = 240;
   const ANCHOR_ORBIT_WIDTH_RATIO = 0.33;
   const ANCHOR_ORBIT_BASE_X = 460;
@@ -2055,13 +2063,14 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const ANCHOR_RADIUS_MIN = 88;
   const ANCHOR_RADIUS_MAX = 156;
   const ANCHOR_RADIUS_SCALE_OFFSET = 1.6;
+  const DISJOINT_PILL_SPACING = 26;
   const HEADER_X = 16;
   const HEADER_Y = 22;
   const SUBHEADER_Y = 38;
   const cloudSelection = normalizeCloudSelection(courses);
   const selectedCourseSet = new Set(cloudSelection);
   const selectedCourses = courses.filter(course => selectedCourseSet.has(course.code));
-  if (cmCloudPinnedCourseCode && !selectedCourseSet.has(cmCloudPinnedCourseCode)) cmCloudPinnedCourseCode = null;
+  syncCloudPinnedCourse(cloudSelection);
   const containerW = Math.max(860, el.clientWidth || 1100);
   const approxCols = Math.max(4, Math.floor(containerW / 180));
   const canvasW = Math.max(containerW, approxCols * 180);
@@ -2114,7 +2123,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     return { code: course.code, homeX, homeY, x: homeX, y: homeY };
   });
   const anchorSim = d3.forceSimulation(anchorNodes)
-    .force("charge", d3.forceManyBody().strength(-Math.max(900, anchorRadius * 11)).distanceMax(Math.max(canvasW, canvasH)))
+    .force("charge", d3.forceManyBody().strength(-Math.max(900, anchorRadius * ANCHOR_CHARGE_MULTIPLIER)).distanceMax(Math.max(canvasW, canvasH)))
     .force("collide", d3.forceCollide().radius(anchorRadius).iterations(3).strength(1))
     .force("homeX", d3.forceX(d => d.homeX).strength(0.08))
     .force("homeY", d3.forceY(d => d.homeY).strength(0.08))
@@ -2215,7 +2224,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
           const dx = b.x - a.x;
           const dy = b.y - a.y;
           const dist = Math.hypot(dx, dy) || 1;
-          const minDist = a.radius + b.radius + 26;
+          const minDist = a.radius + b.radius + DISJOINT_PILL_SPACING;
           if (dist >= minDist) continue;
           const push = ((minDist - dist) / dist) * strength * alpha;
           const px = dx * push;
@@ -2352,12 +2361,13 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     : courseGroups.length === selectedCourses.length
       ? `Showing <strong>${selectedCourses.length}</strong> of up to <strong>${CM_CLOUD_MAX_COURSES}</strong> course blobs.`
       : `Selected <strong>${selectedCourses.length}</strong> courses; <strong>${courseGroups.length}</strong> currently have visible coverage.`;
+  const cloudSelectionStatusClass = `cm-cloud-selection-status${selectedCourses.length ? "" : " warn"}`;
 
   el.innerHTML = `
     <div class="cm-cmp-pills">
       <span class="cm-cmp-heading">Course blobs:</span>
       ${coursePills}
-      <span class="cm-cloud-selection-status${selectedCourses.length ? "" : " warn"}">${cloudNote}</span>
+      <span class="${cloudSelectionStatusClass}">${cloudNote}</span>
     </div>
     <div class="kc-cloud-wrap">
       <div class="kb-legend-box">
