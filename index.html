@@ -349,7 +349,7 @@ table.hm tbody tr:hover{background:#fafbff;}
 .cm-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.15);}
 .cm-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;border:none;background:var(--gold);cursor:pointer;}
 #cm-body{flex:1;overflow:auto;padding:1.5rem 2rem 3rem;}
-#cmv-heatmap.hidden,#cmv-network.hidden,#cmv-list.hidden,#cmv-curriculum.hidden{display:none!important;}
+#cmv-heatmap.hidden,#cmv-network.hidden,#cmv-list.hidden,#cmv-curriculum.hidden,#cmv-bubble.hidden{display:none!important;}
 
 /* Concept heatmap */
 .cm-hm-wrap{overflow-x:auto;}
@@ -521,6 +521,18 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 .cm-cmp-shared-all{background:rgba(184,146,14,.12);border-left:3px solid var(--gold);}
 .cm-cmp-info{font-size:.72rem;color:var(--mu);margin:.6rem 0 .85rem;}
 .cm-cmp-info strong{color:var(--tx);}
+
+/* ── Bubble Overlay view ──────────────────────────────────── */
+#cmv-bubble{position:relative;overflow:auto;}
+.kb-bubble-wrap{display:inline-block;min-width:100%;}
+.kb-legend-box{
+  position:sticky;top:.75rem;right:.75rem;float:right;
+  background:rgba(255,255,255,.92);border:1px solid var(--bdr);
+  border-radius:10px;padding:.55rem .75rem;font-size:.65rem;
+  box-shadow:var(--shadow);min-width:140px;z-index:10;
+}
+.kb-legend-title{font-weight:700;color:var(--mu);margin-bottom:.35rem;font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;}
+.kb-legend-row{display:flex;align-items:center;gap:.45rem;margin-bottom:.22rem;}
 
 /* ── MD Viewer modal ──────────────────────────────────────── */
 .md-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;
@@ -732,7 +744,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 <div class="mobile-nav" id="mobile-nav">
   <button class="tab-btn active" id="mnbtn-graph"    onclick="switchTab('graph');closeNav()">🗂 Curriculum Graph</button>
   <button class="tab-btn"        id="mnbtn-dash"     onclick="switchTab('dash');closeNav()">📊 OBE Dashboard</button>
-  <button class="tab-btn"        id="mnbtn-concepts" onclick="switchTab('concepts');closeNav()">🔬 Topic Overlap</button>
+  <button class="tab-btn"        id="mnbtn-concepts" onclick="switchTab('concepts');closeNav()">🔬 Knowledge Concepts</button>
   <div class="mobile-nav-filters" id="mobile-filters"></div>
 </div>
 
@@ -740,7 +752,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 <div class="tabbar">
   <button class="tab-btn active" id="tbtn-graph"    onclick="switchTab('graph')">🗂 Curriculum Graph</button>
   <button class="tab-btn"        id="tbtn-dash"     onclick="switchTab('dash')">📊 OBE Dashboard</button>
-  <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🔬 Topic Overlap</button>
+  <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🔬 Knowledge Concepts</button>
   <div class="vsep" style="margin:0 .6rem;"></div>
   <div class="tabbar-filters" id="filters"></div>
 </div>
@@ -823,6 +835,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
           <button class="cm-seg-btn active" data-view="curriculum" onclick="cmSetView('curriculum')">Curriculum View</button>
           <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Topic Network</button>
           <button class="cm-seg-btn" data-view="compare" onclick="cmSetView('compare')">Compare Courses</button>
+          <button class="cm-seg-btn" data-view="bubble" onclick="cmSetView('bubble')">Bubble Overlay</button>
         </div>
       </div>
       <div class="cm-toolbar-right">
@@ -848,6 +861,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
       <div id="cmv-curriculum"></div>
       <div id="cmv-network"   class="hidden"></div>
       <div id="cmv-compare"   class="hidden"></div>
+      <div id="cmv-bubble"    class="hidden"></div>
     </div>
   </div><!-- /tab-concepts -->
 
@@ -1493,7 +1507,7 @@ window.cmUpdateForce = function(val) {
 
 window.cmSetView = function(v) {
   // Only allow remaining views
-  if(!["curriculum","network","compare"].includes(v)) v="curriculum";
+  if(!["curriculum","network","compare","bubble"].includes(v)) v="curriculum";
   cmView=v;
   document.querySelectorAll(".cm-seg-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
   const fc=document.getElementById("cm-force-controls");
@@ -1526,12 +1540,13 @@ window.cmRender = function() {
   const sortedConcepts=Object.entries(idx).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0]));
   sortedConcepts.forEach(([c])=>getCMConceptColor(c));
 
-  ["curriculum", "network", "compare"].forEach(v => {
+  ["curriculum", "network", "compare", "bubble"].forEach(v => {
     document.getElementById("cmv-"+v).classList.toggle("hidden",cmView!==v);
   });
   if(cmView==="curriculum") cmRenderCurriculum(courses,sortedConcepts,idx);
   if(cmView==="network")    cmRenderNetwork(courses,sortedConcepts,idx);
   if(cmView==="compare")    cmRenderCompare(courses,sortedConcepts,idx);
+  if(cmView==="bubble")     cmRenderBubble(courses,sortedConcepts,idx);
 };
 
 /* ── Curriculum Concept Graph (UCSD-style with concept tags) ── */
@@ -1949,6 +1964,131 @@ function cmDrawMultiCompare(courses) {
       </table>
     </div>`;
 }
+
+/* ================================================================
+   BUBBLE OVERLAY VIEW
+================================================================ */
+function cmRenderBubble(courses, sortedConcepts, idx) {
+  const el = document.getElementById("cmv-bubble");
+
+  if (!courses.length || !sortedConcepts.length) {
+    el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);">No concepts to display.</div>`;
+    return;
+  }
+
+  const BUBBLE_R = 30;   // radius of each circle in the stack
+  const OFFSET_R = 11;   // how far each circle is displaced from the centre
+  const LABEL_H  = 18;   // space below bubble for the label
+  const H_PAD    = 20;   // horizontal padding per cell (each side)
+  const V_PAD    = 20;   // vertical padding per cell (each side)
+  const CELL_W   = (BUBBLE_R + OFFSET_R) * 2 + H_PAD * 2;
+  const CELL_H   = (BUBBLE_R + OFFSET_R) * 2 + V_PAD * 2 + LABEL_H;
+  const HEADER_H = 52;
+
+  const containerW = Math.max(600, el.clientWidth || 960);
+  const COLS = Math.max(3, Math.floor(containerW / CELL_W));
+  const ROWS = Math.ceil(sortedConcepts.length / COLS);
+  const SVG_W = COLS * CELL_W;
+  const SVG_H = ROWS * CELL_H + HEADER_H + 16;
+
+  let bubblesHtml = '';
+  sortedConcepts.forEach(([concept, codes], i) => {
+    const color = getCMConceptColor(concept);
+    const n = codes.length;
+    const col = i % COLS;
+    const row = Math.floor(i / COLS);
+    const cx = col * CELL_W + CELL_W / 2;
+    const cy = HEADER_H + row * CELL_H + V_PAD + BUBBLE_R + OFFSET_R;
+
+    // Each course that covers this concept contributes one translucent circle,
+    // placed at an evenly-spaced angle around the centre. Where circles overlap
+    // (near the centre) the opacity accumulates, making shared concepts visually
+    // richer the more courses cover them.
+    const layerOpacity = Math.max(0.18, Math.min(0.35, 0.85 / n));
+    const layers = codes.map((_, j) => {
+      const angle = n === 1 ? 0 : (2 * Math.PI * j / n) - Math.PI / 2;
+      const ox = n === 1 ? 0 : Math.cos(angle) * OFFSET_R;
+      const oy = n === 1 ? 0 : Math.sin(angle) * OFFSET_R;
+      return `<circle class="kb-layer" cx="${cx + ox}" cy="${cy + oy}" r="${BUBBLE_R}"
+        fill="${color}" fill-opacity="${layerOpacity}"
+        stroke="${color}" stroke-width="1.4" stroke-opacity="0.45"/>`;
+    }).join('');
+
+    // Count badge for concepts shared by 2+ courses
+    const badge = n > 1
+      ? `<circle cx="${cx + BUBBLE_R - 1}" cy="${cy - BUBBLE_R + 1}" r="9"
+           fill="${color}" fill-opacity="0.95"/>
+         <text x="${cx + BUBBLE_R - 1}" y="${cy - BUBBLE_R + 1}"
+           text-anchor="middle" dominant-baseline="central"
+           font-family="'DM Mono',monospace" font-size="8.5px" font-weight="800"
+           fill="#fff" pointer-events="none">${n}</text>`
+      : '';
+
+    // Concept label below the bubble cluster
+    const labelY = cy + BUBBLE_R + OFFSET_R + 4;
+    const fontSize = Math.max(8, Math.min(11, 110 / Math.max(1, concept.length)));
+    const label = `<text x="${cx}" y="${labelY}"
+      text-anchor="middle" dominant-baseline="hanging"
+      font-family="'Outfit',sans-serif" font-size="${fontSize}px" font-weight="700"
+      fill="${color}" pointer-events="none">${escH(concept)}</text>`;
+
+    // Encode data for inline event handlers
+    const safeConceptAttr = escA(concept);
+    const safeCourses = escA(codes.join(', '));
+
+    bubblesHtml += `<g class="kb-bubble" style="cursor:pointer;"
+      onmouseenter="kbShowTip(event,'${safeConceptAttr}','${safeCourses}')"
+      onmouseleave="hideTip()"
+      onmousemove="moveTip(event)"
+      onclick="cmClickConcept('${safeConceptAttr}',null)">
+      ${layers}${badge}${label}
+    </g>`;
+  });
+
+  // Legend: show layer-count examples 1→max
+  const maxN = sortedConcepts[0][1].length;
+  const legendNs = [...new Set([1, 2, 3, 5, maxN].filter(v => v >= 1 && v <= maxN))].sort((a, b) => a - b);
+  const legendItems = legendNs.map(n => {
+    const demo = Array.from({length: Math.min(n, 4)}, (_, j) => {
+      const angle = n === 1 ? 0 : (2 * Math.PI * j / Math.min(n, 4)) - Math.PI / 2;
+      const ox = n === 1 ? 0 : Math.cos(angle) * 4;
+      const oy = n === 1 ? 0 : Math.sin(angle) * 4;
+      return `<circle cx="${9 + ox}" cy="${9 + oy}" r="7" fill="#64748b"
+        fill-opacity="${Math.max(0.18, Math.min(0.35, 0.85 / n))}"
+        stroke="#64748b" stroke-width="1" stroke-opacity="0.4"/>`;
+    }).join('');
+    return `<div class="kb-legend-row">
+      <svg width="18" height="18" style="flex-shrink:0;">${demo}</svg>
+      <span style="font-size:.63rem;color:var(--mu);">${n} course${n !== 1 ? 's' : ''}</span>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="kb-bubble-wrap">
+      <div class="kb-legend-box">
+        <div class="kb-legend-title">Bubble Layers</div>
+        ${legendItems}
+        <div style="font-size:.59rem;color:var(--dim);margin-top:.35rem;line-height:1.45;">
+          More layers = more<br>courses share concept.<br>Darker centre = higher<br>accumulated coverage.
+        </div>
+      </div>
+      <svg id="cm-bubble-svg" width="${SVG_W}" height="${SVG_H}" style="display:block;">
+        <text x="16" y="21" font-family="'Crimson Pro',serif" font-size="14px" font-weight="700" fill="var(--tx)">Knowledge Concept Bubbles</text>
+        <text x="16" y="37" font-family="'Outfit',sans-serif" font-size="10.5px" fill="var(--mu)">Each bubble cluster represents one concept · stacked layers = shared by multiple courses · click for details</text>
+        ${bubblesHtml}
+      </svg>
+    </div>`;
+}
+
+/* Helper: show tooltip from inline SVG event handlers in the bubble view */
+window.kbShowTip = function(e, concept, courseList) {
+  const n = courseList.split(',').filter(s => s.trim()).length;
+  tip.innerHTML = `<div class="th">${escH(concept)}</div>
+    <div class="tm">Covered by <strong>${n}</strong> course${n !== 1 ? 's' : ''}:
+    ${escH(courseList)}</div>`;
+  tip.style.display = 'block';
+  moveTip(e);
+};
 
 /* ================================================================
    MD FILE VIEWER
