@@ -991,9 +991,13 @@ function allSemesters() {
   return [...new Set(DATA.courses.map(c=>c.semester).filter(Boolean))].sort((a,b)=>a-b);
 }
 
+function courseMatchesSemester(course, semesterFilter) {
+  return String(course.semester) === String(semesterFilter);
+}
+
 function filtered() {
   if (activeSemFilter === "All") return DATA.courses;
-  return DATA.courses.filter(c => c.semester === Number(activeSemFilter));
+  return DATA.courses.filter(c => courseMatchesSemester(c, activeSemFilter));
 }
 
 /* ================================================================
@@ -1031,7 +1035,7 @@ function buildFilters() {
 
 window.setFilter = function(s) {
   activeSemFilter = s;
-  const nextCourses = s === "All" ? DATA.courses : DATA.courses.filter(c => c.semester === Number(s));
+  const nextCourses = s === "All" ? DATA.courses : DATA.courses.filter(c => courseMatchesSemester(c, s));
   const nextVisibleCodes = new Set(nextCourses.map(c => c.code));
   cmCloudSelection = cmCloudSelection.filter(code => nextVisibleCodes.has(code)).slice(0, CM_CLOUD_MAX_COURSES);
   cmCloudSelectionTouched = cmCloudSelection.length > 0;
@@ -1537,6 +1541,13 @@ function syncCloudPinnedCourse(selectedCodes) {
     cmCloudPinnedCourseCode = null;
   }
   return cmCloudPinnedCourseCode;
+}
+
+function calculateAnchorOrbit(canvasSize, courseCount, config) {
+  return Math.max(
+    config.min,
+    Math.min(canvasSize * config.ratio, config.base + courseCount * config.perCourse)
+  );
 }
 
 window.cmToggleCloudCourse = function(code) {
@@ -2113,8 +2124,18 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     );
   }
 
-  const anchorOrbitX = Math.max(ANCHOR_ORBIT_MIN_X, Math.min(canvasW * ANCHOR_ORBIT_WIDTH_RATIO, ANCHOR_ORBIT_BASE_X + courses.length * ANCHOR_ORBIT_X_PER_COURSE));
-  const anchorOrbitY = Math.max(ANCHOR_ORBIT_MIN_Y, Math.min(canvasH * ANCHOR_ORBIT_HEIGHT_RATIO, ANCHOR_ORBIT_BASE_Y + courses.length * ANCHOR_ORBIT_Y_PER_COURSE));
+  const anchorOrbitX = calculateAnchorOrbit(canvasW, courses.length, {
+    min: ANCHOR_ORBIT_MIN_X,
+    ratio: ANCHOR_ORBIT_WIDTH_RATIO,
+    base: ANCHOR_ORBIT_BASE_X,
+    perCourse: ANCHOR_ORBIT_X_PER_COURSE,
+  });
+  const anchorOrbitY = calculateAnchorOrbit(canvasH, courses.length, {
+    min: ANCHOR_ORBIT_MIN_Y,
+    ratio: ANCHOR_ORBIT_HEIGHT_RATIO,
+    base: ANCHOR_ORBIT_BASE_Y,
+    perCourse: ANCHOR_ORBIT_Y_PER_COURSE,
+  });
   const anchorRadius = Math.max(ANCHOR_RADIUS_MIN, Math.min(ANCHOR_RADIUS_MAX, Math.max(canvasW, canvasH) / (Math.sqrt(Math.max(1, courses.length)) + ANCHOR_RADIUS_SCALE_OFFSET)));
   const anchorNodes = courses.map((course, i) => {
     const angle = (i / Math.max(1, courses.length)) * Math.PI * 2;
