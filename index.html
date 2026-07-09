@@ -22,6 +22,7 @@
   --mu:#5a6e8c;
   --dim:#9aaabf;
   --dimfill:#f0f3fa;
+  --cm-pill-disabled-opacity:.48;
   --shadow:0 1px 3px rgba(30,50,90,0.06),0 4px 16px rgba(30,50,90,0.06);
   --shadow-lg:0 2px 8px rgba(30,50,90,0.08),0 8px 32px rgba(30,50,90,0.10);
   --col-s1:#e11d48; --col-s2:#ea580c; --col-s3:#d97706; --col-s4:#65a30d;
@@ -504,7 +505,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
   font-family:'DM Mono',monospace;font-size:.67rem;font-weight:700;cursor:pointer;
   transition:all .15s;background:var(--sf);color:var(--mu);}
 .cm-cmp-pill:hover{border-color:var(--bdr2);color:var(--tx);}
-.cm-cmp-pill:disabled{opacity:.48;cursor:not-allowed;border-color:var(--bdr);color:var(--dim);}
+.cm-cmp-pill:disabled{opacity:var(--cm-pill-disabled-opacity);cursor:not-allowed;border-color:var(--bdr);color:var(--dim);}
 .cm-cmp-pill:disabled:hover{border-color:var(--bdr);color:var(--dim);}
 .cm-cmp-table-wrap{background:var(--sf);border:1px solid var(--bdr);border-radius:12px;
   overflow:hidden;box-shadow:var(--shadow);overflow-x:auto;}
@@ -1522,7 +1523,7 @@ function getConceptsForCourse(courseCode) {
   return [...s].sort();
 }
 
-function getDefaultCloudSelection(courses) {
+function getDefaultCloudSelectionForFilter(courses) {
   if (activeSemFilter === "All") return [];
   return courses.slice(0, CM_CLOUD_MAX_COURSES).map(c => c.code);
 }
@@ -1531,7 +1532,7 @@ function normalizeCloudSelection(courses) {
   const visibleCodes = new Set(courses.map(c => c.code));
   cmCloudSelection = cmCloudSelection.filter(code => visibleCodes.has(code)).slice(0, CM_CLOUD_MAX_COURSES);
   if (!cmCloudSelectionTouched && !cmCloudSelection.length) {
-    cmCloudSelection = getDefaultCloudSelection(courses);
+    cmCloudSelection = getDefaultCloudSelectionForFilter(courses);
   }
   return [...cmCloudSelection];
 }
@@ -1541,6 +1542,10 @@ function syncCloudPinnedCourse(selectedCodes) {
     cmCloudPinnedCourseCode = null;
   }
   return cmCloudPinnedCourseCode;
+}
+
+function sanitizeCssColor(color) {
+  return /^#[0-9a-f]{6}$/i.test(String(color || "")) ? color : "#64748b";
 }
 
 function calculateAnchorOrbit(canvasSize, courseCount, config) {
@@ -2078,7 +2083,8 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const HEADER_X = 16;
   const HEADER_Y = 22;
   const SUBHEADER_Y = 38;
-  const cloudSelection = normalizeCloudSelection(courses);
+  normalizeCloudSelection(courses);
+  const cloudSelection = [...cmCloudSelection];
   const selectedCourseSet = new Set(cloudSelection);
   const selectedCourses = courses.filter(course => selectedCourseSet.has(course.code));
   syncCloudPinnedCourse(cloudSelection);
@@ -2094,15 +2100,19 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const courseIndexByCode = new Map(courses.map((course, i) => [course.code, i]));
   const courseColor = code => CM_PALETTE[(courseIndexByCode.get(code) ?? 0) % CM_PALETTE.length] || semColor(courseByCode[code]?.semester || 0);
   const coursePills = courses.map(course => {
-   const color = courseColor(course.code);
+   const color = sanitizeCssColor(courseColor(course.code));
+   const courseCode = String(course.code || "");
+   const safeCode = courseCode.replace(/'/g, "\\'");
+   const safeLabel = escH(courseCode);
+   const safeTitle = escH(course.title || "");
    const sel = selectedCourseSet.has(course.code);
    const disabled = !sel && selectedCourses.length >= CM_CLOUD_MAX_COURSES;
    return `<button class="cm-cmp-pill${sel ? ' active' : ''}"
-     id="cmcloud-${course.code}"
+     id="cmcloud-${safeLabel}"
      style="${sel ? `background:${color}18;border-color:${color};color:${color};` : ''}"
-     onclick="cmToggleCloudCourse('${course.code}')"
+     onclick="cmToggleCloudCourse('${safeCode}')"
      ${disabled ? "disabled" : ""}
-     title="${course.title}">${course.code}</button>`;
+     title="${safeTitle}">${safeLabel}</button>`;
   }).join("");
 
   function measurePill(concept, count) {
@@ -2235,13 +2245,14 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
 
   function disjointCourseRepel(strength) {
     let simNodes = [];
+    let sharedCoursePairs = new Set();
+    const pairKey = (a, b) => `${a.id}::${b.id}`;
     function force(alpha) {
       for (let i = 0; i < simNodes.length; i++) {
         const a = simNodes[i];
         for (let j = i + 1; j < simNodes.length; j++) {
           const b = simNodes[j];
-          const sharesAnyCourse = a.courses.some(code => b.courseSet.has(code));
-          if (sharesAnyCourse) continue;
+          if (sharedCoursePairs.has(pairKey(a, b))) continue;
           const dx = b.x - a.x;
           const dy = b.y - a.y;
           const dist = Math.hypot(dx, dy) || 1;
@@ -2259,6 +2270,14 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     }
     force.initialize = ns => {
       simNodes = ns;
+      sharedCoursePairs = new Set();
+      for (let i = 0; i < ns.length; i++) {
+        for (let j = i + 1; j < ns.length; j++) {
+          if (ns[i].courses.some(code => ns[j].courseSet.has(code))) {
+            sharedCoursePairs.add(pairKey(ns[i], ns[j]));
+          }
+        }
+      }
     };
     return force;
   }
@@ -2377,11 +2396,14 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       path: blobPoints.length >= 3 ? line(blobPoints) : null,
     };
   }).filter(group => group.nodes.length);
-  const cloudNote = !selectedCourses.length
-    ? `Select up to <strong>${CM_CLOUD_MAX_COURSES}</strong> courses to see their concept coverage.`
-    : courseGroups.length === selectedCourses.length
-      ? `Showing <strong>${selectedCourses.length}</strong> of up to <strong>${CM_CLOUD_MAX_COURSES}</strong> course blobs.`
-      : `Selected <strong>${selectedCourses.length}</strong> courses; <strong>${courseGroups.length}</strong> currently have visible coverage.`;
+  let cloudNote = `Select up to <strong>${CM_CLOUD_MAX_COURSES}</strong> courses to see their concept coverage.`;
+  if (selectedCourses.length) {
+    if (courseGroups.length === selectedCourses.length) {
+      cloudNote = `Showing <strong>${selectedCourses.length}</strong> of up to <strong>${CM_CLOUD_MAX_COURSES}</strong> course blobs.`;
+    } else {
+      cloudNote = `Selected <strong>${selectedCourses.length}</strong> courses; <strong>${courseGroups.length}</strong> currently have visible coverage.`;
+    }
+  }
   const cloudSelectionStatusClass = `cm-cloud-selection-status${selectedCourses.length ? "" : " warn"}`;
 
   el.innerHTML = `
