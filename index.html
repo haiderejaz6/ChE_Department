@@ -1981,6 +1981,10 @@ function cmRenderBubble(courses, sortedConcepts, idx) {
   const LABEL_H  = 18;   // space below bubble for the label
   const H_PAD    = 20;   // horizontal padding per cell (each side)
   const V_PAD    = 20;   // vertical padding per cell (each side)
+  const MIN_LABEL_FONT    = 8;   // minimum label font size (px)
+  const MAX_LABEL_FONT    = 11;  // maximum label font size (px)
+  const LABEL_FONT_SCALE  = 110; // scale factor: fontSize = LABEL_FONT_SCALE / concept.length
+  const MAX_LEGEND_CIRCLES = 4;  // max circles shown per legend demo swatch
   const CELL_W   = (BUBBLE_R + OFFSET_R) * 2 + H_PAD * 2;
   const CELL_H   = (BUBBLE_R + OFFSET_R) * 2 + V_PAD * 2 + LABEL_H;
   const HEADER_H = 52;
@@ -2026,7 +2030,7 @@ function cmRenderBubble(courses, sortedConcepts, idx) {
 
     // Concept label below the bubble cluster
     const labelY = cy + BUBBLE_R + OFFSET_R + 4;
-    const fontSize = Math.max(8, Math.min(11, 110 / Math.max(1, concept.length)));
+    const fontSize = Math.max(MIN_LABEL_FONT, Math.min(MAX_LABEL_FONT, LABEL_FONT_SCALE / Math.max(1, concept.length)));
     const label = `<text x="${cx}" y="${labelY}"
       text-anchor="middle" dominant-baseline="hanging"
       font-family="'Outfit',sans-serif" font-size="${fontSize}px" font-weight="700"
@@ -2049,8 +2053,8 @@ function cmRenderBubble(courses, sortedConcepts, idx) {
   const maxN = sortedConcepts[0][1].length;
   const legendNs = [...new Set([1, 2, 3, 5, maxN].filter(v => v >= 1 && v <= maxN))].sort((a, b) => a - b);
   const legendItems = legendNs.map(n => {
-    const demo = Array.from({length: Math.min(n, 4)}, (_, j) => {
-      const angle = n === 1 ? 0 : (2 * Math.PI * j / Math.min(n, 4)) - Math.PI / 2;
+    const demo = Array.from({length: Math.min(n, MAX_LEGEND_CIRCLES)}, (_, j) => {
+      const angle = n === 1 ? 0 : (2 * Math.PI * j / Math.min(n, MAX_LEGEND_CIRCLES)) - Math.PI / 2;
       const ox = n === 1 ? 0 : Math.cos(angle) * 4;
       const oy = n === 1 ? 0 : Math.sin(angle) * 4;
       return `<circle cx="${9 + ox}" cy="${9 + oy}" r="7" fill="#64748b"
