@@ -839,7 +839,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
           <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Topic Network</button>
           <button class="cm-seg-btn" data-view="compare" onclick="cmSetView('compare')">Compare Courses</button>
           <button class="cm-seg-btn" data-view="bubble" onclick="cmSetView('bubble')">Bubble Overlay</button>
-          <button class="cm-seg-btn" data-view="cloud" onclick="cmSetView('cloud')">Cloud Overlay</button>
+          <button class="cm-seg-btn" data-view="cloud" onclick="cmSetView('cloud')" aria-label="Switch to Cloud Overlay view">Cloud Overlay</button>
         </div>
       </div>
       <div class="cm-toolbar-right">
@@ -1991,6 +1991,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const PILL_PAD_Y = 9;
   const COURSE_PULL = 0.045;
   const SIMULATION_TICKS = 180;
+  // Prevents the spiral search from running indefinitely while still covering dense datasets comfortably.
   const MAX_PLACEMENT_ATTEMPTS = 2600;
   const EDGE_PAD = 68;
   const BLOB_PAD = 14;
@@ -2136,6 +2137,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const svgW = Math.max(containerW, Math.ceil(maxX - minX + EDGE_PAD * 2));
   const svgH = Math.max(620, Math.ceil(maxY - minY + EDGE_PAD * 2 + 68));
 
+  /* Andrew's monotone chain convex hull over point centers; returns the outer boundary in drawing order. */
   function hullPoints(points) {
     const sorted = [...points].sort((a, b) => a.x - b.x || a.y - b.y);
     if (sorted.length <= 1) return sorted;
@@ -2265,8 +2267,8 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   });
 
   function blobTooltip(group) {
-    return `<div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div>
-      <div class="tm"><strong>${group.nodes.length}</strong> concept${group.nodes.length !== 1 ? "s" : ""} in current view</div>`;
+    const countLabel = `${group.nodes.length} concept${group.nodes.length !== 1 ? "s" : ""} in current view`;
+    return `<div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div><div class="tm"><strong>${escH(countLabel)}</strong></div>`;
   }
 
   function applyBlobState(focusCode, pinnedCode) {
