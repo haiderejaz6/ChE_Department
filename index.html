@@ -537,9 +537,9 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 }
 .kb-legend-title{font-weight:700;color:var(--mu);margin-bottom:.35rem;font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;}
 .kb-legend-row{display:flex;align-items:center;gap:.45rem;margin-bottom:.22rem;}
-.cm-cloud-note{font-size:.68rem;color:var(--mu);line-height:1.45;margin-left:auto;}
-.cm-cloud-note strong{color:var(--tx);}
-.cm-cloud-note.warn{color:var(--goldd);}
+.cm-cloud-selection-status{font-size:.68rem;color:var(--mu);line-height:1.45;margin-left:auto;}
+.cm-cloud-selection-status strong{color:var(--tx);}
+.cm-cloud-selection-status.warn{color:var(--goldd);}
 .kc-cloud-pill text{pointer-events:none;}
 
 /* ── MD Viewer modal ──────────────────────────────────────── */
@@ -2044,13 +2044,24 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const BLOB_DIM_FILL_OPACITY = 0.04;
   const BLOB_ACTIVE_STROKE_OPACITY = 0.24;
   const BLOB_DIM_STROKE_OPACITY = 0.08;
+  const ANCHOR_ORBIT_MIN_X = 240;
+  const ANCHOR_ORBIT_WIDTH_RATIO = 0.33;
+  const ANCHOR_ORBIT_BASE_X = 460;
+  const ANCHOR_ORBIT_X_PER_COURSE = 5;
+  const ANCHOR_ORBIT_MIN_Y = 180;
+  const ANCHOR_ORBIT_HEIGHT_RATIO = 0.27;
+  const ANCHOR_ORBIT_BASE_Y = 310;
+  const ANCHOR_ORBIT_Y_PER_COURSE = 4;
+  const ANCHOR_RADIUS_MIN = 88;
+  const ANCHOR_RADIUS_MAX = 156;
+  const ANCHOR_RADIUS_SCALE_OFFSET = 1.6;
   const HEADER_X = 16;
   const HEADER_Y = 22;
   const SUBHEADER_Y = 38;
   const cloudSelection = normalizeCloudSelection(courses);
-  const selectedSet = new Set(cloudSelection);
-  const selectedCourses = courses.filter(course => selectedSet.has(course.code));
-  if (cmCloudPinnedCourseCode && !selectedSet.has(cmCloudPinnedCourseCode)) cmCloudPinnedCourseCode = null;
+  const selectedCourseSet = new Set(cloudSelection);
+  const selectedCourses = courses.filter(course => selectedCourseSet.has(course.code));
+  if (cmCloudPinnedCourseCode && !selectedCourseSet.has(cmCloudPinnedCourseCode)) cmCloudPinnedCourseCode = null;
   const containerW = Math.max(860, el.clientWidth || 1100);
   const approxCols = Math.max(4, Math.floor(containerW / 180));
   const canvasW = Math.max(containerW, approxCols * 180);
@@ -2064,7 +2075,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   const courseColor = code => CM_PALETTE[(courseIndexByCode.get(code) ?? 0) % CM_PALETTE.length] || semColor(courseByCode[code]?.semester || 0);
   const coursePills = courses.map(course => {
    const color = courseColor(course.code);
-   const sel = selectedSet.has(course.code);
+   const sel = selectedCourseSet.has(course.code);
    const disabled = !sel && selectedCourses.length >= CM_CLOUD_MAX_COURSES;
    return `<button class="cm-cmp-pill${sel ? ' active' : ''}"
      id="cmcloud-${course.code}"
@@ -2093,9 +2104,9 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     );
   }
 
-  const anchorOrbitX = Math.max(240, Math.min(canvasW * 0.33, 460 + courses.length * 5));
-  const anchorOrbitY = Math.max(180, Math.min(canvasH * 0.27, 310 + courses.length * 4));
-  const anchorRadius = Math.max(88, Math.min(156, Math.max(canvasW, canvasH) / (Math.sqrt(Math.max(1, courses.length)) + 1.6)));
+  const anchorOrbitX = Math.max(ANCHOR_ORBIT_MIN_X, Math.min(canvasW * ANCHOR_ORBIT_WIDTH_RATIO, ANCHOR_ORBIT_BASE_X + courses.length * ANCHOR_ORBIT_X_PER_COURSE));
+  const anchorOrbitY = Math.max(ANCHOR_ORBIT_MIN_Y, Math.min(canvasH * ANCHOR_ORBIT_HEIGHT_RATIO, ANCHOR_ORBIT_BASE_Y + courses.length * ANCHOR_ORBIT_Y_PER_COURSE));
+  const anchorRadius = Math.max(ANCHOR_RADIUS_MIN, Math.min(ANCHOR_RADIUS_MAX, Math.max(canvasW, canvasH) / (Math.sqrt(Math.max(1, courses.length)) + ANCHOR_RADIUS_SCALE_OFFSET)));
   const anchorNodes = courses.map((course, i) => {
     const angle = (i / Math.max(1, courses.length)) * Math.PI * 2;
     const homeX = centerX + Math.cos(angle) * anchorOrbitX;
@@ -2137,7 +2148,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       courseSet: new Set(codes),
       count: codes.length,
       color: getCMConceptColor(concept),
-      selected: codes.some(code => selectedSet.has(code)),
+      selected: codes.some(code => selectedCourseSet.has(code)),
       ...metrics,
       x: anchorCenter.x,
       y: anchorCenter.y,
@@ -2199,8 +2210,8 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
         const a = simNodes[i];
         for (let j = i + 1; j < simNodes.length; j++) {
           const b = simNodes[j];
-          const overlapsCourses = a.courses.some(code => b.courseSet.has(code));
-          if (overlapsCourses) continue;
+          const sharesAnyCourse = a.courses.some(code => b.courseSet.has(code));
+          if (sharesAnyCourse) continue;
           const dx = b.x - a.x;
           const dy = b.y - a.y;
           const dist = Math.hypot(dx, dy) || 1;
@@ -2346,7 +2357,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     <div class="cm-cmp-pills">
       <span class="cm-cmp-heading">Course blobs:</span>
       ${coursePills}
-      <span class="cm-cloud-note${selectedCourses.length ? "" : " warn"}">${cloudNote}</span>
+      <span class="cm-cloud-selection-status${selectedCourses.length ? "" : " warn"}">${cloudNote}</span>
     </div>
     <div class="kc-cloud-wrap">
       <div class="kb-legend-box">
