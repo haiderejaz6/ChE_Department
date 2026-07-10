@@ -1854,7 +1854,7 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   const semIndex={};sems.forEach((s,i)=>semIndex[s]=i);
   const semW=Math.max(150,W/(sems.length+1));
 
-  // Nodes already include a `type` field so this graph can evolve into typed Course/KnowledgeArea/KnowledgeUnit nodes later.
+  // Nodes already include a `type` field; this can expand from `course/shared` to `course/knowledgeArea/knowledgeUnit` types in the future.
   const courseNodes=courses.map(c=>{
     const si=semIndex[c.semester]||0;
     const sameSem=courses.filter(x=>x.semester===c.semester);
@@ -1874,10 +1874,10 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   });
 
   const allNodes=[...courseNodes,...sharedNodes];
-  const links=[]; // Keep links extensible with relation metadata for future typed edges.
+  const links=[]; // Keep links extensible with relation metadata for a future typed-edge Knowledge Graph.
   sharedConcepts.forEach(sc=>{
     sc.courses.filter(c=>courses.some(x=>x.code===c)).forEach(code=>{
-      links.push({source:code,target:"s::"+sc.label,color:getCMConceptColor(sc.label),relation:"covers"});
+      links.push({source:code,target:"s::"+sc.label,color:getCMConceptColor(sc.label),relation:"covers" /* reserved for future typed edge rendering */});
     });
   });
 
