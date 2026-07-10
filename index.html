@@ -1062,15 +1062,16 @@ window.setDashView = function(view) {
 };
 
 function knowledgeAreaFromUnit(unit){
+  const MIN_KNOWLEDGE_AREA_LENGTH = 2;
   const raw = String(unit || "").trim();
   if (!raw) return "General Chemical Engineering";
   if (raw.includes(":")) {
     const [area] = raw.split(":");
-    if (area.trim().length > 2) return area.trim();
+    if (area.trim().length > MIN_KNOWLEDGE_AREA_LENGTH) return area.trim();
   }
   if (raw.includes(" - ")) {
     const [area] = raw.split(" - ");
-    if (area.trim().length > 2) return area.trim();
+    if (area.trim().length > MIN_KNOWLEDGE_AREA_LENGTH) return area.trim();
   }
   return "General Chemical Engineering";
 }
@@ -1854,7 +1855,7 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   const semIndex={};sems.forEach((s,i)=>semIndex[s]=i);
   const semW=Math.max(150,W/(sems.length+1));
 
-  // Nodes already include a `type` field; this can expand from `course/shared` to `course/knowledgeArea/knowledgeUnit` types in the future.
+  // Nodes currently use `type` as `course` or `shared`; this can expand to `course/knowledgeArea/knowledgeUnit` in a typed Knowledge Graph.
   const courseNodes=courses.map(c=>{
     const si=semIndex[c.semester]||0;
     const sameSem=courses.filter(x=>x.semester===c.semester);
@@ -1874,10 +1875,11 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   });
 
   const allNodes=[...courseNodes,...sharedNodes];
-  const links=[]; // Keep links extensible with relation metadata for a future typed-edge Knowledge Graph.
+  // Keep links extensible with relation metadata for a future typed-edge Knowledge Graph.
+  const links=[];
   sharedConcepts.forEach(sc=>{
     sc.courses.filter(c=>courses.some(x=>x.code===c)).forEach(code=>{
-      links.push({source:code,target:"s::"+sc.label,color:getCMConceptColor(sc.label),relation:"covers" /* reserved for future typed edge rendering */});
+      links.push({source:code,target:"s::"+sc.label,color:getCMConceptColor(sc.label),relation:"covers"});
     });
   });
 
