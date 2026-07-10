@@ -6,7 +6,6 @@
 <title>ChE Curriculum · SCME, NUST</title>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 /* ── TOKENS ─────────────────────────────────────────────── */
 :root{
@@ -25,8 +24,8 @@
   --cm-pill-disabled-opacity:.48;
   --shadow:0 1px 3px rgba(30,50,90,0.06),0 4px 16px rgba(30,50,90,0.06);
   --shadow-lg:0 2px 8px rgba(30,50,90,0.08),0 8px 32px rgba(30,50,90,0.10);
-  --col-s1:#e11d48; --col-s2:#ea580c; --col-s3:#d97706; --col-s4:#65a30d;
-  --col-s5:#0d9488; --col-s6:#059669; --col-s7:#0891b2; --col-s8:#4f46e5;
+  --col-s1:#d4a820; --col-s2:#c9981a; --col-s3:#ba8820; --col-s4:#ab7831;
+  --col-s5:#8d6480; --col-s6:#6f57a3; --col-s7:#5d4cb7; --col-s8:#4f46e5;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;height:100%;overflow:hidden;}
@@ -94,6 +93,19 @@ header{
 }
 .sec-hd::before{content:'';display:block;width:4px;height:1em;background:var(--gold);border-radius:2px;}
 .section{margin-bottom:2.2rem;}
+
+.dash-subnav{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem;}
+.dash-sub-btn{padding:.34rem .78rem;border:1px solid var(--bdr);border-radius:18px;background:var(--sf);cursor:pointer;font-size:.72rem;font-weight:600;color:var(--mu);}
+.dash-sub-btn.active{background:rgba(184,146,14,.12);border-color:var(--gold);color:var(--goldd);}
+.dash-view.hidden{display:none!important;}
+#bloom-semester-chart{width:100%;min-height:360px;}
+.bloom-insight{font-size:.72rem;color:var(--mu);margin-top:.75rem;}
+.bloom-insight strong{color:var(--tx);}
+.ontology-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem;}
+.ontology-area{background:var(--sf);border:1px solid var(--bdr);border-radius:12px;padding:.8rem .9rem;box-shadow:var(--shadow);}
+.ontology-area-title{font-size:.76rem;font-weight:700;color:var(--tx);margin-bottom:.45rem;}
+.ontology-unit-wrap{display:flex;flex-wrap:wrap;gap:.28rem;}
+.ontology-unit{font-size:.62rem;font-weight:600;padding:.14rem .42rem;border-radius:10px;background:#f0f3fa;color:var(--mu);}
 
 /* Heatmap */
 .hm-scroll{overflow-x:auto;border:1px solid var(--bdr);border-radius:14px;background:var(--sf);box-shadow:var(--shadow);}
@@ -304,7 +316,7 @@ table.hm tbody tr:hover{background:#fafbff;}
 #tip .tm{color:var(--mu);line-height:1.5;}
 
 /* ══════════════════════════════════════════════════════════
-   CONCEPT MAP TAB
+   ChE ONTOLOGY TAB
 ══════════════════════════════════════════════════════════ */
 #tab-concepts{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;}
 .cm-toolbar{
@@ -350,7 +362,7 @@ table.hm tbody tr:hover{background:#fafbff;}
 .cm-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.15);}
 .cm-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;border:none;background:var(--gold);cursor:pointer;}
 #cm-body{flex:1;overflow:auto;padding:1.5rem 2rem 3rem;}
-#cmv-heatmap.hidden,#cmv-network.hidden,#cmv-list.hidden,#cmv-curriculum.hidden,#cmv-bubble.hidden,#cmv-cloud.hidden{display:none!important;}
+#cmv-heatmap.hidden,#cmv-network.hidden,#cmv-list.hidden,#cmv-curriculum.hidden,#cmv-cloud.hidden{display:none!important;}
 
 /* Concept heatmap */
 .cm-hm-wrap{overflow-x:auto;}
@@ -501,9 +513,11 @@ table.cm-hm th,table.cm-hm td{padding:0;}
   box-shadow:var(--shadow);margin-bottom:1rem;align-items:center;}
 .cm-cmp-heading{font-size:.7rem;font-weight:700;color:var(--mu);text-transform:uppercase;
   letter-spacing:.07em;margin-right:.3rem;flex-shrink:0;}
-.cm-cmp-pill{padding:.25rem .65rem;border:1.5px solid var(--bdr);border-radius:20px;
-  font-family:'DM Mono',monospace;font-size:.67rem;font-weight:700;cursor:pointer;
-  transition:all .15s;background:var(--sf);color:var(--mu);}
+.cm-cmp-pill{padding:.3rem .62rem;border:1.5px solid var(--bdr);border-radius:12px;
+  font-family:'Outfit',sans-serif;font-size:.67rem;font-weight:700;cursor:pointer;
+  transition:all .15s;background:var(--sf);color:var(--mu);display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;min-width:112px;text-align:left;}
+.cm-cmp-pill-code{font-family:'DM Mono',monospace;font-size:.67rem;font-weight:700;}
+.cm-cmp-pill-title{font-family:'Crimson Pro',serif;font-size:.6rem;font-style:italic;color:var(--mu);font-weight:600;margin-top:.14rem;}
 .cm-cmp-pill:hover{border-color:var(--bdr2);color:var(--tx);}
 .cm-cmp-pill:disabled{opacity:var(--cm-pill-disabled-opacity);cursor:not-allowed;border-color:var(--bdr);color:var(--dim);}
 .cm-cmp-pill:disabled:hover{border-color:var(--bdr);color:var(--dim);}
@@ -525,10 +539,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 .cm-cmp-info{font-size:.72rem;color:var(--mu);margin:.6rem 0 .85rem;}
 .cm-cmp-info strong{color:var(--tx);}
 
-/* ── Bubble Overlay view ──────────────────────────────────── */
-#cmv-bubble{position:relative;overflow:auto;}
 #cmv-cloud{position:relative;overflow:auto;}
-.kb-bubble-wrap{display:inline-block;min-width:100%;}
 .kc-cloud-wrap{display:inline-block;min-width:100%;position:relative;}
 .kb-legend-box{
   position:sticky;top:.75rem;right:.75rem;float:right;
@@ -653,9 +664,6 @@ table.cm-hm th,table.cm-hm td{padding:0;}
   .dom-leg{gap:.35rem;padding:.55rem .65rem;}
   .dl-i{font-size:.62rem;}
 
-  /* Chart shorter */
-  #domChart{max-height:280px !important;}
-
   /* Course cards full-width */
   .course-grid{grid-template-columns:1fr;}
   .cc-title{font-size:.9rem;}
@@ -735,7 +743,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 <header>
   <div class="logo">NUST</div>
   <div class="hdr-text">
-    <h1>Outcome-Based <em>Education</em></h1>
+    <h1>ChE <em>Curriculum</em></h1>
     <p>SCME · BE Chemical Engineering Programme</p>
   </div>
   <div class="vsep"></div>
@@ -752,16 +760,16 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 <!-- MOBILE NAV DRAWER -->
 <div class="mobile-nav" id="mobile-nav">
   <button class="tab-btn active" id="mnbtn-graph"    onclick="switchTab('graph');closeNav()">🗂 Curriculum Graph</button>
-  <button class="tab-btn"        id="mnbtn-dash"     onclick="switchTab('dash');closeNav()">📊 OBE Dashboard</button>
-  <button class="tab-btn"        id="mnbtn-concepts" onclick="switchTab('concepts');closeNav()">🔬 Knowledge Concepts</button>
+  <button class="tab-btn"        id="mnbtn-dash"     onclick="switchTab('dash');closeNav()">📊 Curriculum Dashboard</button>
+  <button class="tab-btn"        id="mnbtn-concepts" onclick="switchTab('concepts');closeNav()">🧭 ChE Ontology</button>
   <div class="mobile-nav-filters" id="mobile-filters"></div>
 </div>
 
 <!-- TABBAR -->
 <div class="tabbar">
   <button class="tab-btn active" id="tbtn-graph"    onclick="switchTab('graph')">🗂 Curriculum Graph</button>
-  <button class="tab-btn"        id="tbtn-dash"     onclick="switchTab('dash')">📊 OBE Dashboard</button>
-  <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🔬 Knowledge Concepts</button>
+  <button class="tab-btn"        id="tbtn-dash"     onclick="switchTab('dash')">📊 Curriculum Dashboard</button>
+  <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🧭 ChE Ontology</button>
   <div class="vsep" style="margin:0 .6rem;"></div>
   <div class="tabbar-filters" id="filters"></div>
 </div>
@@ -802,50 +810,72 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 
   <!-- ── DASHBOARD TAB ── -->
   <div id="tab-dash" class="hidden">
-    <div class="section">
-      <h2 class="sec-hd">PLO Coverage Matrix</h2>
-      <p style="font-size:.74rem;color:var(--mu);margin-bottom:.75rem;">
-        Colour = PLO · Brightness = emphasis (Low / Medium / High) · Number = CLO count · Hover for details
-      </p>
-      <div class="hm-scroll"><table class="hm" id="hm"></table></div>
+    <div class="dash-subnav" id="dash-subnav">
+      <button class="dash-sub-btn active" id="dash-subbtn-course" onclick="setDashView('course')">Course Explorer</button>
+      <button class="dash-sub-btn" id="dash-subbtn-plo" onclick="setDashView('plo')">PLO Coverage Matrix</button>
+      <button class="dash-sub-btn" id="dash-subbtn-bloom" onclick="setDashView('bloom')">Bloom's Level Distribution</button>
+      <button class="dash-sub-btn" id="dash-subbtn-ontology" onclick="setDashView('ontology')">ChE Ontology</button>
     </div>
-    <div class="section">
-      <h2 class="sec-hd">Bloom's Domain Distribution</h2>
-      <div class="dom-leg" id="dom-leg"></div>
-      <div class="chart-card">
-        <p class="chart-sub">Proportion of CLOs at each Bloom's Taxonomy level per course. C = Cognitive · P = Psychomotor · A = Affective</p>
-        <canvas id="domChart" style="max-height:400px;"></canvas>
+
+    <div id="dash-view-course" class="dash-view">
+      <div class="section">
+        <h2 class="sec-hd">
+          Course Explorer
+          <span id="cinfo" style="font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:400;color:var(--mu);margin-left:.4rem;"></span>
+        </h2>
+        <div class="course-grid" id="cgrid"></div>
+      </div>
+      <div style="border-top:1px solid var(--bdr);padding-top:1.5rem;">
+        <h3 style="font-family:'Crimson Pro',serif;font-size:1.05rem;font-weight:700;margin-bottom:.85rem;color:var(--tx);">Programme Learning Outcomes (PLOs)</h3>
+        <div class="plo-grid" id="plo-footer"></div>
+        <p style="margin-top:1.2rem;color:var(--dim);font-size:.68rem;">
+          To update: run
+          <code style="background:#f0f3fa;padding:.1rem .35rem;border-radius:3px;font-family:'DM Mono',monospace;color:var(--gold);">python excel_to_json.py --mode rule</code>
+          then refresh.
+        </p>
       </div>
     </div>
-    <div class="section">
-      <h2 class="sec-hd">
-        Course Explorer
-        <span id="cinfo" style="font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:400;color:var(--mu);margin-left:.4rem;"></span>
-      </h2>
-      <div class="course-grid" id="cgrid"></div>
+
+    <div id="dash-view-plo" class="dash-view hidden">
+      <div class="section">
+        <h2 class="sec-hd">PLO Coverage Matrix</h2>
+        <p style="font-size:.74rem;color:var(--mu);margin-bottom:.75rem;">
+          Colour = PLO · Brightness = emphasis (Low / Medium / High) · Number = CLO count · Hover for details
+        </p>
+        <div class="hm-scroll"><table class="hm" id="hm"></table></div>
+      </div>
     </div>
-    <div style="border-top:1px solid var(--bdr);padding-top:1.5rem;">
-      <h3 style="font-family:'Crimson Pro',serif;font-size:1.05rem;font-weight:700;margin-bottom:.85rem;color:var(--tx);">Programme Learning Outcomes (PLOs)</h3>
-      <div class="plo-grid" id="plo-footer"></div>
-      <p style="margin-top:1.2rem;color:var(--dim);font-size:.68rem;">
-        To update: run
-        <code style="background:#f0f3fa;padding:.1rem .35rem;border-radius:3px;font-family:'DM Mono',monospace;color:var(--gold);">python excel_to_json.py --mode rule</code>
-        then refresh.
-      </p>
+
+    <div id="dash-view-bloom" class="dash-view hidden">
+      <div class="section">
+        <h2 class="sec-hd">Bloom's Level Distribution</h2>
+        <div class="chart-card">
+          <p class="chart-sub">Semester-wise progression of cognitive demand (Remember → Create) as a 100% stacked area.</p>
+          <div id="bloom-semester-chart"></div>
+          <p class="bloom-insight" id="bloom-insight"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="dash-view-ontology" class="dash-view hidden">
+      <div class="section">
+        <h2 class="sec-hd">ChE Ontology</h2>
+        <p style="font-size:.74rem;color:var(--mu);margin-bottom:.75rem;">Knowledge Areas group related Knowledge Units extracted from course CLO mappings.</p>
+        <div id="ontology-tree"></div>
+      </div>
     </div>
   </div><!-- /tab-dash -->
 
-  <!-- ── CONCEPT MAP TAB ── -->
+  <!-- ── ChE ONTOLOGY TAB ── -->
   <div id="tab-concepts" class="hidden">
     <div class="cm-toolbar">
       <div class="cm-toolbar-left">
         <span class="cm-label">View:</span>
         <div class="cm-seg" id="cm-view-seg">
           <button class="cm-seg-btn active" data-view="curriculum" onclick="cmSetView('curriculum')">Curriculum View</button>
-          <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Topic Network</button>
+          <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Knowledge Graph</button>
           <button class="cm-seg-btn" data-view="compare" onclick="cmSetView('compare')">Compare Courses</button>
-          <button class="cm-seg-btn" data-view="bubble" onclick="cmSetView('bubble')">Bubble Overlay</button>
-          <button class="cm-seg-btn" data-view="cloud" onclick="cmSetView('cloud')">Cloud Overlay</button>
+          <button class="cm-seg-btn" data-view="cloud" onclick="cmSetView('cloud')">Knowledge Area Overlap</button>
         </div>
       </div>
       <div class="cm-toolbar-right">
@@ -856,7 +886,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
           <option value="3">≥ 3 courses</option>
         </select>
         <span class="cm-label" style="margin-left:.9rem">Search:</span>
-        <input id="cm-search" class="cm-input" placeholder="filter topics…" oninput="cmRender()">
+        <input id="cm-search" class="cm-input" placeholder="filter Knowledge Units…" oninput="cmRender()">
         <div id="cm-force-controls" style="display:none;align-items:center;gap:.4rem;">
           <span class="cm-label">Spread:</span>
           <input type="range" id="cm-force-slider" min="1" max="10" value="5" step="1"
@@ -871,7 +901,6 @@ table.cm-hm th,table.cm-hm td{padding:0;}
       <div id="cmv-curriculum"></div>
       <div id="cmv-network"   class="hidden"></div>
       <div id="cmv-compare"   class="hidden"></div>
-      <div id="cmv-bubble"    class="hidden"></div>
       <div id="cmv-cloud"     class="hidden"></div>
     </div>
   </div><!-- /tab-concepts -->
@@ -915,8 +944,8 @@ const PLO_COLORS = {
 
 // Semester → colour (warm = early, cool = late)
 const SEM_COLORS = {
-  1:"#e11d48", 2:"#ea580c", 3:"#d97706", 4:"#65a30d",
-  5:"#0d9488", 6:"#059669", 7:"#0891b2", 8:"#4f46e5"
+  1:"#d4a820", 2:"#c9981a", 3:"#ba8820", 4:"#ab7831",
+  5:"#8d6480", 6:"#6f57a3", 7:"#5d4cb7", 8:"#4f46e5"
 };
 
 function semColor(n) { return SEM_COLORS[n] || "#6b7280"; }
@@ -969,7 +998,7 @@ const COURSES_EMBEDDED = [
 let activeSemFilter = "All";
 let activeTab = "graph";
 let DATA = { plos: PLOS_DEF, courses: COURSES_EMBEDDED };
-let domChart = null;
+let dashView = "course";
 
 /* ================================================================
    INIT
@@ -1013,8 +1042,60 @@ window.switchTab = function(tab) {
     if(mb) mb.classList.toggle("active", t===tab);
   });
   if (tab === "graph")    { buildCurriculumGraph(); }
+  if (tab === "dash")     { renderDash(); setDashView(dashView); }
   if (tab === "concepts") { cmRender(); }
 };
+
+window.setDashView = function(view) {
+  if(!["course","plo","bloom","ontology"].includes(view)) view="course";
+  dashView = view;
+  ["course","plo","bloom","ontology"].forEach(v => {
+    const panel = document.getElementById("dash-view-"+v);
+    const btn = document.getElementById("dash-subbtn-"+v);
+    if (panel) panel.classList.toggle("hidden", v !== view);
+    if (btn) btn.classList.toggle("active", v === view);
+  });
+};
+
+function knowledgeAreaFromUnit(unit){
+  const raw = String(unit || "").trim();
+  if (!raw) return "General Chemical Engineering";
+  if (raw.includes(":")) {
+    const [area] = raw.split(":");
+    if (area.trim().length > 2) return area.trim();
+  }
+  if (raw.includes(" - ")) {
+    const [area] = raw.split(" - ");
+    if (area.trim().length > 2) return area.trim();
+  }
+  return "General Chemical Engineering";
+}
+
+function renderOntology(courses){
+  const holder = document.getElementById("ontology-tree");
+  if (!holder) return;
+  const areaMap = {};
+  courses.forEach(course => {
+    getConceptsForCourse(course.code).forEach(unit => {
+      const area = knowledgeAreaFromUnit(unit);
+      if (!areaMap[area]) areaMap[area] = new Set();
+      areaMap[area].add(unit);
+    });
+  });
+  const areas = Object.entries(areaMap).sort((a,b)=>b[1].size-a[1].size || a[0].localeCompare(b[0]));
+  if (!areas.length) {
+    holder.innerHTML = `<div style="padding:1rem;color:var(--mu);">No Knowledge Units found in current filter.</div>`;
+    return;
+  }
+  holder.innerHTML = `<div class="ontology-grid">${
+    areas.map(([area,units]) => `
+      <div class="ontology-area">
+        <div class="ontology-area-title">${escH(area)} <span style="font-size:.62rem;color:var(--mu);font-weight:600;">(${units.size})</span></div>
+        <div class="ontology-unit-wrap">${[...units].sort().map(u=>`<span class="ontology-unit">${escH(u)}</span>`).join("")}</div>
+      </div>`
+    ).join("")
+  }</div>`;
+}
 
 /* ================================================================
    FILTERS — now semester numbers
@@ -1072,12 +1153,13 @@ function renderStats() {
 function renderDash() {
   const courses = filtered();
   renderHeatmap(courses);
-  renderDomainLegend();
-  renderDomainChart(courses);
+  renderBloomProgression(courses);
   renderCourseGrid(courses);
   renderPLOFooter();
+  renderOntology(courses);
   document.getElementById("cinfo").textContent =
     `— ${courses.length} course${courses.length!==1?"s":""}, ${courses.reduce((a,c)=>a+c.clos.length,0)} CLOs`;
+  setDashView(dashView);
 }
 
 /* ── Heatmap ── */
@@ -1143,39 +1225,81 @@ function moveTip(e) {
   tip.style.left=x+"px"; tip.style.top=y+"px";
 }
 
-function renderDomainLegend() {
-  document.getElementById("dom-leg").innerHTML =
-    `<span class="dl-t">Bloom's Taxonomy</span>` +
-    Object.entries(DOMAIN_CFG).map(([,v]) =>
-      `<div class="dl-i"><div class="dl-sw" style="background:${v.color};"></div>${v.label}</div>`
-    ).join("");
-}
+function renderBloomProgression(courses) {
+  const host = document.getElementById("bloom-semester-chart");
+  const insightEl = document.getElementById("bloom-insight");
+  if (!host || !insightEl) return;
+  host.innerHTML = "";
 
-function renderDomainChart(courses) {
-  const ctx = document.getElementById("domChart").getContext("2d");
-  if (domChart) domChart.destroy();
-  domChart = new Chart(ctx, {
-    type:"bar",
-    data:{
-      labels: courses.map(c=>c.code),
-      datasets: Object.entries(DOMAIN_CFG).map(([d,cfg]) => ({
-        label: cfg.label,
-        data:  courses.map(c=>c.clos.filter(cl=>cl.domain===d).length),
-        backgroundColor: cfg.color, borderWidth:0, borderRadius:3
-      }))
-    },
-    options:{
-      responsive:true, indexAxis:"y",
-      plugins:{
-        legend:{position:"bottom",labels:{color:"#5a6e8c",font:{family:"Outfit",size:11},boxWidth:12,padding:14}},
-        tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.raw}`}}
-      },
-      scales:{
-        x:{stacked:true,ticks:{color:"#5a6e8c",font:{family:"Outfit",size:11}},grid:{color:"rgba(0,0,0,.05)"}},
-        y:{stacked:true,ticks:{color:"#18263e",font:{family:"Outfit",size:11,weight:"600"}},grid:{color:"rgba(0,0,0,.05)"}}
-      }
-    }
+  const levels = [
+    { key: "C-1", label: "Remember",  color: "#d4a820" },
+    { key: "C-2", label: "Understand", color: "#c9981a" },
+    { key: "C-3", label: "Apply",     color: "#ab7831" },
+    { key: "C-4", label: "Analyze",   color: "#8d6480" },
+    { key: "C-5", label: "Evaluate",  color: "#6f57a3" },
+    { key: "C-6", label: "Create",    color: "#4f46e5" }
+  ];
+  const sems = [...new Set(courses.map(c => c.semester).filter(Boolean))].sort((a,b)=>a-b);
+  if (!sems.length) {
+    insightEl.textContent = "No semester data available for Bloom distribution.";
+    return;
+  }
+  const rows = sems.map(semester => {
+    const clos = courses.filter(c => c.semester === semester).flatMap(c => c.clos || []);
+    const counts = Object.fromEntries(levels.map(l => [l.key, 0]));
+    clos.forEach(clo => { if (counts[clo.domain] !== undefined) counts[clo.domain] += 1; });
+    const total = Object.values(counts).reduce((a,b)=>a+b,0) || 1;
+    const row = { semester };
+    levels.forEach(l => { row[l.key] = counts[l.key] / total; });
+    return row;
   });
+
+  const width = Math.max(700, host.clientWidth || 700);
+  const height = 360;
+  const margin = { top: 12, right: 12, bottom: 42, left: 44 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const svg = d3.select(host).append("svg").attr("width", width).attr("height", height);
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const x = d3.scalePoint().domain(sems).range([0, innerW]).padding(0.25);
+  const y = d3.scaleLinear().domain([0, 1]).range([innerH, 0]);
+  const stacked = d3.stack().keys(levels.map(l => l.key)).offset(d3.stackOffsetExpand)(rows);
+
+  g.selectAll("line.grid").data(y.ticks(5)).enter().append("line")
+    .attr("x1", 0).attr("x2", innerW).attr("y1", d => y(d)).attr("y2", d => y(d))
+    .attr("stroke", "rgba(0,0,0,.05)");
+
+  g.append("g").attr("transform", `translate(0,${innerH})`)
+    .call(d3.axisBottom(x).tickSizeOuter(0))
+    .call(sel => sel.selectAll("text").attr("fill", "#5a6e8c").style("font-family", "Outfit").style("font-size", "11px"));
+
+  g.append("g")
+    .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".0%")))
+    .call(sel => sel.selectAll("text").attr("fill", "#5a6e8c").style("font-family", "Outfit").style("font-size", "11px"))
+    .call(sel => sel.selectAll("line,path").attr("stroke", "rgba(0,0,0,.12)"));
+
+  const area = d3.area()
+    .x(d => x(d.data.semester))
+    .y0(d => y(d[0]))
+    .y1(d => y(d[1]))
+    .curve(d3.curveMonotoneX);
+
+  g.selectAll("path.bloom-band").data(stacked).enter().append("path")
+    .attr("class", "bloom-band")
+    .attr("fill", d => levels.find(l => l.key === d.key)?.color || "#64748b")
+    .attr("fill-opacity", 0.92)
+    .attr("d", area);
+
+  const legend = svg.append("g").attr("transform", `translate(${margin.left},${height - 8})`);
+  const li = legend.selectAll("g").data(levels).enter().append("g").attr("transform", (_,i) => `translate(${i * 106},0)`);
+  li.append("rect").attr("width", 10).attr("height", 10).attr("rx", 2).attr("fill", d => d.color);
+  li.append("text").attr("x", 14).attr("y", 8).text(d => d.label)
+    .attr("fill", "#5a6e8c").style("font-family", "Outfit").style("font-size", "11px");
+
+  const first = rows[0], last = rows[rows.length - 1];
+  const highOrder = row => (row["C-4"] || 0) + (row["C-5"] || 0) + (row["C-6"] || 0);
+  insightEl.innerHTML = `Auto insight: Higher-order thinking (<strong>Analyze/Evaluate/Create</strong>) rises from <strong>${(highOrder(first) * 100).toFixed(1)}%</strong> in Semester ${sems[0]} to <strong>${(highOrder(last) * 100).toFixed(1)}%</strong> in Semester ${sems[sems.length - 1]}.`;
 }
 
 function renderCourseGrid(courses) {
@@ -1479,7 +1603,7 @@ window.cgJumpTo = function(code) {
 };
 
 /* ================================================================
-   CONCEPT MAP TAB
+   ChE ONTOLOGY TAB
 ================================================================ */
 const CM_PALETTE = [
   "#2563eb","#0891b2","#059669","#65a30d","#d97706","#ea580c",
@@ -1559,7 +1683,7 @@ function calculateAnchorOrbit(canvasSize, courseCount, config) {
 
 function getCloudSelectionMessage(selectedCount, visibleCount) {
   if (!selectedCount) {
-    return `Select up to <strong>${CM_CLOUD_MAX_COURSES}</strong> courses to see their concept coverage.`;
+    return `Select up to <strong>${CM_CLOUD_MAX_COURSES}</strong> courses to see their Knowledge Unit coverage.`;
   }
   if (visibleCount === selectedCount) {
     return `Showing <strong>${selectedCount}</strong> of up to <strong>${CM_CLOUD_MAX_COURSES}</strong> course blobs.`;
@@ -1586,7 +1710,7 @@ window.cmUpdateForce = function(val) {
 
 window.cmSetView = function(v) {
   // Only allow remaining views
-  if(!["curriculum","network","compare","bubble","cloud"].includes(v)) v="curriculum";
+  if(!["curriculum","network","compare","cloud"].includes(v)) v="curriculum";
   cmView=v;
   document.querySelectorAll(".cm-seg-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
   const fc=document.getElementById("cm-force-controls");
@@ -1619,13 +1743,12 @@ window.cmRender = function() {
   const sortedConcepts=Object.entries(idx).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0]));
   sortedConcepts.forEach(([c])=>getCMConceptColor(c));
 
-  ["curriculum", "network", "compare", "bubble", "cloud"].forEach(v => {
+  ["curriculum", "network", "compare", "cloud"].forEach(v => {
     document.getElementById("cmv-"+v).classList.toggle("hidden",cmView!==v);
   });
   if(cmView==="curriculum") cmRenderCurriculum(courses,sortedConcepts,idx);
   if(cmView==="network")    cmRenderNetwork(courses,sortedConcepts,idx);
   if(cmView==="compare")    cmRenderCompare(courses,sortedConcepts,idx);
-  if(cmView==="bubble")     cmRenderBubble(courses,sortedConcepts,idx);
   if(cmView==="cloud")      cmRenderCloud(courses,sortedConcepts,idx);
 };
 
@@ -1669,7 +1792,7 @@ function cmRenderCurriculum(courses,sortedConcepts,idx) {
         onclick="cmCurrSelectCourse('${course.code}',event)">
         <div class="cm-curr-code" style="color:${sc};">${course.code}</div>
         <div class="cm-curr-title">${course.title}</div>
-        <div class="cm-curr-concepts">${tags||'<span style="font-size:.6rem;color:var(--dim);">No topics extracted</span>'}</div>
+        <div class="cm-curr-concepts">${tags||'<span style="font-size:.6rem;color:var(--dim);">No Knowledge Units extracted</span>'}</div>
       </div>`;
     });
     html+=`</div>`;
@@ -1693,7 +1816,7 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   if(!courses.length){el.innerHTML=`<div style="padding:3rem;text-align:center;color:var(--mu);">No courses to display.</div>`;return;}
   if(cmNetSim){cmNetSim.stop();cmNetSim=null;}
   el.innerHTML=`<svg id="cm-net-svg" style="width:100%;height:100%;display:block;"></svg>
-    <div class="cm-net-hint">Drag any node · Scroll to zoom · Click topic for details</div>
+    <div class="cm-net-hint">Drag any node · Scroll to zoom · Click Knowledge Unit for details</div>
     <div class="cm-net-legend" id="cm-net-legend"></div>`;
 
   const W=el.clientWidth||960,H=el.clientHeight||620;
@@ -1727,6 +1850,7 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   const semIndex={};sems.forEach((s,i)=>semIndex[s]=i);
   const semW=Math.max(150,W/(sems.length+1));
 
+  // Keep explicit node type fields to support migration to typed Knowledge Graph nodes/edges.
   const courseNodes=courses.map(c=>{
     const si=semIndex[c.semester]||0;
     const sameSem=courses.filter(x=>x.semester===c.semester);
@@ -1746,7 +1870,7 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   });
 
   const allNodes=[...courseNodes,...sharedNodes];
-  const links=[];
+  const links=[]; // Future edge typing can extend this with relation labels (covers/belongs_to/prerequisite_of).
   sharedConcepts.forEach(sc=>{
     sc.courses.filter(c=>courses.some(x=>x.code===c)).forEach(code=>{
       links.push({source:code,target:"s::"+sc.label,color:getCMConceptColor(sc.label)});
@@ -1850,12 +1974,12 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
       `<div style="border-top:1px solid var(--bdr);margin:.4rem 0 .3rem;"></div>
        <div class="cm-net-legend-title">Nodes</div>
        <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="8" fill="none" stroke="#64748b" stroke-width="2"/></svg><span style="color:var(--mu);">Course bubble</span></div>
-       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="4" fill="#64748b" fill-opacity=".75"/></svg><span style="color:var(--mu);">Unique topic</span></div>
-       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="7" fill="#2563eb" fill-opacity=".85" stroke="#fff" stroke-width="1.5"/></svg><span style="color:var(--mu);">Shared topic</span></div>`;
+       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="4" fill="#64748b" fill-opacity=".75"/></svg><span style="color:var(--mu);">Unique Knowledge Unit</span></div>
+       <div class="cm-net-leg-row"><svg width="18" height="18"><circle cx="9" cy="9" r="7" fill="#2563eb" fill-opacity=".85" stroke="#fff" stroke-width="1.5"/></svg><span style="color:var(--mu);">Shared Knowledge Unit</span></div>`;
   }
 }
 
-/* ── Concept detail panel ── */
+/* ── Knowledge Unit detail panel ── */
 window.cmClickConcept = function(concept,tagEl) {
   cmSelectedConcept=concept;
   document.querySelectorAll(".cc-tag").forEach(t=>t.classList.remove("selected"));
@@ -1910,11 +2034,15 @@ window.cmRenderCompare = function(courses) {
   const pills = courses.map(c => {
     const sc = semColor(c.semester);
     const sel = cmCompareSelection.includes(c.code);
+    const title = escH(c.title || "");
     return `<button class="cm-cmp-pill${sel ? ' active' : ''}"
       id="cmpill-${c.code}"
-      style="${sel ? `background:${sc}18;border-color:${sc};color:${sc};` : ''}"
+      style="background:${sc}${sel ? "24" : "12"};border-color:${sc};color:${sc};"
       onclick="cmToggleCompare('${c.code}','${sc}')"
-      title="${c.title}">${c.code}</button>`;
+      title="${title}">
+      <span class="cm-cmp-pill-code">${c.code}</span>
+      <span class="cm-cmp-pill-title">${title}</span>
+      </button>`;
   }).join("");
 
   el.innerHTML = `
@@ -1934,12 +2062,17 @@ window.cmToggleCompare = function(code, color) {
   const btn = document.getElementById("cmpill-" + code);
   if (i >= 0) {
     cmCompareSelection.splice(i, 1);
-    if (btn) { btn.classList.remove("active"); btn.style = ""; }
+    if (btn) {
+      btn.classList.remove("active");
+      const course = filtered().find(c => c.code === code);
+      const sc = semColor(course?.semester || 0);
+      btn.style.cssText = `background:${sc}12;border-color:${sc};color:${sc};`;
+    }
   } else {
     cmCompareSelection.push(code);
     if (btn) {
       btn.classList.add("active");
-      btn.style.cssText = `background:${color}18;border-color:${color};color:${color};`;
+      btn.style.cssText = `background:${color}24;border-color:${color};color:${color};`;
     }
   }
   const courses = filtered();
@@ -1954,7 +2087,7 @@ function cmDrawMultiCompare(courses) {
 
   if (sel.length < 2) {
     resEl.innerHTML = `<div style="text-align:center;color:var(--mu);padding:2rem;">
-      Select at least <strong>2</strong> courses above to compare their topics.
+      Select at least <strong>2</strong> courses above to compare their Knowledge Units.
     </div>`;
     return;
   }
@@ -1966,12 +2099,12 @@ function cmDrawMultiCompare(courses) {
     concepts: new Set(getConceptsForCourse(code))
   }));
 
-  // Collect all topics covered by any selected course
+  // Collect all Knowledge Units covered by any selected course
   const allTopics = [...new Set(selCourses.flatMap(s => [...s.concepts]))].sort();
 
   if (!allTopics.length) {
     resEl.innerHTML = `<div style="text-align:center;color:var(--mu);padding:2rem;">
-      No topics extracted for the selected courses.
+      No Knowledge Units extracted for the selected courses.
     </div>`;
     return;
   }
@@ -2017,13 +2150,13 @@ function cmDrawMultiCompare(courses) {
   resEl.innerHTML = `
     <p class="cm-cmp-info">
       Comparing <strong>${sel.length} courses</strong> ·
-      <strong>${allTopics.length}</strong> topics total ·
+      <strong>${allTopics.length}</strong> Knowledge Units total ·
       <strong style="color:var(--goldd);">${sharedAll.length}</strong> shared by all ·
       <strong>${totalShared}</strong> shared by any two+
     </p>
     <div class="cm-cmp-table-wrap">
       <table class="cm-cmp-tbl">
-        <thead><tr><th class="topic-col">Topic</th>${colHeaders}</tr></thead>
+        <thead><tr><th class="topic-col">Knowledge Unit</th>${colHeaders}</tr></thead>
         <tbody>
           ${sharedAll.length ? `<tr><td colspan="${sel.length+1}"
             style="font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
@@ -2046,13 +2179,13 @@ function cmDrawMultiCompare(courses) {
 }
 
 /* ================================================================
-   CLOUD OVERLAY VIEW
+   KNOWLEDGE AREA OVERLAP VIEW
 ================================================================ */
 function cmRenderCloud(courses, sortedConcepts, idx) {
   const el = document.getElementById("cmv-cloud");
 
   if (!courses.length || !sortedConcepts.length) {
-    el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);">No concepts to display.</div>`;
+    el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);">No Knowledge Units to display.</div>`;
     return;
   }
 
@@ -2420,16 +2553,16 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     </div>
     <div class="kc-cloud-wrap">
       <div class="kb-legend-box">
-        <div class="kb-legend-title">Cloud Overlay</div>
-        <div class="kb-legend-row"><span style="width:28px;height:16px;border-radius:999px;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.5);display:inline-block;"></span><span style="color:var(--mu);">pill = concept</span></div>
+        <div class="kb-legend-title">Knowledge Area Overlap</div>
+        <div class="kb-legend-row"><span style="width:28px;height:16px;border-radius:999px;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.5);display:inline-block;"></span><span style="color:var(--mu);">pill = Knowledge Unit</span></div>
         <div class="kb-legend-row"><span style="width:28px;height:16px;border-radius:999px;background:rgba(14,165,233,.1);display:inline-block;"></span><span style="color:var(--mu);">colored blob = selected course coverage</span></div>
         <div style="font-size:.59rem;color:var(--dim);margin-top:.35rem;line-height:1.45;">
-          Overlapping blobs =<br>shared concepts between selected courses.
+          Overlapping blobs =<br>shared Knowledge Units between selected courses.
         </div>
       </div>
       <svg id="cm-cloud-svg" width="${svgW}" height="${svgH}" style="display:block;">
-        <text x="${HEADER_X}" y="${HEADER_Y}" font-family="'Crimson Pro',serif" font-size="14px" font-weight="700" fill="var(--tx)">Knowledge Concept Cloud</text>
-        <text x="${HEADER_X}" y="${SUBHEADER_Y}" font-family="'Outfit',sans-serif" font-size="10.5px" fill="var(--mu)">Concept pills cluster around course anchors while shared topics settle between the specific courses that cover them.</text>
+        <text x="${HEADER_X}" y="${HEADER_Y}" font-family="'Crimson Pro',serif" font-size="14px" font-weight="700" fill="var(--tx)">Knowledge Area Overlap</text>
+        <text x="${HEADER_X}" y="${SUBHEADER_Y}" font-family="'Outfit',sans-serif" font-size="10.5px" fill="var(--mu)">Knowledge Units are force-simulated around course anchors; shared units settle between courses to show true overlap.</text>
       </svg>
     </div>`;
 
@@ -2486,7 +2619,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       if (!cloudState.pinned) applyBlobState(group.course.code, null);
       showTip(e, `
         <div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div>
-        <div class="tm"><strong>${group.nodes.length} concept${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`);
+        <div class="tm"><strong>${group.nodes.length} Knowledge Unit${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`);
     })
     .on("mousemove", moveTip)
     .on("mouseleave", function() {
@@ -2500,7 +2633,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
       applyBlobState(null, cloudState.pinned);
       if (cloudState.pinned) showTip(e, `
         <div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div>
-        <div class="tm"><strong>${group.nodes.length} concept${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`);
+        <div class="tm"><strong>${group.nodes.length} Knowledge Unit${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`);
       else hideTip();
     });
 
@@ -2562,126 +2695,7 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
   applyBlobState(null, cloudState.pinned);
 }
 
-/* ================================================================
-   BUBBLE OVERLAY VIEW
-================================================================ */
-function cmRenderBubble(courses, sortedConcepts, idx) {
-  const el = document.getElementById("cmv-bubble");
-
-  if (!courses.length || !sortedConcepts.length) {
-    el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);">No concepts to display.</div>`;
-    return;
-  }
-
-  const BUBBLE_R = 30;   // radius of each circle in the stack
-  const OFFSET_R = 11;   // how far each circle is displaced from the centre
-  const LABEL_H  = 18;   // space below bubble for the label
-  const H_PAD    = 20;   // horizontal padding per cell (each side)
-  const V_PAD    = 20;   // vertical padding per cell (each side)
-  const MIN_LABEL_FONT    = 8;   // minimum label font size (px)
-  const MAX_LABEL_FONT    = 11;  // maximum label font size (px)
-  const LABEL_FONT_SCALE  = 110; // scale factor: fontSize = LABEL_FONT_SCALE / concept.length
-  const MAX_LEGEND_CIRCLES = 4;  // max circles shown per legend demo swatch
-  const CELL_W   = (BUBBLE_R + OFFSET_R) * 2 + H_PAD * 2;
-  const CELL_H   = (BUBBLE_R + OFFSET_R) * 2 + V_PAD * 2 + LABEL_H;
-  const HEADER_H = 52;
-
-  const containerW = Math.max(600, el.clientWidth || 960);
-  const COLS = Math.max(3, Math.floor(containerW / CELL_W));
-  const ROWS = Math.ceil(sortedConcepts.length / COLS);
-  const SVG_W = COLS * CELL_W;
-  const SVG_H = ROWS * CELL_H + HEADER_H + 16;
-
-  let bubblesHtml = '';
-  sortedConcepts.forEach(([concept, codes], i) => {
-    const color = getCMConceptColor(concept);
-    const n = codes.length;
-    const col = i % COLS;
-    const row = Math.floor(i / COLS);
-    const cx = col * CELL_W + CELL_W / 2;
-    const cy = HEADER_H + row * CELL_H + V_PAD + BUBBLE_R + OFFSET_R;
-
-    // Each course that covers this concept contributes one translucent circle,
-    // placed at an evenly-spaced angle around the centre. Where circles overlap
-    // (near the centre) the opacity accumulates, making shared concepts visually
-    // richer the more courses cover them.
-    const layerOpacity = Math.max(0.18, Math.min(0.35, 0.85 / n));
-    const layers = codes.map((_, j) => {
-      const angle = n === 1 ? 0 : (2 * Math.PI * j / n) - Math.PI / 2;
-      const ox = n === 1 ? 0 : Math.cos(angle) * OFFSET_R;
-      const oy = n === 1 ? 0 : Math.sin(angle) * OFFSET_R;
-      return `<circle class="kb-layer" cx="${cx + ox}" cy="${cy + oy}" r="${BUBBLE_R}"
-        fill="${color}" fill-opacity="${layerOpacity}"
-        stroke="${color}" stroke-width="1.4" stroke-opacity="0.45"/>`;
-    }).join('');
-
-    // Count badge for concepts shared by 2+ courses
-    const badge = n > 1
-      ? `<circle cx="${cx + BUBBLE_R - 1}" cy="${cy - BUBBLE_R + 1}" r="9"
-           fill="${color}" fill-opacity="0.95"/>
-         <text x="${cx + BUBBLE_R - 1}" y="${cy - BUBBLE_R + 1}"
-           text-anchor="middle" dominant-baseline="central"
-           font-family="'DM Mono',monospace" font-size="8.5px" font-weight="800"
-           fill="#fff" pointer-events="none">${n}</text>`
-      : '';
-
-    // Concept label below the bubble cluster
-    const labelY = cy + BUBBLE_R + OFFSET_R + 4;
-    const fontSize = Math.max(MIN_LABEL_FONT, Math.min(MAX_LABEL_FONT, LABEL_FONT_SCALE / Math.max(1, concept.length)));
-    const label = `<text x="${cx}" y="${labelY}"
-      text-anchor="middle" dominant-baseline="hanging"
-      font-family="'Outfit',sans-serif" font-size="${fontSize}px" font-weight="700"
-      fill="${color}" pointer-events="none">${escH(concept)}</text>`;
-
-    // Encode data for inline event handlers
-    const safeConceptAttr = escA(concept);
-    const safeCourses = escA(codes.join(', '));
-
-    bubblesHtml += `<g class="kb-bubble" style="cursor:pointer;"
-      onmouseenter="kbShowTip(event,'${safeConceptAttr}','${safeCourses}')"
-      onmouseleave="hideTip()"
-      onmousemove="moveTip(event)"
-      onclick="cmClickConcept('${safeConceptAttr}',null)">
-      ${layers}${badge}${label}
-    </g>`;
-  });
-
-  // Legend: show layer-count examples 1→max
-  const maxN = sortedConcepts[0][1].length;
-  const legendNs = [...new Set([1, 2, 3, 5, maxN].filter(v => v >= 1 && v <= maxN))].sort((a, b) => a - b);
-  const legendItems = legendNs.map(n => {
-    const demo = Array.from({length: Math.min(n, MAX_LEGEND_CIRCLES)}, (_, j) => {
-      const angle = n === 1 ? 0 : (2 * Math.PI * j / Math.min(n, MAX_LEGEND_CIRCLES)) - Math.PI / 2;
-      const ox = n === 1 ? 0 : Math.cos(angle) * 4;
-      const oy = n === 1 ? 0 : Math.sin(angle) * 4;
-      return `<circle cx="${9 + ox}" cy="${9 + oy}" r="7" fill="#64748b"
-        fill-opacity="${Math.max(0.18, Math.min(0.35, 0.85 / n))}"
-        stroke="#64748b" stroke-width="1" stroke-opacity="0.4"/>`;
-    }).join('');
-    return `<div class="kb-legend-row">
-      <svg width="18" height="18" style="flex-shrink:0;">${demo}</svg>
-      <span style="font-size:.63rem;color:var(--mu);">${n} course${n !== 1 ? 's' : ''}</span>
-    </div>`;
-  }).join('');
-
-  el.innerHTML = `
-    <div class="kb-bubble-wrap">
-      <div class="kb-legend-box">
-        <div class="kb-legend-title">Bubble Layers</div>
-        ${legendItems}
-        <div style="font-size:.59rem;color:var(--dim);margin-top:.35rem;line-height:1.45;">
-          More layers = more<br>courses share concept.<br>Darker centre = higher<br>accumulated coverage.
-        </div>
-      </div>
-      <svg id="cm-bubble-svg" width="${SVG_W}" height="${SVG_H}" style="display:block;">
-        <text x="16" y="21" font-family="'Crimson Pro',serif" font-size="14px" font-weight="700" fill="var(--tx)">Knowledge Concept Bubbles</text>
-        <text x="16" y="37" font-family="'Outfit',sans-serif" font-size="10.5px" fill="var(--mu)">Each bubble cluster represents one concept · stacked layers = shared by multiple courses · click for details</text>
-        ${bubblesHtml}
-      </svg>
-    </div>`;
-}
-
-/* Helper: show tooltip from inline SVG event handlers in the bubble view */
+/* Helper: show tooltip from Knowledge Unit overlays */
 window.kbShowTip = function(e, concept, courseList) {
   const n = courseList.split(',').filter(s => s.trim()).length;
   tip.innerHTML = `<div class="th">${escH(concept)}</div>
