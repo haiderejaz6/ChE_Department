@@ -1066,14 +1066,16 @@ window.setDashView = function(view) {
 
 function knowledgeAreaFromUnit(unit){
   const MIN_AREA_PREFIX_LENGTH = 2;
+  const AREA_DELIMITER_COLON = ":";
+  const AREA_DELIMITER_DASH = " - ";
   const raw = String(unit || "").trim();
   if (!raw) return "General Chemical Engineering";
-  if (raw.includes(":")) {
-    const [area] = raw.split(":");
+  if (raw.includes(AREA_DELIMITER_COLON)) {
+    const [area] = raw.split(AREA_DELIMITER_COLON);
     if (area.trim().length > MIN_AREA_PREFIX_LENGTH) return area.trim();
   }
-  if (raw.includes(" - ")) {
-    const [area] = raw.split(" - ");
+  if (raw.includes(AREA_DELIMITER_DASH)) {
+    const [area] = raw.split(AREA_DELIMITER_DASH);
     if (area.trim().length > MIN_AREA_PREFIX_LENGTH) return area.trim();
   }
   return "General Chemical Engineering";
@@ -1307,7 +1309,7 @@ function renderBloomProgression(courses) {
 
   const first = rows[0], last = rows[rows.length - 1];
   const highOrder = row => (row["C-4"] || 0) + (row["C-5"] || 0) + (row["C-6"] || 0);
-  insightEl.innerHTML = `Auto insight: Higher-order thinking (<strong>Analyze/Evaluate/Create</strong>) rises from <strong>${(highOrder(first) * 100).toFixed(1)}%</strong> in Semester ${sems[0]} to <strong>${(highOrder(last) * 100).toFixed(1)}%</strong> in Semester ${sems[sems.length - 1]}.`;
+  insightEl.innerHTML = `Auto insight: Higher-order thinking (<strong>Analyze/Evaluate/Create</strong>) changes from <strong>${(highOrder(first) * 100).toFixed(1)}%</strong> in Semester ${sems[0]} to <strong>${(highOrder(last) * 100).toFixed(1)}%</strong> in Semester ${sems[sems.length - 1]}.`;
 }
 
 function renderCourseGrid(courses) {
