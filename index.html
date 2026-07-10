@@ -513,9 +513,13 @@ table.cm-hm th,table.cm-hm td{padding:0;}
   box-shadow:var(--shadow);margin-bottom:1rem;align-items:center;}
 .cm-cmp-heading{font-size:.7rem;font-weight:700;color:var(--mu);text-transform:uppercase;
   letter-spacing:.07em;margin-right:.3rem;flex-shrink:0;}
-.cm-cmp-pill{padding:.3rem .62rem;border:1.5px solid var(--bdr);border-radius:12px;
+.cm-cmp-pill{
+  padding:.3rem .62rem;border:1.5px solid var(--bdr);border-radius:12px;
   font-family:'Outfit',sans-serif;font-size:.67rem;font-weight:700;cursor:pointer;
-  transition:all .15s;background:var(--sf);color:var(--mu);display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;min-width:112px;text-align:left;}
+  transition:all .15s;background:var(--sf);color:var(--mu);
+  display:flex;flex-direction:column;align-items:flex-start;
+  line-height:1.15;min-width:112px;text-align:left;
+}
 .cm-cmp-pill-code{font-family:'DM Mono',monospace;font-size:.67rem;font-weight:700;}
 .cm-cmp-pill-title{font-family:'Crimson Pro',serif;font-size:.6rem;font-style:italic;color:var(--mu);font-weight:600;margin-top:.14rem;}
 .cm-cmp-pill:hover{border-color:var(--bdr2);color:var(--tx);}
@@ -1850,7 +1854,7 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   const semIndex={};sems.forEach((s,i)=>semIndex[s]=i);
   const semW=Math.max(150,W/(sems.length+1));
 
-  // Keep explicit node type fields to support migration to typed Knowledge Graph nodes/edges.
+  // Nodes already include a `type` field so this graph can evolve into typed Course/KnowledgeArea/KnowledgeUnit nodes later.
   const courseNodes=courses.map(c=>{
     const si=semIndex[c.semester]||0;
     const sameSem=courses.filter(x=>x.semester===c.semester);
@@ -1870,10 +1874,10 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   });
 
   const allNodes=[...courseNodes,...sharedNodes];
-  const links=[]; // Future edge typing can extend this with relation labels (covers/belongs_to/prerequisite_of).
+  const links=[]; // Keep links extensible with relation metadata for future typed edges.
   sharedConcepts.forEach(sc=>{
     sc.courses.filter(c=>courses.some(x=>x.code===c)).forEach(code=>{
-      links.push({source:code,target:"s::"+sc.label,color:getCMConceptColor(sc.label)});
+      links.push({source:code,target:"s::"+sc.label,color:getCMConceptColor(sc.label),relation:"covers"});
     });
   });
 
