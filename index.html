@@ -1003,6 +1003,9 @@ let activeSemFilter = "All";
 let activeTab = "graph";
 let DATA = { plos: PLOS_DEF, courses: COURSES_EMBEDDED };
 let dashView = "course";
+const DASH_VIEWS = ["course","plo","bloom","ontology"];
+const CMP_PILL_SELECTED_ALPHA = "24";
+const CMP_PILL_DEFAULT_ALPHA = "12";
 
 /* ================================================================
    INIT
@@ -1051,9 +1054,9 @@ window.switchTab = function(tab) {
 };
 
 window.setDashView = function(view) {
-  if(!["course","plo","bloom","ontology"].includes(view)) view="course";
+  if(!DASH_VIEWS.includes(view)) view="course";
   dashView = view;
-  ["course","plo","bloom","ontology"].forEach(v => {
+  DASH_VIEWS.forEach(v => {
     const panel = document.getElementById("dash-view-"+v);
     const btn = document.getElementById("dash-subbtn-"+v);
     if (panel) panel.classList.toggle("hidden", v !== view);
@@ -1062,16 +1065,16 @@ window.setDashView = function(view) {
 };
 
 function knowledgeAreaFromUnit(unit){
-  const MIN_KNOWLEDGE_AREA_LENGTH = 2;
+  const MIN_AREA_PREFIX_LENGTH = 2;
   const raw = String(unit || "").trim();
   if (!raw) return "General Chemical Engineering";
   if (raw.includes(":")) {
     const [area] = raw.split(":");
-    if (area.trim().length > MIN_KNOWLEDGE_AREA_LENGTH) return area.trim();
+    if (area.trim().length > MIN_AREA_PREFIX_LENGTH) return area.trim();
   }
   if (raw.includes(" - ")) {
     const [area] = raw.split(" - ");
-    if (area.trim().length > MIN_KNOWLEDGE_AREA_LENGTH) return area.trim();
+    if (area.trim().length > MIN_AREA_PREFIX_LENGTH) return area.trim();
   }
   return "General Chemical Engineering";
 }
@@ -1855,7 +1858,7 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   const semIndex={};sems.forEach((s,i)=>semIndex[s]=i);
   const semW=Math.max(150,W/(sems.length+1));
 
-  // Nodes currently use `type` as `course` or `shared`; this can expand to `course/knowledgeArea/knowledgeUnit` in a typed Knowledge Graph.
+  // courseNodes/sharedNodes below already carry `type` fields (`course` / `shared`) and can evolve to typed knowledge graph entities later.
   const courseNodes=courses.map(c=>{
     const si=semIndex[c.semester]||0;
     const sameSem=courses.filter(x=>x.semester===c.semester);
@@ -1875,11 +1878,10 @@ function cmRenderNetwork(courses,sortedConcepts,idx){
   });
 
   const allNodes=[...courseNodes,...sharedNodes];
-  // Keep links extensible with relation metadata for a future typed-edge Knowledge Graph.
   const links=[];
   sharedConcepts.forEach(sc=>{
     sc.courses.filter(c=>courses.some(x=>x.code===c)).forEach(code=>{
-      links.push({source:code,target:"s::"+sc.label,color:getCMConceptColor(sc.label),relation:"covers"});
+      links.push({source:code,target:"s::"+sc.label,color:getCMConceptColor(sc.label)});
     });
   });
 
@@ -2043,7 +2045,7 @@ window.cmRenderCompare = function(courses) {
     const title = escH(c.title || "");
     return `<button class="cm-cmp-pill${sel ? ' active' : ''}"
       id="cmpill-${c.code}"
-      style="background:${sc}${sel ? "24" : "12"};border-color:${sc};color:${sc};"
+      style="background:${sc}${sel ? CMP_PILL_SELECTED_ALPHA : CMP_PILL_DEFAULT_ALPHA};border-color:${sc};color:${sc};"
       onclick="cmToggleCompare('${c.code}','${sc}')"
       title="${title}">
       <span class="cm-cmp-pill-code">${c.code}</span>
@@ -2072,13 +2074,13 @@ window.cmToggleCompare = function(code, color) {
       btn.classList.remove("active");
       const course = filtered().find(c => c.code === code);
       const sc = semColor(course?.semester || 0);
-      btn.style.cssText = `background:${sc}12;border-color:${sc};color:${sc};`;
+      btn.style.cssText = `background:${sc}${CMP_PILL_DEFAULT_ALPHA};border-color:${sc};color:${sc};`;
     }
   } else {
     cmCompareSelection.push(code);
     if (btn) {
       btn.classList.add("active");
-      btn.style.cssText = `background:${color}24;border-color:${color};color:${color};`;
+      btn.style.cssText = `background:${color}${CMP_PILL_SELECTED_ALPHA};border-color:${color};color:${color};`;
     }
   }
   const courses = filtered();
