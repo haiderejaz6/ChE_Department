@@ -98,38 +98,30 @@ header{
 .dash-sub-btn{padding:.34rem .78rem;border:1px solid var(--bdr);border-radius:18px;background:var(--sf);cursor:pointer;font-size:.72rem;font-weight:600;color:var(--mu);}
 .dash-sub-btn.active{background:rgba(184,146,14,.12);border-color:var(--gold);color:var(--goldd);}
 .dash-view.hidden{display:none!important;}
-#bloom-semester-chart{width:100%;min-height:360px;}
+#bloom-cognitive-chart,#bloom-affective-chart,#bloom-psychomotor-chart{width:100%;min-height:320px;}
 .bloom-insight{font-size:.72rem;color:var(--mu);margin-top:.75rem;}
 .bloom-insight strong{color:var(--tx);}
-.ontology-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem;}
-.ontology-area{background:var(--sf);border:1px solid var(--bdr);border-radius:12px;padding:.8rem .9rem;box-shadow:var(--shadow);}
-.ontology-area-title{font-size:.76rem;font-weight:700;color:var(--tx);margin-bottom:.45rem;}
-.ontology-unit-wrap{display:flex;flex-wrap:wrap;gap:.28rem;}
-.ontology-unit{font-size:.62rem;font-weight:600;padding:.14rem .42rem;border-radius:10px;background:#f0f3fa;color:var(--mu);}
 
-/* Heatmap */
+/* PLO Coverage Matrix — PLO-first rows with course pills */
 .hm-scroll{overflow-x:auto;border:1px solid var(--bdr);border-radius:14px;background:var(--sf);box-shadow:var(--shadow);}
-table.hm{width:100%;border-collapse:collapse;min-width:840px;}
-table.hm thead th{
-  padding:.55rem .3rem;font-size:.6rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:.07em;color:var(--mu);
-  background:#f7f9fd;border-bottom:1px solid var(--bdr);text-align:center;
+.plom{width:100%;min-width:640px;}
+.plom-row{display:flex;gap:1.1rem;align-items:flex-start;padding:.8rem 1.2rem;border-bottom:1px solid rgba(0,0,0,.04);}
+.plom-row:last-child{border-bottom:none;}
+.plom-row:hover{background:#fafbff;}
+.plom-plo{flex:0 0 218px;border-left:3px solid transparent;padding-left:.7rem;padding-top:.1rem;}
+.plom-plo-code{font-family:'DM Mono',monospace;font-size:.74rem;font-weight:800;}
+.plom-plo-label{font-size:.66rem;color:var(--mu);margin-top:.18rem;line-height:1.32;}
+.plom-pills{flex:1;display:flex;flex-wrap:wrap;gap:.42rem;align-items:flex-start;padding-top:.05rem;}
+.plom-pill{
+  padding:.3rem .6rem;border:1.4px solid var(--bdr);border-radius:10px;
+  font-family:'Outfit',sans-serif;cursor:default;background:var(--sf);
+  display:flex;flex-direction:column;align-items:flex-start;line-height:1.18;
+  min-width:98px;max-width:150px;text-align:left;transition:transform .12s,box-shadow .12s;
 }
-table.hm thead th:first-child{text-align:left;padding-left:1.2rem;min-width:210px;}
-table.hm tbody tr{border-bottom:1px solid rgba(0,0,0,.04);}
-table.hm tbody tr:last-child{border-bottom:none;}
-table.hm tbody tr:hover{background:#fafbff;}
-.hm-cc{padding:.55rem .5rem .55rem 1.2rem!important;}
-.hm-course-code{font-size:.76rem;font-weight:700;color:var(--tx);}
-.hm-course-title{font-size:.63rem;color:var(--mu);}
-.hm-plo{padding:.3rem .28rem!important;text-align:center;}
-.hm-dot{
-  width:32px;height:32px;border-radius:8px;margin:0 auto;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.64rem;font-weight:700;transition:transform .14s;cursor:default;
-}
-.hm-dot:hover{transform:scale(1.2);}
-.hm-dot.empty{background:#f0f3fa;color:var(--dim);font-size:.7rem;}
+.plom-pill:hover{transform:translateY(-1px);box-shadow:var(--shadow-lg);z-index:1;}
+.plom-pill-code{font-family:'DM Mono',monospace;font-size:.66rem;font-weight:700;}
+.plom-pill-title{font-size:.58rem;color:var(--mu);margin-top:.14rem;line-height:1.28;}
+.plom-empty{font-size:.68rem;color:var(--dim);font-style:italic;padding-top:.2rem;}
 
 /* Semester badges */
 .sem-badge{
@@ -503,7 +495,10 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 
 /* ── Curriculum Graph prerequisite arrows overlay ────────── */
 #cg-canvas{position:relative;}
-#prereq-svg{position:absolute;top:0;left:0;pointer-events:none;overflow:visible;z-index:0;}
+#prereq-svg{position:absolute;top:0;left:0;pointer-events:none;overflow:visible;z-index:5;}
+.prereq-edge{transition:stroke-opacity .15s,stroke-width .15s;}
+.prereq-edge.dim{stroke-opacity:.12!important;}
+.prereq-edge.active{stroke-opacity:.95!important;stroke-width:2.6px!important;}
 .prereq-legend{display:flex;align-items:center;gap:.4rem;font-size:.67rem;color:var(--mu);}
 .prereq-leg-line{width:28px;height:0;border-top:2px dashed rgba(184,146,14,.65);}
 
@@ -657,11 +652,9 @@ table.cm-hm th,table.cm-hm td{padding:0;}
   #cm-body{padding:.85rem .75rem 3rem;}
 
   /* Heatmap smaller text on mobile */
-  table.hm thead th{font-size:.52rem;padding:.4rem .18rem;}
-  table.hm tbody td{font-size:.65rem;}
-  .hm-dot{width:26px;height:26px;font-size:.58rem;}
-  .hm-course-code{font-size:.68rem;}
-  .hm-course-title{font-size:.56rem;}
+  .plom-row{flex-direction:column;gap:.5rem;padding:.7rem .9rem;}
+  .plom-plo{flex-basis:auto;border-left-width:3px;}
+  .plom-pill{min-width:88px;max-width:130px;}
   .sem-badge{font-size:.5rem;padding:.05rem .22rem;}
 
   /* Domain legend wraps tighter */
@@ -764,7 +757,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 <!-- MOBILE NAV DRAWER -->
 <div class="mobile-nav" id="mobile-nav">
   <button class="tab-btn active" id="mnbtn-graph"    onclick="switchTab('graph');closeNav()">🗂 Curriculum Graph</button>
-  <button class="tab-btn"        id="mnbtn-dash"     onclick="switchTab('dash');closeNav()">📊 Curriculum Dashboard</button>
+  <button class="tab-btn"        id="mnbtn-dash"     onclick="switchTab('dash');closeNav()">📊 OBE Dashboard</button>
   <button class="tab-btn"        id="mnbtn-concepts" onclick="switchTab('concepts');closeNav()">🧭 ChE Ontology</button>
   <div class="mobile-nav-filters" id="mobile-filters"></div>
 </div>
@@ -772,7 +765,7 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 <!-- TABBAR -->
 <div class="tabbar">
   <button class="tab-btn active" id="tbtn-graph"    onclick="switchTab('graph')">🗂 Curriculum Graph</button>
-  <button class="tab-btn"        id="tbtn-dash"     onclick="switchTab('dash')">📊 Curriculum Dashboard</button>
+  <button class="tab-btn"        id="tbtn-dash"     onclick="switchTab('dash')">📊 OBE Dashboard</button>
   <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🧭 ChE Ontology</button>
   <div class="vsep" style="margin:0 .6rem;"></div>
   <div class="tabbar-filters" id="filters"></div>
@@ -818,7 +811,6 @@ table.cm-hm th,table.cm-hm td{padding:0;}
       <button class="dash-sub-btn active" id="dash-subbtn-course" onclick="setDashView('course')">Course Explorer</button>
       <button class="dash-sub-btn" id="dash-subbtn-plo" onclick="setDashView('plo')">PLO Coverage Matrix</button>
       <button class="dash-sub-btn" id="dash-subbtn-bloom" onclick="setDashView('bloom')">Bloom's Level Distribution</button>
-      <button class="dash-sub-btn" id="dash-subbtn-ontology" onclick="setDashView('ontology')">ChE Ontology</button>
     </div>
 
     <div id="dash-view-course" class="dash-view">
@@ -844,28 +836,30 @@ table.cm-hm th,table.cm-hm td{padding:0;}
       <div class="section">
         <h2 class="sec-hd">PLO Coverage Matrix</h2>
         <p style="font-size:.74rem;color:var(--mu);margin-bottom:.75rem;">
-          Colour = PLO · Brightness = emphasis (Low / Medium / High) · Number = CLO count · Hover for details
+          Each PLO on the left · courses that cover it on the right · pill brightness = emphasis (Low / Medium / High) · hover a course for CLO details
         </p>
-        <div class="hm-scroll"><table class="hm" id="hm"></table></div>
+        <div class="hm-scroll"><div class="plom" id="hm"></div></div>
       </div>
     </div>
 
     <div id="dash-view-bloom" class="dash-view hidden">
       <div class="section">
         <h2 class="sec-hd">Bloom's Level Distribution</h2>
-        <div class="chart-card">
-          <p class="chart-sub">Semester-wise progression of cognitive demand (Remember → Create) as a 100% stacked area.</p>
-          <div id="bloom-semester-chart"></div>
-          <p class="bloom-insight" id="bloom-insight"></p>
+        <div class="chart-card" style="margin-bottom:1.4rem;">
+          <p class="chart-sub">Cognitive domain (Remember → Create) · semester-wise progression as a 100% stacked area.</p>
+          <div id="bloom-cognitive-chart"></div>
+          <p class="bloom-insight" id="bloom-cognitive-insight"></p>
         </div>
-      </div>
-    </div>
-
-    <div id="dash-view-ontology" class="dash-view hidden">
-      <div class="section">
-        <h2 class="sec-hd">ChE Ontology</h2>
-        <p style="font-size:.74rem;color:var(--mu);margin-bottom:.75rem;">Knowledge Areas group related Knowledge Units extracted from course CLO mappings.</p>
-        <div id="ontology-tree"></div>
+        <div class="chart-card" style="margin-bottom:1.4rem;">
+          <p class="chart-sub">Affective domain (Receiving → Characterizing) · semester-wise progression as a 100% stacked area.</p>
+          <div id="bloom-affective-chart"></div>
+          <p class="bloom-insight" id="bloom-affective-insight"></p>
+        </div>
+        <div class="chart-card">
+          <p class="chart-sub">Psychomotor domain (Perception → Origination) · semester-wise progression as a 100% stacked area.</p>
+          <div id="bloom-psychomotor-chart"></div>
+          <p class="bloom-insight" id="bloom-psychomotor-insight"></p>
+        </div>
       </div>
     </div>
   </div><!-- /tab-dash -->
@@ -1003,7 +997,7 @@ let activeSemFilter = "All";
 let activeTab = "graph";
 let DATA = { plos: PLOS_DEF, courses: COURSES_EMBEDDED };
 let dashView = "course";
-const DASH_VIEWS = ["course","plo","bloom","ontology"];
+const DASH_VIEWS = ["course","plo","bloom"];
 const CMP_PILL_SELECTED_ALPHA = "24";
 const CMP_PILL_DEFAULT_ALPHA = "12";
 
@@ -1081,32 +1075,6 @@ function knowledgeAreaFromUnit(unit){
   return "General Chemical Engineering";
 }
 
-function renderOntology(courses){
-  const holder = document.getElementById("ontology-tree");
-  if (!holder) return;
-  const areaMap = {};
-  courses.forEach(course => {
-    getConceptsForCourse(course.code).forEach(unit => {
-      const area = knowledgeAreaFromUnit(unit);
-      if (!areaMap[area]) areaMap[area] = new Set();
-      areaMap[area].add(unit);
-    });
-  });
-  const areas = Object.entries(areaMap).sort((a,b)=>b[1].size-a[1].size || a[0].localeCompare(b[0]));
-  if (!areas.length) {
-    holder.innerHTML = `<div style="padding:1rem;color:var(--mu);">No Knowledge Units found in current filter.</div>`;
-    return;
-  }
-  holder.innerHTML = `<div class="ontology-grid">${
-    areas.map(([area,units]) => `
-      <div class="ontology-area">
-        <div class="ontology-area-title">${escH(area)} <span style="font-size:.62rem;color:var(--mu);font-weight:600;">(${units.size})</span></div>
-        <div class="ontology-unit-wrap">${[...units].sort().map(u=>`<span class="ontology-unit">${escH(u)}</span>`).join("")}</div>
-      </div>`
-    ).join("")
-  }</div>`;
-}
-
 /* ================================================================
    FILTERS — now semester numbers
 ================================================================ */
@@ -1163,56 +1131,62 @@ function renderStats() {
 function renderDash() {
   const courses = filtered();
   renderHeatmap(courses);
-  renderBloomProgression(courses);
+  renderBloomDistributions(courses);
   renderCourseGrid(courses);
   renderPLOFooter();
-  renderOntology(courses);
   document.getElementById("cinfo").textContent =
     `— ${courses.length} course${courses.length!==1?"s":""}, ${courses.reduce((a,c)=>a+c.clos.length,0)} CLOs`;
   setDashView(dashView);
 }
 
-/* ── Heatmap ── */
+/* ── PLO Coverage Matrix (PLO-first: which courses cover each PLO) ── */
 function renderHeatmap(courses) {
   const plos = Object.keys(DATA.plos||PLOS_DEF);
-  const map  = {};
+  const alphaHex = {None:"14", Low:"2e", Medium:"55", High:"85"};
+
+  // Build: for each PLO, which courses cover it + max emphasis + CLO count
+  const coverage = {};
+  plos.forEach(p => coverage[p] = {});
   courses.forEach(c => {
-    map[c.code] = {};
-    plos.forEach(p => map[c.code][p] = {count:0, maxEmphasis:"None"});
     c.clos.forEach(cl => {
-      if (!map[c.code][cl.plo]) return;
-      map[c.code][cl.plo].count++;
-      if (EMPHASIS_ORDER[cl.emphasis] > EMPHASIS_ORDER[map[c.code][cl.plo].maxEmphasis])
-        map[c.code][cl.plo].maxEmphasis = cl.emphasis;
+      if (!coverage[cl.plo]) return;
+      if (!coverage[cl.plo][c.code]) coverage[cl.plo][c.code] = {count:0, maxEmphasis:"None"};
+      coverage[cl.plo][c.code].count++;
+      if (EMPHASIS_ORDER[cl.emphasis] > EMPHASIS_ORDER[coverage[cl.plo][c.code].maxEmphasis])
+        coverage[cl.plo][c.code].maxEmphasis = cl.emphasis;
     });
   });
-  const alphaMap = {None:0, Low:0.22, Medium:0.55, High:0.9};
-  const thead = `<thead><tr>
-    <th style="text-align:left;padding-left:1.2rem;">Course</th>
-    ${plos.map(p=>`<th title="${DATA.plos[p]}">${p.replace("PLO-","P")}</th>`).join("")}
-  </tr></thead>`;
-  const tbody = "<tbody>" + courses.map(c => {
-    const sc = semColor(c.semester);
-    const cells = plos.map(p => {
-      const d = map[c.code]?.[p];
-      if (!d || !d.count) return `<td class="hm-plo"><div class="hm-dot empty">·</div></td>`;
-      const col   = PLO_COLORS[p] || "#888";
-      const alpha = alphaMap[d.maxEmphasis] || 0.22;
-      return `<td class="hm-plo">
-        <div class="hm-dot" style="background:${col};opacity:${alpha+0.08};color:#fff;"
-          onmouseenter="showTip(event,'${c.code}','${p}','${d.count}','${d.maxEmphasis}')"
-          onmouseleave="hideTip()">${d.count}</div></td>`;
-    }).join("");
-    return `<tr>
-      <td class="hm-cc">
-        <div class="hm-course-code">${c.code}
-          <span class="sem-badge" style="background:${sc}18;color:${sc};">${semLabel(c.semester)}</span>
-        </div>
-        <div class="hm-course-title">${c.title}</div>
-      </td>${cells}
-    </tr>`;
-  }).join("") + "</tbody>";
-  document.getElementById("hm").innerHTML = thead + tbody;
+
+  const rows = plos.map(p => {
+    const col   = PLO_COLORS[p] || "#888";
+    const label = (DATA.plos||PLOS_DEF)[p] || "";
+    const entries = Object.entries(coverage[p])
+      .sort((a,b) => {
+        const ca = DATA.courses.find(c=>c.code===a[0]), cb = DATA.courses.find(c=>c.code===b[0]);
+        return (ca?.semester||0) - (cb?.semester||0) || a[0].localeCompare(b[0]);
+      });
+
+    const pills = entries.length ? entries.map(([code,d]) => {
+      const course = DATA.courses.find(c=>c.code===code);
+      const bg = col + (alphaHex[d.maxEmphasis] || "14");
+      return `<div class="plom-pill" style="border-color:${col};background:${bg};"
+        onmouseenter="showTip(event,'${code}','${p}','${d.count}','${d.maxEmphasis}')"
+        onmouseleave="hideTip()">
+        <span class="plom-pill-code" style="color:${col};">${code}${d.count>1?` ×${d.count}`:""}</span>
+        <span class="plom-pill-title">${escH(course ? course.title : "")}</span>
+      </div>`;
+    }).join("") : `<span class="plom-empty">No courses currently mapped to this PLO</span>`;
+
+    return `<div class="plom-row">
+      <div class="plom-plo" style="border-left-color:${col};">
+        <div class="plom-plo-code" style="color:${col};">${p.replace("PLO-","PLO ")}</div>
+        <div class="plom-plo-label">${escH(label)}</div>
+      </div>
+      <div class="plom-pills">${pills}</div>
+    </div>`;
+  }).join("");
+
+  document.getElementById("hm").innerHTML = rows;
 }
 
 /* ── Tooltip ── */
@@ -1235,25 +1209,49 @@ function moveTip(e) {
   tip.style.left=x+"px"; tip.style.top=y+"px";
 }
 
-function renderBloomProgression(courses) {
-  const host = document.getElementById("bloom-semester-chart");
-  const insightEl = document.getElementById("bloom-insight");
+const BLOOM_COGNITIVE_LEVELS = [
+  { key: "C-1", label: "Remember",  color: "#d4a820" },
+  { key: "C-2", label: "Understand", color: "#c9981a" },
+  { key: "C-3", label: "Apply",     color: "#ab7831" },
+  { key: "C-4", label: "Analyze",   color: "#8d6480" },
+  { key: "C-5", label: "Evaluate",  color: "#6f57a3" },
+  { key: "C-6", label: "Create",    color: "#4f46e5" }
+];
+const BLOOM_AFFECTIVE_LEVELS = [
+  { key: "A-1", label: "Receiving",      color: "#38bdf8" },
+  { key: "A-2", label: "Responding",     color: "#22c1a6" },
+  { key: "A-3", label: "Valuing",        color: "#f97316" },
+  { key: "A-4", label: "Organizing",     color: "#a855f7" },
+  { key: "A-5", label: "Characterizing", color: "#ef4444" }
+];
+const BLOOM_PSYCHOMOTOR_LEVELS = [
+  { key: "P-1", label: "Perception",             color: "#5eead4" },
+  { key: "P-2", label: "Set",                    color: "#38bdf8" },
+  { key: "P-3", label: "Guided Response",        color: "#a855f7" },
+  { key: "P-4", label: "Mechanism",              color: "#6366f1" },
+  { key: "P-5", label: "Complex Overt Response", color: "#f59e0b" },
+  { key: "P-6", label: "Adaptation",             color: "#f97316" },
+  { key: "P-7", label: "Origination",            color: "#ef4444" }
+];
+
+function renderBloomDomainChart(courses, { hostId, insightId, levels, domainLabel }) {
+  const host = document.getElementById(hostId);
+  const insightEl = document.getElementById(insightId);
   if (!host || !insightEl) return;
   host.innerHTML = "";
 
-  const levels = [
-    { key: "C-1", label: "Remember",  color: "#d4a820" },
-    { key: "C-2", label: "Understand", color: "#c9981a" },
-    { key: "C-3", label: "Apply",     color: "#ab7831" },
-    { key: "C-4", label: "Analyze",   color: "#8d6480" },
-    { key: "C-5", label: "Evaluate",  color: "#6f57a3" },
-    { key: "C-6", label: "Create",    color: "#4f46e5" }
-  ];
   const sems = [...new Set(courses.map(c => c.semester).filter(Boolean))].sort((a,b)=>a-b);
   if (!sems.length) {
-    insightEl.textContent = "No semester data available for Bloom distribution.";
+    insightEl.textContent = "No semester data available for this domain.";
     return;
   }
+
+  const totalDomainCLOs = courses.flatMap(c => c.clos || []).filter(cl => levels.some(l => l.key === cl.domain)).length;
+  if (!totalDomainCLOs) {
+    insightEl.innerHTML = `No CLOs are currently mapped to the ${domainLabel} domain.`;
+    return;
+  }
+
   const rows = sems.map(semester => {
     const clos = courses.filter(c => c.semester === semester).flatMap(c => c.clos || []);
     const counts = Object.fromEntries(levels.map(l => [l.key, 0]));
@@ -1265,7 +1263,7 @@ function renderBloomProgression(courses) {
   });
 
   const width = Math.max(700, host.clientWidth || 700);
-  const height = 360;
+  const height = 320;
   const margin = { top: 12, right: 12, bottom: 42, left: 44 };
   const innerW = width - margin.left - margin.right;
   const innerH = height - margin.top - margin.bottom;
@@ -1301,15 +1299,24 @@ function renderBloomProgression(courses) {
     .attr("fill-opacity", 0.92)
     .attr("d", area);
 
+  const legendItemW = Math.max(70, Math.min(106, innerW / levels.length));
   const legend = svg.append("g").attr("transform", `translate(${margin.left},${height - 8})`);
-  const li = legend.selectAll("g").data(levels).enter().append("g").attr("transform", (_,i) => `translate(${i * 106},0)`);
+  const li = legend.selectAll("g").data(levels).enter().append("g").attr("transform", (_,i) => `translate(${i * legendItemW},0)`);
   li.append("rect").attr("width", 10).attr("height", 10).attr("rx", 2).attr("fill", d => d.color);
   li.append("text").attr("x", 14).attr("y", 8).text(d => d.label)
     .attr("fill", "#5a6e8c").style("font-family", "Outfit").style("font-size", "11px");
 
   const first = rows[0], last = rows[rows.length - 1];
-  const highOrder = row => (row["C-4"] || 0) + (row["C-5"] || 0) + (row["C-6"] || 0);
-  insightEl.innerHTML = `Auto insight: Higher-order thinking (<strong>Analyze/Evaluate/Create</strong>) changes from <strong>${(highOrder(first) * 100).toFixed(1)}%</strong> in Semester ${sems[0]} to <strong>${(highOrder(last) * 100).toFixed(1)}%</strong> in Semester ${sems[sems.length - 1]}.`;
+  const advanced = levels.slice(-Math.min(3, levels.length));
+  const shareOf = row => advanced.reduce((s,l) => s + (row[l.key] || 0), 0);
+  const advancedLabel = advanced.map(l => l.label).join("/");
+  insightEl.innerHTML = `Auto insight: Higher-order ${domainLabel} demand (<strong>${advancedLabel}</strong>) changes from <strong>${(shareOf(first) * 100).toFixed(1)}%</strong> in Semester ${sems[0]} to <strong>${(shareOf(last) * 100).toFixed(1)}%</strong> in Semester ${sems[sems.length - 1]}.`;
+}
+
+function renderBloomDistributions(courses) {
+  renderBloomDomainChart(courses, { hostId: "bloom-cognitive-chart",   insightId: "bloom-cognitive-insight",   levels: BLOOM_COGNITIVE_LEVELS,   domainLabel: "cognitive" });
+  renderBloomDomainChart(courses, { hostId: "bloom-affective-chart",   insightId: "bloom-affective-insight",   levels: BLOOM_AFFECTIVE_LEVELS,   domainLabel: "affective" });
+  renderBloomDomainChart(courses, { hostId: "bloom-psychomotor-chart", insightId: "bloom-psychomotor-insight", levels: BLOOM_PSYCHOMOTOR_LEVELS, domainLabel: "psychomotor" });
 }
 
 function renderCourseGrid(courses) {
@@ -1438,8 +1445,9 @@ function buildCurriculumGraph() {
           <div class="tm">${course.title}</div>
           <div class="tm" style="color:var(--gold);">${semLabel(course.semester)} · ${credLabel} credits · ${cloCount} CLOs</div>`;
         tip.style.display = "block"; moveTip(e);
+        highlightPrereqEdges(course.code);
       };
-      node.onmouseleave = () => hideTip();
+      node.onmouseleave = () => { hideTip(); highlightPrereqEdges(null); };
       col.appendChild(node);
     });
 
@@ -1465,12 +1473,12 @@ function drawPrereqArrows() {
   svgEl.style.cssText =
     `position:absolute;top:0;left:0;` +
     `width:${canvas.scrollWidth}px;height:${canvas.scrollHeight}px;` +
-    `pointer-events:none;overflow:visible;z-index:0;`;
+    `pointer-events:none;overflow:visible;z-index:5;`;
 
   const defs = document.createElementNS(svgNS, "defs");
   defs.innerHTML =
-    `<marker id="arr-end" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0,8 3,0 6" fill="rgba(184,146,14,0.75)"/>
+    `<marker id="arr-end" markerWidth="10" markerHeight="8" refX="8.5" refY="4" orient="auto">
+      <polygon points="0 0,10 4,0 8" fill="rgba(184,146,14,0.85)"/>
     </marker>`;
   svgEl.appendChild(defs);
 
@@ -1494,8 +1502,11 @@ function drawPrereqArrows() {
     const pathEl = document.createElementNS(svgNS, "path");
     const cx = (x1 + x2) / 2;
     pathEl.setAttribute("d", `M${x1},${y1} C${cx},${y1} ${cx},${y2} ${x2},${y2}`);
-    pathEl.setAttribute("stroke", "rgba(184,146,14,0.6)");
-    pathEl.setAttribute("stroke-width", "1.8");
+    pathEl.setAttribute("class", "prereq-edge");
+    pathEl.setAttribute("data-from", from);
+    pathEl.setAttribute("data-to", to);
+    pathEl.setAttribute("stroke", "rgba(184,146,14,0.75)");
+    pathEl.setAttribute("stroke-width", "2");
     pathEl.setAttribute("stroke-dasharray", "5,3");
     pathEl.setAttribute("fill", "none");
     pathEl.setAttribute("marker-end", "url(#arr-end)");
@@ -1503,6 +1514,20 @@ function drawPrereqArrows() {
   });
 
   canvas.insertBefore(svgEl, canvas.firstChild);
+}
+
+/* Highlight prerequisite edges touching a given course code; dim the rest.
+   Pass null to clear the highlight and restore all edges to their default state. */
+function highlightPrereqEdges(code) {
+  const svgEl = document.getElementById("prereq-svg");
+  if (!svgEl) return;
+  const edges = svgEl.querySelectorAll(".prereq-edge");
+  edges.forEach(edge => {
+    if (!code) { edge.classList.remove("active", "dim"); return; }
+    const touches = edge.getAttribute("data-from") === code || edge.getAttribute("data-to") === code;
+    edge.classList.toggle("active", touches);
+    edge.classList.toggle("dim", !touches);
+  });
 }
 
 function cgOpenPanel(course) {  if (cgSelectedCode) {
@@ -2268,7 +2293,10 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
      style="${sel ? `background:${color}18;border-color:${color};color:${color};` : ''}"
      onclick="cmToggleCloudCourse('${safeCode}')"
      ${disabled ? "disabled" : ""}
-     title="${safeTitle}">${safeLabel}</button>`;
+     title="${safeTitle}">
+     <span class="cm-cmp-pill-code" style="${sel ? `color:${color};` : ''}">${safeLabel}</span>
+     <span class="cm-cmp-pill-title" style="${sel ? `color:${color};` : ''}">${safeTitle}</span>
+     </button>`;
   }).join("");
 
   function measurePill(concept, count) {
@@ -2679,19 +2707,19 @@ function cmRenderCloud(courses, sortedConcepts, idx) {
     .attr("width", d => d.width)
     .attr("height", d => d.height)
     .attr("fill", d => d.color)
-    .attr("fill-opacity", d => d.selected ? 0.15 : 0.06)
+    .attr("fill-opacity", d => d.selected ? 0.2 : 0.05)
     .attr("stroke", d => d.color)
-    .attr("stroke-opacity", d => d.selected ? 0.5 : 0.24)
-    .attr("stroke-width", 1.2);
+    .attr("stroke-opacity", d => d.selected ? 0.65 : 0.18)
+    .attr("stroke-width", d => d.selected ? 1.6 : 1);
 
   pillSel.append("text")
     .attr("text-anchor", "middle")
     .attr("dominant-baseline", "central")
     .attr("font-family", "'Outfit',sans-serif")
     .attr("font-size", d => `${d.fontSize}px`)
-    .attr("font-weight", "600")
+    .attr("font-weight", d => d.selected ? "800" : "500")
     .attr("fill", d => d.color)
-    .attr("fill-opacity", d => d.selected ? 1 : 0.5)
+    .attr("fill-opacity", d => d.selected ? 1 : 0.35)
     .text(d => d.concept);
 
   window._cmFitFn = () => {
