@@ -538,20 +538,53 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 .cm-cmp-info{font-size:.72rem;color:var(--mu);margin:.6rem 0 .85rem;}
 .cm-cmp-info strong{color:var(--tx);}
 
-#cmv-cloud{position:relative;overflow:auto;}
-.kc-cloud-wrap{display:inline-block;min-width:100%;position:relative;}
+/* ── Knowledge Area Overlap: compact course strip + zoomable topic stage ── */
+.kc-course-strip{display:flex;align-items:center;gap:.55rem;padding:.4rem .65rem;
+  background:var(--sf);border:1px solid var(--bdr);border-radius:10px;
+  box-shadow:var(--shadow);margin-bottom:.55rem;}
+.kc-course-strip-label{font-size:.62rem;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.06em;flex-shrink:0;white-space:nowrap;}
+.kc-course-strip-track{display:flex;gap:.32rem;overflow-x:auto;overflow-y:hidden;
+  flex:1;min-width:0;scrollbar-width:thin;padding:.1rem 0;}
+.kc-course-strip-track::-webkit-scrollbar{height:5px;}
+.kc-course-strip-track::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:4px;}
+.kc-course-chip{
+  flex:0 0 auto;padding:.22rem .5rem;border:1.4px solid var(--bdr);border-radius:8px;
+  font-family:'Outfit',sans-serif;cursor:pointer;background:var(--sf);color:var(--mu);
+  display:flex;flex-direction:column;align-items:flex-start;line-height:1.1;
+  max-width:104px;text-align:left;transition:transform .12s,box-shadow .12s;
+}
+.kc-course-chip:hover{transform:translateY(-1px);box-shadow:var(--shadow);}
+.kc-course-chip:disabled{opacity:var(--cm-pill-disabled-opacity);cursor:not-allowed;}
+.kc-course-chip-code{font-family:'DM Mono',monospace;font-size:.61rem;font-weight:700;}
+.kc-course-chip-title{font-size:.52rem;color:var(--mu);margin-top:.08rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:96px;}
+.kc-course-strip-status{font-size:.63rem;color:var(--mu);flex-shrink:0;white-space:nowrap;
+  padding-left:.4rem;border-left:1px solid var(--bdr);margin-left:.15rem;}
+.kc-course-strip-status.empty-selection{color:var(--goldd);}
+
+.kc-stage{position:relative;height:70vh;min-height:520px;max-height:900px;
+  border:1px solid var(--bdr);border-radius:14px;background:var(--sf);
+  box-shadow:var(--shadow);overflow:hidden;}
+#cm-cloud-svg{width:100%;height:100%;display:block;cursor:grab;}
+#cm-cloud-svg.grabbing{cursor:grabbing;}
+.kc-stage-toolbar{position:absolute;top:.6rem;right:.6rem;z-index:20;
+  display:flex;flex-direction:column;gap:.3rem;}
+.kc-stage-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--bdr);
+  background:rgba(255,255,255,.94);color:var(--mu);font-size:.85rem;font-weight:700;
+  cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;
+  transition:all .12s;}
+.kc-stage-btn:hover{color:var(--tx);border-color:var(--bdr2);}
 .kb-legend-box{
-  position:sticky;top:.75rem;right:.75rem;float:right;
+  position:absolute;top:.6rem;left:.6rem;z-index:20;
   background:rgba(255,255,255,.92);border:1px solid var(--bdr);
   border-radius:10px;padding:.55rem .75rem;font-size:.65rem;
-  box-shadow:var(--shadow);min-width:140px;z-index:10;
+  box-shadow:var(--shadow);min-width:140px;max-width:200px;
 }
 .kb-legend-title{font-weight:700;color:var(--mu);margin-bottom:.35rem;font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;}
 .kb-legend-row{display:flex;align-items:center;gap:.45rem;margin-bottom:.22rem;}
-.cm-cloud-selection-status{font-size:.68rem;color:var(--mu);line-height:1.45;margin-left:auto;}
-.cm-cloud-selection-status strong{color:var(--tx);}
-.cm-cloud-selection-status.empty-selection{color:var(--goldd);}
 .kc-cloud-pill text{pointer-events:none;}
+.kc-blob-path{transition:fill-opacity .18s,stroke-opacity .18s;}
 
 /* ── MD Viewer modal ──────────────────────────────────────── */
 .md-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;
@@ -2216,522 +2249,468 @@ function cmDrawMultiCompare(courses) {
 /* ================================================================
    KNOWLEDGE AREA OVERLAP VIEW
 ================================================================ */
+function cmMulberry32(seed) {
+  let a = seed >>> 0;
+  return function() {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function cmMeasurePill(measureCtx, concept, count) {
+  const LABEL_MIN = 9, LABEL_MAX = 18, LABEL_SCALE = 110, SHARED_TOPIC_BONUS = 4;
+  const PILL_PAD_X = 16, PILL_PAD_Y = 9;
+  const fontSize = Math.max(
+    LABEL_MIN,
+    Math.min(LABEL_MAX, LABEL_SCALE / Math.max(1, concept.length) + Math.min(SHARED_TOPIC_BONUS, count - 1))
+  );
+  if (measureCtx) measureCtx.font = `600 ${fontSize}px Outfit, sans-serif`;
+  const textW = measureCtx ? measureCtx.measureText(concept).width : concept.length * fontSize * 0.58;
+  const width = Math.max(70, textW + PILL_PAD_X * 2);
+  const height = fontSize + PILL_PAD_Y * 2;
+  return { fontSize, width, height, radius: Math.sqrt((width / 2) ** 2 + (height / 2) ** 2) };
+}
+
+/* Andrew's monotone chain convex hull over point centers; returns the outer boundary in drawing order. */
+function cmHullPoints(points) {
+  const sorted = [...points].sort((a, b) => a.x - b.x || a.y - b.y);
+  if (sorted.length <= 1) return sorted;
+  const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+  const lower = [];
+  sorted.forEach(p => {
+    while (lower.length >= 2) {
+      const secondLastLower = lower[lower.length - 2];
+      const lastLower = lower[lower.length - 1];
+      if (cross(secondLastLower, lastLower, p) > 0) break;
+      lower.pop();
+    }
+    lower.push(p);
+  });
+  const upper = [];
+  for (let i = sorted.length - 1; i >= 0; i--) {
+    const p = sorted[i];
+    while (upper.length >= 2) {
+      const secondLastUpper = upper[upper.length - 2];
+      const lastUpper = upper[upper.length - 1];
+      if (cross(secondLastUpper, lastUpper, p) > 0) break;
+      upper.pop();
+    }
+    upper.push(p);
+  }
+  lower.pop();
+  upper.pop();
+  return lower.concat(upper);
+}
+
+function cmInflateHull(points, pad) {
+  const cx = points.reduce((sum, p) => sum + p.x, 0) / points.length;
+  const cy = points.reduce((sum, p) => sum + p.y, 0) / points.length;
+  return points.map(p => {
+    const dx = p.x - cx;
+    const dy = p.y - cy;
+    const len = Math.hypot(dx, dy) || 1;
+    const pd = (p.radius || 0) + pad;
+    return { x: p.x + (dx / len) * pd, y: p.y + (dy / len) * pd };
+  });
+}
+
+function cmTwoPointBlob(points, pad) {
+  const [a, b] = points;
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const len = Math.hypot(dx, dy) || 1;
+  const ux = dx / len, uy = dy / len;
+  const px = -uy, py = ux;
+  const p = (((a.radius || 0) + (b.radius || 0)) / 2) * 0.58 + pad;
+  const cap = p * 0.4;
+  return [
+    { x: a.x - ux * cap + px * p, y: a.y - uy * cap + py * p },
+    { x: b.x + ux * cap + px * p, y: b.y + uy * cap + py * p },
+    { x: b.x + ux * cap - px * p, y: b.y + uy * cap - py * p },
+    { x: a.x - ux * cap - px * p, y: a.y - uy * cap - py * p },
+  ];
+}
+
+const CM_BLOB_PAD = 14;
+const CM_BLOB_LINE = d3.line().x(d => d.x).y(d => d.y).curve(d3.curveCatmullRomClosed.alpha(0.72));
+
+/* Evenly space selected-course "attractor" centroids around a ring so shared topics
+   naturally settle between the centroids of every course that covers them. */
+function cmLayoutCourseCentroids(codes, canvasW, canvasH) {
+  const map = new Map();
+  const n = codes.length;
+  if (!n) return map;
+  const cx = canvasW / 2, cy = canvasH / 2;
+  if (n === 1) { map.set(codes[0], { x: cx, y: cy }); return map; }
+  const radius = Math.min(canvasW, canvasH) * (n <= 3 ? 0.2 : n <= 6 ? 0.28 : 0.34);
+  codes.forEach((code, i) => {
+    const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
+    map.set(code, { x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius });
+  });
+  return map;
+}
+
+let _cmCloud = null;
+
+function cmCloudSignature(courses, sortedConcepts) {
+  return courses.map(c => c.code).sort().join(",") + "||" + sortedConcepts.map(([c]) => c).sort().join(",");
+}
+
+/* ── Dispatcher: mount fresh only when the underlying course/topic set actually
+   changes (filters, search); course-selection toggles reuse the live simulation
+   so topics animate fluidly instead of snapping to a freshly computed layout. ── */
 function cmRenderCloud(courses, sortedConcepts, idx) {
   const el = document.getElementById("cmv-cloud");
-
   if (!courses.length || !sortedConcepts.length) {
+    if (_cmCloud && _cmCloud.sim) _cmCloud.sim.stop();
+    _cmCloud = null;
     el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);">No Knowledge Units to display.</div>`;
     return;
   }
-
-  const LABEL_MIN = 9;
-  const LABEL_MAX = 18;
-  const LABEL_SCALE = 110;
-  const SHARED_TOPIC_BONUS = 4;
-  const PILL_PAD_X = 16;
-  const PILL_PAD_Y = 9;
-  const COURSE_PULL = 0.085;
-  const DISJOINT_REPEL = 0.22;
-  const SIMULATION_TICKS = 240;
-  const ANCHOR_SIM_TICKS = 240;
-  // Caps spiral retries after roughly a few thousand outward spiral samples, enough for this dataset size without risking runaway loops.
-  const MAX_PLACEMENT_ATTEMPTS = 2600;
-  const EDGE_PAD = 68;
-  const BLOB_PAD = 14;
-  const SPIRAL_ANGLE_STEP = 0.34;
-  // Higher alpha keeps the Catmull-Rom spline a bit tighter around the inflated hull so blobs stay compact.
-  const BLOB_CURVE_ALPHA = 0.72;
-  const BLOB_FILL_OPACITY = 0.1;
-  const BLOB_STROKE_OPACITY = 0.15;
-  const BLOB_ACTIVE_FILL_OPACITY = 0.2;
-  const BLOB_DIM_FILL_OPACITY = 0.04;
-  const BLOB_ACTIVE_STROKE_OPACITY = 0.24;
-  const BLOB_DIM_STROKE_OPACITY = 0.08;
-  const ANCHOR_CHARGE_MULTIPLIER = 11;
-  const ANCHOR_ORBIT_MIN_X = 240;
-  const ANCHOR_ORBIT_WIDTH_RATIO = 0.33;
-  const ANCHOR_ORBIT_BASE_X = 460;
-  const ANCHOR_ORBIT_X_PER_COURSE = 5;
-  const ANCHOR_ORBIT_MIN_Y = 180;
-  const ANCHOR_ORBIT_HEIGHT_RATIO = 0.27;
-  const ANCHOR_ORBIT_BASE_Y = 310;
-  const ANCHOR_ORBIT_Y_PER_COURSE = 4;
-  const ANCHOR_RADIUS_MIN = 88;
-  const ANCHOR_RADIUS_MAX = 156;
-  const ANCHOR_RADIUS_SCALE_OFFSET = 1.6;
-  const ANCHOR_HEADER_OFFSET = 90;
-  const DISJOINT_PILL_SPACING = 26;
-  const HEADER_X = 16;
-  const HEADER_Y = 22;
-  const SUBHEADER_Y = 38;
   normalizeCloudSelection(courses);
-  const cloudSelection = [...cmCloudSelection];
-  const selectedCourseSet = new Set(cloudSelection);
-  const selectedCourses = courses.filter(course => selectedCourseSet.has(course.code));
-  syncCloudPinnedCourse(cloudSelection);
-  const containerW = Math.max(860, el.clientWidth || 1100);
-  const approxCols = Math.max(4, Math.floor(containerW / 180));
-  const canvasW = Math.max(containerW, approxCols * 180);
-  const canvasH = Math.max(620, Math.ceil(sortedConcepts.length / approxCols) * 112 + 180);
-  const centerX = canvasW / 2;
-  const centerY = canvasH / 2 + 18;
-  const measureCanvas = document.createElement("canvas");
-  const measureCtx = measureCanvas.getContext("2d");
+  const signature = cmCloudSignature(courses, sortedConcepts);
+  const needsRemount = !_cmCloud || _cmCloud.signature !== signature || !document.getElementById("cm-cloud-svg");
+  if (needsRemount) {
+    cmMountCloud(courses, sortedConcepts, idx, signature);
+  } else {
+    _cmCloud.idx = idx;
+    _cmCloud.courses = courses;
+    cmUpdateCloudSelection();
+  }
+}
+
+function cmMountCloud(courses, sortedConcepts, idx, signature) {
+  const el = document.getElementById("cmv-cloud");
+  if (_cmCloud && _cmCloud.sim) _cmCloud.sim.stop();
+
+  // Fixed logical canvas that every node is clamped inside — this guarantees the
+  // "fit view" transform always reveals the full topic space, however it settles.
+  const canvasW = Math.max(1000, Math.round(Math.sqrt(sortedConcepts.length) * 190));
+  const canvasH = Math.max(680, Math.round(Math.sqrt(sortedConcepts.length) * 140));
+
   const courseByCode = Object.fromEntries(courses.map(c => [c.code, c]));
   const courseIndexByCode = new Map(courses.map((course, i) => [course.code, i]));
   const courseColor = code => CM_PALETTE[(courseIndexByCode.get(code) ?? 0) % CM_PALETTE.length] || semColor(courseByCode[code]?.semester || 0);
-  const coursePills = courses.map(course => {
-   const color = sanitizeCssColor(courseColor(course.code));
-   const courseCode = String(course.code || "");
-   const safeCode = courseCode.replace(/'/g, "\\'");
-   const safeLabel = escH(courseCode);
-   const safeTitle = escH(course.title || "");
-   const sel = selectedCourseSet.has(course.code);
-   const disabled = !sel && selectedCourses.length >= CM_CLOUD_MAX_COURSES;
-   return `<button class="cm-cmp-pill${sel ? ' active' : ''}"
-     id="cmcloud-${safeLabel}"
-     style="${sel ? `background:${color}18;border-color:${color};color:${color};` : ''}"
-     onclick="cmToggleCloudCourse('${safeCode}')"
-     ${disabled ? "disabled" : ""}
-     title="${safeTitle}">
-     <span class="cm-cmp-pill-code" style="${sel ? `color:${color};` : ''}">${safeLabel}</span>
-     <span class="cm-cmp-pill-title" style="${sel ? `color:${color};` : ''}">${safeTitle}</span>
-     </button>`;
-  }).join("");
 
-  function measurePill(concept, count) {
-   const fontSize = Math.max(
-     LABEL_MIN,
-     Math.min(LABEL_MAX, LABEL_SCALE / Math.max(1, concept.length) + Math.min(SHARED_TOPIC_BONUS, count - 1))
-    );
-    if (measureCtx) measureCtx.font = `600 ${fontSize}px Outfit, sans-serif`;
-    const textW = measureCtx ? measureCtx.measureText(concept).width : concept.length * fontSize * 0.58;
-    const width = Math.max(70, textW + PILL_PAD_X * 2);
-    const height = fontSize + PILL_PAD_Y * 2;
-    return { fontSize, width, height, radius: Math.sqrt((width / 2) ** 2 + (height / 2) ** 2) };
-  }
+  const measureCanvas = document.createElement("canvas");
+  const measureCtx = measureCanvas.getContext("2d");
+  const rng = cmMulberry32(sortedConcepts.length * 2654435761 % 2147483647 || 1);
 
-  function overlaps(box, placed) {
-    return placed.some(p =>
-      Math.abs(box.x - p.x) < (box.width + p.width) / 2 + 8 &&
-      Math.abs(box.y - p.y) < (box.height + p.height) / 2 + 8
-    );
-  }
-
-  const anchorOrbitX = calculateAnchorOrbit(canvasW, courses.length, {
-    min: ANCHOR_ORBIT_MIN_X,
-    ratio: ANCHOR_ORBIT_WIDTH_RATIO,
-    base: ANCHOR_ORBIT_BASE_X,
-    perCourse: ANCHOR_ORBIT_X_PER_COURSE,
-  });
-  const anchorOrbitY = calculateAnchorOrbit(canvasH, courses.length, {
-    min: ANCHOR_ORBIT_MIN_Y,
-    ratio: ANCHOR_ORBIT_HEIGHT_RATIO,
-    base: ANCHOR_ORBIT_BASE_Y,
-    perCourse: ANCHOR_ORBIT_Y_PER_COURSE,
-  });
-  const anchorRadius = Math.max(ANCHOR_RADIUS_MIN, Math.min(ANCHOR_RADIUS_MAX, Math.max(canvasW, canvasH) / (Math.sqrt(Math.max(1, courses.length)) + ANCHOR_RADIUS_SCALE_OFFSET)));
-  const anchorNodes = courses.map((course, i) => {
-    const angle = (i / Math.max(1, courses.length)) * Math.PI * 2;
-    const homeX = centerX + Math.cos(angle) * anchorOrbitX;
-    const homeY = centerY + Math.sin(angle) * anchorOrbitY;
-    return { code: course.code, homeX, homeY, x: homeX, y: homeY };
-  });
-  const anchorSim = d3.forceSimulation(anchorNodes)
-    .force("charge", d3.forceManyBody().strength(-Math.max(900, anchorRadius * ANCHOR_CHARGE_MULTIPLIER)).distanceMax(Math.max(canvasW, canvasH)))
-    .force("collide", d3.forceCollide().radius(anchorRadius).iterations(3).strength(1))
-    .force("homeX", d3.forceX(d => d.homeX).strength(0.08))
-    .force("homeY", d3.forceY(d => d.homeY).strength(0.08))
-    .velocityDecay(0.4)
-    .stop();
-  for (let i = 0; i < ANCHOR_SIM_TICKS; i++) {
-    anchorSim.tick();
-    anchorNodes.forEach(anchor => {
-      anchor.x = Math.max(EDGE_PAD * 2, Math.min(canvasW - EDGE_PAD * 2, anchor.x));
-      anchor.y = Math.max(HEADER_Y + ANCHOR_HEADER_OFFSET, Math.min(canvasH - EDGE_PAD * 2, anchor.y));
-    });
-  }
-  const anchorByCode = new Map(anchorNodes.map(anchor => [anchor.code, anchor]));
-  const averageAnchors = codes => {
-    const anchors = codes.map(code => anchorByCode.get(code)).filter(Boolean);
-    if (!anchors.length) return { x: centerX, y: centerY };
+  const nodes = sortedConcepts.map(([concept, codes]) => {
+    const metrics = cmMeasurePill(measureCtx, concept, codes.length);
     return {
-      x: anchors.reduce((sum, anchor) => sum + anchor.x, 0) / anchors.length,
-      y: anchors.reduce((sum, anchor) => sum + anchor.y, 0) / anchors.length,
-    };
-  };
-
-  const placed = [];
-  const nodes = sortedConcepts.map(([concept, codes], i) => {
-    const metrics = measurePill(concept, codes.length);
-    const anchorCenter = averageAnchors(codes);
-    const node = {
       id: concept,
       concept,
       courses: [...codes],
       courseSet: new Set(codes),
       count: codes.length,
       color: getCMConceptColor(concept),
-      selected: codes.some(code => selectedCourseSet.has(code)),
       ...metrics,
-      x: anchorCenter.x,
-      y: anchorCenter.y,
-      baseX: anchorCenter.x,
-      baseY: anchorCenter.y,
+      x: CM_BLOB_PAD + 40 + rng() * (canvasW - (CM_BLOB_PAD + 40) * 2),
+      y: CM_BLOB_PAD + 40 + rng() * (canvasH - (CM_BLOB_PAD + 40) * 2),
+      targetX: null,
+      targetY: null,
+      selected: false,
     };
-    let angle = i * 0.58;
-    let step = 0;
-    let found = false;
-    while (step < MAX_PLACEMENT_ATTEMPTS) {
-      const spiralR = 10 + step * 1.55;
-      const candidate = {
-        x: anchorCenter.x + Math.cos(angle) * spiralR,
-        y: anchorCenter.y + Math.sin(angle) * spiralR * 0.76,
-        width: node.width,
-        height: node.height,
-      };
-      if (!overlaps(candidate, placed)) {
-        node.x = node.baseX = candidate.x;
-        node.y = node.baseY = candidate.y;
-        placed.push(candidate);
-        found = true;
-        break;
-      }
-      angle += SPIRAL_ANGLE_STEP;
-      step += 1;
-    }
-    if (!found) {
-      placed.push({ x: node.x, y: node.y, width: node.width, height: node.height });
-    }
-    return node;
   });
-
-  function courseAnchorForce(strength) {
-    let simNodes = [];
-    function force(alpha) {
-      simNodes.forEach(node => {
-        const anchors = (node.courses || []).map(code => anchorByCode.get(code)).filter(Boolean);
-        if (!anchors.length) return;
-        let dx = 0, dy = 0;
-        anchors.forEach(anchor => {
-          dx += anchor.x - node.x;
-          dy += anchor.y - node.y;
-        });
-        node.vx += (dx / anchors.length) * strength * alpha;
-        node.vy += (dy / anchors.length) * strength * alpha;
-      });
-    }
-    force.initialize = ns => {
-      simNodes = ns;
-    };
-    return force;
-  }
-
-  function disjointCourseRepel(strength) {
-    let simNodes = [];
-    let sharedCoursePairs = new Set();
-    const pairKey = (a, b) => JSON.stringify([a.id, b.id]);
-    function force(alpha) {
-      for (let i = 0; i < simNodes.length; i++) {
-        const a = simNodes[i];
-        for (let j = i + 1; j < simNodes.length; j++) {
-          const b = simNodes[j];
-          if (sharedCoursePairs.has(pairKey(a, b))) continue;
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
-          const dist = Math.hypot(dx, dy) || 1;
-          const minDist = a.radius + b.radius + DISJOINT_PILL_SPACING;
-          if (dist >= minDist) continue;
-          const push = ((minDist - dist) / dist) * strength * alpha;
-          const px = dx * push;
-          const py = dy * push;
-          a.vx -= px;
-          a.vy -= py;
-          b.vx += px;
-          b.vy += py;
-        }
-      }
-    }
-    force.initialize = ns => {
-      simNodes = ns;
-      sharedCoursePairs = new Set();
-      for (let i = 0; i < ns.length; i++) {
-        for (let j = i + 1; j < ns.length; j++) {
-          if (ns[i].courses.some(code => ns[j].courseSet.has(code))) {
-            sharedCoursePairs.add(pairKey(ns[i], ns[j]));
-          }
-        }
-      }
-    };
-    return force;
-  }
-
-  const sim = d3.forceSimulation(nodes)
-    .force("collide", d3.forceCollide().radius(d => d.radius + 2).iterations(2).strength(1))
-    .force("anchorX", d3.forceX(d => d.baseX).strength(0.025))
-    .force("anchorY", d3.forceY(d => d.baseY).strength(0.025))
-    .force("cluster", courseAnchorForce(COURSE_PULL))
-    .force("disjointRepel", disjointCourseRepel(DISJOINT_REPEL))
-    .velocityDecay(0.42)
-    .stop();
-  for (let i = 0; i < SIMULATION_TICKS; i++) sim.tick();
-
-  const minX = d3.min(nodes, d => d.x - d.width / 2) || 0;
-  const maxX = d3.max(nodes, d => d.x + d.width / 2) || canvasW;
-  const minY = d3.min(nodes, d => d.y - d.height / 2) || 0;
-  const maxY = d3.max(nodes, d => d.y + d.height / 2) || canvasH;
-  const shiftX = EDGE_PAD - minX;
-  const shiftY = EDGE_PAD + 46 - minY;
-  nodes.forEach(node => {
-    node.x += shiftX;
-    node.y += shiftY;
-  });
-
-  const svgW = Math.max(containerW, Math.ceil(maxX - minX + EDGE_PAD * 2));
-  const svgH = Math.max(620, Math.ceil(maxY - minY + EDGE_PAD * 2 + 68));
-
-  /* Andrew's monotone chain convex hull over point centers; returns the outer boundary in drawing order. */
-  function hullPoints(points) {
-    const sorted = [...points].sort((a, b) => a.x - b.x || a.y - b.y);
-    if (sorted.length <= 1) return sorted;
-    // Positive cross products indicate a counterclockwise turn; non-positive turns fall inside the hull and are removed.
-    const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
-    const lower = [];
-    // Sweep left-to-right to build the lower hull.
-    sorted.forEach(p => {
-      while (lower.length >= 2) {
-        const secondLastLower = lower[lower.length - 2];
-        const lastLower = lower[lower.length - 1];
-        if (cross(secondLastLower, lastLower, p) > 0) break;
-        lower.pop();
-      }
-      lower.push(p);
-    });
-    const upper = [];
-    // Sweep back right-to-left to build the upper hull, then join both chains into one perimeter.
-    for (let i = sorted.length - 1; i >= 0; i--) {
-      const p = sorted[i];
-      while (upper.length >= 2) {
-        const secondLastUpper = upper[upper.length - 2];
-        const lastUpper = upper[upper.length - 1];
-        if (cross(secondLastUpper, lastUpper, p) > 0) break;
-        upper.pop();
-      }
-      upper.push(p);
-    }
-    lower.pop();
-    upper.pop();
-    return lower.concat(upper);
-  }
-
-  function inflateHull(points) {
-    const cx = points.reduce((sum, p) => sum + p.x, 0) / points.length;
-    const cy = points.reduce((sum, p) => sum + p.y, 0) / points.length;
-    return points.map(p => {
-      const dx = p.x - cx;
-      const dy = p.y - cy;
-      const len = Math.hypot(dx, dy) || 1;
-      const pad = (p.radius || 0) + BLOB_PAD;
-      return { x: p.x + (dx / len) * pad, y: p.y + (dy / len) * pad };
-    });
-  }
-
-  const line = d3.line().x(d => d.x).y(d => d.y).curve(d3.curveCatmullRomClosed.alpha(BLOB_CURVE_ALPHA));
-  function twoPointBlob(points) {
-    const [a, b] = points;
-    const dx = b.x - a.x;
-    const dy = b.y - a.y;
-    const len = Math.hypot(dx, dy) || 1;
-    const ux = dx / len;
-    const uy = dy / len;
-    const px = -uy;
-    const py = ux;
-    const pad = (((a.radius || 0) + (b.radius || 0)) / 2) * 0.58 + BLOB_PAD;
-    const cap = pad * 0.4;
-    return [
-      { x: a.x - ux * cap + px * pad, y: a.y - uy * cap + py * pad },
-      { x: b.x + ux * cap + px * pad, y: b.y + uy * cap + py * pad },
-      { x: b.x + ux * cap - px * pad, y: b.y + uy * cap - py * pad },
-      { x: a.x - ux * cap - px * pad, y: a.y - uy * cap - py * pad },
-    ];
-  }
-  const conceptNodeMap = new Map(nodes.map(node => [node.concept, node]));
-  const courseGroups = selectedCourses.map(course => {
-    const conceptNodes = (getConceptsForCourse(course.code) || [])
-      .filter(concept => idx[concept])
-      .map(concept => conceptNodeMap.get(concept))
-      .filter(Boolean);
-    const color = courseColor(course.code);
-    const centroid = conceptNodes.length
-      ? {
-          x: conceptNodes.reduce((sum, n) => sum + n.x, 0) / conceptNodes.length,
-          y: conceptNodes.reduce((sum, n) => sum + n.y, 0) / conceptNodes.length,
-        }
-      : null;
-    const hullSource = conceptNodes.map(n => ({ x: n.x, y: n.y, radius: n.radius }));
-    const hull = conceptNodes.length >= 3 ? hullPoints(hullSource) : [];
-    const blobPoints = conceptNodes.length >= 3 ? inflateHull(hull) : conceptNodes.length === 2 ? twoPointBlob(hullSource) : [];
-    return {
-      course,
-      color,
-      nodes: conceptNodes,
-      centroid,
-      hull,
-      path: blobPoints.length >= 3 ? line(blobPoints) : null,
-    };
-  }).filter(group => group.nodes.length);
-  const cloudNote = getCloudSelectionMessage(selectedCourses.length, courseGroups.length);
-  const cloudSelectionStatusClass = `cm-cloud-selection-status${selectedCourses.length ? "" : " empty-selection"}`;
+  const nodeByConcept = new Map(nodes.map(n => [n.concept, n]));
 
   el.innerHTML = `
-    <div class="cm-cmp-pills">
-      <span class="cm-cmp-heading">Course blobs:</span>
-      ${coursePills}
-      <span class="${cloudSelectionStatusClass}">${cloudNote}</span>
-    </div>
-    <div class="kc-cloud-wrap">
+    <div class="kc-course-strip" id="kc-course-strip"></div>
+    <div class="kc-stage" id="kc-stage">
       <div class="kb-legend-box">
         <div class="kb-legend-title">Knowledge Area Overlap</div>
-        <div class="kb-legend-row"><span style="width:28px;height:16px;border-radius:999px;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.5);display:inline-block;"></span><span style="color:var(--mu);">pill = Knowledge Unit</span></div>
-        <div class="kb-legend-row"><span style="width:28px;height:16px;border-radius:999px;background:rgba(14,165,233,.1);display:inline-block;"></span><span style="color:var(--mu);">colored blob = selected course coverage</span></div>
-        <div style="font-size:.59rem;color:var(--dim);margin-top:.35rem;line-height:1.45;">
-          Overlapping blobs =<br>shared Knowledge Units between selected courses.
+        <div class="kb-legend-row"><span style="width:22px;height:14px;border-radius:999px;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.5);display:inline-block;"></span><span style="color:var(--mu);">pill = Knowledge Unit</span></div>
+        <div class="kb-legend-row"><span style="width:22px;height:14px;border-radius:999px;background:rgba(14,165,233,.14);display:inline-block;"></span><span style="color:var(--mu);">blob = selected course</span></div>
+        <div style="font-size:.58rem;color:var(--dim);margin-top:.3rem;line-height:1.4;">
+          Overlapping blobs = shared units.<br>Scroll/drag to zoom &amp; pan.
         </div>
       </div>
-      <svg id="cm-cloud-svg" width="${svgW}" height="${svgH}" style="display:block;">
-        <text x="${HEADER_X}" y="${HEADER_Y}" font-family="'Crimson Pro',serif" font-size="14px" font-weight="700" fill="var(--tx)">Knowledge Area Overlap</text>
-        <text x="${HEADER_X}" y="${SUBHEADER_Y}" font-family="'Outfit',sans-serif" font-size="10.5px" fill="var(--mu)">Knowledge Units are force-simulated around course anchors; shared units settle between courses to show true overlap.</text>
-      </svg>
+      <div class="kc-stage-toolbar">
+        <button class="kc-stage-btn" onclick="cmCloudZoomBy(1.3)" title="Zoom in">+</button>
+        <button class="kc-stage-btn" onclick="cmCloudZoomBy(0.77)" title="Zoom out">\u2212</button>
+        <button class="kc-stage-btn" onclick="cmFitView()" title="Fit all topics">\u2922</button>
+      </div>
+      <svg id="cm-cloud-svg"></svg>
     </div>`;
 
   const svg = d3.select("#cm-cloud-svg");
-  const blobLayer = svg.append("g").attr("transform", "translate(0,18)").style("mix-blend-mode", "multiply");
-  const pillLayer = svg.append("g").attr("transform", "translate(0,18)");
-  const cloudState = { pinned: cmCloudPinnedCourseCode };
+  const zoomLayer = svg.append("g").attr("class", "kc-zoom-layer");
+  const blobLayer = zoomLayer.append("g").attr("class", "kc-blob-layer").style("mix-blend-mode", "multiply");
+  const pillLayer = zoomLayer.append("g").attr("class", "kc-pill-layer");
 
-  const blobSel = blobLayer.selectAll("g.kc-blob")
-    .data(courseGroups)
-    .enter()
-    .append("g")
-    .attr("class", "kc-blob")
-    .style("cursor", "pointer");
+  const zoom = d3.zoom()
+    .scaleExtent([0.2, 4])
+    .on("start", () => svg.classed("grabbing", true))
+    .on("zoom", event => zoomLayer.attr("transform", event.transform))
+    .on("end", () => svg.classed("grabbing", false));
+  svg.call(zoom).on("dblclick.zoom", null);
 
-  blobSel.each(function(group) {
-    const g = d3.select(this);
-    if (group.path) {
-      g.append("path")
-        .attr("d", group.path)
-        .attr("fill", group.color)
-        .attr("fill-opacity", BLOB_FILL_OPACITY)
-        .attr("stroke", group.color)
-        .attr("stroke-opacity", BLOB_STROKE_OPACITY)
-        .attr("stroke-width", 1.1);
-    } else if (group.centroid) {
-      g.append("circle")
-        .attr("cx", group.centroid.x)
-        .attr("cy", group.centroid.y)
-        .attr("r", 10)
-        .attr("fill", group.color)
-        .attr("fill-opacity", BLOB_FILL_OPACITY + 0.02)
-        .attr("stroke", group.color)
-        .attr("stroke-opacity", BLOB_STROKE_OPACITY + 0.03)
-        .attr("stroke-width", 1);
-    }
-  });
-
-  function applyBlobState(focusCode, pinnedCode) {
-    blobSel.each(function(group) {
-      const activeCode = pinnedCode || focusCode;
-      const isActive = !!activeCode && group.course.code === activeCode;
-      const dim = !!activeCode && !isActive;
-      d3.select(this).selectAll("path,circle")
-        .attr("fill-opacity", isActive ? BLOB_ACTIVE_FILL_OPACITY : dim ? BLOB_DIM_FILL_OPACITY : BLOB_FILL_OPACITY)
-        .attr("stroke-opacity", isActive ? BLOB_ACTIVE_STROKE_OPACITY : dim ? BLOB_DIM_STROKE_OPACITY : BLOB_STROKE_OPACITY)
-        .attr("stroke-width", isActive ? 1.4 : 1.1);
-      if (isActive) this.parentNode.appendChild(this);
-    });
-  }
-
-  blobSel
-    .on("mouseenter", function(e, group) {
-      if (!cloudState.pinned) applyBlobState(group.course.code, null);
-      showTip(e, `
-        <div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div>
-        <div class="tm"><strong>${group.nodes.length} Knowledge Unit${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`);
-    })
-    .on("mousemove", moveTip)
-    .on("mouseleave", function() {
-      hideTip();
-      applyBlobState(null, cloudState.pinned);
-    })
-    .on("click", function(e, group) {
-      e.stopPropagation();
-      cloudState.pinned = cloudState.pinned === group.course.code ? null : group.course.code;
-      cmCloudPinnedCourseCode = cloudState.pinned;
-      applyBlobState(null, cloudState.pinned);
-      if (cloudState.pinned) showTip(e, `
-        <div class="th">${escH(group.course.code)} — ${escH(group.course.title)}</div>
-        <div class="tm"><strong>${group.nodes.length} Knowledge Unit${group.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`);
-      else hideTip();
-    });
+  _cmCloud = {
+    signature, el, svg, zoom, zoomLayer, blobLayer, pillLayer,
+    nodes, nodeByConcept, courses, courseByCode, courseColor,
+    canvasW, canvasH, idx,
+    pinned: cmCloudPinnedCourseCode, hovered: null,
+    blobGroups: [], blobSel: null,
+  };
 
   const pillSel = pillLayer.selectAll("g.kc-cloud-pill")
-    .data(nodes)
+    .data(nodes, d => d.concept)
     .enter()
     .append("g")
     .attr("class", "kc-cloud-pill")
-    .attr("transform", d => `translate(${d.x},${d.y})`)
     .style("cursor", "pointer")
     .on("mouseenter", (e, d) => {
       kbShowTip(e, d.concept, d.courses.join(", "));
-      d3.select(e.currentTarget).select("rect").attr("fill-opacity", 0.24).attr("stroke-opacity", 0.72);
+      d3.select(e.currentTarget).select("rect").attr("fill-opacity", 0.3).attr("stroke-opacity", 0.8);
     })
     .on("mousemove", moveTip)
     .on("mouseleave", e => {
       hideTip();
-      d3.select(e.currentTarget).select("rect").attr("fill-opacity", 0.15).attr("stroke-opacity", 0.5);
+      const d = d3.select(e.currentTarget).datum();
+      d3.select(e.currentTarget).select("rect")
+        .attr("fill-opacity", d.selected ? 0.2 : 0.05)
+        .attr("stroke-opacity", d.selected ? 0.65 : 0.18);
     })
     .on("click", (e, d) => {
       e.stopPropagation();
-      cloudState.pinned = null;
+      _cmCloud.pinned = null;
       cmCloudPinnedCourseCode = null;
-      applyBlobState(null, null);
+      cmApplyBlobFocus();
       cmClickConcept(d.concept, null);
     });
 
   pillSel.append("rect")
-    .attr("x", d => -d.width / 2)
-    .attr("y", d => -d.height / 2)
-    .attr("rx", d => d.height / 2)
-    .attr("ry", d => d.height / 2)
-    .attr("width", d => d.width)
-    .attr("height", d => d.height)
-    .attr("fill", d => d.color)
-    .attr("fill-opacity", d => d.selected ? 0.2 : 0.05)
-    .attr("stroke", d => d.color)
-    .attr("stroke-opacity", d => d.selected ? 0.65 : 0.18)
-    .attr("stroke-width", d => d.selected ? 1.6 : 1);
+    .attr("x", d => -d.width / 2).attr("y", d => -d.height / 2)
+    .attr("rx", d => d.height / 2).attr("ry", d => d.height / 2)
+    .attr("width", d => d.width).attr("height", d => d.height)
+    .attr("fill", d => d.color).attr("fill-opacity", 0.05)
+    .attr("stroke", d => d.color).attr("stroke-opacity", 0.18)
+    .attr("stroke-width", 1);
 
   pillSel.append("text")
-    .attr("text-anchor", "middle")
-    .attr("dominant-baseline", "central")
+    .attr("text-anchor", "middle").attr("dominant-baseline", "central")
     .attr("font-family", "'Outfit',sans-serif")
     .attr("font-size", d => `${d.fontSize}px`)
-    .attr("font-weight", d => d.selected ? "800" : "500")
-    .attr("fill", d => d.color)
-    .attr("fill-opacity", d => d.selected ? 1 : 0.35)
+    .attr("font-weight", 500)
+    .attr("fill", d => d.color).attr("fill-opacity", 0.35)
     .text(d => d.concept);
 
-  window._cmFitFn = () => {
-    el.scrollTo({
-      left: Math.max(0, (svgW - el.clientWidth) / 2),
-      top: 0,
-      behavior: "smooth"
-    });
-  };
+  _cmCloud.pillSel = pillSel;
 
-  applyBlobState(null, cloudState.pinned);
+  const sim = d3.forceSimulation(nodes)
+    .force("charge", d3.forceManyBody().strength(-26))
+    .force("collide", d3.forceCollide().radius(d => d.radius + 3).strength(0.9).iterations(2))
+    .force("x", d3.forceX(d => d.targetX != null ? d.targetX : canvasW / 2).strength(d => d.targetX != null ? 0.16 : 0.012))
+    .force("y", d3.forceY(d => d.targetY != null ? d.targetY : canvasH / 2).strength(d => d.targetY != null ? 0.16 : 0.012))
+    .alphaDecay(0.018)
+    .alphaMin(0.001)
+    .velocityDecay(0.55)
+    .on("tick", cmCloudTick);
+
+  _cmCloud.sim = sim;
+
+  window._cmFitFn = cmCloudFitView;
+  requestAnimationFrame(cmCloudFitView);
+
+  cmUpdateCloudSelection();
 }
+
+function cmCloudTick() {
+  if (!_cmCloud) return;
+  const { nodes, pillSel, canvasW, canvasH } = _cmCloud;
+  const pad = 10;
+  nodes.forEach(d => {
+    d.x = Math.max(pad + d.width / 2, Math.min(canvasW - pad - d.width / 2, d.x));
+    d.y = Math.max(pad + d.height / 2, Math.min(canvasH - pad - d.height / 2, d.y));
+  });
+  pillSel.attr("transform", d => `translate(${d.x},${d.y})`);
+  cmDrawBlobs();
+}
+
+/* Recompute each selected course's blob boundary from its member topics' *current*
+   simulated positions, so blobs fluidly track the nodes every tick. */
+function cmDrawBlobs() {
+  if (!_cmCloud) return;
+  const { blobLayer, nodeByConcept, courses, courseColor, idx } = _cmCloud;
+  const selectedCourseSet = new Set(cmCloudSelection);
+  const selectedCourses = courses.filter(c => selectedCourseSet.has(c.code));
+
+  const groups = selectedCourses.map(course => {
+    const conceptList = (getConceptsForCourse(course.code) || []).filter(c => idx[c]);
+    const conceptNodes = conceptList.map(c => nodeByConcept.get(c)).filter(Boolean);
+    const hullSource = conceptNodes.map(n => ({ x: n.x, y: n.y, radius: n.radius }));
+    const hull = conceptNodes.length >= 3 ? cmHullPoints(hullSource) : [];
+    const blobPoints = conceptNodes.length >= 3 ? cmInflateHull(hull, CM_BLOB_PAD)
+      : conceptNodes.length === 2 ? cmTwoPointBlob(hullSource, CM_BLOB_PAD) : [];
+    const centroid = conceptNodes.length ? {
+      x: conceptNodes.reduce((s, n) => s + n.x, 0) / conceptNodes.length,
+      y: conceptNodes.reduce((s, n) => s + n.y, 0) / conceptNodes.length,
+    } : null;
+    return {
+      course, color: courseColor(course.code), nodes: conceptNodes, centroid,
+      path: blobPoints.length >= 3 ? CM_BLOB_LINE(blobPoints) : null,
+    };
+  }).filter(g => g.nodes.length);
+
+  const sel = blobLayer.selectAll("g.kc-blob").data(groups, g => g.course.code);
+  sel.exit().remove();
+
+  const enter = sel.enter().append("g").attr("class", "kc-blob").style("cursor", "pointer")
+    .on("mouseenter", function(e, g) {
+      _cmCloud.hovered = g.course.code;
+      cmApplyBlobFocus();
+      showTip(e, `<div class="th">${escH(g.course.code)} \u2014 ${escH(g.course.title)}</div>
+        <div class="tm"><strong>${g.nodes.length} Knowledge Unit${g.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`);
+    })
+    .on("mousemove", moveTip)
+    .on("mouseleave", function() {
+      _cmCloud.hovered = null;
+      cmApplyBlobFocus();
+      hideTip();
+    })
+    .on("click", function(e, g) {
+      e.stopPropagation();
+      _cmCloud.pinned = _cmCloud.pinned === g.course.code ? null : g.course.code;
+      cmCloudPinnedCourseCode = _cmCloud.pinned;
+      cmApplyBlobFocus();
+      if (_cmCloud.pinned) showTip(e, `<div class="th">${escH(g.course.code)} \u2014 ${escH(g.course.title)}</div>
+        <div class="tm"><strong>${g.nodes.length} Knowledge Unit${g.nodes.length !== 1 ? "s" : ""} in current view</strong></div>`);
+      else hideTip();
+    });
+  enter.append("path").attr("class", "kc-blob-path");
+  enter.append("circle").attr("class", "kc-blob-dot");
+
+  const merged = enter.merge(sel);
+  merged.each(function(g) {
+    const node = d3.select(this);
+    const path = node.select("path.kc-blob-path");
+    const dot = node.select("circle.kc-blob-dot");
+    if (g.path) {
+      path.attr("d", g.path).style("display", null).attr("fill", g.color).attr("stroke", g.color);
+      dot.style("display", "none");
+    } else if (g.centroid) {
+      path.style("display", "none");
+      dot.attr("cx", g.centroid.x).attr("cy", g.centroid.y).attr("r", 10).style("display", null)
+        .attr("fill", g.color).attr("stroke", g.color);
+    } else {
+      path.style("display", "none");
+      dot.style("display", "none");
+    }
+  });
+
+  _cmCloud.blobGroups = groups;
+  _cmCloud.blobSel = merged;
+  cmApplyBlobFocus();
+}
+
+function cmApplyBlobFocus() {
+  if (!_cmCloud || !_cmCloud.blobSel) return;
+  const activeCode = _cmCloud.pinned || _cmCloud.hovered;
+  _cmCloud.blobSel.each(function(g) {
+    const isActive = !!activeCode && g.course.code === activeCode;
+    const dim = !!activeCode && !isActive;
+    d3.select(this).selectAll("path.kc-blob-path,circle.kc-blob-dot")
+      .attr("fill-opacity", isActive ? 0.22 : dim ? 0.035 : 0.1)
+      .attr("stroke-opacity", isActive ? 0.5 : dim ? 0.06 : 0.16)
+      .attr("stroke-width", isActive ? 1.6 : 1.1);
+    if (isActive) this.parentNode.appendChild(this);
+  });
+}
+
+/* Re-targets nodes toward the centroids of the currently-selected courses (or lets
+   them float freely if unselected), refreshes the compact course strip, and gently
+   reheats the simulation so the transition between selections is animated. */
+function cmUpdateCloudSelection() {
+  if (!_cmCloud) return;
+  normalizeCloudSelection(_cmCloud.courses);
+  syncCloudPinnedCourse(cmCloudSelection);
+  _cmCloud.pinned = cmCloudPinnedCourseCode;
+
+  const selectedCourseSet = new Set(cmCloudSelection);
+  const selectedCourses = _cmCloud.courses.filter(c => selectedCourseSet.has(c.code));
+  const centroids = cmLayoutCourseCentroids(selectedCourses.map(c => c.code), _cmCloud.canvasW, _cmCloud.canvasH);
+
+  _cmCloud.nodes.forEach(n => {
+    const myCourses = n.courses.filter(code => selectedCourseSet.has(code));
+    n.selected = myCourses.length > 0;
+    if (myCourses.length) {
+      let tx = 0, ty = 0;
+      myCourses.forEach(code => { const c = centroids.get(code); tx += c.x; ty += c.y; });
+      n.targetX = tx / myCourses.length;
+      n.targetY = ty / myCourses.length;
+    } else {
+      n.targetX = null;
+      n.targetY = null;
+    }
+  });
+
+  _cmCloud.pillSel.select("rect")
+    .attr("fill-opacity", d => d.selected ? 0.2 : 0.05)
+    .attr("stroke-opacity", d => d.selected ? 0.65 : 0.18)
+    .attr("stroke-width", d => d.selected ? 1.6 : 1);
+  _cmCloud.pillSel.select("text")
+    .attr("font-weight", d => d.selected ? 800 : 500)
+    .attr("fill-opacity", d => d.selected ? 1 : 0.35);
+
+  if (_cmCloud.sim) _cmCloud.sim.alpha(Math.max(_cmCloud.sim.alpha(), 0.6)).restart();
+
+  cmDrawBlobs();
+  cmRenderCourseStrip();
+}
+
+function cmRenderCourseStrip() {
+  const track = document.getElementById("kc-course-strip");
+  if (!track || !_cmCloud) return;
+  const { courses, courseColor } = _cmCloud;
+  const selectedCourseSet = new Set(cmCloudSelection);
+  const selectedCourses = courses.filter(c => selectedCourseSet.has(c.code));
+  const chips = courses.map(course => {
+    const color = sanitizeCssColor(courseColor(course.code));
+    const courseCode = String(course.code || "");
+    const safeCode = courseCode.replace(/'/g, "\\'");
+    const safeLabel = escH(courseCode);
+    const safeTitle = escH(course.title || "");
+    const sel = selectedCourseSet.has(course.code);
+    const disabled = !sel && selectedCourses.length >= CM_CLOUD_MAX_COURSES;
+    return `<button class="kc-course-chip${sel ? " active" : ""}"
+      style="${sel ? `background:${color}18;border-color:${color};color:${color};` : ""}"
+      onclick="cmToggleCloudCourse('${safeCode}')"
+      ${disabled ? "disabled" : ""}
+      title="${safeTitle}">
+      <span class="kc-course-chip-code" style="${sel ? `color:${color};` : ""}">${safeLabel}</span>
+      <span class="kc-course-chip-title" style="${sel ? `color:${color};` : ""}">${safeTitle}</span>
+      </button>`;
+  }).join("");
+  const visibleCount = _cmCloud.blobGroups ? _cmCloud.blobGroups.length : selectedCourses.length;
+  const cloudNote = getCloudSelectionMessage(selectedCourses.length, visibleCount);
+  const statusClass = `kc-course-strip-status${selectedCourses.length ? "" : " empty-selection"}`;
+  track.innerHTML = `
+    <span class="kc-course-strip-label">Courses</span>
+    <div class="kc-course-strip-track">${chips}</div>
+    <span class="${statusClass}">${cloudNote}</span>`;
+}
+
+function cmCloudFitView() {
+  if (!_cmCloud) return;
+  const stage = document.getElementById("kc-stage");
+  if (!stage) return;
+  const w = stage.clientWidth, h = stage.clientHeight;
+  if (!w || !h) return;
+  const { canvasW, canvasH, svg, zoom } = _cmCloud;
+  const scale = Math.max(0.2, Math.min(4, Math.min(w / canvasW, h / canvasH) * 0.94));
+  const tx = (w - canvasW * scale) / 2;
+  const ty = (h - canvasH * scale) / 2;
+  const t = d3.zoomIdentity.translate(tx, ty).scale(scale);
+  svg.transition().duration(500).call(zoom.transform, t);
+}
+
+window.cmCloudZoomBy = function(factor) {
+  if (!_cmCloud) return;
+  _cmCloud.svg.transition().duration(200).call(_cmCloud.zoom.scaleBy, factor);
+};
 
 /* Helper: show tooltip from Knowledge Unit overlays */
 window.kbShowTip = function(e, concept, courseList) {
