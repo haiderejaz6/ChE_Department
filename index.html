@@ -538,29 +538,35 @@ table.cm-hm th,table.cm-hm td{padding:0;}
 .cm-cmp-info{font-size:.72rem;color:var(--mu);margin:.6rem 0 .85rem;}
 .cm-cmp-info strong{color:var(--tx);}
 
-/* ── Knowledge Area Overlap: compact course strip + zoomable topic stage ── */
-.kc-course-strip{display:flex;align-items:center;gap:.55rem;padding:.4rem .65rem;
+/* ── Knowledge Area Overlap: dropdown course selector + zoomable topic stage ── */
+.kc-course-strip{display:flex;align-items:center;gap:.6rem;padding:.4rem .65rem;
   background:var(--sf);border:1px solid var(--bdr);border-radius:10px;
-  box-shadow:var(--shadow);margin-bottom:.55rem;}
+  box-shadow:var(--shadow);margin-bottom:.55rem;position:relative;z-index:25;}
 .kc-course-strip-label{font-size:.62rem;font-weight:700;color:var(--mu);text-transform:uppercase;
   letter-spacing:.06em;flex-shrink:0;white-space:nowrap;}
-.kc-course-strip-track{display:flex;gap:.32rem;overflow-x:auto;overflow-y:hidden;
-  flex:1;min-width:0;scrollbar-width:thin;padding:.1rem 0;}
-.kc-course-strip-track::-webkit-scrollbar{height:5px;}
-.kc-course-strip-track::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:4px;}
-.kc-course-chip{
-  flex:0 0 auto;padding:.22rem .5rem;border:1.4px solid var(--bdr);border-radius:8px;
-  font-family:'Outfit',sans-serif;cursor:pointer;background:var(--sf);color:var(--mu);
-  display:flex;flex-direction:column;align-items:flex-start;line-height:1.1;
-  max-width:104px;text-align:left;transition:transform .12s,box-shadow .12s;
-}
-.kc-course-chip:hover{transform:translateY(-1px);box-shadow:var(--shadow);}
-.kc-course-chip:disabled{opacity:var(--cm-pill-disabled-opacity);cursor:not-allowed;}
-.kc-course-chip-code{font-family:'DM Mono',monospace;font-size:.61rem;font-weight:700;}
-.kc-course-chip-title{font-size:.52rem;color:var(--mu);margin-top:.08rem;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:96px;}
+.kc-course-dd{position:relative;flex-shrink:0;}
+.kc-course-dd-toggle{display:flex;align-items:center;gap:.5rem;padding:.36rem .7rem;
+  border:1.4px solid var(--bdr);border-radius:8px;background:var(--sf);color:var(--tx);
+  font-family:'Outfit',sans-serif;font-size:.68rem;font-weight:600;cursor:pointer;
+  transition:border-color .12s;white-space:nowrap;}
+.kc-course-dd-toggle:hover{border-color:var(--bdr2);}
+.kc-course-dd-caret{font-size:.58rem;color:var(--mu);transition:transform .15s;}
+.kc-course-dd.open .kc-course-dd-caret{transform:rotate(180deg);}
+.kc-course-dd-panel{position:absolute;top:calc(100% + 6px);left:0;z-index:30;
+  width:300px;max-height:360px;overflow-y:auto;background:var(--sf);
+  border:1px solid var(--bdr);border-radius:10px;box-shadow:var(--shadow-lg);padding:.35rem;}
+.kc-course-dd-panel.hidden{display:none;}
+.kc-course-dd-row{display:flex;align-items:center;gap:.55rem;padding:.34rem .5rem;
+  border-radius:7px;cursor:pointer;font-family:'Outfit',sans-serif;}
+.kc-course-dd-row:hover{background:#f7f9fd;}
+.kc-course-dd-row input{flex-shrink:0;accent-color:var(--gold);cursor:pointer;}
+.kc-course-dd-row.disabled{opacity:.45;cursor:not-allowed;}
+.kc-course-dd-row.disabled input{cursor:not-allowed;}
+.kc-course-dd-code{font-family:'DM Mono',monospace;font-size:.66rem;font-weight:700;flex-shrink:0;min-width:66px;}
+.kc-course-dd-title{font-size:.65rem;color:var(--mu);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;flex:1;}
 .kc-course-strip-status{font-size:.63rem;color:var(--mu);flex-shrink:0;white-space:nowrap;
-  padding-left:.4rem;border-left:1px solid var(--bdr);margin-left:.15rem;}
+  padding-left:.4rem;border-left:1px solid var(--bdr);margin-left:.15rem;overflow:hidden;text-overflow:ellipsis;}
 .kc-course-strip-status.empty-selection{color:var(--goldd);}
 
 .kc-stage{position:relative;height:70vh;min-height:520px;max-height:900px;
@@ -2259,8 +2265,9 @@ function cmMulberry32(seed) {
   };
 }
 
-function cmMeasurePill(measureCtx, concept, count) {
-  const LABEL_MIN = 9, LABEL_MAX = 18, LABEL_SCALE = 110, SHARED_TOPIC_BONUS = 4;
+function cmMeasurePill(measureCtx, concept, count, boost) {
+  boost = boost || 1;
+  const LABEL_MIN = 9 * boost, LABEL_MAX = 19 * boost, LABEL_SCALE = 110 * boost, SHARED_TOPIC_BONUS = 4 * boost;
   const PILL_PAD_X = 16, PILL_PAD_Y = 9;
   const fontSize = Math.max(
     LABEL_MIN,
@@ -2398,8 +2405,9 @@ function cmMountCloud(courses, sortedConcepts, idx, signature) {
   const measureCtx = measureCanvas.getContext("2d");
   const rng = cmMulberry32(sortedConcepts.length * 2654435761 % 2147483647 || 1);
 
-  const nodes = sortedConcepts.map(([concept, codes]) => {
-    const metrics = cmMeasurePill(measureCtx, concept, codes.length);
+  const nodes = sortedConcepts.map(([concept, codes], i) => {
+    const base = cmMeasurePill(measureCtx, concept, codes.length, 1);
+    const big = cmMeasurePill(measureCtx, concept, codes.length, 1.4);
     return {
       id: concept,
       concept,
@@ -2407,7 +2415,9 @@ function cmMountCloud(courses, sortedConcepts, idx, signature) {
       courseSet: new Set(codes),
       count: codes.length,
       color: getCMConceptColor(concept),
-      ...metrics,
+      base, big,
+      ...base,
+      homeAngle: (i * 137.50776) * (Math.PI / 180) % (Math.PI * 2),
       x: CM_BLOB_PAD + 40 + rng() * (canvasW - (CM_BLOB_PAD + 40) * 2),
       y: CM_BLOB_PAD + 40 + rng() * (canvasH - (CM_BLOB_PAD + 40) * 2),
       targetX: null,
@@ -2501,10 +2511,10 @@ function cmMountCloud(courses, sortedConcepts, idx, signature) {
   _cmCloud.pillSel = pillSel;
 
   const sim = d3.forceSimulation(nodes)
-    .force("charge", d3.forceManyBody().strength(-26))
+    .force("charge", d3.forceManyBody().strength(d => d.selected ? -14 : -26))
     .force("collide", d3.forceCollide().radius(d => d.radius + 3).strength(0.9).iterations(2))
-    .force("x", d3.forceX(d => d.targetX != null ? d.targetX : canvasW / 2).strength(d => d.targetX != null ? 0.16 : 0.012))
-    .force("y", d3.forceY(d => d.targetY != null ? d.targetY : canvasH / 2).strength(d => d.targetY != null ? 0.16 : 0.012))
+    .force("x", d3.forceX(d => d.targetX != null ? d.targetX : canvasW / 2).strength(d => d.targetX == null ? 0.012 : d.selected ? 0.26 : 0.09))
+    .force("y", d3.forceY(d => d.targetY != null ? d.targetY : canvasH / 2).strength(d => d.targetY == null ? 0.012 : d.selected ? 0.26 : 0.09))
     .alphaDecay(0.018)
     .alphaMin(0.001)
     .velocityDecay(0.55)
@@ -2620,9 +2630,10 @@ function cmApplyBlobFocus() {
   });
 }
 
-/* Re-targets nodes toward the centroids of the currently-selected courses (or lets
-   them float freely if unselected), refreshes the compact course strip, and gently
-   reheats the simulation so the transition between selections is animated. */
+/* Re-targets nodes toward the centroids of the currently-selected courses, actively
+   parks non-member topics on an outer ring so the cluster gets exclusive center
+   space, grows member topics' text for legibility, and gently reheats the
+   simulation so every transition between selections is animated rather than snapped. */
 function cmUpdateCloudSelection() {
   if (!_cmCloud) return;
   normalizeCloudSelection(_cmCloud.courses);
@@ -2631,34 +2642,68 @@ function cmUpdateCloudSelection() {
 
   const selectedCourseSet = new Set(cmCloudSelection);
   const selectedCourses = _cmCloud.courses.filter(c => selectedCourseSet.has(c.code));
+  const anySelected = selectedCourseSet.size > 0;
   const centroids = cmLayoutCourseCentroids(selectedCourses.map(c => c.code), _cmCloud.canvasW, _cmCloud.canvasH);
+  const cx = _cmCloud.canvasW / 2, cy = _cmCloud.canvasH / 2;
+  const parkRadiusX = _cmCloud.canvasW * 0.46;
+  const parkRadiusY = _cmCloud.canvasH * 0.46;
 
   _cmCloud.nodes.forEach(n => {
     const myCourses = n.courses.filter(code => selectedCourseSet.has(code));
     n.selected = myCourses.length > 0;
+    const m = n.selected ? n.big : n.base;
+    n.width = m.width; n.height = m.height; n.radius = m.radius; n.fontSize = m.fontSize;
+
     if (myCourses.length) {
       let tx = 0, ty = 0;
       myCourses.forEach(code => { const c = centroids.get(code); tx += c.x; ty += c.y; });
       n.targetX = tx / myCourses.length;
       n.targetY = ty / myCourses.length;
+    } else if (anySelected) {
+      // Park unselected topics on a stable outer ring so the cluster forms in
+      // an otherwise-empty center rather than fighting for the same space.
+      n.targetX = cx + Math.cos(n.homeAngle) * parkRadiusX;
+      n.targetY = cy + Math.sin(n.homeAngle) * parkRadiusY;
     } else {
       n.targetX = null;
       n.targetY = null;
     }
   });
 
-  _cmCloud.pillSel.select("rect")
-    .attr("fill-opacity", d => d.selected ? 0.2 : 0.05)
-    .attr("stroke-opacity", d => d.selected ? 0.65 : 0.18)
-    .attr("stroke-width", d => d.selected ? 1.6 : 1);
-  _cmCloud.pillSel.select("text")
+  _cmCloud.pillSel.select("rect").transition().duration(450)
+    .attr("x", d => -d.width / 2).attr("y", d => -d.height / 2)
+    .attr("width", d => d.width).attr("height", d => d.height)
+    .attr("rx", d => d.height / 2).attr("ry", d => d.height / 2)
+    .attr("fill-opacity", d => d.selected ? 0.22 : 0.05)
+    .attr("stroke-opacity", d => d.selected ? 0.7 : 0.18)
+    .attr("stroke-width", d => d.selected ? 1.8 : 1);
+  _cmCloud.pillSel.select("text").transition().duration(450)
+    .attr("font-size", d => `${d.fontSize}px`)
     .attr("font-weight", d => d.selected ? 800 : 500)
     .attr("fill-opacity", d => d.selected ? 1 : 0.35);
 
-  if (_cmCloud.sim) _cmCloud.sim.alpha(Math.max(_cmCloud.sim.alpha(), 0.6)).restart();
+  if (_cmCloud.sim) _cmCloud.sim.alpha(Math.max(_cmCloud.sim.alpha(), 0.7)).restart();
 
   cmDrawBlobs();
   cmRenderCourseStrip();
+}
+
+
+let _kcCourseDropdownOpen = false;
+
+window.cmToggleCourseDropdown = function(forceState) {
+  _kcCourseDropdownOpen = forceState !== undefined ? forceState : !_kcCourseDropdownOpen;
+  const panel = document.getElementById("kc-course-dd-panel");
+  const wrap = document.getElementById("kc-course-dd");
+  if (panel) panel.classList.toggle("hidden", !_kcCourseDropdownOpen);
+  if (wrap) wrap.classList.toggle("open", _kcCourseDropdownOpen);
+  if (_kcCourseDropdownOpen) document.addEventListener("click", cmCourseDropdownOutsideClick, true);
+  else document.removeEventListener("click", cmCourseDropdownOutsideClick, true);
+};
+
+function cmCourseDropdownOutsideClick(e) {
+  const dd = document.getElementById("kc-course-dd");
+  if (dd && !dd.contains(e.target)) window.cmToggleCourseDropdown(false);
 }
 
 function cmRenderCourseStrip() {
@@ -2667,7 +2712,8 @@ function cmRenderCourseStrip() {
   const { courses, courseColor } = _cmCloud;
   const selectedCourseSet = new Set(cmCloudSelection);
   const selectedCourses = courses.filter(c => selectedCourseSet.has(c.code));
-  const chips = courses.map(course => {
+
+  const rows = courses.map(course => {
     const color = sanitizeCssColor(courseColor(course.code));
     const courseCode = String(course.code || "");
     const safeCode = courseCode.replace(/'/g, "\\'");
@@ -2675,22 +2721,33 @@ function cmRenderCourseStrip() {
     const safeTitle = escH(course.title || "");
     const sel = selectedCourseSet.has(course.code);
     const disabled = !sel && selectedCourses.length >= CM_CLOUD_MAX_COURSES;
-    return `<button class="kc-course-chip${sel ? " active" : ""}"
-      style="${sel ? `background:${color}18;border-color:${color};color:${color};` : ""}"
-      onclick="cmToggleCloudCourse('${safeCode}')"
-      ${disabled ? "disabled" : ""}
-      title="${safeTitle}">
-      <span class="kc-course-chip-code" style="${sel ? `color:${color};` : ""}">${safeLabel}</span>
-      <span class="kc-course-chip-title" style="${sel ? `color:${color};` : ""}">${safeTitle}</span>
-      </button>`;
+    return `<label class="kc-course-dd-row${disabled ? " disabled" : ""}">
+      <input type="checkbox" ${sel ? "checked" : ""} ${disabled ? "disabled" : ""}
+        onchange="cmToggleCloudCourse('${safeCode}')">
+      <span class="kc-course-dd-code" style="color:${color};">${safeLabel}</span>
+      <span class="kc-course-dd-title">${safeTitle}</span>
+    </label>`;
   }).join("");
+
   const visibleCount = _cmCloud.blobGroups ? _cmCloud.blobGroups.length : selectedCourses.length;
   const cloudNote = getCloudSelectionMessage(selectedCourses.length, visibleCount);
   const statusClass = `kc-course-strip-status${selectedCourses.length ? "" : " empty-selection"}`;
+  const toggleLabel = selectedCourses.length
+    ? `${selectedCourses.length} course${selectedCourses.length > 1 ? "s" : ""} selected`
+    : "Select courses…";
+
   track.innerHTML = `
     <span class="kc-course-strip-label">Courses</span>
-    <div class="kc-course-strip-track">${chips}</div>
+    <div class="kc-course-dd" id="kc-course-dd">
+      <button type="button" class="kc-course-dd-toggle" onclick="cmToggleCourseDropdown()">
+        <span>${escH(toggleLabel)}</span>
+        <span class="kc-course-dd-caret">▾</span>
+      </button>
+      <div class="kc-course-dd-panel${_kcCourseDropdownOpen ? "" : " hidden"}" id="kc-course-dd-panel">${rows}</div>
+    </div>
     <span class="${statusClass}">${cloudNote}</span>`;
+
+  if (_kcCourseDropdownOpen) document.getElementById("kc-course-dd").classList.add("open");
 }
 
 function cmCloudFitView() {
