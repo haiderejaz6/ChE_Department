@@ -2682,7 +2682,14 @@ function cmUpdateCloudSelection() {
     .attr("font-weight", d => d.selected ? 800 : 500)
     .attr("fill-opacity", d => d.selected ? 1 : 0.35);
 
-  if (_cmCloud.sim) _cmCloud.sim.alpha(Math.max(_cmCloud.sim.alpha(), 0.7)).restart();
+  // d3-force caches each force's per-node target/strength/radius the first time it
+  // initializes — mutating node.targetX/selected/radius alone does nothing on its
+  // own. Re-registering the node array forces every force (x, y, charge, collide)
+  // to re-read those accessors, which is what actually makes the cluster move.
+  if (_cmCloud.sim) {
+    _cmCloud.sim.nodes(_cmCloud.nodes);
+    _cmCloud.sim.alpha(Math.max(_cmCloud.sim.alpha(), 0.7)).restart();
+  }
 
   cmDrawBlobs();
   cmRenderCourseStrip();
