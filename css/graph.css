@@ -1,0 +1,85 @@
+
+
+/* Top control bar for the curriculum graph */
+.cg-toolbar{
+  flex-shrink:0;background:var(--sf);border-bottom:1px solid var(--bdr);
+  padding:.5rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  box-shadow:var(--shadow);z-index:5;
+}
+.cg-label{font-size:.68rem;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;}
+.cg-legend{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;}
+.cg-leg-item{display:flex;align-items:center;gap:.3rem;font-size:.68rem;color:var(--mu);}
+.cg-leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+
+/* Scrollable canvas for the semester grid */
+#cg-canvas{flex:1;overflow:auto;padding:1.5rem 2rem 3rem;background:var(--bg);}
+
+/* Semester columns layout */
+.cg-grid{
+  display:flex;gap:1.4rem;align-items:flex-start;
+  min-width:max-content;
+}
+.cg-col{
+  width:190px;flex-shrink:0;display:flex;flex-direction:column;gap:.65rem;
+}
+.cg-col-hdr{
+  background:var(--sf);border:1.5px solid var(--bdr);border-radius:10px;
+  padding:.5rem .75rem;text-align:center;box-shadow:var(--shadow);
+  border-top-width:3px;
+}
+.cg-col-sem{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;}
+.cg-col-count{font-size:.62rem;color:var(--mu);margin-top:.12rem;}
+
+/* Individual course card in the graph */
+.cg-node{
+  background:var(--sf);border:1.5px solid var(--bdr);border-radius:10px;
+  padding:.62rem .75rem;box-shadow:var(--shadow);
+  cursor:pointer;transition:all .17s;position:relative;
+  border-left-width:4px;
+}
+.cg-node:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px) scale(1.01);}
+.cg-node.selected{box-shadow:0 0 0 2px var(--gold),var(--shadow-lg);border-color:var(--gold)!important;}
+.cg-node-code{font-family:'DM Mono',monospace;font-size:.72rem;font-weight:700;}
+.cg-node-title{font-size:.7rem;color:var(--mu);margin-top:.18rem;line-height:1.35;}
+.cg-node-meta{display:flex;gap:.35rem;margin-top:.42rem;flex-wrap:wrap;align-items:center;}
+.cg-credits{
+  display:inline-flex;align-items:center;gap:.2rem;
+  font-size:.58rem;font-weight:700;padding:.08rem .3rem;
+  border-radius:4px;background:#f0f3fa;color:var(--mu);
+}
+.cg-plo-dots{display:flex;gap:.18rem;flex-wrap:wrap;}
+.cg-plo-dot{
+  width:12px;height:12px;border-radius:3px;
+  display:inline-block;cursor:default;
+}
+
+/* Side panel for curriculum graph */
+.cg-panel{
+  width:320px;flex-shrink:0;border-left:1px solid var(--bdr);
+  background:var(--sf);display:flex;flex-direction:column;
+  overflow:hidden;transition:width .22s ease,opacity .22s;
+  box-shadow:-2px 0 12px rgba(30,50,90,.06);
+}
+.cg-panel.hidden{width:0;opacity:0;border-left:none;}
+#cg-panel-inner{flex:1;overflow-y:auto;padding:.8rem 1.1rem;}
+.cg-phdr{
+  padding:.9rem 1.1rem .75rem;border-bottom:1px solid var(--bdr);
+  display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;
+}
+
+/* ── Curriculum Graph prerequisite arrows overlay ────────── */
+#cg-canvas{position:relative;}
+#prereq-svg{position:absolute;top:0;left:0;pointer-events:none;overflow:visible;z-index:5;}
+.prereq-edge{transition:stroke-opacity .15s,stroke-width .15s;}
+.prereq-edge.dim{stroke-opacity:.12!important;}
+.prereq-edge.active{stroke-opacity:.95!important;stroke-width:2.6px!important;}
+.prereq-legend{display:flex;align-items:center;gap:.4rem;font-size:.67rem;color:var(--mu);}
+.prereq-leg-line{width:28px;height:0;border-top:2px dashed rgba(184,146,14,.65);}
+
+/* ── Prereq / unlocks tags in panel ─────────────────────── */
+.cg-dep-tag{
+  display:inline-flex;align-items:center;gap:.25rem;padding:.2rem .52rem;
+  border-radius:12px;font-family:'DM Mono',monospace;font-size:.64rem;font-weight:700;
+  border:1px solid;cursor:pointer;transition:all .14s;
+}
+.cg-dep-tag:hover{filter:brightness(.92);}

@@ -1,0 +1,79 @@
+
+
+@media(max-width:720px){
+  /* Header */
+  header{padding:0 .75rem;height:54px;gap:.6rem;}
+  .hdr-stats{display:none;}
+  .hdr-text h1{font-size:1rem;}
+  .hdr-text p{display:none;}
+  .vsep:first-of-type{display:none;}
+
+  /* Show hamburger, hide desktop tabbar */
+  .ham-btn{display:flex;}
+  .tabbar{display:none;}
+
+  /* Body shifts down for 54px header */
+  .body-wrap{top:54px;}
+  #tab-dash{padding:.85rem .75rem 4rem;}
+  #cg-canvas{padding:1rem .75rem 3rem;}
+  #cm-body{padding:.85rem .75rem 3rem;}
+
+  /* Heatmap smaller text on mobile */
+  .plom-row{flex-direction:column;gap:.5rem;padding:.7rem .9rem;}
+  .plom-plo{flex-basis:auto;border-left-width:3px;}
+  .plom-pill{min-width:88px;max-width:130px;}
+  .sem-badge{font-size:.5rem;padding:.05rem .22rem;}
+
+  /* Domain legend wraps tighter */
+  .dom-leg{gap:.35rem;padding:.55rem .65rem;}
+  .dl-i{font-size:.62rem;}
+
+  /* Course cards full-width */
+  .course-grid{grid-template-columns:1fr;}
+  .cc-title{font-size:.9rem;}
+
+  /* Curriculum graph columns narrower */
+  .cg-col{width:160px;}
+  .cg-grid{gap:1rem;}
+  #cg-canvas{overflow:auto;}
+
+  /* Side panel full-width overlay on mobile */
+  .cg-panel{
+    position:fixed;right:0;top:54px;bottom:0;z-index:50;
+    width:92vw !important;max-width:380px;
+    box-shadow:-4px 0 24px rgba(30,50,90,.18);
+  }
+  .cg-panel.hidden{width:0!important;opacity:0;}
+
+  /* CG toolbar wraps */
+  .cg-toolbar{padding:.4rem .75rem;gap:.5rem;font-size:.62rem;}
+  .cg-toolbar > div:last-child{display:none;}
+
+  /* CM toolbar stacks */
+  .cm-toolbar{flex-direction:column;align-items:flex-start;gap:.5rem;padding:.55rem .75rem;}
+  .cm-toolbar-left,.cm-toolbar-right{flex-wrap:wrap;gap:.4rem;}
+  .cm-seg-btn{font-size:.68rem;padding:.28rem .55rem;}
+  .cm-input{width:120px;}
+  .cm-fit-btn{font-size:.68rem;}
+
+  /* CM list grid single col */
+  .cm-list-grid{grid-template-columns:1fr;}
+
+  /* Topic heatmap scroll hint */
+  .cm-hm-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .cm-hm-row-th{font-size:.58rem;}
+  .cm-hm-dot{width:24px;height:24px;font-size:.56rem;}
+
+  /* Network SVG min-height */
+  #cmv-network{height:calc(100vh - 175px);min-height:360px;}
+
+  /* PLO grid smaller */
+  .plo-grid{grid-template-columns:1fr 1fr;}
+  .plo-name-t{font-size:.58rem;}
+
+  /* Concept detail panel */
+  .cm-detail{right:.5rem;bottom:.5rem;left:.5rem;max-width:none;}
+
+  /* Tip hidden on mobile (too cramped) */
+  #tip{display:none !important;}
+}

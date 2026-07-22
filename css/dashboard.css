@@ -1,0 +1,69 @@
+
+
+.sec-hd{
+  font-family:'Crimson Pro',serif;font-size:1.2rem;font-weight:700;
+  display:flex;align-items:center;gap:.7rem;margin-bottom:.85rem;color:var(--tx);
+}
+.sec-hd::before{content:'';display:block;width:4px;height:1em;background:var(--gold);border-radius:2px;}
+
+.dash-subnav{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem;}
+.dash-sub-btn{padding:.34rem .78rem;border:1px solid var(--bdr);border-radius:18px;background:var(--sf);cursor:pointer;font-size:.72rem;font-weight:600;color:var(--mu);}
+.dash-sub-btn.active{background:rgba(184,146,14,.12);border-color:var(--gold);color:var(--goldd);}
+.dash-view.hidden{display:none!important;}
+#bloom-cognitive-chart,#bloom-affective-chart,#bloom-psychomotor-chart{width:100%;min-height:320px;}
+.bloom-insight{font-size:.72rem;color:var(--mu);margin-top:.75rem;}
+.bloom-insight strong{color:var(--tx);}
+
+/* PLO Coverage Matrix — PLO-first rows with course pills */
+.hm-scroll{overflow-x:auto;border:1px solid var(--bdr);border-radius:14px;background:var(--sf);box-shadow:var(--shadow);}
+.plom-row{display:flex;gap:1.1rem;align-items:flex-start;padding:.8rem 1.2rem;border-bottom:1px solid rgba(0,0,0,.04);}
+.plom-row:last-child{border-bottom:none;}
+.plom-row:hover{background:#fafbff;}
+.plom-plo{flex:0 0 218px;border-left:3px solid transparent;padding-left:.7rem;padding-top:.1rem;}
+.plom-plo-code{font-family:'DM Mono',monospace;font-size:.74rem;font-weight:800;}
+.plom-plo-label{font-size:.66rem;color:var(--mu);margin-top:.18rem;line-height:1.32;}
+.plom-pills{flex:1;display:flex;flex-wrap:wrap;gap:.42rem;align-items:flex-start;padding-top:.05rem;}
+.plom-pill{
+  padding:.3rem .6rem;border:1.4px solid var(--bdr);border-radius:10px;
+  font-family:'Outfit',sans-serif;cursor:default;background:var(--sf);
+  display:flex;flex-direction:column;align-items:flex-start;line-height:1.18;
+  min-width:98px;max-width:150px;text-align:left;transition:transform .12s,box-shadow .12s;
+}
+.plom-pill:hover{transform:translateY(-1px);box-shadow:var(--shadow-lg);z-index:1;}
+.plom-pill-code{font-family:'DM Mono',monospace;font-size:.66rem;font-weight:700;}
+.plom-pill-title{font-size:.58rem;color:var(--mu);margin-top:.14rem;line-height:1.28;}
+.plom-empty{font-size:.68rem;color:var(--dim);font-style:italic;padding-top:.2rem;}
+
+/* Semester badges */
+.sem-badge{
+  display:inline-block;font-size:.57rem;font-weight:700;padding:.08rem .32rem;
+  border-radius:3px;margin-left:.35rem;vertical-align:middle;
+  background:rgba(0,0,0,.06);color:var(--mu);
+}
+
+/* Domain legend */
+.dom-leg{
+  display:flex;flex-wrap:wrap;gap:.5rem;padding:.75rem 1rem;
+  background:var(--sf);border:1px solid var(--bdr);border-radius:10px;
+  align-items:center;margin-bottom:.9rem;box-shadow:var(--shadow);
+}
+.dl-i{display:flex;align-items:center;gap:.32rem;font-size:.68rem;color:var(--mu);}
+
+/* Course grid */
+.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1rem;}
+.cc-hdr{padding:1rem 1.1rem .7rem;display:flex;justify-content:space-between;align-items:flex-start;}
+.cc-code{font-size:.73rem;font-weight:700;color:var(--gold);font-family:'DM Mono',monospace;}
+.cc-title{font-family:'Crimson Pro',serif;font-size:1rem;font-weight:700;color:var(--tx);margin-top:.2rem;line-height:1.3;}
+.cc-meta{display:flex;gap:.35rem;margin-top:.55rem;flex-wrap:wrap;align-items:center;}
+.cc-r{text-align:right;flex-shrink:0;padding-left:.8rem;}
+.cc-n{font-family:'Crimson Pro',serif;font-size:1.9rem;font-weight:700;color:var(--dim);line-height:1;}
+.cc-nl{font-size:.56rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;}
+
+/* PLO footer */
+.plo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.4rem;margin-bottom:1rem;}
+.plo-name-t{font-size:.65rem;color:var(--mu);}
+.psec-hd{
+  font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--mu);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;
+}
+.psec-hd::after{content:'';flex:1;height:1px;background:var(--bdr);}
