@@ -97,6 +97,12 @@
           Course Explorer
           <span id="cinfo" style="font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:400;color:var(--mu);margin-left:.4rem;"></span>
         </h2>
+        <div class="course-explorer-controls" style="margin-bottom:1rem;">
+          <label for="course-select" style="font-family:'Outfit',sans-serif;font-size:.72rem;color:var(--mu);margin-right:.5rem;">Select course:</label>
+          <select id="course-select" onchange="selectCourse(this.value)" style="font-family:'Outfit',sans-serif;font-size:.78rem;padding:.25rem .5rem;border:1px solid var(--bdr);border-radius:4px;background:#fff;color:var(--tx);min-width:160px;">
+            <option value="">All courses</option>
+          </select>
+        </div>
         <div class="course-grid" id="cgrid"></div>
       </div>
       <div style="border-top:1px solid var(--bdr);padding-top:1.5rem;">

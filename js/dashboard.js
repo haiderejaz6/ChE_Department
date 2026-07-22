@@ -1,4 +1,5 @@
 const DASH_VIEWS = ["course","plo","bloom"];
+let selectedCourseCode = null;
 
 window.setDashView = function(view) {
   if(!DASH_VIEWS.includes(view)) view="course";
@@ -34,6 +35,7 @@ function renderStats() {
 ================================================================ */
 function renderDash() {
   const courses = filtered();
+  renderCourseSelect(courses);
   renderHeatmap(courses);
   renderBloomDistributions(courses);
   renderCourseGrid(courses);
@@ -42,6 +44,31 @@ function renderDash() {
     `— ${courses.length} course${courses.length!==1?"s":""}, ${courses.reduce((a,c)=>a+c.clos.length,0)} CLOs`;
   setDashView(dashView);
 }
+
+function renderCourseSelect(courses) {
+  const sel = document.getElementById("course-select");
+  if (!sel) return;
+  const sorted = [...courses].sort((a,b)=>(a.semester||0)-(b.semester||0)||a.code.localeCompare(b.code));
+  const options = sorted.map(c => {
+    const sc = semColor(c.semester);
+    return `<option value="${c.code}" style="color:${sc};">[${c.code}] ${c.title}</option>`;
+  }).join("");
+  sel.innerHTML = `<option value="">All courses</option>${options}`;
+  if (selectedCourseCode && sorted.some(c=>c.code===selectedCourseCode)) {
+    sel.value = selectedCourseCode;
+  }
+}
+
+window.selectCourse = function(code) {
+  selectedCourseCode = code || null;
+  const courses = filtered();
+  const visible = selectedCourseCode
+    ? courses.filter(c => c.code === selectedCourseCode)
+    : courses;
+  renderCourseGrid(visible);
+  document.getElementById("cinfo").textContent =
+    `— ${visible.length} course${visible.length!==1?"s":""}, ${visible.reduce((a,c)=>a+c.clos.length,0)} CLOs`;
+};
 
 /* ── PLO Coverage Matrix (PLO-first: which courses cover each PLO) ── */
 function renderHeatmap(courses) {
