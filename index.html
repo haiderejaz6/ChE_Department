@@ -158,6 +158,7 @@
           <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Knowledge Graph</button>
           <button class="cm-seg-btn" data-view="compare" onclick="cmSetView('compare')">Compare Courses</button>
           <button class="cm-seg-btn" data-view="cloud" onclick="cmSetView('cloud')">Knowledge Area Overlap</button>
+          <button class="cm-seg-btn" data-view="sequence" onclick="cmSetView('sequence')">Sequence Graph</button>
         </div>
       </div>
       <div class="cm-toolbar-right">
@@ -175,6 +176,12 @@
             class="cm-slider" oninput="cmUpdateForce(this.value)">
           <span id="cm-force-val" style="font-size:.68rem;color:var(--mu);width:1.4rem;text-align:center;">5</span>
         </div>
+        <div id="cm-seq-controls" style="display:none;align-items:center;gap:.4rem;">
+          <span class="cm-label">Course:</span>
+          <select id="cm-seq-course-select" onchange="cmSeqSelectCourse(this.value)" class="cm-select">
+            <option value="">All courses (grid)</option>
+          </select>
+        </div>
         <button class="cm-fit-btn" onclick="cmFitView()">⊡ Fit</button>
         <span id="cm-mode-badge" class="cm-mode-badge"></span>
       </div>
@@ -184,6 +191,7 @@
       <div id="cmv-network"   class="hidden"></div>
       <div id="cmv-compare"   class="hidden"></div>
       <div id="cmv-cloud"     class="hidden"></div>
+      <div id="cmv-sequence"  class="hidden"></div>
     </div>
   </div><!-- /tab-concepts -->
 

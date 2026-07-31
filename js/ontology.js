@@ -7,6 +7,7 @@ let cmNetSim = null;
 let cmCloudPinnedCourseCode = null;
 let cmCloudSelection = [];
 let cmCloudSelectionTouched = false;
+let cmSeqCourse = ""; // "" = all-courses grid; else a course code (Sequence Graph view)
 
 function getCMConceptColor(concept) {
   if (!conceptColorMap[concept]) {
@@ -97,11 +98,13 @@ window.cmUpdateForce = function(val) {
 
 window.cmSetView = function(v) {
   // Only allow remaining views
-  if(!["curriculum","network","compare","cloud"].includes(v)) v="curriculum";
+  if(!["curriculum","network","compare","cloud","sequence"].includes(v)) v="curriculum";
   cmView=v;
   document.querySelectorAll(".cm-seg-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
   const fc=document.getElementById("cm-force-controls");
   if(fc) fc.style.display=v==="network"?"flex":"none";
+  const sc=document.getElementById("cm-seq-controls");
+  if(sc) sc.style.display=v==="sequence"?"flex":"none";
   cmRender();
 };
 
@@ -130,13 +133,14 @@ window.cmRender = function() {
   const sortedConcepts=Object.entries(idx).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0]));
   sortedConcepts.forEach(([c])=>getCMConceptColor(c));
 
-  ["curriculum", "network", "compare", "cloud"].forEach(v => {
+  ["curriculum", "network", "compare", "cloud", "sequence"].forEach(v => {
     document.getElementById("cmv-"+v).classList.toggle("hidden",cmView!==v);
   });
   if(cmView==="curriculum") cmRenderCurriculum(courses,sortedConcepts,idx);
   if(cmView==="network")    cmRenderNetwork(courses,sortedConcepts,idx);
   if(cmView==="compare")    cmRenderCompare(courses,sortedConcepts,idx);
   if(cmView==="cloud")      cmRenderCloud(courses,sortedConcepts,idx);
+  if(cmView==="sequence")   cmRenderSequence(courses);
 };
 
 /* ── Curriculum Concept Graph (UCSD-style with concept tags) ── */
@@ -1040,3 +1044,300 @@ window.kbShowTip = function(e, concept, courseList) {
   tip.style.display = 'block';
   moveTip(e);
 };
+
+/* ══════════════════════════════════════════════════════════
+   SEQUENCE GRAPH  —  topic-level prerequisite DAG per course,
+   or a semester-grouped grid of every course's mini-DAG.
+
+   Reads course.topics[] = {id,label,bloom_level,status} and
+   course.edges[] = {source,target,type,rationale,confidence,status}
+   as written by excel_to_json.py (edge_schema.types:
+   prerequisite_of / corequisite_with / related_to).
+══════════════════════════════════════════════════════════ */
+const CM_SEQ_EDGE_STYLE = {
+  prerequisite_of:  { stroke: "#4f46e5", label: "prerequisite of" },
+  corequisite_with: { stroke: "#b8920e", label: "corequisite with" },
+  related_to:       { stroke: "#9aaabf", label: "related to" },
+};
+
+function cmBloomColor(label) {
+  const lvl = BLOOM_COGNITIVE_LEVELS.find(l => l.label === label);
+  return lvl ? lvl.color : "#9aaabf";
+}
+
+const _cmSeqMeasureCtx = document.createElement("canvas").getContext("2d");
+function cmSeqTextWidth(str, font) {
+  _cmSeqMeasureCtx.font = font;
+  return _cmSeqMeasureCtx.measureText(str).width;
+}
+
+function cmSeqEdgePath(a, b) {
+  const midX = (a.x + a.w / 2 + b.x - b.w / 2) / 2;
+  return `M${a.x + a.w / 2},${a.y} C${midX},${a.y} ${midX},${b.y} ${b.x - b.w / 2},${b.y}`;
+}
+
+/* Longest-path layering using prerequisite_of edges only; corequisite_with
+   pairs are then pulled to the same layer. related_to never affects layer
+   assignment — it's drawn as a purely informational connector. */
+function cmLayoutTopicDag(course) {
+  const topics = course.topics || [];
+  const nodes  = topics.map(t => ({ ...t }));
+  const byId   = new Map(nodes.map(n => [n.id, n]));
+  const edges  = (course.edges || []).filter(e => byId.has(e.source) && byId.has(e.target));
+
+  const prereq = edges.filter(e => e.type === "prerequisite_of");
+  const coreq  = edges.filter(e => e.type === "corequisite_with");
+
+  const indeg = new Map(nodes.map(n => [n.id, 0]));
+  const adj   = new Map(nodes.map(n => [n.id, []]));
+  prereq.forEach(e => {
+    adj.get(e.source).push(e.target);
+    indeg.set(e.target, (indeg.get(e.target) || 0) + 1);
+  });
+
+  const layer = new Map(nodes.map(n => [n.id, 0]));
+  const queue = nodes.filter(n => indeg.get(n.id) === 0).map(n => n.id);
+  const seen = new Set();
+  let guard = 0;
+  while (queue.length && guard++ < 2000) {
+    const id = queue.shift();
+    if (seen.has(id)) continue;
+    seen.add(id);
+    (adj.get(id) || []).forEach(next => {
+      layer.set(next, Math.max(layer.get(next), layer.get(id) + 1));
+      indeg.set(next, indeg.get(next) - 1);
+      if (indeg.get(next) <= 0) queue.push(next);
+    });
+  }
+  coreq.forEach(e => {
+    const m = Math.max(layer.get(e.source), layer.get(e.target));
+    layer.set(e.source, m); layer.set(e.target, m);
+  });
+  // The corequisite pull above can flatten a downstream prerequisite_of edge
+  // to the same layer as its source (e.g. when the target was itself pulled
+  // sideways by a coreq pair). Re-enforce strict ordering along every
+  // prerequisite edge with a bounded relaxation pass.
+  let relaxed = true, guard2 = 0;
+  while (relaxed && guard2++ < 100) {
+    relaxed = false;
+    prereq.forEach(e => {
+      const s = layer.get(e.source), t = layer.get(e.target);
+      if (t <= s) { layer.set(e.target, s + 1); relaxed = true; }
+    });
+  }
+
+  const maxLayer = nodes.length ? Math.max(...[...layer.values()]) : 0;
+  const byLayer = Array.from({ length: maxLayer + 1 }, () => []);
+  nodes.forEach(n => { n.layer = layer.get(n.id); byLayer[n.layer].push(n); });
+  byLayer.forEach(col => col.forEach((n, i) => n.slot = i));
+
+  return { nodes, byId, maxLayer, byLayer, edges };
+}
+
+window.cmSeqSelectCourse = function(code) {
+  cmSeqCourse = code || "";
+  const sel = document.getElementById("cm-seq-course-select");
+  if (sel) sel.value = cmSeqCourse;
+  cmRenderSequence(filtered());
+};
+
+function cmPopulateSeqCourseSelect(courses) {
+  const sel = document.getElementById("cm-seq-course-select");
+  if (!sel) return;
+  const sorted = [...courses].sort((a, b) => (a.semester || 0) - (b.semester || 0) || a.code.localeCompare(b.code));
+  const opts = sorted.map(c => `<option value="${c.code}">[${c.code}] ${escH(c.title)}</option>`).join("");
+  sel.innerHTML = `<option value="">All courses (grid)</option>${opts}`;
+  if (!courses.some(c => c.code === cmSeqCourse)) cmSeqCourse = "";
+  sel.value = cmSeqCourse;
+}
+
+function cmSeqLegendHtml() {
+  const s = CM_SEQ_EDGE_STYLE;
+  return `<div class="cm-seq-legend">
+    <div class="cm-seq-leg-item"><span class="cm-seq-leg-line" style="border-top-color:${s.prerequisite_of.stroke};"></span>prerequisite of</div>
+    <div class="cm-seq-leg-item"><span class="cm-seq-leg-line dashed" style="border-top-color:${s.corequisite_with.stroke};"></span>corequisite with</div>
+    <div class="cm-seq-leg-item"><span class="cm-seq-leg-line dotted" style="border-top-color:${s.related_to.stroke};"></span>related to</div>
+    <div class="cm-seq-leg-item" style="margin-left:auto;font-style:italic;font-family:'Crimson Pro',serif;">
+      LLM-proposed — pending expert validation
+    </div>
+  </div>`;
+}
+
+function cmRenderSequence(courses) {
+  const el = document.getElementById("cmv-sequence");
+  cmPopulateSeqCourseSelect(courses);
+  window._cmFitFn = null;
+  if (!courses.length) {
+    el.innerHTML = `<div style="padding:3rem;text-align:center;color:var(--mu);">No courses to display.</div>`;
+    return;
+  }
+  const course = cmSeqCourse ? courses.find(c => c.code === cmSeqCourse) : null;
+  if (course) cmRenderSeqFull(el, course);
+  else cmRenderSeqGrid(el, courses);
+}
+
+/* ── Grid: every course's mini-DAG, grouped by semester ── */
+function cmRenderSeqGrid(el, courses) {
+  const sems = allSemesters().filter(s => courses.some(c => c.semester === s));
+  const bySem = {}; sems.forEach(s => bySem[s] = []);
+  courses.forEach(c => { if (bySem[c.semester]) bySem[c.semester].push(c); });
+
+  let html = cmSeqLegendHtml() + `<div class="cm-seq-scroll">`;
+  sems.forEach(sem => {
+    const sc = semColor(sem);
+    html += `<div class="cm-seq-sem-block">
+      <div class="cm-seq-sem-hd" style="color:${sc};border-top-color:${sc};">${semLabel(sem)}</div>
+      <div class="cm-seq-grid">`;
+    bySem[sem].forEach(course => {
+      const nTopics = (course.topics || []).length;
+      const nEdges  = (course.edges || []).length;
+      html += `<div class="cm-seq-card" style="border-top-color:${sc};" onclick="cmSeqSelectCourse('${course.code}')">
+        <div class="cm-seq-card-code" style="color:${sc};">${course.code}</div>
+        <div class="cm-seq-card-title">${escH(course.title)}</div>
+        <svg class="cm-seq-mini-svg" data-code="${course.code}"></svg>
+        <div class="cm-seq-card-meta">${nTopics} topic${nTopics !== 1 ? "s" : ""} · ${nEdges} edge${nEdges !== 1 ? "s" : ""}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+  html += `</div>`;
+  el.innerHTML = html;
+
+  courses.forEach(course => {
+    const svgEl = el.querySelector(`svg[data-code="${course.code}"]`);
+    if (svgEl) cmDrawMiniDag(svgEl, course);
+  });
+}
+
+function cmDrawMiniDag(svgNode, course) {
+  const g = cmLayoutTopicDag(course);
+  const svg = d3.select(svgNode);
+  if (!g.nodes.length) {
+    svg.attr("viewBox", "0 0 200 34").append("text")
+      .attr("x", 100).attr("y", 19).attr("text-anchor", "middle")
+      .attr("font-family", "Outfit").attr("font-size", "9px").attr("fill", "var(--dim)")
+      .text("No topics extracted yet");
+    return;
+  }
+  const colW = 76, rowH = 24, marginX = 10, marginY = 10;
+  const w = marginX * 2 + (g.maxLayer + 1) * colW;
+  const h = marginY * 2 + Math.max(...g.byLayer.map(c => c.length), 1) * rowH;
+
+  g.nodes.forEach(n => {
+    n.w = Math.max(50, cmSeqTextWidth(n.label, "500 6.4px 'DM Mono'") + 8);
+    n.h = 15;
+    n.x = marginX + n.layer * colW;
+    n.y = marginY + n.slot * rowH + (h - marginY * 2 - g.byLayer[n.layer].length * rowH) / 2 + rowH / 2;
+  });
+
+  svg.attr("viewBox", `0 0 ${Math.max(w, 160)} ${Math.max(h, 46)}`);
+  svg.append("g").selectAll("path").data(g.edges).join("path")
+    .attr("class", e => `cm-seq-mini-edge ${e.type}`)
+    .attr("fill", "none")
+    .attr("d", e => cmSeqEdgePath(g.byId.get(e.source), g.byId.get(e.target)));
+
+  const ng = svg.append("g").selectAll("g").data(g.nodes).join("g")
+    .attr("transform", n => `translate(${n.x - n.w / 2},${n.y - n.h / 2})`);
+  ng.append("rect").attr("class", "cm-seq-mini-node")
+    .attr("width", d => d.w).attr("height", d => d.h).attr("rx", 4)
+    .attr("stroke", d => cmBloomColor(d.bloom_level));
+  ng.append("text").attr("class", "cm-seq-mini-label")
+    .attr("x", d => d.w / 2).attr("y", d => d.h / 2 + 2.2).attr("text-anchor", "middle")
+    .text(d => d.label);
+}
+
+/* ── Single-course full DAG, with pan/zoom + hover detail via the shared tooltip ── */
+function cmRenderSeqFull(el, course) {
+  const sc = semColor(course.semester);
+  const g = cmLayoutTopicDag(course);
+
+  let html = `
+    <div class="cm-seq-full-hdr">
+      <button class="cm-fit-btn" onclick="cmSeqSelectCourse('')">← All courses</button>
+      <div class="cm-seq-full-title">
+        <span class="cm-seq-full-code" style="color:${sc};">${course.code}</span>
+        <span class="cm-seq-full-name">${escH(course.title)}</span>
+        <span class="sem-badge" style="background:${sc}18;color:${sc};">${semLabel(course.semester)}</span>
+      </div>
+    </div>
+    ${cmSeqLegendHtml()}`;
+
+  if (!g.nodes.length) {
+    html += `<div style="padding:3rem;text-align:center;color:var(--mu);">
+      No topics extracted for this course yet — run
+      <code style="font-family:'DM Mono',monospace;color:var(--gold);">python excel_to_json.py --mode llm</code>
+      (or <code style="font-family:'DM Mono',monospace;color:var(--gold);">--mode both</code>) to populate its knowledge graph, then refresh.
+    </div>`;
+    el.innerHTML = html;
+    return;
+  }
+
+  html += `<div class="cm-seq-canvas-wrap"><svg id="cm-seq-full-svg"></svg></div>`;
+  el.innerHTML = html;
+
+  const colW = 220, rowH = 74, marginX = 50, marginY = 40;
+  const width  = marginX * 2 + (g.maxLayer + 1) * colW;
+  const height = marginY * 2 + Math.max(...g.byLayer.map(c => c.length), 1) * rowH;
+
+  g.nodes.forEach(n => {
+    n.w = Math.max(110, cmSeqTextWidth(n.label, "500 12.5px Outfit") + 34);
+    n.h = 42;
+    n.x = marginX + n.layer * colW;
+    n.y = marginY + n.slot * rowH + (height - marginY * 2 - g.byLayer[n.layer].length * rowH) / 2 + rowH / 2;
+  });
+
+  const svgEl = document.getElementById("cm-seq-full-svg");
+  const svg = d3.select(svgEl).attr("width", Math.max(width, 600)).attr("height", Math.max(height, 260));
+  const zoomG = svg.append("g").attr("class", "cm-seq-zoom-g");
+
+  const defs = svg.append("defs");
+  defs.append("marker").attr("id", "cm-seq-arrow").attr("viewBox", "0 -5 10 10")
+    .attr("refX", 9).attr("refY", 0).attr("markerWidth", 7).attr("markerHeight", 7).attr("orient", "auto")
+    .append("path").attr("d", "M0,-5L10,0L0,5").attr("fill", CM_SEQ_EDGE_STYLE.prerequisite_of.stroke);
+
+  zoomG.append("g").selectAll("path").data(g.edges).join("path")
+    .attr("class", e => `cm-seq-edge ${e.type}`)
+    .attr("marker-end", e => e.type === "prerequisite_of" ? "url(#cm-seq-arrow)" : null)
+    .attr("opacity", e => 0.35 + 0.65 * (e.confidence != null ? e.confidence : 0.5))
+    .attr("d", e => cmSeqEdgePath(g.byId.get(e.source), g.byId.get(e.target)))
+    .on("mouseenter", (ev, e) => {
+      const style = CM_SEQ_EDGE_STYLE[e.type] || { label: e.type };
+      showTip(ev, `<div class="th">${escH(style.label)}</div>
+        <div class="tm">${escH(e.rationale || "No rationale recorded.")}</div>
+        <div class="tm" style="color:var(--gold);">confidence ${e.confidence != null ? e.confidence : "—"} · ${escH(e.status || "pending_validation")}</div>`);
+    })
+    .on("mousemove", moveTip)
+    .on("mouseleave", hideTip);
+
+  const ng = zoomG.append("g").selectAll("g").data(g.nodes).join("g")
+    .attr("transform", n => `translate(${n.x - n.w / 2},${n.y - n.h / 2})`)
+    .on("mouseenter", (ev, n) => {
+      showTip(ev, `<div class="th">${escH(n.label)}</div>
+        <div class="tm">${escH(n.id)}</div>
+        <div class="tm" style="color:${cmBloomColor(n.bloom_level)};">${escH(n.bloom_level || "Bloom level unknown")} · ${escH(n.status || "pending_validation")}</div>`);
+    })
+    .on("mousemove", moveTip)
+    .on("mouseleave", hideTip);
+  ng.append("rect").attr("class", "cm-seq-node")
+    .attr("width", n => n.w).attr("height", n => n.h).attr("rx", 9)
+    .attr("stroke", n => cmBloomColor(n.bloom_level));
+  ng.append("text").attr("class", "cm-seq-node-label")
+    .attr("x", n => n.w / 2).attr("y", n => n.h / 2 - 3).attr("text-anchor", "middle")
+    .text(n => n.label);
+  ng.append("text").attr("class", "cm-seq-node-bloom")
+    .attr("x", n => n.w / 2).attr("y", n => n.h / 2 + 13).attr("text-anchor", "middle")
+    .text(n => n.bloom_level || "");
+
+  const zoom = d3.zoom().scaleExtent([0.3, 2.5])
+    .on("zoom", ev => zoomG.attr("transform", ev.transform))
+    .on("start", () => svgEl.classList.add("grabbing"))
+    .on("end", () => svgEl.classList.remove("grabbing"));
+  svg.call(zoom);
+
+  window._cmFitFn = () => {
+    const availW = (el.clientWidth || 900) - 40;
+    const scale = Math.max(0.3, Math.min(1, availW / width));
+    svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity.translate(20, 20).scale(scale));
+  };
+  window._cmFitFn();
+}
