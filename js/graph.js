@@ -187,7 +187,7 @@ function cgOpenPanel(course) {  if (cgSelectedCode) {
     const dl  = (DOMAIN_CFG[cl.domain]||{label:cl.domain}).label;
     return `<div class="p-clo-item">
       <div class="p-clo-badge" style="background:${col}18;border:1px solid ${col}30;color:${col};">${cl.code}</div>
-      <div>
+      <div style="flex:1;min-width:0;">
         <div class="p-clo-desc">${cl.description}</div>
         <div class="p-clo-tags">
           <span class="pctag" style="background:${col}18;color:${col};">${cl.plo}</span>
@@ -195,6 +195,10 @@ function cgOpenPanel(course) {  if (cgSelectedCode) {
           <span class="pctag" style="background:#f0f3fa;color:var(--mu);">${cl.emphasis}</span>
         </div>
       </div>
+      <button class="clo-suggest-btn" title="Suggest an edit to ${escA(cl.code)}"
+        data-course="${escA(course.code)}" data-title="${escA(course.title)}"
+        data-context="CLO ${escA(cl.code)}" data-current="${escA(cl.description)}"
+        onclick="openSuggestFromEl(this)">✎</button>
     </div>`;
   }).join("");
 
@@ -202,10 +206,15 @@ function cgOpenPanel(course) {  if (cgSelectedCode) {
     `<div style="margin-bottom:1rem;"><div class="psec-hd">PLO Connections</div>${ploHtml}</div>
      ${buildDepSection(course)}
      <div><div class="psec-hd">${course.clos.length} CLOs</div>${cloHtml}</div>
-     <div style="margin-top:.75rem;border-top:1px solid var(--bdr);padding-top:.75rem;">
+     <div style="margin-top:.75rem;border-top:1px solid var(--bdr);padding-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap;">
        <button class="md-view-btn" data-code="${escH(course.code)}" data-title="${escA(course.title)}"
          onclick="openMdModal(this.dataset.code,this.dataset.title)">
          📄 View Course Content (.md)
+       </button>
+       <button class="suggest-trigger"
+         data-course="${escA(course.code)}" data-title="${escA(course.title)}" data-context="Course File / Overview"
+         onclick="openSuggestFromEl(this)">
+         Suggest an Edit
        </button>
      </div>`;
 }

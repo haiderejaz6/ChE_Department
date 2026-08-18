@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChE Ontology · Knowledge Graph · SCME, NUST</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/ontology.css">
+<link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">NUST</div>
+  <div class="hdr-text">
+    <h1>ChE <em>Ontology</em></h1>
+    <p>SCME · Research — knowledge-graph view of the curriculum, not an official department record</p>
+  </div>
+  <div class="vsep"></div>
+  <a class="ontology-link" href="../">🗂 ChE Curriculum (department site) ↗</a>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+  </button>
+</header>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeNav()"></div>
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobile-nav">
+  <a class="tab-btn" href="../">🗂 ChE Curriculum (department site) ↗</a>
+  <div class="mobile-nav-filters" id="mobile-filters"></div>
+</div>
+
+<!-- TABBAR (semester filters only — single-purpose site, no tabs) -->
+<div class="tabbar">
+  <span class="cm-label" style="padding-left:.2rem;">Filter by semester:</span>
+  <div class="tabbar-filters" id="filters"></div>
+</div>
+
+<!-- BODY -->
+<div class="body-wrap">
+  <div id="tab-concepts">
+    <div class="cm-toolbar">
+      <div class="cm-toolbar-left">
+        <span class="cm-label">View:</span>
+        <div class="cm-seg" id="cm-view-seg">
+          <button class="cm-seg-btn active" data-view="curriculum" onclick="cmSetView('curriculum')">Curriculum View</button>
+          <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Knowledge Graph</button>
+          <button class="cm-seg-btn" data-view="compare" onclick="cmSetView('compare')">Compare Courses</button>
+          <button class="cm-seg-btn" data-view="cloud" onclick="cmSetView('cloud')">Knowledge Area Overlap</button>
+          <button class="cm-seg-btn" data-view="sequence" onclick="cmSetView('sequence')">Sequence Graph</button>
+        </div>
+      </div>
+      <div class="cm-toolbar-right">
+        <span class="cm-label">Min. overlap:</span>
+        <select id="cm-min-overlap" onchange="cmRender()" class="cm-select">
+          <option value="1">Show all</option>
+          <option value="2" selected>≥ 2 courses</option>
+          <option value="3">≥ 3 courses</option>
+        </select>
+        <span class="cm-label" style="margin-left:.9rem">Search:</span>
+        <input id="cm-search" class="cm-input" placeholder="filter knowledge units…" oninput="cmRender()">
+        <div id="cm-force-controls" style="display:none;align-items:center;gap:.4rem;">
+          <span class="cm-label">Spread:</span>
+          <input type="range" id="cm-force-slider" min="1" max="10" value="5" step="1"
+            class="cm-slider" oninput="cmUpdateForce(this.value)">
+          <span id="cm-force-val" style="font-size:.68rem;color:var(--mu);width:1.4rem;text-align:center;">5</span>
+        </div>
+        <div id="cm-seq-controls" style="display:none;align-items:center;gap:.4rem;">
+          <span class="cm-label">Course:</span>
+          <select id="cm-seq-course-select" onchange="cmSeqSelectCourse(this.value)" class="cm-select">
+            <option value="">All courses (grid)</option>
+          </select>
+        </div>
+        <button class="cm-fit-btn" onclick="cmFitView()">⊡ Fit</button>
+        <span id="cm-mode-badge" class="cm-mode-badge"></span>
+      </div>
+    </div>
+    <div id="cm-body">
+      <div id="cmv-curriculum"></div>
+      <div id="cmv-network"   class="hidden"></div>
+      <div id="cmv-compare"   class="hidden"></div>
+      <div id="cmv-cloud"     class="hidden"></div>
+      <div id="cmv-sequence"  class="hidden"></div>
+    </div>
+  </div><!-- /tab-concepts -->
+</div><!-- /body-wrap -->
+
+<div id="tip"></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/ontology.js"></script>
+<script src="js/app.js"></script>
+<script>init();</script>
+</body>
+</html>

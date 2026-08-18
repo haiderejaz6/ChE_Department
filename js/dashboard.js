@@ -229,6 +229,10 @@ function renderCourseGrid(courses) {
           <span class="tag" style="background:${dc}18;color:${dc};">${dl}</span>
           <span class="tag" style="background:#f0f3fa;color:var(--mu);">${cl.emphasis}</span>
         </div>
+        <button class="clo-suggest-btn" title="Suggest an edit to ${escA(cl.code)}"
+          data-course="${escA(c.code)}" data-title="${escA(c.title)}"
+          data-context="CLO ${escA(cl.code)}" data-current="${escA(cl.description)}"
+          onclick="event.stopPropagation();openSuggestFromEl(this)">✎</button>
       </div>`;
     }).join("");
     const credits = `${c.lec||0}L+${c.lab||0}P`;
@@ -251,7 +255,15 @@ function renderCourseGrid(courses) {
         </div>
       </div>
       <div class="dm-bar">${bar}</div>
-      <div class="clo-list">${cloRows}</div>
+      <div class="clo-list">${cloRows}
+        <div style="padding:.7rem 1.1rem;">
+          <button class="suggest-trigger"
+            data-course="${escA(c.code)}" data-title="${escA(c.title)}" data-context="Course File / Overview"
+            onclick="event.stopPropagation();openSuggestFromEl(this)">
+            Suggest an Edit
+          </button>
+        </div>
+      </div>
     </div>`;
   }).join("");
 }

@@ -1,27 +1,15 @@
 
-function semColor(n) { return SEM_COLORS[n] || "#6b7280"; }
-function semLabel(n) { return n ? `Semester ${n}` : "Unknown"; }
-
-/* ── HTML escaping helpers ────────────────────────────────── */
-function escH(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function escA(s){ return escH(s).replace(/'/g,'&#39;'); }
-
 /* ================================================================
-   APP STATE
+   APP STATE (curriculum site — Curriculum Graph + OBE Dashboard)
 ================================================================ */
-let activeSemFilter = "All";
 let activeTab = "graph";
-let DATA = { plos: PLOS_DEF, courses: COURSES_EMBEDDED };
 let dashView = "course";
 
 /* ================================================================
    INIT
 ================================================================ */
 async function init() {
-  try {
-    const r = await fetch("./data.json");
-    if (r.ok) DATA = await r.json();
-  } catch(e) {}
+  await loadData("./data.json");
   buildFilters();
   renderStats();
   renderDash();      // pre-render dashboard in background
@@ -29,27 +17,11 @@ async function init() {
 }
 
 /* ================================================================
-   HELPERS
-================================================================ */
-function allSemesters() {
-  return [...new Set(DATA.courses.map(c=>c.semester).filter(Boolean))].sort((a,b)=>a-b);
-}
-
-function matchesSemester(course, semesterFilter) {
-  return String(course.semester) === String(semesterFilter);
-}
-
-function filtered() {
-  if (activeSemFilter === "All") return DATA.courses;
-  return DATA.courses.filter(c => matchesSemester(c, activeSemFilter));
-}
-
-/* ================================================================
    TAB SWITCHING
 ================================================================ */
 window.switchTab = function(tab) {
   activeTab = tab;
-  ["dash","graph","concepts"].forEach(t => {
+  ["dash","graph"].forEach(t => {
     document.getElementById("tab-"+t).classList.toggle("hidden", t!==tab);
     document.getElementById("tbtn-"+t).classList.toggle("active", t===tab);
     const mb = document.getElementById("mnbtn-"+t);
@@ -57,28 +29,10 @@ window.switchTab = function(tab) {
   });
   if (tab === "graph")    { buildCurriculumGraph(); }
   if (tab === "dash")     { renderDash(); setDashView(dashView); }
-  if (tab === "concepts") { cmRender(); }
 };
 
-function knowledgeAreaFromUnit(unit){
-  const MIN_AREA_PREFIX_LENGTH = 2;
-  const AREA_DELIMITER_COLON = ":";
-  const AREA_DELIMITER_DASH = " - ";
-  const raw = String(unit || "").trim();
-  if (!raw) return "General Chemical Engineering";
-  if (raw.includes(AREA_DELIMITER_COLON)) {
-    const [area] = raw.split(AREA_DELIMITER_COLON);
-    if (area.trim().length > MIN_AREA_PREFIX_LENGTH) return area.trim();
-  }
-  if (raw.includes(AREA_DELIMITER_DASH)) {
-    const [area] = raw.split(AREA_DELIMITER_DASH);
-    if (area.trim().length > MIN_AREA_PREFIX_LENGTH) return area.trim();
-  }
-  return "General Chemical Engineering";
-}
-
 /* ================================================================
-   FILTERS — now semester numbers
+   FILTERS — semester numbers
 ================================================================ */
 function buildFilters() {
   const sems = allSemesters();
@@ -97,29 +51,11 @@ function buildFilters() {
 
 window.setFilter = function(s) {
   activeSemFilter = s;
-  const nextCourses = s === "All" ? DATA.courses : DATA.courses.filter(c => matchesSemester(c, s));
-  const nextVisibleCodes = new Set(nextCourses.map(c => c.code));
-  cmCloudSelection = cmCloudSelection.filter(code => nextVisibleCodes.has(code)).slice(0, CM_CLOUD_MAX_COURSES);
-  cmCloudSelectionTouched = cmCloudSelection.length > 0;
-  syncCloudPinnedCourse(cmCloudSelection);
   buildFilters();
   renderStats();
   renderDash();
-  if (activeTab === "graph")    buildCurriculumGraph();
-  if (activeTab === "concepts") { if(cmNetSim) cmNetSim.stop(); cmRender(); }
+  if (activeTab === "graph") buildCurriculumGraph();
 };
-
-/* ── Tooltip ── */
-const tip = document.getElementById("tip");
-window.hideTip = () => tip.style.display="none";
-document.addEventListener("mousemove",moveTip);
-function moveTip(e) {
-  if(tip.style.display==="none") return;
-  let x=e.clientX+14, y=e.clientY+14;
-  if(x+280>window.innerWidth) x=e.clientX-290;
-  if(y+160>window.innerHeight) y=e.clientY-170;
-  tip.style.left=x+"px"; tip.style.top=y+"px";
-}
 
 /* ================================================================
    MD FILE VIEWER
@@ -176,6 +112,12 @@ window.openMdModal = async function(code, title) {
   bodyEl.innerHTML = `<p style="color:var(--dim);font-style:italic;">Loading ${code}.md…</p>`;
   modal.classList.remove("hidden");
 
+  document.getElementById("md-suggest-btn").onclick = () => openSuggestModal({
+    courseCode: code,
+    courseTitle: title,
+    context: `Course File (${code}.md)`,
+  });
+
   // Try common locations
   const paths = [`./${code}.md`, `./courses/${code}.md`, `./md/${code}.md`];
   let loaded = false;
@@ -205,8 +147,6 @@ window.closeMdModal = function() {
 window.onMdModalOverlayClick = function(e) {
   if (e.target === document.getElementById("md-modal")) closeMdModal();
 };
-
-function showTip(e,html){tip.innerHTML=html;tip.style.display="block";moveTip(e);}
 
 /* ================================================================
    MOBILE NAV

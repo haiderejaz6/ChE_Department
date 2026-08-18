@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/dashboard.css">
 <link rel="stylesheet" href="css/graph.css">
-<link rel="stylesheet" href="css/ontology.css">
 <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/suggest.css">
 </head>
 <body>
 
@@ -23,6 +23,7 @@
   </div>
   <div class="vsep"></div>
   <div class="hdr-stats" id="hdr-stats"></div>
+  <a class="ontology-link" href="ontology/" title="ChE Ontology — a separate research site">🧭 ChE Ontology (research) ↗</a>
   <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
     <div class="ham-line"></div>
     <div class="ham-line"></div>
@@ -36,7 +37,7 @@
 <div class="mobile-nav" id="mobile-nav">
   <button class="tab-btn active" id="mnbtn-graph"    onclick="switchTab('graph');closeNav()">🗂 Curriculum Graph</button>
   <button class="tab-btn"        id="mnbtn-dash"     onclick="switchTab('dash');closeNav()">📊 OBE Dashboard</button>
-  <button class="tab-btn"        id="mnbtn-concepts" onclick="switchTab('concepts');closeNav()">🧭 ChE Ontology</button>
+  <a class="tab-btn" href="ontology/">🧭 ChE Ontology (research) ↗</a>
   <div class="mobile-nav-filters" id="mobile-filters"></div>
 </div>
 
@@ -44,7 +45,6 @@
 <div class="tabbar">
   <button class="tab-btn active" id="tbtn-graph"    onclick="switchTab('graph')">🗂 Curriculum Graph</button>
   <button class="tab-btn"        id="tbtn-dash"     onclick="switchTab('dash')">📊 OBE Dashboard</button>
-  <button class="tab-btn"        id="tbtn-concepts" onclick="switchTab('concepts')">🧭 ChE Ontology</button>
   <div class="vsep" style="margin:0 .6rem;"></div>
   <div class="tabbar-filters" id="filters"></div>
 </div>
@@ -148,53 +148,6 @@
     </div>
   </div><!-- /tab-dash -->
 
-  <!-- ── ChE ONTOLOGY TAB ── -->
-  <div id="tab-concepts" class="hidden">
-    <div class="cm-toolbar">
-      <div class="cm-toolbar-left">
-        <span class="cm-label">View:</span>
-        <div class="cm-seg" id="cm-view-seg">
-          <button class="cm-seg-btn active" data-view="curriculum" onclick="cmSetView('curriculum')">Curriculum View</button>
-          <button class="cm-seg-btn"        data-view="network"    onclick="cmSetView('network')">Knowledge Graph</button>
-          <button class="cm-seg-btn" data-view="compare" onclick="cmSetView('compare')">Compare Courses</button>
-          <button class="cm-seg-btn" data-view="cloud" onclick="cmSetView('cloud')">Knowledge Area Overlap</button>
-          <button class="cm-seg-btn" data-view="sequence" onclick="cmSetView('sequence')">Sequence Graph</button>
-        </div>
-      </div>
-      <div class="cm-toolbar-right">
-        <span class="cm-label">Min. overlap:</span>
-        <select id="cm-min-overlap" onchange="cmRender()" class="cm-select">
-          <option value="1">Show all</option>
-          <option value="2" selected>≥ 2 courses</option>
-          <option value="3">≥ 3 courses</option>
-        </select>
-        <span class="cm-label" style="margin-left:.9rem">Search:</span>
-        <input id="cm-search" class="cm-input" placeholder="filter knowledge units…" oninput="cmRender()">
-        <div id="cm-force-controls" style="display:none;align-items:center;gap:.4rem;">
-          <span class="cm-label">Spread:</span>
-          <input type="range" id="cm-force-slider" min="1" max="10" value="5" step="1"
-            class="cm-slider" oninput="cmUpdateForce(this.value)">
-          <span id="cm-force-val" style="font-size:.68rem;color:var(--mu);width:1.4rem;text-align:center;">5</span>
-        </div>
-        <div id="cm-seq-controls" style="display:none;align-items:center;gap:.4rem;">
-          <span class="cm-label">Course:</span>
-          <select id="cm-seq-course-select" onchange="cmSeqSelectCourse(this.value)" class="cm-select">
-            <option value="">All courses (grid)</option>
-          </select>
-        </div>
-        <button class="cm-fit-btn" onclick="cmFitView()">⊡ Fit</button>
-        <span id="cm-mode-badge" class="cm-mode-badge"></span>
-      </div>
-    </div>
-    <div id="cm-body">
-      <div id="cmv-curriculum"></div>
-      <div id="cmv-network"   class="hidden"></div>
-      <div id="cmv-compare"   class="hidden"></div>
-      <div id="cmv-cloud"     class="hidden"></div>
-      <div id="cmv-sequence"  class="hidden"></div>
-    </div>
-  </div><!-- /tab-concepts -->
-
 </div><!-- /body-wrap -->
 
 <div id="tip"></div>
@@ -204,7 +157,10 @@
   <div class="md-modal-box" onclick="event.stopPropagation()">
     <div class="md-modal-hdr">
       <div class="md-modal-title" id="md-modal-title">Course Content</div>
-      <button class="close-btn" onclick="closeMdModal()" style="font-size:1rem;">✕</button>
+      <div style="display:flex;align-items:center;gap:.6rem;">
+        <button class="suggest-trigger" id="md-suggest-btn">Suggest an Edit</button>
+        <button class="close-btn" onclick="closeMdModal()" style="font-size:1rem;">✕</button>
+      </div>
     </div>
     <div class="md-modal-body">
       <div class="md-body" id="md-modal-body">
@@ -214,11 +170,63 @@
   </div>
 </div>
 
+<!-- Suggest an Edit Modal -->
+<div class="md-modal hidden" id="suggest-modal" onclick="onSuggestModalOverlayClick(event)">
+  <div class="md-modal-box" onclick="event.stopPropagation()">
+    <div class="md-modal-hdr">
+      <div>
+        <div class="md-modal-title">Suggest an Edit</div>
+        <div class="sg-sub" id="sg-course">—</div>
+        <div class="sg-sub sg-context-line" id="sg-context"></div>
+      </div>
+      <button class="close-btn" onclick="closeSuggestModal()" style="font-size:1rem;">✕</button>
+    </div>
+    <div class="md-modal-body">
+      <form id="sg-form" onsubmit="submitSuggestForm(event)">
+        <input type="hidden" id="sg-course-code">
+        <input type="hidden" id="sg-context-field">
+
+        <div class="sg-field hidden" id="sg-current-wrap">
+          <label class="sg-label" for="sg-current">Current text</label>
+          <textarea id="sg-current" class="sg-input" rows="3" readonly></textarea>
+        </div>
+
+        <div class="sg-field">
+          <label class="sg-label" for="sg-suggested">Your suggested change *</label>
+          <textarea id="sg-suggested" class="sg-input" rows="4" placeholder="Describe the change you'd like to see…" required></textarea>
+        </div>
+
+        <div class="sg-row">
+          <div class="sg-field">
+            <label class="sg-label" for="sg-name">Your name *</label>
+            <input type="text" id="sg-name" class="sg-input" required>
+          </div>
+          <div class="sg-field">
+            <label class="sg-label" for="sg-email">Your email *</label>
+            <input type="email" id="sg-email" class="sg-input" required>
+          </div>
+        </div>
+
+        <div class="sg-field">
+          <label class="sg-label" for="sg-notes">Additional notes (optional)</label>
+          <textarea id="sg-notes" class="sg-input" rows="2" placeholder="Rationale, references, PEC/PAB alignment, etc."></textarea>
+        </div>
+
+        <div class="sg-footer">
+          <span class="sg-status" id="sg-status"></span>
+          <button type="submit" class="sg-submit-btn" id="sg-submit">Send Suggestion</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script src="js/data.js"></script>
+<script src="js/common.js"></script>
 <script src="js/shared.js"></script>
 <script src="js/dashboard.js"></script>
 <script src="js/graph.js"></script>
-<script src="js/ontology.js"></script>
+<script src="js/suggest.js"></script>
 <script>init();</script>
 </body>
 </html>
