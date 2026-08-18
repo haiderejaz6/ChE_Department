@@ -176,6 +176,12 @@ window.openMdModal = async function(code, title) {
   bodyEl.innerHTML = `<p style="color:var(--dim);font-style:italic;">Loading ${code}.md…</p>`;
   modal.classList.remove("hidden");
 
+  document.getElementById("md-suggest-btn").onclick = () => openSuggestModal({
+    courseCode: code,
+    courseTitle: title,
+    context: `Course File (${code}.md)`,
+  });
+
   // Try common locations
   const paths = [`./${code}.md`, `./courses/${code}.md`, `./md/${code}.md`];
   let loaded = false;

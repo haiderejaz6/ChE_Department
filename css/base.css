@@ -106,7 +106,7 @@ header{
 .ccard.open .clo-list{display:block;}
 .clo-item{
   padding:.7rem 1.1rem;border-bottom:1px solid rgba(0,0,0,.04);
-  display:grid;grid-template-columns:38px 1fr auto;gap:.5rem;align-items:start;
+  display:grid;grid-template-columns:38px 1fr auto auto;gap:.5rem;align-items:start;
 }
 .clo-item:last-child{border-bottom:none;}
 .clo-num{font-size:.63rem;font-weight:700;color:var(--dim);padding-top:.1rem;font-family:'DM Mono',monospace;}
@@ -129,7 +129,7 @@ header{
 
 /* Panel CLO items */
 .p-clo-item{
-  display:grid;grid-template-columns:36px 1fr;gap:.45rem;
+  display:grid;grid-template-columns:36px 1fr auto;gap:.45rem;align-items:start;
   margin-bottom:.55rem;padding-bottom:.55rem;border-bottom:1px solid rgba(0,0,0,.05);
 }
 .p-clo-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
