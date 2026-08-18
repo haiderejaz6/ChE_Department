@@ -46,6 +46,13 @@ header{
 .hdr-text p{font-size:.7rem;color:var(--mu);margin-top:.05rem;}
 .vsep{width:1px;height:24px;background:var(--bdr);flex-shrink:0;}
 .hdr-stats{display:flex;gap:1.5rem;}
+.ontology-link{
+  margin-left:auto;font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:600;
+  color:var(--mu);text-decoration:none;white-space:nowrap;
+  padding:.32rem .65rem;border:1px solid var(--bdr);border-radius:16px;
+  transition:all .15s;
+}
+.ontology-link:hover{color:var(--gold);border-color:var(--gold);background:rgba(184,146,14,.06);}
 .stat-n{font-family:'Crimson Pro',serif;font-size:1.5rem;font-weight:700;color:var(--gold);line-height:1;}
 .stat-l{font-size:.6rem;color:var(--mu);text-transform:uppercase;letter-spacing:.1em;}
 
