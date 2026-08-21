@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>ChE Reference Knowledge Units · SCME, NUST</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/reference.css">
+<link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">NUST</div>
+  <div class="hdr-text">
+    <h1>ChE <em>Reference</em></h1>
+    <p>SCME · Body of knowledge for chemical engineering — the yardstick, not the curriculum</p>
+  </div>
+  <div class="vsep"></div>
+  <div class="hdr-stats" id="hdr-stats"></div>
+  <a class="ontology-link" href="../">🗂 ChE Curriculum ↗</a>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+  </button>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeNav()"></div>
+<div class="mobile-nav" id="mobile-nav">
+  <button class="tab-btn active" id="mnbtn-tree"    onclick="setView('tree');closeNav()">🌳 Tree View</button>
+  <button class="tab-btn"        id="mnbtn-outline" onclick="setView('outline');closeNav()">📄 Outline View</button>
+  <a class="tab-btn" href="../">🗂 ChE Curriculum ↗</a>
+  <a class="tab-btn" href="../ontology/">🧭 ChE Ontology ↗</a>
+</div>
+
+<!-- TABBAR -->
+<div class="tabbar">
+  <button class="tab-btn active" id="tbtn-tree"    onclick="setView('tree')">🌳 Tree View</button>
+  <button class="tab-btn"        id="tbtn-outline" onclick="setView('outline')">📄 Outline View</button>
+  <div class="vsep" style="margin:0 .6rem;"></div>
+  <input type="search" id="search" class="rf-search" placeholder="Search units and topics…" autocomplete="off">
+  <span class="rf-hits" id="rf-hits"></span>
+</div>
+
+<div class="body-wrap">
+
+  <!-- ── TREE VIEW ─────────────────────────────────────── -->
+  <div id="view-tree" class="rf-view">
+    <div class="rf-toolbar">
+      <span class="rf-label">Levels:</span>
+      <button class="rf-btn" onclick="expandTo(1)">Areas</button>
+      <button class="rf-btn" onclick="expandTo(2)">+ Units</button>
+      <button class="rf-btn" onclick="expandTo(3)">+ Topics</button>
+      <div class="vsep" style="margin:0 .55rem;"></div>
+      <span class="rf-label">Show:</span>
+      <button class="rf-btn" id="btn-core" onclick="toggleCoreOnly()">Core only</button>
+      <div class="rf-zoom">
+        <button class="rf-btn rf-icon" onclick="zoomBy(1.35)" aria-label="Zoom in">+</button>
+        <button class="rf-btn rf-icon" onclick="zoomBy(0.74)" aria-label="Zoom out">−</button>
+        <button class="rf-btn" onclick="resetZoom()">Fit</button>
+      </div>
+      <div class="rf-hint">Drag to pan · scroll or pinch to zoom · click a node to open it</div>
+    </div>
+    <div class="rf-canvas" id="rf-canvas">
+      <svg id="rf-svg"></svg>
+      <div class="rf-loading" id="rf-loading">Loading reference ontology…</div>
+    </div>
+  </div>
+
+  <!-- ── OUTLINE VIEW ──────────────────────────────────── -->
+  <div id="view-outline" class="rf-view" style="display:none;">
+    <div class="rf-toolbar">
+      <span class="rf-label">Sections:</span>
+      <button class="rf-btn" onclick="outlineAll(true)">Expand all</button>
+      <button class="rf-btn" onclick="outlineAll(false)">Collapse all</button>
+      <div class="vsep" style="margin:0 .55rem;"></div>
+      <button class="rf-btn" id="btn-core2" onclick="toggleCoreOnly()">Core only</button>
+    </div>
+    <div class="rf-outline" id="rf-outline"></div>
+  </div>
+
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="rf-panel" id="rf-panel">
+  <button class="rf-panel-close" onclick="closePanel()" aria-label="Close">×</button>
+  <div id="rf-panel-body"></div>
+</div>
+<div class="rf-panel-scrim" id="rf-panel-scrim" onclick="closePanel()"></div>
+
+<script src="js/app.js"></script>
+<script>init();</script>
+</body>
+</html>

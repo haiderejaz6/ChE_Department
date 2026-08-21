@@ -4,3 +4,8 @@ pandas==3.0.3
 openpyxl==3.1.5
 owlready2==0.51
 requests==2.34.2
+
+# Claude-based knowledge-unit extraction (build_reference_ontology.py,
+# claude_extract.py). Not needed for the rule/Ollama path in excel_to_json.py.
+anthropic>=0.72
+pydantic>=2.9
