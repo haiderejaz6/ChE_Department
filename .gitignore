@@ -1,0 +1,12 @@
+# Python virtual environments — rebuild from requirements.txt instead
+venv/
+.venv/
+env/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

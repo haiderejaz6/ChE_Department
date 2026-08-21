@@ -1,0 +1,6 @@
+# Direct dependencies for the pipeline/ scripts.
+# Pinned to the versions the current data.json was generated with.
+pandas==3.0.3
+openpyxl==3.1.5
+owlready2==0.51
+requests==2.34.2
