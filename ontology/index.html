@@ -30,7 +30,8 @@
 
 <div class="nav-overlay" id="nav-overlay" onclick="closeNav()"></div>
 <div class="mobile-nav" id="mobile-nav">
-  <button class="tab-btn active" id="mn-map"    onclick="setView('map');closeNav()">🗺 Coverage Map</button>
+  <button class="tab-btn active" id="mn-tree"   onclick="setView('tree');closeNav()">🌳 Tree + Courses</button>
+  <button class="tab-btn"        id="mn-map"    onclick="setView('map');closeNav()">🗺 Coverage Map</button>
   <button class="tab-btn"        id="mn-matrix" onclick="setView('matrix');closeNav()">▦ Course Matrix</button>
   <button class="tab-btn"        id="mn-net"    onclick="setView('net');closeNav()">🕸 Course Overlap</button>
   <button class="tab-btn"        id="mn-gaps"   onclick="setView('gaps');closeNav()">⚠ Gaps &amp; Weak Spots</button>
@@ -40,7 +41,8 @@
 
 <!-- TABBAR -->
 <div class="tabbar">
-  <button class="tab-btn active" id="tb-map"    onclick="setView('map')">🗺 Coverage Map</button>
+  <button class="tab-btn active" id="tb-tree"   onclick="setView('tree')">🌳 Tree + Courses</button>
+  <button class="tab-btn"        id="tb-map"    onclick="setView('map')">🗺 Coverage Map</button>
   <button class="tab-btn"        id="tb-matrix" onclick="setView('matrix')">▦ Course Matrix</button>
   <button class="tab-btn"        id="tb-net"    onclick="setView('net')">🕸 Course Overlap</button>
   <button class="tab-btn"        id="tb-gaps"   onclick="setView('gaps')">⚠ Gaps &amp; Weak Spots</button>
@@ -50,8 +52,36 @@
 
 <div class="body-wrap">
 
+
+  <!-- ── TREE + COURSE OVERLAY ───────────────────────────── -->
+  <div id="v-tree" class="cv-view">
+    <div class="cv-toolbar">
+      <div class="cv-legend" id="legend-tree"></div>
+      <div class="vsep" style="margin:0 .5rem;"></div>
+      <span class="cv-label">Depth:</span>
+      <button class="cv-btn active" id="tr-d2" onclick="setTreeDepth(2)">Areas + Units</button>
+      <button class="cv-btn" id="tr-d3" onclick="setTreeDepth(3)">+ Topics</button>
+      <div class="vsep" style="margin:0 .5rem;"></div>
+      <button class="cv-btn" onclick="trZoom(1.3)">+</button>
+      <button class="cv-btn" onclick="trZoom(0.77)">−</button>
+      <button class="cv-btn" onclick="trFit()">Fit</button>
+      <button class="cv-btn" onclick="clearCourses()">Clear overlay</button>
+      <div class="cv-hint">Tick courses to draw a boundary around what each teaches · where boundaries overlap, courses share content</div>
+    </div>
+    <div class="tr-split">
+      <aside class="tr-rail">
+        <div class="tr-rail-head">
+          <input id="tr-course-search" class="cv-input" placeholder="find a course…" style="width:100%;">
+          <div class="tr-rail-note" id="tr-sel-note">No courses selected</div>
+        </div>
+        <div class="tr-rail-list" id="tr-course-list"></div>
+      </aside>
+      <div class="cv-canvas" id="tr-canvas"><svg id="tr-svg"></svg></div>
+    </div>
+  </div>
+
   <!-- ── COVERAGE MAP (icicle) ───────────────────────────── -->
-  <div id="v-map" class="cv-view">
+  <div id="v-map" class="cv-view hidden">
     <div class="cv-toolbar">
       <div class="cv-legend" id="legend-map"></div>
       <div class="cv-hint">Click a block to zoom in · click the breadcrumb to zoom out</div>
@@ -115,6 +145,7 @@
 
 <script src="../js/data.js"></script>
 <script src="js/app.js"></script>
+<script src="js/tree.js"></script>
 <script>init();</script>
 </body>
 </html>

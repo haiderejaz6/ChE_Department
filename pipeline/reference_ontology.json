@@ -18,10 +18,36 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-01.01.01", "name": "Differential Calculus", "description": "Derivatives, partial derivatives, chain rule for multivariable functions."},
-            {"id": "T-01.01.02", "name": "Integral Calculus", "description": "Definite and indefinite integration, multiple integrals."},
-            {"id": "T-01.01.03", "name": "Vector Calculus", "description": "Gradient, divergence, curl and the integral theorems used in transport."},
-            {"id": "T-01.01.04", "name": "Series and Approximation", "description": "Taylor expansion and linearisation of nonlinear relations."}
+            {
+              "id": "T-01.01.01",
+              "name": "Differential Calculus",
+              "description": "Derivatives, partial derivatives, chain rule for multivariable functions."
+            },
+            {
+              "id": "T-01.01.02",
+              "name": "Integral Calculus",
+              "description": "Definite and indefinite integration, multiple integrals."
+            },
+            {
+              "id": "T-01.01.03",
+              "name": "Vector Calculus",
+              "description": "Gradient, divergence, curl and the integral theorems used in transport."
+            },
+            {
+              "id": "T-01.01.04",
+              "name": "Series and Approximation",
+              "description": "Taylor expansion and linearisation of nonlinear relations."
+            },
+            {
+              "id": "T-01.01.05",
+              "name": "Analytical Geometry",
+              "description": "Coordinate geometry in 2- and 3-space, quadric surfaces, cylindrical and spherical systems."
+            },
+            {
+              "id": "T-01.01.06",
+              "name": "Complex Numbers",
+              "description": "Complex arithmetic and its engineering applications."
+            }
           ]
         },
         {
@@ -31,11 +57,31 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-01.02.01", "name": "First-Order ODEs", "description": "Separable, linear and exact equations; batch process models."},
-            {"id": "T-01.02.02", "name": "Higher-Order ODEs", "description": "Linear constant-coefficient systems and their characteristic behaviour."},
-            {"id": "T-01.02.03", "name": "Partial Differential Equations", "description": "Diffusion, wave and Laplace equations in transport contexts."},
-            {"id": "T-01.02.04", "name": "Laplace Transforms", "description": "Transform methods for linear dynamic systems."},
-            {"id": "T-01.02.05", "name": "Boundary Value Problems", "description": "Boundary conditions for distributed-parameter systems."}
+            {
+              "id": "T-01.02.01",
+              "name": "First-Order ODEs",
+              "description": "Separable, linear and exact equations; batch process models."
+            },
+            {
+              "id": "T-01.02.02",
+              "name": "Higher-Order ODEs",
+              "description": "Linear constant-coefficient systems and their characteristic behaviour."
+            },
+            {
+              "id": "T-01.02.03",
+              "name": "Partial Differential Equations",
+              "description": "Diffusion, wave and Laplace equations in transport contexts."
+            },
+            {
+              "id": "T-01.02.04",
+              "name": "Laplace Transforms",
+              "description": "Transform methods for linear dynamic systems."
+            },
+            {
+              "id": "T-01.02.05",
+              "name": "Boundary Value Problems",
+              "description": "Boundary conditions for distributed-parameter systems."
+            }
           ]
         },
         {
@@ -45,9 +91,21 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-01.03.01", "name": "Matrix Operations", "description": "Multiplication, inversion, rank and determinants."},
-            {"id": "T-01.03.02", "name": "Linear Systems", "description": "Gaussian elimination and consistency of simultaneous balances."},
-            {"id": "T-01.03.03", "name": "Eigenvalues and Eigenvectors", "description": "Stability and modal analysis of linear systems."}
+            {
+              "id": "T-01.03.01",
+              "name": "Matrix Operations",
+              "description": "Multiplication, inversion, rank and determinants."
+            },
+            {
+              "id": "T-01.03.02",
+              "name": "Linear Systems",
+              "description": "Gaussian elimination and consistency of simultaneous balances."
+            },
+            {
+              "id": "T-01.03.03",
+              "name": "Eigenvalues and Eigenvectors",
+              "description": "Stability and modal analysis of linear systems."
+            }
           ]
         },
         {
@@ -57,10 +115,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-01.04.01", "name": "Root Finding", "description": "Bisection, Newton-Raphson and successive substitution."},
-            {"id": "T-01.04.02", "name": "Numerical Integration", "description": "Trapezoidal, Simpson and quadrature rules."},
-            {"id": "T-01.04.03", "name": "Numerical ODE Solution", "description": "Euler and Runge-Kutta integration of dynamic models."},
-            {"id": "T-01.04.04", "name": "Convergence and Error", "description": "Truncation error, stability and step-size selection."}
+            {
+              "id": "T-01.04.01",
+              "name": "Root Finding",
+              "description": "Bisection, Newton-Raphson and successive substitution."
+            },
+            {
+              "id": "T-01.04.02",
+              "name": "Numerical Integration",
+              "description": "Trapezoidal, Simpson and quadrature rules."
+            },
+            {
+              "id": "T-01.04.03",
+              "name": "Numerical ODE Solution",
+              "description": "Euler and Runge-Kutta integration of dynamic models."
+            },
+            {
+              "id": "T-01.04.04",
+              "name": "Convergence and Error",
+              "description": "Truncation error, stability and step-size selection."
+            }
           ]
         },
         {
@@ -70,11 +144,31 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-01.05.01", "name": "Probability Distributions", "description": "Normal, binomial and Poisson behaviour of process variables."},
-            {"id": "T-01.05.02", "name": "Error and Uncertainty Analysis", "description": "Propagation of measurement error through calculations."},
-            {"id": "T-01.05.03", "name": "Regression and Curve Fitting", "description": "Least squares fitting of models to experimental data."},
-            {"id": "T-01.05.04", "name": "Hypothesis Testing", "description": "Significance testing and confidence intervals."},
-            {"id": "T-01.05.05", "name": "Design of Experiments", "description": "Factorial designs and systematic experimental planning."}
+            {
+              "id": "T-01.05.01",
+              "name": "Probability Distributions",
+              "description": "Normal, binomial and Poisson behaviour of process variables."
+            },
+            {
+              "id": "T-01.05.02",
+              "name": "Error and Uncertainty Analysis",
+              "description": "Propagation of measurement error through calculations."
+            },
+            {
+              "id": "T-01.05.03",
+              "name": "Regression and Curve Fitting",
+              "description": "Least squares fitting of models to experimental data."
+            },
+            {
+              "id": "T-01.05.04",
+              "name": "Hypothesis Testing",
+              "description": "Significance testing and confidence intervals."
+            },
+            {
+              "id": "T-01.05.05",
+              "name": "Design of Experiments",
+              "description": "Factorial designs and systematic experimental planning."
+            }
           ]
         },
         {
@@ -84,10 +178,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-01.06.01", "name": "Programming Fundamentals", "description": "Variables, control flow, functions and data structures."},
-            {"id": "T-01.06.02", "name": "Scientific Computing Libraries", "description": "Array and numerical libraries for engineering computation."},
-            {"id": "T-01.06.03", "name": "Data Handling and Visualisation", "description": "Reading, transforming and plotting process data."},
-            {"id": "T-01.06.04", "name": "Spreadsheet Modelling", "description": "Structured calculation and solver use in spreadsheets."}
+            {
+              "id": "T-01.06.01",
+              "name": "Programming Fundamentals",
+              "description": "Variables, control flow, functions and data structures."
+            },
+            {
+              "id": "T-01.06.02",
+              "name": "Scientific Computing Libraries",
+              "description": "Array and numerical libraries for engineering computation."
+            },
+            {
+              "id": "T-01.06.03",
+              "name": "Data Handling and Visualisation",
+              "description": "Reading, transforming and plotting process data."
+            },
+            {
+              "id": "T-01.06.04",
+              "name": "Spreadsheet Modelling",
+              "description": "Structured calculation and solver use in spreadsheets."
+            }
           ]
         },
         {
@@ -97,12 +207,98 @@
           "core": false,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-01.07.01", "name": "Objective Functions and Constraints", "description": "Casting engineering goals as optimisation problems."},
-            {"id": "T-01.07.02", "name": "Linear Programming", "description": "Simplex method and constrained linear allocation."},
-            {"id": "T-01.07.03", "name": "Nonlinear Optimisation", "description": "Gradient and search methods for nonlinear objectives."}
+            {
+              "id": "T-01.07.01",
+              "name": "Objective Functions and Constraints",
+              "description": "Casting engineering goals as optimisation problems."
+            },
+            {
+              "id": "T-01.07.02",
+              "name": "Linear Programming",
+              "description": "Simplex method and constrained linear allocation."
+            },
+            {
+              "id": "T-01.07.03",
+              "name": "Nonlinear Optimisation",
+              "description": "Gradient and search methods for nonlinear objectives."
+            },
+            {
+              "id": "T-01.07.04",
+              "name": "Queuing and Waiting-Line Models",
+              "description": "Infinite and finite source queuing analysis of process and service systems."
+            },
+            {
+              "id": "T-01.07.05",
+              "name": "Facility Layout and Line Balancing",
+              "description": "Allocation of work and space across a production system."
+            }
+          ]
+        },
+        {
+          "id": "KU-01.08",
+          "name": "Data Science and Machine Learning",
+          "core": true,
+          "expected_bloom": "Apply",
+          "description": "Learning models fitted to data, and their use for prediction and classification in process contexts.",
+          "topics": [
+            {
+              "id": "T-01.08.01",
+              "name": "Supervised Learning",
+              "description": "Regression, classification, decision trees, neural networks and support vector machines."
+            },
+            {
+              "id": "T-01.08.02",
+              "name": "Unsupervised Learning",
+              "description": "Clustering, dimensionality reduction and pattern discovery in unlabelled data."
+            },
+            {
+              "id": "T-01.08.03",
+              "name": "Model Validation and Overfitting",
+              "description": "Train-test splitting, cross-validation, accuracy measures and pruning."
+            },
+            {
+              "id": "T-01.08.04",
+              "name": "Data-Driven Process Modelling",
+              "description": "Applying learned models to process prediction, soft sensing and control."
+            },
+            {
+              "id": "T-01.08.05",
+              "name": "Reinforcement and Ensemble Methods",
+              "description": "Markov decision processes, bagging, boosting and committee methods."
+            }
+          ]
+        },
+        {
+          "id": "KU-01.09",
+          "name": "Quantitative and Logical Reasoning",
+          "core": true,
+          "expected_bloom": "Evaluate",
+          "description": "Numeracy and formal reasoning underpinning evidence-based engineering judgement.",
+          "topics": [
+            {
+              "id": "T-01.09.01",
+              "name": "Numeracy and Proportional Reasoning",
+              "description": "Number systems, rates, ratios, proportions and measurement scales."
+            },
+            {
+              "id": "T-01.09.02",
+              "name": "Propositional Logic",
+              "description": "Propositions, connectives, truth tables and logical equivalence."
+            },
+            {
+              "id": "T-01.09.03",
+              "name": "Argument Evaluation and Fallacies",
+              "description": "Inductive, deductive and abductive reasoning; identifying logical fallacies."
+            },
+            {
+              "id": "T-01.09.04",
+              "name": "Data Interpretation",
+              "description": "Reading and critiquing quantitative information presented in tables and charts."
+            }
           ]
         }
-      ]
+      ],
+      "order": 1
     },
     {
       "id": "KA-02",
@@ -117,11 +313,36 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-02.01.01", "name": "Gas Laws and Real Gases", "description": "Ideal gas behaviour and deviations at process conditions."},
-            {"id": "T-02.01.02", "name": "Solutions and Colligative Properties", "description": "Concentration measures, vapour pressure lowering, osmotic behaviour."},
-            {"id": "T-02.01.03", "name": "Chemical Equilibrium", "description": "Equilibrium constants and Le Chatelier response."},
-            {"id": "T-02.01.04", "name": "Electrochemistry", "description": "Electrode potentials, cells and corrosion basics."},
-            {"id": "T-02.01.05", "name": "Surface and Colloid Chemistry", "description": "Interfacial phenomena, surfactants and colloidal stability."}
+            {
+              "id": "T-02.01.01",
+              "name": "Gas Laws and Real Gases",
+              "description": "Ideal gas behaviour and deviations at process conditions."
+            },
+            {
+              "id": "T-02.01.02",
+              "name": "Solutions and Colligative Properties",
+              "description": "Concentration measures, vapour pressure lowering, osmotic behaviour."
+            },
+            {
+              "id": "T-02.01.03",
+              "name": "Chemical Equilibrium",
+              "description": "Equilibrium constants and Le Chatelier response."
+            },
+            {
+              "id": "T-02.01.04",
+              "name": "Electrochemistry",
+              "description": "Electrode potentials, cells and corrosion basics."
+            },
+            {
+              "id": "T-02.01.05",
+              "name": "Surface and Colloid Chemistry",
+              "description": "Interfacial phenomena, surfactants and colloidal stability."
+            },
+            {
+              "id": "T-02.01.06",
+              "name": "Chemical Bonding and Molecular Orbitals",
+              "description": "Bonding theory and molecular orbital description of structure and reactivity."
+            }
           ]
         },
         {
@@ -131,10 +352,26 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-02.02.01", "name": "Functional Groups", "description": "Classification and characteristic reactivity."},
-            {"id": "T-02.02.02", "name": "Reaction Mechanisms", "description": "Substitution, addition and elimination pathways."},
-            {"id": "T-02.02.03", "name": "Hydrocarbon Chemistry", "description": "Alkanes, alkenes, aromatics and their industrial routes."},
-            {"id": "T-02.02.04", "name": "Industrial Organic Synthesis", "description": "Commodity chemical production routes."}
+            {
+              "id": "T-02.02.01",
+              "name": "Functional Groups",
+              "description": "Classification and characteristic reactivity."
+            },
+            {
+              "id": "T-02.02.02",
+              "name": "Reaction Mechanisms",
+              "description": "Substitution, addition and elimination pathways."
+            },
+            {
+              "id": "T-02.02.03",
+              "name": "Hydrocarbon Chemistry",
+              "description": "Alkanes, alkenes, aromatics and their industrial routes."
+            },
+            {
+              "id": "T-02.02.04",
+              "name": "Industrial Organic Synthesis",
+              "description": "Commodity chemical production routes."
+            }
           ]
         },
         {
@@ -144,9 +381,26 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-02.03.01", "name": "Periodic Behaviour", "description": "Trends governing inorganic reactivity."},
-            {"id": "T-02.03.02", "name": "Acids, Bases and Salts", "description": "Industrial acid and alkali manufacture."},
-            {"id": "T-02.03.03", "name": "Inorganic Process Industries", "description": "Fertiliser, cement and heavy chemical sectors."}
+            {
+              "id": "T-02.03.01",
+              "name": "Periodic Behaviour",
+              "description": "Trends governing inorganic reactivity."
+            },
+            {
+              "id": "T-02.03.02",
+              "name": "Acids, Bases and Salts",
+              "description": "Industrial acid and alkali manufacture."
+            },
+            {
+              "id": "T-02.03.03",
+              "name": "Inorganic Process Industries",
+              "description": "Fertiliser, cement and heavy chemical sectors."
+            },
+            {
+              "id": "T-02.03.04",
+              "name": "Nuclear and Radiochemistry",
+              "description": "Radioactive elements, decay and their industrial and safety implications."
+            }
           ]
         },
         {
@@ -156,10 +410,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-02.04.01", "name": "Volumetric Analysis", "description": "Titrimetric determination of concentration."},
-            {"id": "T-02.04.02", "name": "Chromatography", "description": "Gas and liquid chromatographic separation and quantification."},
-            {"id": "T-02.04.03", "name": "Spectroscopic Methods", "description": "UV-visible, IR and atomic spectroscopy."},
-            {"id": "T-02.04.04", "name": "Thermal Analysis", "description": "TGA and DSC characterisation of materials."}
+            {
+              "id": "T-02.04.01",
+              "name": "Volumetric Analysis",
+              "description": "Titrimetric determination of concentration."
+            },
+            {
+              "id": "T-02.04.02",
+              "name": "Chromatography",
+              "description": "Gas and liquid chromatographic separation and quantification."
+            },
+            {
+              "id": "T-02.04.03",
+              "name": "Spectroscopic Methods",
+              "description": "UV-visible, IR and atomic spectroscopy."
+            },
+            {
+              "id": "T-02.04.04",
+              "name": "Thermal Analysis",
+              "description": "TGA and DSC characterisation of materials."
+            }
           ]
         },
         {
@@ -169,10 +439,118 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-02.05.01", "name": "Homogeneous Catalysis", "description": "Single-phase catalytic systems and their mechanisms."},
-            {"id": "T-02.05.02", "name": "Heterogeneous Catalysis", "description": "Solid catalysts, active sites and surface reaction steps."},
-            {"id": "T-02.05.03", "name": "Catalyst Preparation and Characterisation", "description": "Support, loading and surface area measurement."},
-            {"id": "T-02.05.04", "name": "Catalyst Deactivation", "description": "Fouling, poisoning, sintering and regeneration."}
+            {
+              "id": "T-02.05.01",
+              "name": "Homogeneous Catalysis",
+              "description": "Single-phase catalytic systems and their mechanisms."
+            },
+            {
+              "id": "T-02.05.02",
+              "name": "Heterogeneous Catalysis",
+              "description": "Solid catalysts, active sites and surface reaction steps."
+            },
+            {
+              "id": "T-02.05.03",
+              "name": "Catalyst Preparation and Characterisation",
+              "description": "Support, loading and surface area measurement."
+            },
+            {
+              "id": "T-02.05.04",
+              "name": "Catalyst Deactivation",
+              "description": "Fouling, poisoning, sintering and regeneration."
+            }
+          ]
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "KA-15",
+      "name": "Physics for Chemical Engineers",
+      "order": 3,
+      "description": "The engineering-science physics on which mechanical and electrical aspects of process plant rest.",
+      "rationale": "Accreditation requires an engineering-science foundation beyond mathematics and chemistry; the original reference omitted physics entirely.",
+      "units": [
+        {
+          "id": "KU-15.01",
+          "name": "Classical Mechanics",
+          "core": true,
+          "expected_bloom": "Apply",
+          "description": "Newtonian description of forces, motion and energy in engineering systems.",
+          "topics": [
+            {
+              "id": "T-15.01.01",
+              "name": "Newton's Laws and Statics",
+              "description": "Force balances, equilibrium and free-body analysis."
+            },
+            {
+              "id": "T-15.01.02",
+              "name": "Work, Energy and Power",
+              "description": "Mechanical energy accounting and conservation."
+            },
+            {
+              "id": "T-15.01.03",
+              "name": "Friction",
+              "description": "Frictional resistance in mechanical and process equipment."
+            },
+            {
+              "id": "T-15.01.04",
+              "name": "Rotation and Moment of Inertia",
+              "description": "Rotational dynamics of shafts, impellers and agitators."
+            }
+          ]
+        },
+        {
+          "id": "KU-15.02",
+          "name": "Oscillations and Waves",
+          "core": true,
+          "expected_bloom": "Understand",
+          "description": "Periodic motion and wave propagation, and their appearance in process equipment.",
+          "topics": [
+            {
+              "id": "T-15.02.01",
+              "name": "Simple Harmonic Motion",
+              "description": "Oscillatory systems, damping and resonance."
+            },
+            {
+              "id": "T-15.02.02",
+              "name": "Wave Propagation",
+              "description": "Travelling and standing waves; acoustic and vibrational phenomena."
+            },
+            {
+              "id": "T-15.02.03",
+              "name": "Vibration in Equipment",
+              "description": "Machine vibration as a diagnostic and design concern."
+            }
+          ]
+        },
+        {
+          "id": "KU-15.03",
+          "name": "Electricity and Magnetism",
+          "core": true,
+          "expected_bloom": "Understand",
+          "description": "Electrical and magnetic phenomena underpinning plant instrumentation and drives.",
+          "topics": [
+            {
+              "id": "T-15.03.01",
+              "name": "Electrostatics",
+              "description": "Electric charge, Coulomb's law, fields and potential."
+            },
+            {
+              "id": "T-15.03.02",
+              "name": "Capacitance and Dielectrics",
+              "description": "Charge storage and dielectric behaviour."
+            },
+            {
+              "id": "T-15.03.03",
+              "name": "Magnetic Fields and Induction",
+              "description": "Magnetic fields, electromagnetic induction and their applications."
+            },
+            {
+              "id": "T-15.03.04",
+              "name": "Electrical Machines and Drives",
+              "description": "Motors and electrical drives in process plant."
+            }
           ]
         }
       ]
@@ -190,10 +568,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-03.01.01", "name": "Units and Dimensions", "description": "SI and engineering unit systems and conversion."},
-            {"id": "T-03.01.02", "name": "Composition Measures", "description": "Mass fraction, mole fraction, concentration and flow basis."},
-            {"id": "T-03.01.03", "name": "Pressure, Temperature and Density", "description": "Measurement scales and process significance."},
-            {"id": "T-03.01.04", "name": "Dimensional Analysis", "description": "Buckingham Pi and dimensionless group formation."}
+            {
+              "id": "T-03.01.01",
+              "name": "Units and Dimensions",
+              "description": "SI and engineering unit systems and conversion."
+            },
+            {
+              "id": "T-03.01.02",
+              "name": "Composition Measures",
+              "description": "Mass fraction, mole fraction, concentration and flow basis."
+            },
+            {
+              "id": "T-03.01.03",
+              "name": "Pressure, Temperature and Density",
+              "description": "Measurement scales and process significance."
+            },
+            {
+              "id": "T-03.01.04",
+              "name": "Dimensional Analysis",
+              "description": "Buckingham Pi and dimensionless group formation."
+            }
           ]
         },
         {
@@ -203,10 +597,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-03.02.01", "name": "Single-Unit Balances", "description": "Overall and component balances on one unit."},
-            {"id": "T-03.02.02", "name": "Multi-Unit Flowsheets", "description": "Sequential and simultaneous solution across units."},
-            {"id": "T-03.02.03", "name": "Recycle and Bypass", "description": "Balances on streams returned or diverted around units."},
-            {"id": "T-03.02.04", "name": "Degrees of Freedom Analysis", "description": "Determining whether a balance problem is solvable."}
+            {
+              "id": "T-03.02.01",
+              "name": "Single-Unit Balances",
+              "description": "Overall and component balances on one unit."
+            },
+            {
+              "id": "T-03.02.02",
+              "name": "Multi-Unit Flowsheets",
+              "description": "Sequential and simultaneous solution across units."
+            },
+            {
+              "id": "T-03.02.03",
+              "name": "Recycle and Bypass",
+              "description": "Balances on streams returned or diverted around units."
+            },
+            {
+              "id": "T-03.02.04",
+              "name": "Degrees of Freedom Analysis",
+              "description": "Determining whether a balance problem is solvable."
+            }
           ]
         },
         {
@@ -216,11 +626,31 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-03.03.01", "name": "Stoichiometry", "description": "Reaction stoichiometry and limiting reactant identification."},
-            {"id": "T-03.03.02", "name": "Conversion, Yield and Selectivity", "description": "Performance measures for reacting systems."},
-            {"id": "T-03.03.03", "name": "Extent of Reaction", "description": "Reaction coordinate formulation of balances."},
-            {"id": "T-03.03.04", "name": "Purge and Recycle in Reacting Systems", "description": "Inert accumulation and purge sizing."},
-            {"id": "T-03.03.05", "name": "Combustion Calculations", "description": "Air requirement, excess air and flue gas composition."}
+            {
+              "id": "T-03.03.01",
+              "name": "Stoichiometry",
+              "description": "Reaction stoichiometry and limiting reactant identification."
+            },
+            {
+              "id": "T-03.03.02",
+              "name": "Conversion, Yield and Selectivity",
+              "description": "Performance measures for reacting systems."
+            },
+            {
+              "id": "T-03.03.03",
+              "name": "Extent of Reaction",
+              "description": "Reaction coordinate formulation of balances."
+            },
+            {
+              "id": "T-03.03.04",
+              "name": "Purge and Recycle in Reacting Systems",
+              "description": "Inert accumulation and purge sizing."
+            },
+            {
+              "id": "T-03.03.05",
+              "name": "Combustion Calculations",
+              "description": "Air requirement, excess air and flue gas composition."
+            }
           ]
         },
         {
@@ -230,11 +660,31 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-03.04.01", "name": "Enthalpy and Heat Capacity", "description": "Sensible heat calculation and reference states."},
-            {"id": "T-03.04.02", "name": "Latent Heat and Phase Change", "description": "Energy accounting across vaporisation and fusion."},
-            {"id": "T-03.04.03", "name": "Heat of Reaction", "description": "Standard heats of formation and reaction enthalpy."},
-            {"id": "T-03.04.04", "name": "Simultaneous Mass and Energy Balances", "description": "Coupled solution for reacting and non-reacting systems."},
-            {"id": "T-03.04.05", "name": "Mechanical Energy Balance", "description": "Bernoulli form and friction losses."}
+            {
+              "id": "T-03.04.01",
+              "name": "Enthalpy and Heat Capacity",
+              "description": "Sensible heat calculation and reference states."
+            },
+            {
+              "id": "T-03.04.02",
+              "name": "Latent Heat and Phase Change",
+              "description": "Energy accounting across vaporisation and fusion."
+            },
+            {
+              "id": "T-03.04.03",
+              "name": "Heat of Reaction",
+              "description": "Standard heats of formation and reaction enthalpy."
+            },
+            {
+              "id": "T-03.04.04",
+              "name": "Simultaneous Mass and Energy Balances",
+              "description": "Coupled solution for reacting and non-reacting systems."
+            },
+            {
+              "id": "T-03.04.05",
+              "name": "Mechanical Energy Balance",
+              "description": "Bernoulli form and friction losses."
+            }
           ]
         },
         {
@@ -244,12 +694,25 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-03.05.01", "name": "Accumulation Term", "description": "Formulating balances with time derivatives."},
-            {"id": "T-03.05.02", "name": "Batch and Semi-Batch Systems", "description": "Time-varying inventory in non-continuous operation."},
-            {"id": "T-03.05.03", "name": "Start-up and Shutdown", "description": "Transient behaviour during non-steady operation."}
+            {
+              "id": "T-03.05.01",
+              "name": "Accumulation Term",
+              "description": "Formulating balances with time derivatives."
+            },
+            {
+              "id": "T-03.05.02",
+              "name": "Batch and Semi-Batch Systems",
+              "description": "Time-varying inventory in non-continuous operation."
+            },
+            {
+              "id": "T-03.05.03",
+              "name": "Start-up and Shutdown",
+              "description": "Transient behaviour during non-steady operation."
+            }
           ]
         }
-      ]
+      ],
+      "order": 4
     },
     {
       "id": "KA-04",
@@ -264,10 +727,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-04.01.01", "name": "First Law and Internal Energy", "description": "Energy conservation for closed and flow systems."},
-            {"id": "T-04.01.02", "name": "Second Law and Entropy", "description": "Entropy generation and directionality of processes."},
-            {"id": "T-04.01.03", "name": "Reversibility and Lost Work", "description": "Ideal versus actual process efficiency."},
-            {"id": "T-04.01.04", "name": "Exergy Analysis", "description": "Available work and thermodynamic efficiency assessment."}
+            {
+              "id": "T-04.01.01",
+              "name": "First Law and Internal Energy",
+              "description": "Energy conservation for closed and flow systems."
+            },
+            {
+              "id": "T-04.01.02",
+              "name": "Second Law and Entropy",
+              "description": "Entropy generation and directionality of processes."
+            },
+            {
+              "id": "T-04.01.03",
+              "name": "Reversibility and Lost Work",
+              "description": "Ideal versus actual process efficiency."
+            },
+            {
+              "id": "T-04.01.04",
+              "name": "Exergy Analysis",
+              "description": "Available work and thermodynamic efficiency assessment."
+            }
           ]
         },
         {
@@ -277,10 +756,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-04.02.01", "name": "PVT Behaviour", "description": "Phase diagrams and critical properties."},
-            {"id": "T-04.02.02", "name": "Equations of State", "description": "Van der Waals, Redlich-Kwong, Peng-Robinson and compressibility."},
-            {"id": "T-04.02.03", "name": "Residual Properties", "description": "Departure functions from ideal behaviour."},
-            {"id": "T-04.02.04", "name": "Maxwell Relations", "description": "Thermodynamic property interrelations."}
+            {
+              "id": "T-04.02.01",
+              "name": "PVT Behaviour",
+              "description": "Phase diagrams and critical properties."
+            },
+            {
+              "id": "T-04.02.02",
+              "name": "Equations of State",
+              "description": "Van der Waals, Redlich-Kwong, Peng-Robinson and compressibility."
+            },
+            {
+              "id": "T-04.02.03",
+              "name": "Residual Properties",
+              "description": "Departure functions from ideal behaviour."
+            },
+            {
+              "id": "T-04.02.04",
+              "name": "Maxwell Relations",
+              "description": "Thermodynamic property interrelations."
+            }
           ]
         },
         {
@@ -290,11 +785,31 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-04.03.01", "name": "Fugacity and Activity", "description": "Escaping tendency and non-ideal correction factors."},
-            {"id": "T-04.03.02", "name": "Vapour-Liquid Equilibrium", "description": "Raoult and modified Raoult behaviour, K-values."},
-            {"id": "T-04.03.03", "name": "Activity Coefficient Models", "description": "Margules, Van Laar, Wilson, NRTL and UNIQUAC."},
-            {"id": "T-04.03.04", "name": "Liquid-Liquid and Solid-Liquid Equilibrium", "description": "Miscibility gaps and solubility behaviour."},
-            {"id": "T-04.03.05", "name": "Azeotropes", "description": "Formation and consequences for separation."}
+            {
+              "id": "T-04.03.01",
+              "name": "Fugacity and Activity",
+              "description": "Escaping tendency and non-ideal correction factors."
+            },
+            {
+              "id": "T-04.03.02",
+              "name": "Vapour-Liquid Equilibrium",
+              "description": "Raoult and modified Raoult behaviour, K-values."
+            },
+            {
+              "id": "T-04.03.03",
+              "name": "Activity Coefficient Models",
+              "description": "Margules, Van Laar, Wilson, NRTL and UNIQUAC."
+            },
+            {
+              "id": "T-04.03.04",
+              "name": "Liquid-Liquid and Solid-Liquid Equilibrium",
+              "description": "Miscibility gaps and solubility behaviour."
+            },
+            {
+              "id": "T-04.03.05",
+              "name": "Azeotropes",
+              "description": "Formation and consequences for separation."
+            }
           ]
         },
         {
@@ -304,9 +819,21 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-04.04.01", "name": "Gibbs Energy Minimisation", "description": "Equilibrium criterion for reacting systems."},
-            {"id": "T-04.04.02", "name": "Equilibrium Constant", "description": "Temperature dependence and Van't Hoff relation."},
-            {"id": "T-04.04.03", "name": "Multiple Reaction Equilibria", "description": "Simultaneous equilibrium in complex systems."}
+            {
+              "id": "T-04.04.01",
+              "name": "Gibbs Energy Minimisation",
+              "description": "Equilibrium criterion for reacting systems."
+            },
+            {
+              "id": "T-04.04.02",
+              "name": "Equilibrium Constant",
+              "description": "Temperature dependence and Van't Hoff relation."
+            },
+            {
+              "id": "T-04.04.03",
+              "name": "Multiple Reaction Equilibria",
+              "description": "Simultaneous equilibrium in complex systems."
+            }
           ]
         },
         {
@@ -316,13 +843,35 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-04.05.01", "name": "Power Cycles", "description": "Rankine and Brayton cycle analysis."},
-            {"id": "T-04.05.02", "name": "Refrigeration Cycles", "description": "Vapour compression and absorption refrigeration."},
-            {"id": "T-04.05.03", "name": "Compression and Expansion", "description": "Compressor and turbine thermodynamics."},
-            {"id": "T-04.05.04", "name": "Steam Systems", "description": "Steam generation, distribution and utility balance."}
+            {
+              "id": "T-04.05.01",
+              "name": "Power Cycles",
+              "description": "Rankine and Brayton cycle analysis."
+            },
+            {
+              "id": "T-04.05.02",
+              "name": "Refrigeration Cycles",
+              "description": "Vapour compression and absorption refrigeration."
+            },
+            {
+              "id": "T-04.05.03",
+              "name": "Compression and Expansion",
+              "description": "Compressor and turbine thermodynamics."
+            },
+            {
+              "id": "T-04.05.04",
+              "name": "Steam Systems",
+              "description": "Steam generation, distribution and utility balance."
+            },
+            {
+              "id": "T-04.05.05",
+              "name": "Electrochemical Energy Conversion",
+              "description": "Fuel cells and the thermodynamics of electrochemical cells."
+            }
           ]
         }
-      ]
+      ],
+      "order": 5
     },
     {
       "id": "KA-05",
@@ -337,9 +886,21 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-05.01.01", "name": "Fluid Properties", "description": "Density, viscosity, surface tension and compressibility."},
-            {"id": "T-05.01.02", "name": "Hydrostatic Pressure", "description": "Pressure variation with depth and manometry."},
-            {"id": "T-05.01.03", "name": "Buoyancy", "description": "Archimedes principle and floating bodies."}
+            {
+              "id": "T-05.01.01",
+              "name": "Fluid Properties",
+              "description": "Density, viscosity, surface tension and compressibility."
+            },
+            {
+              "id": "T-05.01.02",
+              "name": "Hydrostatic Pressure",
+              "description": "Pressure variation with depth and manometry."
+            },
+            {
+              "id": "T-05.01.03",
+              "name": "Buoyancy",
+              "description": "Archimedes principle and floating bodies."
+            }
           ]
         },
         {
@@ -349,11 +910,31 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-05.02.01", "name": "Continuity Equation", "description": "Mass conservation in flowing systems."},
-            {"id": "T-05.02.02", "name": "Bernoulli Equation", "description": "Mechanical energy conservation along a streamline."},
-            {"id": "T-05.02.03", "name": "Laminar and Turbulent Flow", "description": "Reynolds number and regime transition."},
-            {"id": "T-05.02.04", "name": "Momentum Equation", "description": "Force balances on control volumes."},
-            {"id": "T-05.02.05", "name": "Boundary Layer Theory", "description": "Velocity profile development near surfaces."}
+            {
+              "id": "T-05.02.01",
+              "name": "Continuity Equation",
+              "description": "Mass conservation in flowing systems."
+            },
+            {
+              "id": "T-05.02.02",
+              "name": "Bernoulli Equation",
+              "description": "Mechanical energy conservation along a streamline."
+            },
+            {
+              "id": "T-05.02.03",
+              "name": "Laminar and Turbulent Flow",
+              "description": "Reynolds number and regime transition."
+            },
+            {
+              "id": "T-05.02.04",
+              "name": "Momentum Equation",
+              "description": "Force balances on control volumes."
+            },
+            {
+              "id": "T-05.02.05",
+              "name": "Boundary Layer Theory",
+              "description": "Velocity profile development near surfaces."
+            }
           ]
         },
         {
@@ -363,10 +944,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-05.03.01", "name": "Friction Factor", "description": "Moody chart, roughness and correlations."},
-            {"id": "T-05.03.02", "name": "Major and Minor Losses", "description": "Straight pipe and fitting pressure losses."},
-            {"id": "T-05.03.03", "name": "Pipe Network Analysis", "description": "Series, parallel and branched network solution."},
-            {"id": "T-05.03.04", "name": "Compressible Flow", "description": "Gas flow with significant density change."}
+            {
+              "id": "T-05.03.01",
+              "name": "Friction Factor",
+              "description": "Moody chart, roughness and correlations."
+            },
+            {
+              "id": "T-05.03.02",
+              "name": "Major and Minor Losses",
+              "description": "Straight pipe and fitting pressure losses."
+            },
+            {
+              "id": "T-05.03.03",
+              "name": "Pipe Network Analysis",
+              "description": "Series, parallel and branched network solution."
+            },
+            {
+              "id": "T-05.03.04",
+              "name": "Compressible Flow",
+              "description": "Gas flow with significant density change."
+            }
           ]
         },
         {
@@ -376,11 +973,31 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-05.04.01", "name": "Centrifugal Pumps", "description": "Characteristic curves and impeller behaviour."},
-            {"id": "T-05.04.02", "name": "Positive Displacement Pumps", "description": "Reciprocating and rotary pump behaviour."},
-            {"id": "T-05.04.03", "name": "NPSH and Cavitation", "description": "Suction conditions and cavitation avoidance."},
-            {"id": "T-05.04.04", "name": "Pump Selection and System Curves", "description": "Matching machine to system requirement."},
-            {"id": "T-05.04.05", "name": "Compressors and Fans", "description": "Gas moving equipment and staging."}
+            {
+              "id": "T-05.04.01",
+              "name": "Centrifugal Pumps",
+              "description": "Characteristic curves and impeller behaviour."
+            },
+            {
+              "id": "T-05.04.02",
+              "name": "Positive Displacement Pumps",
+              "description": "Reciprocating and rotary pump behaviour."
+            },
+            {
+              "id": "T-05.04.03",
+              "name": "NPSH and Cavitation",
+              "description": "Suction conditions and cavitation avoidance."
+            },
+            {
+              "id": "T-05.04.04",
+              "name": "Pump Selection and System Curves",
+              "description": "Matching machine to system requirement."
+            },
+            {
+              "id": "T-05.04.05",
+              "name": "Compressors and Fans",
+              "description": "Gas moving equipment and staging."
+            }
           ]
         },
         {
@@ -390,9 +1007,21 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-05.05.01", "name": "Differential Pressure Meters", "description": "Orifice, venturi and nozzle metering."},
-            {"id": "T-05.05.02", "name": "Variable Area Meters", "description": "Rotameter principle and calibration."},
-            {"id": "T-05.05.03", "name": "Modern Flow Meters", "description": "Magnetic, ultrasonic and Coriolis devices."}
+            {
+              "id": "T-05.05.01",
+              "name": "Differential Pressure Meters",
+              "description": "Orifice, venturi and nozzle metering."
+            },
+            {
+              "id": "T-05.05.02",
+              "name": "Variable Area Meters",
+              "description": "Rotameter principle and calibration."
+            },
+            {
+              "id": "T-05.05.03",
+              "name": "Modern Flow Meters",
+              "description": "Magnetic, ultrasonic and Coriolis devices."
+            }
           ]
         },
         {
@@ -402,9 +1031,21 @@
           "core": false,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-05.06.01", "name": "Non-Newtonian Rheology", "description": "Power-law, Bingham and viscoelastic fluids."},
-            {"id": "T-05.06.02", "name": "Two-Phase Flow Regimes", "description": "Gas-liquid flow patterns in pipes."},
-            {"id": "T-05.06.03", "name": "Slurry Transport", "description": "Solid-liquid suspension flow."}
+            {
+              "id": "T-05.06.01",
+              "name": "Non-Newtonian Rheology",
+              "description": "Power-law, Bingham and viscoelastic fluids."
+            },
+            {
+              "id": "T-05.06.02",
+              "name": "Two-Phase Flow Regimes",
+              "description": "Gas-liquid flow patterns in pipes."
+            },
+            {
+              "id": "T-05.06.03",
+              "name": "Slurry Transport",
+              "description": "Solid-liquid suspension flow."
+            }
           ]
         },
         {
@@ -414,12 +1055,25 @@
           "core": false,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-05.07.01", "name": "Governing Equations and Discretisation", "description": "Navier-Stokes formulation and meshing."},
-            {"id": "T-05.07.02", "name": "Turbulence Modelling", "description": "Closure models and their limitations."},
-            {"id": "T-05.07.03", "name": "Validation of CFD Results", "description": "Grid independence and experimental comparison."}
+            {
+              "id": "T-05.07.01",
+              "name": "Governing Equations and Discretisation",
+              "description": "Navier-Stokes formulation and meshing."
+            },
+            {
+              "id": "T-05.07.02",
+              "name": "Turbulence Modelling",
+              "description": "Closure models and their limitations."
+            },
+            {
+              "id": "T-05.07.03",
+              "name": "Validation of CFD Results",
+              "description": "Grid independence and experimental comparison."
+            }
           ]
         }
-      ]
+      ],
+      "order": 6
     },
     {
       "id": "KA-06",
@@ -434,11 +1088,31 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-06.01.01", "name": "Fourier's Law", "description": "Conduction rate and thermal conductivity."},
-            {"id": "T-06.01.02", "name": "Steady Conduction", "description": "Plane wall, cylinder and sphere, series resistance."},
-            {"id": "T-06.01.03", "name": "Unsteady Conduction", "description": "Lumped capacitance and transient temperature fields."},
-            {"id": "T-06.01.04", "name": "Extended Surfaces", "description": "Fin performance and efficiency."},
-            {"id": "T-06.01.05", "name": "Insulation", "description": "Thermal insulation selection and critical thickness."}
+            {
+              "id": "T-06.01.01",
+              "name": "Fourier's Law",
+              "description": "Conduction rate and thermal conductivity."
+            },
+            {
+              "id": "T-06.01.02",
+              "name": "Steady Conduction",
+              "description": "Plane wall, cylinder and sphere, series resistance."
+            },
+            {
+              "id": "T-06.01.03",
+              "name": "Unsteady Conduction",
+              "description": "Lumped capacitance and transient temperature fields."
+            },
+            {
+              "id": "T-06.01.04",
+              "name": "Extended Surfaces",
+              "description": "Fin performance and efficiency."
+            },
+            {
+              "id": "T-06.01.05",
+              "name": "Insulation",
+              "description": "Thermal insulation selection and critical thickness."
+            }
           ]
         },
         {
@@ -448,10 +1122,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-06.02.01", "name": "Convective Coefficient", "description": "Newton's law of cooling and film coefficients."},
-            {"id": "T-06.02.02", "name": "Forced Convection", "description": "Internal and external flow correlations."},
-            {"id": "T-06.02.03", "name": "Natural Convection", "description": "Buoyancy-driven heat transfer and Grashof number."},
-            {"id": "T-06.02.04", "name": "Dimensionless Correlations", "description": "Nusselt, Prandtl and Reynolds relationships."}
+            {
+              "id": "T-06.02.01",
+              "name": "Convective Coefficient",
+              "description": "Newton's law of cooling and film coefficients."
+            },
+            {
+              "id": "T-06.02.02",
+              "name": "Forced Convection",
+              "description": "Internal and external flow correlations."
+            },
+            {
+              "id": "T-06.02.03",
+              "name": "Natural Convection",
+              "description": "Buoyancy-driven heat transfer and Grashof number."
+            },
+            {
+              "id": "T-06.02.04",
+              "name": "Dimensionless Correlations",
+              "description": "Nusselt, Prandtl and Reynolds relationships."
+            }
           ]
         },
         {
@@ -461,10 +1151,26 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-06.03.01", "name": "Blackbody Radiation", "description": "Stefan-Boltzmann and Planck distribution."},
-            {"id": "T-06.03.02", "name": "Emissivity and Absorptivity", "description": "Real surface radiative properties."},
-            {"id": "T-06.03.03", "name": "View Factors", "description": "Geometric exchange between surfaces."},
-            {"id": "T-06.03.04", "name": "Radiation in Furnaces", "description": "Combined radiation and convection in fired equipment."}
+            {
+              "id": "T-06.03.01",
+              "name": "Blackbody Radiation",
+              "description": "Stefan-Boltzmann and Planck distribution."
+            },
+            {
+              "id": "T-06.03.02",
+              "name": "Emissivity and Absorptivity",
+              "description": "Real surface radiative properties."
+            },
+            {
+              "id": "T-06.03.03",
+              "name": "View Factors",
+              "description": "Geometric exchange between surfaces."
+            },
+            {
+              "id": "T-06.03.04",
+              "name": "Radiation in Furnaces",
+              "description": "Combined radiation and convection in fired equipment."
+            }
           ]
         },
         {
@@ -474,11 +1180,31 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-06.04.01", "name": "Overall Heat Transfer Coefficient", "description": "Resistance combination and fouling factors."},
-            {"id": "T-06.04.02", "name": "LMTD Method", "description": "Log mean temperature difference and correction factors."},
-            {"id": "T-06.04.03", "name": "Effectiveness-NTU Method", "description": "Rating exchangers with unknown outlet temperatures."},
-            {"id": "T-06.04.04", "name": "Shell and Tube Exchangers", "description": "Configuration, passes and mechanical arrangement."},
-            {"id": "T-06.04.05", "name": "Compact and Plate Exchangers", "description": "Alternative geometries and their application."}
+            {
+              "id": "T-06.04.01",
+              "name": "Overall Heat Transfer Coefficient",
+              "description": "Resistance combination and fouling factors."
+            },
+            {
+              "id": "T-06.04.02",
+              "name": "LMTD Method",
+              "description": "Log mean temperature difference and correction factors."
+            },
+            {
+              "id": "T-06.04.03",
+              "name": "Effectiveness-NTU Method",
+              "description": "Rating exchangers with unknown outlet temperatures."
+            },
+            {
+              "id": "T-06.04.04",
+              "name": "Shell and Tube Exchangers",
+              "description": "Configuration, passes and mechanical arrangement."
+            },
+            {
+              "id": "T-06.04.05",
+              "name": "Compact and Plate Exchangers",
+              "description": "Alternative geometries and their application."
+            }
           ]
         },
         {
@@ -488,10 +1214,26 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-06.05.01", "name": "Boiling Regimes", "description": "Nucleate, transition and film boiling; critical heat flux."},
-            {"id": "T-06.05.02", "name": "Condensation Mechanisms", "description": "Filmwise and dropwise condensation."},
-            {"id": "T-06.05.03", "name": "Evaporators", "description": "Single and multiple effect evaporation."},
-            {"id": "T-06.05.04", "name": "Reboilers and Condensers", "description": "Phase-change service in separation equipment."}
+            {
+              "id": "T-06.05.01",
+              "name": "Boiling Regimes",
+              "description": "Nucleate, transition and film boiling; critical heat flux."
+            },
+            {
+              "id": "T-06.05.02",
+              "name": "Condensation Mechanisms",
+              "description": "Filmwise and dropwise condensation."
+            },
+            {
+              "id": "T-06.05.03",
+              "name": "Evaporators",
+              "description": "Single and multiple effect evaporation."
+            },
+            {
+              "id": "T-06.05.04",
+              "name": "Reboilers and Condensers",
+              "description": "Phase-change service in separation equipment."
+            }
           ]
         },
         {
@@ -501,12 +1243,25 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-06.06.01", "name": "Pinch Analysis", "description": "Composite curves and the pinch point."},
-            {"id": "T-06.06.02", "name": "Heat Exchanger Networks", "description": "Network synthesis for minimum utility."},
-            {"id": "T-06.06.03", "name": "Energy Targeting", "description": "Minimum hot and cold utility determination."}
+            {
+              "id": "T-06.06.01",
+              "name": "Pinch Analysis",
+              "description": "Composite curves and the pinch point."
+            },
+            {
+              "id": "T-06.06.02",
+              "name": "Heat Exchanger Networks",
+              "description": "Network synthesis for minimum utility."
+            },
+            {
+              "id": "T-06.06.03",
+              "name": "Energy Targeting",
+              "description": "Minimum hot and cold utility determination."
+            }
           ]
         }
-      ]
+      ],
+      "order": 7
     },
     {
       "id": "KA-07",
@@ -521,11 +1276,31 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-07.01.01", "name": "Fick's Law", "description": "Molecular diffusion and diffusivity."},
-            {"id": "T-07.01.02", "name": "Steady-State Diffusion", "description": "Equimolar counter-diffusion and diffusion through stagnant film."},
-            {"id": "T-07.01.03", "name": "Unsteady Diffusion", "description": "Transient concentration profiles."},
-            {"id": "T-07.01.04", "name": "Mass Transfer Coefficients", "description": "Film and overall coefficients."},
-            {"id": "T-07.01.05", "name": "Interphase Mass Transfer", "description": "Two-film theory and resistance in series."}
+            {
+              "id": "T-07.01.01",
+              "name": "Fick's Law",
+              "description": "Molecular diffusion and diffusivity."
+            },
+            {
+              "id": "T-07.01.02",
+              "name": "Steady-State Diffusion",
+              "description": "Equimolar counter-diffusion and diffusion through stagnant film."
+            },
+            {
+              "id": "T-07.01.03",
+              "name": "Unsteady Diffusion",
+              "description": "Transient concentration profiles."
+            },
+            {
+              "id": "T-07.01.04",
+              "name": "Mass Transfer Coefficients",
+              "description": "Film and overall coefficients."
+            },
+            {
+              "id": "T-07.01.05",
+              "name": "Interphase Mass Transfer",
+              "description": "Two-film theory and resistance in series."
+            }
           ]
         },
         {
@@ -535,12 +1310,36 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-07.02.01", "name": "Flash and Differential Distillation", "description": "Single-stage vaporisation and Rayleigh equation."},
-            {"id": "T-07.02.02", "name": "McCabe-Thiele Method", "description": "Graphical stage construction for binary systems."},
-            {"id": "T-07.02.03", "name": "Reflux Ratio and Column Design", "description": "Minimum reflux, optimum reflux and stage count."},
-            {"id": "T-07.02.04", "name": "Multicomponent Distillation", "description": "Key components and shortcut methods."},
-            {"id": "T-07.02.05", "name": "Azeotropic and Extractive Distillation", "description": "Entrainer-assisted separation of close-boiling mixtures."},
-            {"id": "T-07.02.06", "name": "Column Internals and Efficiency", "description": "Trays, packing and stage efficiency."}
+            {
+              "id": "T-07.02.01",
+              "name": "Flash and Differential Distillation",
+              "description": "Single-stage vaporisation and Rayleigh equation."
+            },
+            {
+              "id": "T-07.02.02",
+              "name": "McCabe-Thiele Method",
+              "description": "Graphical stage construction for binary systems."
+            },
+            {
+              "id": "T-07.02.03",
+              "name": "Reflux Ratio and Column Design",
+              "description": "Minimum reflux, optimum reflux and stage count."
+            },
+            {
+              "id": "T-07.02.04",
+              "name": "Multicomponent Distillation",
+              "description": "Key components and shortcut methods."
+            },
+            {
+              "id": "T-07.02.05",
+              "name": "Azeotropic and Extractive Distillation",
+              "description": "Entrainer-assisted separation of close-boiling mixtures."
+            },
+            {
+              "id": "T-07.02.06",
+              "name": "Column Internals and Efficiency",
+              "description": "Trays, packing and stage efficiency."
+            }
           ]
         },
         {
@@ -550,23 +1349,60 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-07.03.01", "name": "Equilibrium and Operating Lines", "description": "Graphical analysis of countercurrent contactors."},
-            {"id": "T-07.03.02", "name": "Packed Column Design", "description": "HTU, NTU and height of packing."},
-            {"id": "T-07.03.03", "name": "Minimum Solvent Rate", "description": "Solvent requirement and column loading."},
-            {"id": "T-07.03.04", "name": "Reactive Absorption", "description": "Chemical enhancement of gas absorption."}
+            {
+              "id": "T-07.03.01",
+              "name": "Equilibrium and Operating Lines",
+              "description": "Graphical analysis of countercurrent contactors."
+            },
+            {
+              "id": "T-07.03.02",
+              "name": "Packed Column Design",
+              "description": "HTU, NTU and height of packing."
+            },
+            {
+              "id": "T-07.03.03",
+              "name": "Minimum Solvent Rate",
+              "description": "Solvent requirement and column loading."
+            },
+            {
+              "id": "T-07.03.04",
+              "name": "Reactive Absorption",
+              "description": "Chemical enhancement of gas absorption."
+            }
           ]
         },
         {
           "id": "KU-07.04",
-          "name": "Liquid-Liquid Extraction",
+          "name": "Liquid-Liquid Extraction and Leaching",
           "description": "Separation using a partially miscible solvent phase.",
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-07.04.01", "name": "Ternary Phase Diagrams", "description": "Solubility envelopes and tie lines."},
-            {"id": "T-07.04.02", "name": "Single and Multistage Extraction", "description": "Cross-current and countercurrent staging."},
-            {"id": "T-07.04.03", "name": "Solvent Selection", "description": "Selectivity, capacity and recoverability."},
-            {"id": "T-07.04.04", "name": "Extraction Equipment", "description": "Mixer-settlers and column contactors."}
+            {
+              "id": "T-07.04.01",
+              "name": "Ternary Phase Diagrams",
+              "description": "Solubility envelopes and tie lines."
+            },
+            {
+              "id": "T-07.04.02",
+              "name": "Single and Multistage Extraction",
+              "description": "Cross-current and countercurrent staging."
+            },
+            {
+              "id": "T-07.04.03",
+              "name": "Solvent Selection",
+              "description": "Selectivity, capacity and recoverability."
+            },
+            {
+              "id": "T-07.04.04",
+              "name": "Extraction Equipment",
+              "description": "Mixer-settlers and column contactors."
+            },
+            {
+              "id": "T-07.04.05",
+              "name": "Leaching and Solid-Liquid Extraction",
+              "description": "Solid-liquid extraction principles, rate factors, equipment and staging."
+            }
           ]
         },
         {
@@ -576,10 +1412,26 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-07.05.01", "name": "Adsorption Isotherms", "description": "Langmuir, Freundlich and BET behaviour."},
-            {"id": "T-07.05.02", "name": "Fixed-Bed Adsorption", "description": "Breakthrough curves and mass transfer zone."},
-            {"id": "T-07.05.03", "name": "Regeneration Cycles", "description": "Pressure and temperature swing operation."},
-            {"id": "T-07.05.04", "name": "Ion Exchange", "description": "Resin selectivity and water treatment application."}
+            {
+              "id": "T-07.05.01",
+              "name": "Adsorption Isotherms",
+              "description": "Langmuir, Freundlich and BET behaviour."
+            },
+            {
+              "id": "T-07.05.02",
+              "name": "Fixed-Bed Adsorption",
+              "description": "Breakthrough curves and mass transfer zone."
+            },
+            {
+              "id": "T-07.05.03",
+              "name": "Regeneration Cycles",
+              "description": "Pressure and temperature swing operation."
+            },
+            {
+              "id": "T-07.05.04",
+              "name": "Ion Exchange",
+              "description": "Resin selectivity and water treatment application."
+            }
           ]
         },
         {
@@ -589,10 +1441,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-07.06.01", "name": "Psychrometry", "description": "Humidity charts and wet-bulb behaviour."},
-            {"id": "T-07.06.02", "name": "Drying Rate Curves", "description": "Constant and falling rate periods."},
-            {"id": "T-07.06.03", "name": "Dryer Types and Selection", "description": "Tray, rotary, fluidised bed and spray dryers."},
-            {"id": "T-07.06.04", "name": "Cooling Towers", "description": "Water cooling by evaporative contact."}
+            {
+              "id": "T-07.06.01",
+              "name": "Psychrometry",
+              "description": "Humidity charts and wet-bulb behaviour."
+            },
+            {
+              "id": "T-07.06.02",
+              "name": "Drying Rate Curves",
+              "description": "Constant and falling rate periods."
+            },
+            {
+              "id": "T-07.06.03",
+              "name": "Dryer Types and Selection",
+              "description": "Tray, rotary, fluidised bed and spray dryers."
+            },
+            {
+              "id": "T-07.06.04",
+              "name": "Cooling Towers",
+              "description": "Water cooling by evaporative contact."
+            }
           ]
         },
         {
@@ -602,10 +1470,26 @@
           "core": false,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-07.07.01", "name": "Membrane Classification", "description": "Micro, ultra, nanofiltration and reverse osmosis."},
-            {"id": "T-07.07.02", "name": "Transport Mechanisms", "description": "Solution-diffusion and pore flow models."},
-            {"id": "T-07.07.03", "name": "Concentration Polarisation and Fouling", "description": "Performance decline and mitigation."},
-            {"id": "T-07.07.04", "name": "Gas Separation Membranes", "description": "Permeability, selectivity and module design."}
+            {
+              "id": "T-07.07.01",
+              "name": "Membrane Classification",
+              "description": "Micro, ultra, nanofiltration and reverse osmosis."
+            },
+            {
+              "id": "T-07.07.02",
+              "name": "Transport Mechanisms",
+              "description": "Solution-diffusion and pore flow models."
+            },
+            {
+              "id": "T-07.07.03",
+              "name": "Concentration Polarisation and Fouling",
+              "description": "Performance decline and mitigation."
+            },
+            {
+              "id": "T-07.07.04",
+              "name": "Gas Separation Membranes",
+              "description": "Permeability, selectivity and module design."
+            }
           ]
         },
         {
@@ -615,13 +1499,30 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-07.08.01", "name": "Solubility and Supersaturation", "description": "Driving force for crystal formation."},
-            {"id": "T-07.08.02", "name": "Nucleation and Growth", "description": "Primary and secondary nucleation kinetics."},
-            {"id": "T-07.08.03", "name": "Crystal Size Distribution", "description": "Population balance and product quality."},
-            {"id": "T-07.08.04", "name": "Crystalliser Design", "description": "Equipment types and operating strategy."}
+            {
+              "id": "T-07.08.01",
+              "name": "Solubility and Supersaturation",
+              "description": "Driving force for crystal formation."
+            },
+            {
+              "id": "T-07.08.02",
+              "name": "Nucleation and Growth",
+              "description": "Primary and secondary nucleation kinetics."
+            },
+            {
+              "id": "T-07.08.03",
+              "name": "Crystal Size Distribution",
+              "description": "Population balance and product quality."
+            },
+            {
+              "id": "T-07.08.04",
+              "name": "Crystalliser Design",
+              "description": "Equipment types and operating strategy."
+            }
           ]
         }
-      ]
+      ],
+      "order": 8
     },
     {
       "id": "KA-08",
@@ -636,10 +1537,26 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-08.01.01", "name": "Rate Laws and Reaction Order", "description": "Elementary and non-elementary rate expressions."},
-            {"id": "T-08.01.02", "name": "Arrhenius Behaviour", "description": "Activation energy and temperature dependence."},
-            {"id": "T-08.01.03", "name": "Kinetic Data Analysis", "description": "Integral and differential methods for rate determination."},
-            {"id": "T-08.01.04", "name": "Complex Reaction Networks", "description": "Series, parallel and reversible reaction systems."}
+            {
+              "id": "T-08.01.01",
+              "name": "Rate Laws and Reaction Order",
+              "description": "Elementary and non-elementary rate expressions."
+            },
+            {
+              "id": "T-08.01.02",
+              "name": "Arrhenius Behaviour",
+              "description": "Activation energy and temperature dependence."
+            },
+            {
+              "id": "T-08.01.03",
+              "name": "Kinetic Data Analysis",
+              "description": "Integral and differential methods for rate determination."
+            },
+            {
+              "id": "T-08.01.04",
+              "name": "Complex Reaction Networks",
+              "description": "Series, parallel and reversible reaction systems."
+            }
           ]
         },
         {
@@ -649,11 +1566,31 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-08.02.01", "name": "Batch Reactor", "description": "Time-conversion relationship and cycle time."},
-            {"id": "T-08.02.02", "name": "Continuous Stirred Tank Reactor", "description": "CSTR design equation and multiplicity."},
-            {"id": "T-08.02.03", "name": "Plug Flow Reactor", "description": "PFR design equation and space time."},
-            {"id": "T-08.02.04", "name": "Reactors in Series and Parallel", "description": "Combining units for required conversion."},
-            {"id": "T-08.02.05", "name": "Reactor Selection and Comparison", "description": "Choosing configuration for a given kinetics."}
+            {
+              "id": "T-08.02.01",
+              "name": "Batch Reactor",
+              "description": "Time-conversion relationship and cycle time."
+            },
+            {
+              "id": "T-08.02.02",
+              "name": "Continuous Stirred Tank Reactor",
+              "description": "CSTR design equation and multiplicity."
+            },
+            {
+              "id": "T-08.02.03",
+              "name": "Plug Flow Reactor",
+              "description": "PFR design equation and space time."
+            },
+            {
+              "id": "T-08.02.04",
+              "name": "Reactors in Series and Parallel",
+              "description": "Combining units for required conversion."
+            },
+            {
+              "id": "T-08.02.05",
+              "name": "Reactor Selection and Comparison",
+              "description": "Choosing configuration for a given kinetics."
+            }
           ]
         },
         {
@@ -663,10 +1600,26 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-08.03.01", "name": "Energy Balance on Reactors", "description": "Adiabatic and non-adiabatic operation."},
-            {"id": "T-08.03.02", "name": "Adiabatic Temperature Rise", "description": "Exotherm magnitude and its consequences."},
-            {"id": "T-08.03.03", "name": "Thermal Runaway and Stability", "description": "Multiple steady states and ignition-extinction."},
-            {"id": "T-08.03.04", "name": "Optimum Temperature Progression", "description": "Temperature policy for reversible reactions."}
+            {
+              "id": "T-08.03.01",
+              "name": "Energy Balance on Reactors",
+              "description": "Adiabatic and non-adiabatic operation."
+            },
+            {
+              "id": "T-08.03.02",
+              "name": "Adiabatic Temperature Rise",
+              "description": "Exotherm magnitude and its consequences."
+            },
+            {
+              "id": "T-08.03.03",
+              "name": "Thermal Runaway and Stability",
+              "description": "Multiple steady states and ignition-extinction."
+            },
+            {
+              "id": "T-08.03.04",
+              "name": "Optimum Temperature Progression",
+              "description": "Temperature policy for reversible reactions."
+            }
           ]
         },
         {
@@ -676,9 +1629,21 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-08.04.01", "name": "Residence Time Distribution", "description": "Tracer experiments and E-curves."},
-            {"id": "T-08.04.02", "name": "Dispersion and Tanks-in-Series Models", "description": "Modelling intermediate mixing behaviour."},
-            {"id": "T-08.04.03", "name": "Segregation and Micromixing", "description": "Effect of mixing scale on conversion."}
+            {
+              "id": "T-08.04.01",
+              "name": "Residence Time Distribution",
+              "description": "Tracer experiments and E-curves."
+            },
+            {
+              "id": "T-08.04.02",
+              "name": "Dispersion and Tanks-in-Series Models",
+              "description": "Modelling intermediate mixing behaviour."
+            },
+            {
+              "id": "T-08.04.03",
+              "name": "Segregation and Micromixing",
+              "description": "Effect of mixing scale on conversion."
+            }
           ]
         },
         {
@@ -688,11 +1653,31 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-08.05.01", "name": "Catalytic Rate Expressions", "description": "Langmuir-Hinshelwood and Eley-Rideal kinetics."},
-            {"id": "T-08.05.02", "name": "Internal and External Diffusion", "description": "Mass transfer limitation within and around pellets."},
-            {"id": "T-08.05.03", "name": "Effectiveness Factor and Thiele Modulus", "description": "Quantifying diffusion-limited catalyst use."},
-            {"id": "T-08.05.04", "name": "Fixed and Fluidised Bed Reactors", "description": "Configuration and performance of solid-catalysed reactors."},
-            {"id": "T-08.05.05", "name": "Gas-Liquid and Gas-Solid Reactions", "description": "Multiphase reactor behaviour and design."}
+            {
+              "id": "T-08.05.01",
+              "name": "Catalytic Rate Expressions",
+              "description": "Langmuir-Hinshelwood and Eley-Rideal kinetics."
+            },
+            {
+              "id": "T-08.05.02",
+              "name": "Internal and External Diffusion",
+              "description": "Mass transfer limitation within and around pellets."
+            },
+            {
+              "id": "T-08.05.03",
+              "name": "Effectiveness Factor and Thiele Modulus",
+              "description": "Quantifying diffusion-limited catalyst use."
+            },
+            {
+              "id": "T-08.05.04",
+              "name": "Fixed and Fluidised Bed Reactors",
+              "description": "Configuration and performance of solid-catalysed reactors."
+            },
+            {
+              "id": "T-08.05.05",
+              "name": "Gas-Liquid and Gas-Solid Reactions",
+              "description": "Multiphase reactor behaviour and design."
+            }
           ]
         },
         {
@@ -702,12 +1687,25 @@
           "core": false,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-08.06.01", "name": "Enzyme Kinetics", "description": "Michaelis-Menten behaviour and inhibition."},
-            {"id": "T-08.06.02", "name": "Microbial Growth Kinetics", "description": "Monod model and growth phases."},
-            {"id": "T-08.06.03", "name": "Bioreactor Design and Operation", "description": "Fermenter configuration, aeration and sterility."}
+            {
+              "id": "T-08.06.01",
+              "name": "Enzyme Kinetics",
+              "description": "Michaelis-Menten behaviour and inhibition."
+            },
+            {
+              "id": "T-08.06.02",
+              "name": "Microbial Growth Kinetics",
+              "description": "Monod model and growth phases."
+            },
+            {
+              "id": "T-08.06.03",
+              "name": "Bioreactor Design and Operation",
+              "description": "Fermenter configuration, aeration and sterility."
+            }
           ]
         }
-      ]
+      ],
+      "order": 9
     },
     {
       "id": "KA-09",
@@ -722,10 +1720,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-09.01.01", "name": "Particle Size Definitions", "description": "Equivalent diameters and shape factors."},
-            {"id": "T-09.01.02", "name": "Size Distribution Analysis", "description": "Sieve analysis, mean sizes and distribution functions."},
-            {"id": "T-09.01.03", "name": "Surface Area and Porosity", "description": "Specific surface and pore structure measurement."},
-            {"id": "T-09.01.04", "name": "Sampling of Particulate Solids", "description": "Representative sampling technique."}
+            {
+              "id": "T-09.01.01",
+              "name": "Particle Size Definitions",
+              "description": "Equivalent diameters and shape factors."
+            },
+            {
+              "id": "T-09.01.02",
+              "name": "Size Distribution Analysis",
+              "description": "Sieve analysis, mean sizes and distribution functions."
+            },
+            {
+              "id": "T-09.01.03",
+              "name": "Surface Area and Porosity",
+              "description": "Specific surface and pore structure measurement."
+            },
+            {
+              "id": "T-09.01.04",
+              "name": "Sampling of Particulate Solids",
+              "description": "Representative sampling technique."
+            }
           ]
         },
         {
@@ -735,10 +1749,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-09.02.01", "name": "Drag and Terminal Velocity", "description": "Settling behaviour of single particles."},
-            {"id": "T-09.02.02", "name": "Hindered Settling", "description": "Concentrated suspension sedimentation."},
-            {"id": "T-09.02.03", "name": "Flow Through Packed Beds", "description": "Ergun equation and bed pressure drop."},
-            {"id": "T-09.02.04", "name": "Fluidisation", "description": "Minimum fluidisation velocity and bed regimes."}
+            {
+              "id": "T-09.02.01",
+              "name": "Drag and Terminal Velocity",
+              "description": "Settling behaviour of single particles."
+            },
+            {
+              "id": "T-09.02.02",
+              "name": "Hindered Settling",
+              "description": "Concentrated suspension sedimentation."
+            },
+            {
+              "id": "T-09.02.03",
+              "name": "Flow Through Packed Beds",
+              "description": "Ergun equation and bed pressure drop."
+            },
+            {
+              "id": "T-09.02.04",
+              "name": "Fluidisation",
+              "description": "Minimum fluidisation velocity and bed regimes."
+            }
           ]
         },
         {
@@ -748,10 +1778,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-09.03.01", "name": "Comminution Laws", "description": "Rittinger, Kick and Bond energy relationships."},
-            {"id": "T-09.03.02", "name": "Crushing and Grinding Equipment", "description": "Crushers, mills and their selection."},
-            {"id": "T-09.03.03", "name": "Granulation and Agglomeration", "description": "Size enlargement mechanisms and equipment."},
-            {"id": "T-09.03.04", "name": "Screening and Classification", "description": "Size separation by screen and by fluid classification."}
+            {
+              "id": "T-09.03.01",
+              "name": "Comminution Laws",
+              "description": "Rittinger, Kick and Bond energy relationships."
+            },
+            {
+              "id": "T-09.03.02",
+              "name": "Crushing and Grinding Equipment",
+              "description": "Crushers, mills and their selection."
+            },
+            {
+              "id": "T-09.03.03",
+              "name": "Granulation and Agglomeration",
+              "description": "Size enlargement mechanisms and equipment."
+            },
+            {
+              "id": "T-09.03.04",
+              "name": "Screening and Classification",
+              "description": "Size separation by screen and by fluid classification."
+            }
           ]
         },
         {
@@ -761,10 +1807,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-09.04.01", "name": "Filtration", "description": "Cake and depth filtration, filter media and equipment."},
-            {"id": "T-09.04.02", "name": "Sedimentation and Thickening", "description": "Gravity settling equipment design."},
-            {"id": "T-09.04.03", "name": "Centrifugation", "description": "Centrifugal separation of solids and immiscible liquids."},
-            {"id": "T-09.04.04", "name": "Cyclones and Gas Cleaning", "description": "Cyclone separators, scrubbers and electrostatic precipitators."}
+            {
+              "id": "T-09.04.01",
+              "name": "Filtration",
+              "description": "Cake and depth filtration, filter media and equipment."
+            },
+            {
+              "id": "T-09.04.02",
+              "name": "Sedimentation and Thickening",
+              "description": "Gravity settling equipment design."
+            },
+            {
+              "id": "T-09.04.03",
+              "name": "Centrifugation",
+              "description": "Centrifugal separation of solids and immiscible liquids."
+            },
+            {
+              "id": "T-09.04.04",
+              "name": "Cyclones and Gas Cleaning",
+              "description": "Cyclone separators, scrubbers and electrostatic precipitators."
+            }
           ]
         },
         {
@@ -774,13 +1836,30 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-09.05.01", "name": "Bulk Solids Flow and Storage", "description": "Hopper design, arching and ratholing."},
-            {"id": "T-09.05.02", "name": "Pneumatic and Mechanical Conveying", "description": "Transport of solids in dilute and dense phase."},
-            {"id": "T-09.05.03", "name": "Solids Mixing and Segregation", "description": "Blending of powders and demixing mechanisms."},
-            {"id": "T-09.05.04", "name": "Dust Explosion Hazards", "description": "Ignition of combustible dust and its control."}
+            {
+              "id": "T-09.05.01",
+              "name": "Bulk Solids Flow and Storage",
+              "description": "Hopper design, arching and ratholing."
+            },
+            {
+              "id": "T-09.05.02",
+              "name": "Pneumatic and Mechanical Conveying",
+              "description": "Transport of solids in dilute and dense phase."
+            },
+            {
+              "id": "T-09.05.03",
+              "name": "Solids Mixing and Segregation",
+              "description": "Blending of powders and demixing mechanisms."
+            },
+            {
+              "id": "T-09.05.04",
+              "name": "Dust Explosion Hazards",
+              "description": "Ignition of combustible dust and its control."
+            }
           ]
         }
-      ]
+      ],
+      "order": 10
     },
     {
       "id": "KA-10",
@@ -795,10 +1874,26 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-10.01.01", "name": "Dynamic Modelling", "description": "Deriving transient models from conservation equations."},
-            {"id": "T-10.01.02", "name": "Transfer Functions", "description": "Laplace domain representation of linear systems."},
-            {"id": "T-10.01.03", "name": "First and Second Order Response", "description": "Time constants, damping and overshoot."},
-            {"id": "T-10.01.04", "name": "Dead Time and Linearisation", "description": "Transport delay and approximation of nonlinear systems."}
+            {
+              "id": "T-10.01.01",
+              "name": "Dynamic Modelling",
+              "description": "Deriving transient models from conservation equations."
+            },
+            {
+              "id": "T-10.01.02",
+              "name": "Transfer Functions",
+              "description": "Laplace domain representation of linear systems."
+            },
+            {
+              "id": "T-10.01.03",
+              "name": "First and Second Order Response",
+              "description": "Time constants, damping and overshoot."
+            },
+            {
+              "id": "T-10.01.04",
+              "name": "Dead Time and Linearisation",
+              "description": "Transport delay and approximation of nonlinear systems."
+            }
           ]
         },
         {
@@ -808,11 +1903,31 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-10.02.01", "name": "Control Loop Elements", "description": "Sensor, controller, final control element and process."},
-            {"id": "T-10.02.02", "name": "PID Control", "description": "Proportional, integral and derivative action and their effects."},
-            {"id": "T-10.02.03", "name": "Controller Tuning", "description": "Ziegler-Nichols and model-based tuning rules."},
-            {"id": "T-10.02.04", "name": "Closed-Loop Stability", "description": "Root locus, Bode and stability margins."},
-            {"id": "T-10.02.05", "name": "Offset and Reset Windup", "description": "Steady-state error and integral saturation."}
+            {
+              "id": "T-10.02.01",
+              "name": "Control Loop Elements",
+              "description": "Sensor, controller, final control element and process."
+            },
+            {
+              "id": "T-10.02.02",
+              "name": "PID Control",
+              "description": "Proportional, integral and derivative action and their effects."
+            },
+            {
+              "id": "T-10.02.03",
+              "name": "Controller Tuning",
+              "description": "Ziegler-Nichols and model-based tuning rules."
+            },
+            {
+              "id": "T-10.02.04",
+              "name": "Closed-Loop Stability",
+              "description": "Root locus, Bode and stability margins."
+            },
+            {
+              "id": "T-10.02.05",
+              "name": "Offset and Reset Windup",
+              "description": "Steady-state error and integral saturation."
+            }
           ]
         },
         {
@@ -822,10 +1937,26 @@
           "core": false,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-10.03.01", "name": "Cascade Control", "description": "Nested loops for disturbance rejection."},
-            {"id": "T-10.03.02", "name": "Feedforward and Ratio Control", "description": "Anticipatory and proportioning strategies."},
-            {"id": "T-10.03.03", "name": "Multivariable Control and Interaction", "description": "Loop pairing and relative gain array."},
-            {"id": "T-10.03.04", "name": "Model Predictive Control", "description": "Constrained optimisation-based control."}
+            {
+              "id": "T-10.03.01",
+              "name": "Cascade Control",
+              "description": "Nested loops for disturbance rejection."
+            },
+            {
+              "id": "T-10.03.02",
+              "name": "Feedforward and Ratio Control",
+              "description": "Anticipatory and proportioning strategies."
+            },
+            {
+              "id": "T-10.03.03",
+              "name": "Multivariable Control and Interaction",
+              "description": "Loop pairing and relative gain array."
+            },
+            {
+              "id": "T-10.03.04",
+              "name": "Model Predictive Control",
+              "description": "Constrained optimisation-based control."
+            }
           ]
         },
         {
@@ -835,11 +1966,36 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-10.04.01", "name": "Temperature Measurement", "description": "Thermocouples, RTDs and pyrometry."},
-            {"id": "T-10.04.02", "name": "Pressure and Level Measurement", "description": "Transmitters and level sensing methods."},
-            {"id": "T-10.04.03", "name": "Composition Analysers", "description": "Online analytical measurement."},
-            {"id": "T-10.04.04", "name": "Sensor Calibration and Error", "description": "Accuracy, drift, repeatability and calibration procedure."},
-            {"id": "T-10.04.05", "name": "Control Valves", "description": "Valve characteristics, sizing and actuator selection."}
+            {
+              "id": "T-10.04.01",
+              "name": "Temperature Measurement",
+              "description": "Thermocouples, RTDs and pyrometry."
+            },
+            {
+              "id": "T-10.04.02",
+              "name": "Pressure and Level Measurement",
+              "description": "Transmitters and level sensing methods."
+            },
+            {
+              "id": "T-10.04.03",
+              "name": "Composition Analysers",
+              "description": "Online analytical measurement."
+            },
+            {
+              "id": "T-10.04.04",
+              "name": "Sensor Calibration and Error",
+              "description": "Accuracy, drift, repeatability and calibration procedure."
+            },
+            {
+              "id": "T-10.04.05",
+              "name": "Control Valves",
+              "description": "Valve characteristics, sizing and actuator selection."
+            },
+            {
+              "id": "T-10.04.06",
+              "name": "Dimensional Metrology",
+              "description": "Measurement standards, limits, fits and tolerances."
+            }
           ]
         },
         {
@@ -849,13 +2005,30 @@
           "core": false,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-10.05.01", "name": "P&ID Interpretation", "description": "Reading instrumentation and control symbols on drawings."},
-            {"id": "T-10.05.02", "name": "DCS and PLC Architecture", "description": "Distributed control and programmable logic systems."},
-            {"id": "T-10.05.03", "name": "Alarm Management", "description": "Alarm rationalisation and operator load."},
-            {"id": "T-10.05.04", "name": "Safety Instrumented Systems", "description": "Interlocks, SIL and protective control layers."}
+            {
+              "id": "T-10.05.01",
+              "name": "P&ID Interpretation",
+              "description": "Reading instrumentation and control symbols on drawings."
+            },
+            {
+              "id": "T-10.05.02",
+              "name": "DCS and PLC Architecture",
+              "description": "Distributed control and programmable logic systems."
+            },
+            {
+              "id": "T-10.05.03",
+              "name": "Alarm Management",
+              "description": "Alarm rationalisation and operator load."
+            },
+            {
+              "id": "T-10.05.04",
+              "name": "Safety Instrumented Systems",
+              "description": "Interlocks, SIL and protective control layers."
+            }
           ]
         }
-      ]
+      ],
+      "order": 11
     },
     {
       "id": "KA-11",
@@ -870,11 +2043,31 @@
           "core": true,
           "expected_bloom": "Create",
           "topics": [
-            {"id": "T-11.01.01", "name": "Hierarchical Design Approach", "description": "Onion model and successive decision levels."},
-            {"id": "T-11.01.02", "name": "Reaction Path Selection", "description": "Choosing chemistry and raw materials."},
-            {"id": "T-11.01.03", "name": "Separation Sequencing", "description": "Ordering separation steps for efficiency."},
-            {"id": "T-11.01.04", "name": "Recycle Structure", "description": "Recycle placement and its economic consequences."},
-            {"id": "T-11.01.05", "name": "Block and Process Flow Diagrams", "description": "Representing a process at successive detail levels."}
+            {
+              "id": "T-11.01.01",
+              "name": "Hierarchical Design Approach",
+              "description": "Onion model and successive decision levels."
+            },
+            {
+              "id": "T-11.01.02",
+              "name": "Reaction Path Selection",
+              "description": "Choosing chemistry and raw materials."
+            },
+            {
+              "id": "T-11.01.03",
+              "name": "Separation Sequencing",
+              "description": "Ordering separation steps for efficiency."
+            },
+            {
+              "id": "T-11.01.04",
+              "name": "Recycle Structure",
+              "description": "Recycle placement and its economic consequences."
+            },
+            {
+              "id": "T-11.01.05",
+              "name": "Block and Process Flow Diagrams",
+              "description": "Representing a process at successive detail levels."
+            }
           ]
         },
         {
@@ -884,10 +2077,26 @@
           "core": true,
           "expected_bloom": "Create",
           "topics": [
-            {"id": "T-11.02.01", "name": "Vessel Design", "description": "Sizing, pressure rating and mechanical considerations."},
-            {"id": "T-11.02.02", "name": "Equipment Datasheets", "description": "Specification documents for procurement."},
-            {"id": "T-11.02.03", "name": "Materials of Construction", "description": "Selection for corrosion and service conditions."},
-            {"id": "T-11.02.04", "name": "Design Codes and Standards", "description": "ASME, API and applicable national codes."}
+            {
+              "id": "T-11.02.01",
+              "name": "Vessel Design",
+              "description": "Sizing, pressure rating and mechanical considerations."
+            },
+            {
+              "id": "T-11.02.02",
+              "name": "Equipment Datasheets",
+              "description": "Specification documents for procurement."
+            },
+            {
+              "id": "T-11.02.03",
+              "name": "Materials of Construction",
+              "description": "Selection for corrosion and service conditions."
+            },
+            {
+              "id": "T-11.02.04",
+              "name": "Design Codes and Standards",
+              "description": "ASME, API and applicable national codes."
+            }
           ]
         },
         {
@@ -897,11 +2106,31 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-11.03.01", "name": "Thermodynamic Package Selection", "description": "Choosing property methods appropriate to the system."},
-            {"id": "T-11.03.02", "name": "Unit Operation Modelling", "description": "Building and specifying simulator blocks."},
-            {"id": "T-11.03.03", "name": "Flowsheet Convergence", "description": "Recycle tearing and convergence troubleshooting."},
-            {"id": "T-11.03.04", "name": "Sensitivity and Case Studies", "description": "Parametric exploration of design alternatives."},
-            {"id": "T-11.03.05", "name": "Simulation Validation", "description": "Checking simulator output against expectation and data."}
+            {
+              "id": "T-11.03.01",
+              "name": "Thermodynamic Package Selection",
+              "description": "Choosing property methods appropriate to the system."
+            },
+            {
+              "id": "T-11.03.02",
+              "name": "Unit Operation Modelling",
+              "description": "Building and specifying simulator blocks."
+            },
+            {
+              "id": "T-11.03.03",
+              "name": "Flowsheet Convergence",
+              "description": "Recycle tearing and convergence troubleshooting."
+            },
+            {
+              "id": "T-11.03.04",
+              "name": "Sensitivity and Case Studies",
+              "description": "Parametric exploration of design alternatives."
+            },
+            {
+              "id": "T-11.03.05",
+              "name": "Simulation Validation",
+              "description": "Checking simulator output against expectation and data."
+            }
           ]
         },
         {
@@ -911,11 +2140,36 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-11.04.01", "name": "Capital Cost Estimation", "description": "Equipment costing, factors and cost indices."},
-            {"id": "T-11.04.02", "name": "Operating Cost Estimation", "description": "Utilities, raw material and labour costs."},
-            {"id": "T-11.04.03", "name": "Time Value of Money", "description": "Discounting, present worth and interest."},
-            {"id": "T-11.04.04", "name": "Profitability Analysis", "description": "NPV, IRR, payback and rate of return."},
-            {"id": "T-11.04.05", "name": "Sensitivity and Risk Analysis", "description": "Economic robustness under uncertain inputs."}
+            {
+              "id": "T-11.04.01",
+              "name": "Capital Cost Estimation",
+              "description": "Equipment costing, factors and cost indices."
+            },
+            {
+              "id": "T-11.04.02",
+              "name": "Operating Cost Estimation",
+              "description": "Utilities, raw material and labour costs."
+            },
+            {
+              "id": "T-11.04.03",
+              "name": "Time Value of Money",
+              "description": "Discounting, present worth and interest."
+            },
+            {
+              "id": "T-11.04.04",
+              "name": "Profitability Analysis",
+              "description": "NPV, IRR, payback and rate of return."
+            },
+            {
+              "id": "T-11.04.05",
+              "name": "Sensitivity and Risk Analysis",
+              "description": "Economic robustness under uncertain inputs."
+            },
+            {
+              "id": "T-11.04.06",
+              "name": "Market Economics",
+              "description": "Demand, supply, equilibrium and market structure as they bear on process economics."
+            }
           ]
         },
         {
@@ -925,9 +2179,21 @@
           "core": false,
           "expected_bloom": "Evaluate",
           "topics": [
-            {"id": "T-11.05.01", "name": "Objective Function Formulation", "description": "Defining what is being optimised and why."},
-            {"id": "T-11.05.02", "name": "Debottlenecking", "description": "Identifying and relieving capacity constraints."},
-            {"id": "T-11.05.03", "name": "Retrofit Design", "description": "Modifying existing plant within constraints."}
+            {
+              "id": "T-11.05.01",
+              "name": "Objective Function Formulation",
+              "description": "Defining what is being optimised and why."
+            },
+            {
+              "id": "T-11.05.02",
+              "name": "Debottlenecking",
+              "description": "Identifying and relieving capacity constraints."
+            },
+            {
+              "id": "T-11.05.03",
+              "name": "Retrofit Design",
+              "description": "Modifying existing plant within constraints."
+            }
           ]
         },
         {
@@ -937,13 +2203,69 @@
           "core": false,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-11.06.01", "name": "Start-up and Shutdown Procedures", "description": "Safe transition between operating states."},
-            {"id": "T-11.06.02", "name": "Maintenance and Reliability", "description": "Preventive maintenance and equipment availability."},
-            {"id": "T-11.06.03", "name": "Quality Control Systems", "description": "Statistical process control and product specification."},
-            {"id": "T-11.06.04", "name": "Project Management", "description": "Scheduling, resourcing and execution of engineering projects."}
+            {
+              "id": "T-11.06.01",
+              "name": "Start-up and Shutdown Procedures",
+              "description": "Safe transition between operating states."
+            },
+            {
+              "id": "T-11.06.02",
+              "name": "Maintenance and Reliability",
+              "description": "Preventive maintenance and equipment availability."
+            },
+            {
+              "id": "T-11.06.03",
+              "name": "Quality Control Systems",
+              "description": "Statistical process control and product specification."
+            },
+            {
+              "id": "T-11.06.04",
+              "name": "Project Management",
+              "description": "Scheduling, resourcing and execution of engineering projects."
+            },
+            {
+              "id": "T-11.06.05",
+              "name": "Inspection and Non-Destructive Testing",
+              "description": "Asset integrity assessment without damaging the equipment inspected."
+            }
+          ]
+        },
+        {
+          "id": "KU-11.07",
+          "name": "Plant Utility Systems",
+          "core": true,
+          "expected_bloom": "Understand",
+          "description": "The supporting services every process plant needs, their selection and economical operation.",
+          "topics": [
+            {
+              "id": "T-11.07.01",
+              "name": "Steam and Boiler Feed Water",
+              "description": "Steam generation, distribution and water treatment for boilers."
+            },
+            {
+              "id": "T-11.07.02",
+              "name": "Cooling Water Systems",
+              "description": "Cooling water supply, circulation and treatment."
+            },
+            {
+              "id": "T-11.07.03",
+              "name": "Instrument and Plant Air",
+              "description": "Compressed air systems supporting instrumentation and operations."
+            },
+            {
+              "id": "T-11.07.04",
+              "name": "Flare and Relief Networks",
+              "description": "Plant-wide flare header design and disposal of relieved streams."
+            },
+            {
+              "id": "T-11.07.05",
+              "name": "Utility Selection and Economics",
+              "description": "Choosing and sizing utilities for economical operation."
+            }
           ]
         }
-      ]
+      ],
+      "order": 12
     },
     {
       "id": "KA-12",
@@ -958,10 +2280,26 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-12.01.01", "name": "Material Classes", "description": "Metals, ceramics, polymers and composites."},
-            {"id": "T-12.01.02", "name": "Mechanical Properties", "description": "Strength, ductility, hardness and fatigue."},
-            {"id": "T-12.01.03", "name": "Thermal and Electrical Properties", "description": "Conductivity, expansion and service temperature."},
-            {"id": "T-12.01.04", "name": "Material Selection for Process Equipment", "description": "Matching material to process environment."}
+            {
+              "id": "T-12.01.01",
+              "name": "Material Classes",
+              "description": "Metals, ceramics, polymers and composites."
+            },
+            {
+              "id": "T-12.01.02",
+              "name": "Mechanical Properties",
+              "description": "Strength, ductility, hardness and fatigue."
+            },
+            {
+              "id": "T-12.01.03",
+              "name": "Thermal and Electrical Properties",
+              "description": "Conductivity, expansion and service temperature."
+            },
+            {
+              "id": "T-12.01.04",
+              "name": "Material Selection for Process Equipment",
+              "description": "Matching material to process environment."
+            }
           ]
         },
         {
@@ -971,9 +2309,21 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-12.02.01", "name": "Electrochemical Corrosion", "description": "Galvanic cells and corrosion rate."},
-            {"id": "T-12.02.02", "name": "Forms of Corrosion", "description": "Pitting, crevice, stress corrosion cracking and erosion."},
-            {"id": "T-12.02.03", "name": "Corrosion Prevention", "description": "Coatings, inhibitors and cathodic protection."}
+            {
+              "id": "T-12.02.01",
+              "name": "Electrochemical Corrosion",
+              "description": "Galvanic cells and corrosion rate."
+            },
+            {
+              "id": "T-12.02.02",
+              "name": "Forms of Corrosion",
+              "description": "Pitting, crevice, stress corrosion cracking and erosion."
+            },
+            {
+              "id": "T-12.02.03",
+              "name": "Corrosion Prevention",
+              "description": "Coatings, inhibitors and cathodic protection."
+            }
           ]
         },
         {
@@ -983,10 +2333,26 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-12.03.01", "name": "Polymerisation Mechanisms", "description": "Addition, condensation and copolymerisation."},
-            {"id": "T-12.03.02", "name": "Molecular Weight and Distribution", "description": "Averages, polydispersity and measurement."},
-            {"id": "T-12.03.03", "name": "Polymer Morphology", "description": "Crystallinity, amorphous regions and glass transition."},
-            {"id": "T-12.03.04", "name": "Polymer Characterisation", "description": "Thermal, mechanical and spectroscopic methods."}
+            {
+              "id": "T-12.03.01",
+              "name": "Polymerisation Mechanisms",
+              "description": "Addition, condensation and copolymerisation."
+            },
+            {
+              "id": "T-12.03.02",
+              "name": "Molecular Weight and Distribution",
+              "description": "Averages, polydispersity and measurement."
+            },
+            {
+              "id": "T-12.03.03",
+              "name": "Polymer Morphology",
+              "description": "Crystallinity, amorphous regions and glass transition."
+            },
+            {
+              "id": "T-12.03.04",
+              "name": "Polymer Characterisation",
+              "description": "Thermal, mechanical and spectroscopic methods."
+            }
           ]
         },
         {
@@ -996,10 +2362,26 @@
           "core": false,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-12.04.01", "name": "Polymer Rheology", "description": "Shear thinning and viscoelastic response."},
-            {"id": "T-12.04.02", "name": "Extrusion", "description": "Screw extruder operation and die flow."},
-            {"id": "T-12.04.03", "name": "Moulding Processes", "description": "Injection, blow and compression moulding."},
-            {"id": "T-12.04.04", "name": "Polymer Recycling", "description": "Mechanical and chemical recycling routes."}
+            {
+              "id": "T-12.04.01",
+              "name": "Polymer Rheology",
+              "description": "Shear thinning and viscoelastic response."
+            },
+            {
+              "id": "T-12.04.02",
+              "name": "Extrusion",
+              "description": "Screw extruder operation and die flow."
+            },
+            {
+              "id": "T-12.04.03",
+              "name": "Moulding Processes",
+              "description": "Injection, blow and compression moulding."
+            },
+            {
+              "id": "T-12.04.04",
+              "name": "Polymer Recycling",
+              "description": "Mechanical and chemical recycling routes."
+            }
           ]
         },
         {
@@ -1009,9 +2391,171 @@
           "core": false,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-12.05.01", "name": "Nanomaterial Classes", "description": "Nanoparticles, nanotubes and nanocomposites."},
-            {"id": "T-12.05.02", "name": "Synthesis Routes", "description": "Top-down and bottom-up fabrication."},
-            {"id": "T-12.05.03", "name": "Applications and Safety", "description": "Industrial uses and nanomaterial exposure concerns."}
+            {
+              "id": "T-12.05.01",
+              "name": "Nanomaterial Classes",
+              "description": "Nanoparticles, nanotubes and nanocomposites."
+            },
+            {
+              "id": "T-12.05.02",
+              "name": "Synthesis Routes",
+              "description": "Top-down and bottom-up fabrication."
+            },
+            {
+              "id": "T-12.05.03",
+              "name": "Applications and Safety",
+              "description": "Industrial uses and nanomaterial exposure concerns."
+            }
+          ]
+        },
+        {
+          "id": "KU-12.06",
+          "name": "Crystal Structure and Phase Behaviour of Materials",
+          "core": true,
+          "expected_bloom": "Understand",
+          "description": "Atomic-scale structure of solids and the phase diagrams that govern their processing.",
+          "topics": [
+            {
+              "id": "T-12.06.01",
+              "name": "Crystal Structures",
+              "description": "Lattice types, unit cells, crystallographic planes and directions."
+            },
+            {
+              "id": "T-12.06.02",
+              "name": "Imperfections and Defects",
+              "description": "Point, line and surface defects and their effect on properties."
+            },
+            {
+              "id": "T-12.06.03",
+              "name": "Diffusion in Solids",
+              "description": "Mass transport through crystalline solids."
+            },
+            {
+              "id": "T-12.06.04",
+              "name": "Binary Phase Diagrams",
+              "description": "Solid solutions, eutectics and the interpretation of alloy phase diagrams."
+            }
+          ]
+        }
+      ],
+      "order": 13
+    },
+    {
+      "id": "KA-16",
+      "name": "Energy and Process Industry Sectors",
+      "order": 14,
+      "description": "Sector-specific process knowledge: how the major energy and chemical industries are actually configured.",
+      "rationale": "Programmes teach refining, gas processing and fuels as distinct courses; the generic unit operations areas do not capture this sector knowledge.",
+      "units": [
+        {
+          "id": "KU-16.01",
+          "name": "Petroleum Refining",
+          "core": false,
+          "expected_bloom": "Apply",
+          "description": "Crude oil characterisation and the conversion train of a modern refinery.",
+          "topics": [
+            {
+              "id": "T-16.01.01",
+              "name": "Crude Oil Characterisation",
+              "description": "Composition, physical properties and standard test methods."
+            },
+            {
+              "id": "T-16.01.02",
+              "name": "Crude Distillation",
+              "description": "Desalting, atmospheric and vacuum distillation, stabilisation."
+            },
+            {
+              "id": "T-16.01.03",
+              "name": "Conversion Processes",
+              "description": "Alkylation, reforming, isomerisation, cracking and hydroprocessing."
+            },
+            {
+              "id": "T-16.01.04",
+              "name": "Refinery Products",
+              "description": "Product slates, specifications and lubricating oils."
+            },
+            {
+              "id": "T-16.01.05",
+              "name": "Upstream Petroleum",
+              "description": "Exploration, resource estimation, well logging and oil production."
+            }
+          ]
+        },
+        {
+          "id": "KU-16.02",
+          "name": "Natural Gas Processing",
+          "core": false,
+          "expected_bloom": "Analyze",
+          "description": "Treatment and conditioning of natural gas from wellhead to sales specification.",
+          "topics": [
+            {
+              "id": "T-16.02.01",
+              "name": "Gas Sweetening",
+              "description": "Chemical and physical solvent processes for acid gas removal."
+            },
+            {
+              "id": "T-16.02.02",
+              "name": "Gas Dehydration",
+              "description": "Water removal by glycol and molecular sieve."
+            },
+            {
+              "id": "T-16.02.03",
+              "name": "LPG, LNG and CNG",
+              "description": "Recovery, liquefaction, condensate stabilisation and storage."
+            },
+            {
+              "id": "T-16.02.04",
+              "name": "Gas Transmission",
+              "description": "Pipeline transport, compression, pigging and metering."
+            }
+          ]
+        },
+        {
+          "id": "KU-16.03",
+          "name": "Fuels and Combustion Technology",
+          "core": false,
+          "expected_bloom": "Analyze",
+          "description": "Characterisation, upgrading and combustion of solid, liquid and gaseous fuels.",
+          "topics": [
+            {
+              "id": "T-16.03.01",
+              "name": "Fuel Classification and Characterisation",
+              "description": "Properties, calorific value, storage and handling of fuels."
+            },
+            {
+              "id": "T-16.03.02",
+              "name": "Fuel Upgrading",
+              "description": "Carbonisation, gasification, liquefaction, syngas and Fischer-Tropsch routes."
+            },
+            {
+              "id": "T-16.03.03",
+              "name": "Combustion Principles",
+              "description": "Mechanism and kinetics of combustion; flame behaviour."
+            },
+            {
+              "id": "T-16.03.04",
+              "name": "Combustion Equipment",
+              "description": "Burners, boilers, furnaces, draft control and waste heat recovery."
+            }
+          ]
+        },
+        {
+          "id": "KU-16.04",
+          "name": "Petrochemicals",
+          "core": false,
+          "expected_bloom": "Understand",
+          "description": "Commodity chemical manufacture from hydrocarbon feedstocks.",
+          "topics": [
+            {
+              "id": "T-16.04.01",
+              "name": "Petrochemical Feedstocks",
+              "description": "Olefins, aromatics and their sources."
+            },
+            {
+              "id": "T-16.04.02",
+              "name": "Commodity Chemical Routes",
+              "description": "Major industrial synthesis routes from petrochemical feedstock."
+            }
           ]
         }
       ]
@@ -1029,10 +2573,26 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-13.01.01", "name": "Chemical Hazard Properties", "description": "Flammability, toxicity, reactivity and safety data sheets."},
-            {"id": "T-13.01.02", "name": "HAZOP Methodology", "description": "Guide-word based deviation analysis."},
-            {"id": "T-13.01.03", "name": "What-If and Checklist Methods", "description": "Structured qualitative hazard review."},
-            {"id": "T-13.01.04", "name": "Failure Mode and Effects Analysis", "description": "Component-level failure consequence assessment."}
+            {
+              "id": "T-13.01.01",
+              "name": "Chemical Hazard Properties",
+              "description": "Flammability, toxicity, reactivity and safety data sheets."
+            },
+            {
+              "id": "T-13.01.02",
+              "name": "HAZOP Methodology",
+              "description": "Guide-word based deviation analysis."
+            },
+            {
+              "id": "T-13.01.03",
+              "name": "What-If and Checklist Methods",
+              "description": "Structured qualitative hazard review."
+            },
+            {
+              "id": "T-13.01.04",
+              "name": "Failure Mode and Effects Analysis",
+              "description": "Component-level failure consequence assessment."
+            }
           ]
         },
         {
@@ -1042,10 +2602,26 @@
           "core": true,
           "expected_bloom": "Evaluate",
           "topics": [
-            {"id": "T-13.02.01", "name": "Consequence Modelling", "description": "Dispersion, fire and explosion consequence estimation."},
-            {"id": "T-13.02.02", "name": "Fault and Event Tree Analysis", "description": "Logical modelling of accident sequences."},
-            {"id": "T-13.02.03", "name": "Layer of Protection Analysis", "description": "Independent protection layers and risk reduction."},
-            {"id": "T-13.02.04", "name": "Risk Tolerability Criteria", "description": "Individual and societal risk acceptance."}
+            {
+              "id": "T-13.02.01",
+              "name": "Consequence Modelling",
+              "description": "Dispersion, fire and explosion consequence estimation."
+            },
+            {
+              "id": "T-13.02.02",
+              "name": "Fault and Event Tree Analysis",
+              "description": "Logical modelling of accident sequences."
+            },
+            {
+              "id": "T-13.02.03",
+              "name": "Layer of Protection Analysis",
+              "description": "Independent protection layers and risk reduction."
+            },
+            {
+              "id": "T-13.02.04",
+              "name": "Risk Tolerability Criteria",
+              "description": "Individual and societal risk acceptance."
+            }
           ]
         },
         {
@@ -1055,10 +2631,26 @@
           "core": true,
           "expected_bloom": "Evaluate",
           "topics": [
-            {"id": "T-13.03.01", "name": "Inherent Safety Principles", "description": "Minimise, substitute, moderate and simplify."},
-            {"id": "T-13.03.02", "name": "Pressure Relief Systems", "description": "Relief valve and rupture disc sizing."},
-            {"id": "T-13.03.03", "name": "Fire and Explosion Protection", "description": "Prevention, detection and suppression systems."},
-            {"id": "T-13.03.04", "name": "Emergency Planning and Response", "description": "Preparedness for loss of containment."}
+            {
+              "id": "T-13.03.01",
+              "name": "Inherent Safety Principles",
+              "description": "Minimise, substitute, moderate and simplify."
+            },
+            {
+              "id": "T-13.03.02",
+              "name": "Pressure Relief Systems",
+              "description": "Relief valve and rupture disc sizing."
+            },
+            {
+              "id": "T-13.03.03",
+              "name": "Fire and Explosion Protection",
+              "description": "Prevention, detection and suppression systems."
+            },
+            {
+              "id": "T-13.03.04",
+              "name": "Emergency Planning and Response",
+              "description": "Preparedness for loss of containment."
+            }
           ]
         },
         {
@@ -1068,10 +2660,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-13.04.01", "name": "Exposure Limits and Toxicology", "description": "Dose-response and occupational exposure standards."},
-            {"id": "T-13.04.02", "name": "Personal Protective Equipment", "description": "Selection and correct use of PPE."},
-            {"id": "T-13.04.03", "name": "Safe Laboratory Practice", "description": "Handling, storage and disposal of chemicals."},
-            {"id": "T-13.04.04", "name": "Permit to Work Systems", "description": "Controlled authorisation of hazardous tasks."}
+            {
+              "id": "T-13.04.01",
+              "name": "Exposure Limits and Toxicology",
+              "description": "Dose-response and occupational exposure standards."
+            },
+            {
+              "id": "T-13.04.02",
+              "name": "Personal Protective Equipment",
+              "description": "Selection and correct use of PPE."
+            },
+            {
+              "id": "T-13.04.03",
+              "name": "Safe Laboratory Practice",
+              "description": "Handling, storage and disposal of chemicals."
+            },
+            {
+              "id": "T-13.04.04",
+              "name": "Permit to Work Systems",
+              "description": "Controlled authorisation of hazardous tasks."
+            }
           ]
         },
         {
@@ -1081,11 +2689,31 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-13.05.01", "name": "Wastewater Treatment", "description": "Physical, chemical and biological treatment stages."},
-            {"id": "T-13.05.02", "name": "Air Pollution Control", "description": "Particulate and gaseous emission abatement."},
-            {"id": "T-13.05.03", "name": "Solid and Hazardous Waste Management", "description": "Treatment, disposal and regulatory duty."},
-            {"id": "T-13.05.04", "name": "Environmental Regulation and Compliance", "description": "Standards, permitting and monitoring obligations."},
-            {"id": "T-13.05.05", "name": "Environmental Impact Assessment", "description": "Systematic evaluation of project environmental effects."}
+            {
+              "id": "T-13.05.01",
+              "name": "Wastewater Treatment",
+              "description": "Physical, chemical and biological treatment stages."
+            },
+            {
+              "id": "T-13.05.02",
+              "name": "Air Pollution Control",
+              "description": "Particulate and gaseous emission abatement."
+            },
+            {
+              "id": "T-13.05.03",
+              "name": "Solid and Hazardous Waste Management",
+              "description": "Treatment, disposal and regulatory duty."
+            },
+            {
+              "id": "T-13.05.04",
+              "name": "Environmental Regulation and Compliance",
+              "description": "Standards, permitting and monitoring obligations."
+            },
+            {
+              "id": "T-13.05.05",
+              "name": "Environmental Impact Assessment",
+              "description": "Systematic evaluation of project environmental effects."
+            }
           ]
         },
         {
@@ -1095,14 +2723,40 @@
           "core": true,
           "expected_bloom": "Evaluate",
           "topics": [
-            {"id": "T-13.06.01", "name": "Green Chemistry Principles", "description": "Atom economy, benign solvents and waste prevention."},
-            {"id": "T-13.06.02", "name": "Life Cycle Assessment", "description": "Cradle-to-grave environmental accounting."},
-            {"id": "T-13.06.03", "name": "Energy Efficiency and Carbon Footprint", "description": "Emission reduction and energy conservation."},
-            {"id": "T-13.06.04", "name": "Circular Economy and Waste Minimisation", "description": "Resource recovery and closed-loop design."},
-            {"id": "T-13.06.05", "name": "Renewable and Alternative Feedstocks", "description": "Biomass and non-fossil raw material routes."}
+            {
+              "id": "T-13.06.01",
+              "name": "Green Chemistry Principles",
+              "description": "Atom economy, benign solvents and waste prevention."
+            },
+            {
+              "id": "T-13.06.02",
+              "name": "Life Cycle Assessment",
+              "description": "Cradle-to-grave environmental accounting."
+            },
+            {
+              "id": "T-13.06.03",
+              "name": "Energy Efficiency and Carbon Footprint",
+              "description": "Emission reduction and energy conservation."
+            },
+            {
+              "id": "T-13.06.04",
+              "name": "Circular Economy and Waste Minimisation",
+              "description": "Resource recovery and closed-loop design."
+            },
+            {
+              "id": "T-13.06.05",
+              "name": "Renewable and Alternative Feedstocks",
+              "description": "Biomass and non-fossil raw material routes."
+            },
+            {
+              "id": "T-13.06.06",
+              "name": "Energy Policy and Regulation",
+              "description": "National and international policy shaping industrial energy choices."
+            }
           ]
         }
-      ]
+      ],
+      "order": 15
     },
     {
       "id": "KA-14",
@@ -1117,10 +2771,26 @@
           "core": true,
           "expected_bloom": "Evaluate",
           "topics": [
-            {"id": "T-14.01.01", "name": "Codes of Professional Conduct", "description": "PEC and international engineering codes."},
-            {"id": "T-14.01.02", "name": "Ethical Decision Making", "description": "Frameworks for resolving professional dilemmas."},
-            {"id": "T-14.01.03", "name": "Public Safety and Whistleblowing", "description": "Duty to the public above employer interest."},
-            {"id": "T-14.01.04", "name": "Case Studies in Engineering Failure", "description": "Learning from historical disasters."}
+            {
+              "id": "T-14.01.01",
+              "name": "Codes of Professional Conduct",
+              "description": "PEC and international engineering codes."
+            },
+            {
+              "id": "T-14.01.02",
+              "name": "Ethical Decision Making",
+              "description": "Frameworks for resolving professional dilemmas."
+            },
+            {
+              "id": "T-14.01.03",
+              "name": "Public Safety and Whistleblowing",
+              "description": "Duty to the public above employer interest."
+            },
+            {
+              "id": "T-14.01.04",
+              "name": "Case Studies in Engineering Failure",
+              "description": "Learning from historical disasters."
+            }
           ]
         },
         {
@@ -1130,10 +2800,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-14.02.01", "name": "Experimental Design and Procedure", "description": "Planning experiments to answer a defined question."},
-            {"id": "T-14.02.02", "name": "Data Recording and Traceability", "description": "Laboratory notebooks and record integrity."},
-            {"id": "T-14.02.03", "name": "Equipment Operation and Calibration", "description": "Correct use of laboratory apparatus."},
-            {"id": "T-14.02.04", "name": "Interpretation of Experimental Results", "description": "Drawing defensible conclusions from data."}
+            {
+              "id": "T-14.02.01",
+              "name": "Experimental Design and Procedure",
+              "description": "Planning experiments to answer a defined question."
+            },
+            {
+              "id": "T-14.02.02",
+              "name": "Data Recording and Traceability",
+              "description": "Laboratory notebooks and record integrity."
+            },
+            {
+              "id": "T-14.02.03",
+              "name": "Equipment Operation and Calibration",
+              "description": "Correct use of laboratory apparatus."
+            },
+            {
+              "id": "T-14.02.04",
+              "name": "Interpretation of Experimental Results",
+              "description": "Drawing defensible conclusions from data."
+            }
           ]
         },
         {
@@ -1143,10 +2829,26 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-14.03.01", "name": "Technical Report Writing", "description": "Structure, clarity and evidence in written reports."},
-            {"id": "T-14.03.02", "name": "Oral Presentation", "description": "Presenting technical work to an audience."},
-            {"id": "T-14.03.03", "name": "Engineering Drawing and Graphics", "description": "Projection, drawing conventions and CAD."},
-            {"id": "T-14.03.04", "name": "Data Presentation", "description": "Effective graphs, tables and visual summaries."}
+            {
+              "id": "T-14.03.01",
+              "name": "Technical Report Writing",
+              "description": "Structure, clarity and evidence in written reports."
+            },
+            {
+              "id": "T-14.03.02",
+              "name": "Oral Presentation",
+              "description": "Presenting technical work to an audience."
+            },
+            {
+              "id": "T-14.03.03",
+              "name": "Engineering Drawing and Graphics",
+              "description": "Projection, drawing conventions and CAD."
+            },
+            {
+              "id": "T-14.03.04",
+              "name": "Data Presentation",
+              "description": "Effective graphs, tables and visual summaries."
+            }
           ]
         },
         {
@@ -1156,9 +2858,21 @@
           "core": true,
           "expected_bloom": "Apply",
           "topics": [
-            {"id": "T-14.04.01", "name": "Team Roles and Dynamics", "description": "Functioning as member and leader."},
-            {"id": "T-14.04.02", "name": "Conflict Resolution", "description": "Managing disagreement productively."},
-            {"id": "T-14.04.03", "name": "Multidisciplinary Collaboration", "description": "Working across engineering disciplines."}
+            {
+              "id": "T-14.04.01",
+              "name": "Team Roles and Dynamics",
+              "description": "Functioning as member and leader."
+            },
+            {
+              "id": "T-14.04.02",
+              "name": "Conflict Resolution",
+              "description": "Managing disagreement productively."
+            },
+            {
+              "id": "T-14.04.03",
+              "name": "Multidisciplinary Collaboration",
+              "description": "Working across engineering disciplines."
+            }
           ]
         },
         {
@@ -1168,10 +2882,26 @@
           "core": true,
           "expected_bloom": "Analyze",
           "topics": [
-            {"id": "T-14.05.01", "name": "Literature Search and Review", "description": "Finding and synthesising technical literature."},
-            {"id": "T-14.05.02", "name": "Critical Evaluation of Sources", "description": "Judging reliability and relevance of evidence."},
-            {"id": "T-14.05.03", "name": "Research Ethics and Plagiarism", "description": "Integrity in scholarly and technical work."},
-            {"id": "T-14.05.04", "name": "Self-Directed Learning", "description": "Maintaining competence beyond formal education."}
+            {
+              "id": "T-14.05.01",
+              "name": "Literature Search and Review",
+              "description": "Finding and synthesising technical literature."
+            },
+            {
+              "id": "T-14.05.02",
+              "name": "Critical Evaluation of Sources",
+              "description": "Judging reliability and relevance of evidence."
+            },
+            {
+              "id": "T-14.05.03",
+              "name": "Research Ethics and Plagiarism",
+              "description": "Integrity in scholarly and technical work."
+            },
+            {
+              "id": "T-14.05.04",
+              "name": "Self-Directed Learning",
+              "description": "Maintaining competence beyond formal education."
+            }
           ]
         },
         {
@@ -1181,13 +2911,31 @@
           "core": true,
           "expected_bloom": "Understand",
           "topics": [
-            {"id": "T-14.06.01", "name": "Societal and Cultural Impact", "description": "Consequences of technology for communities."},
-            {"id": "T-14.06.02", "name": "Sustainable Development Goals", "description": "Engineering contribution to global development targets."},
-            {"id": "T-14.06.03", "name": "Legal and Regulatory Framework", "description": "Law governing engineering practice and liability."},
-            {"id": "T-14.06.04", "name": "Entrepreneurship and Innovation", "description": "Translating engineering ideas into ventures."}
+            {
+              "id": "T-14.06.01",
+              "name": "Societal and Cultural Impact",
+              "description": "Consequences of technology for communities."
+            },
+            {
+              "id": "T-14.06.02",
+              "name": "Sustainable Development Goals",
+              "description": "Engineering contribution to global development targets."
+            },
+            {
+              "id": "T-14.06.03",
+              "name": "Legal and Regulatory Framework",
+              "description": "Law governing engineering practice and liability."
+            },
+            {
+              "id": "T-14.06.04",
+              "name": "Entrepreneurship and Innovation",
+              "description": "Translating engineering ideas into ventures."
+            }
           ]
         }
-      ]
+      ],
+      "order": 16
     }
-  ]
+  ],
+  "gaps_filled": "ISSUES.md Part A closed. New ids are appended, never renumbered; `order` carries pedagogical display order."
 }

@@ -23,7 +23,7 @@ let REF = null, EXT = null;
 let UNITS = {};          // KU id -> {id,name,desc,core,bloom,area,areaId,topics,maps[]}
 let COURSES = {};        // code -> {code,title,semester,units[],nonTech,hasFile}
 let AREA_COLOR = {};
-let VIEW = "map";
+let VIEW = "tree";
 let QUERY = "";
 let MX_MODE = "all", HIDE_NT = false, GAP_FILTER = "weak";
 let icFocus = null, nwSim = null, nwZoom = null, nwSvg = null, nwG = null;
@@ -52,8 +52,11 @@ async function init() {
   buildIndex();
   renderStats();
   renderLegends();
-  drawIcicle();
+  buildCourseRail();
+  drawTree();
   wireSearch();
+  document.getElementById("tr-course-search")
+    .addEventListener("input", debounce(buildCourseRail, 200));
   window.addEventListener("resize", debounce(() => redraw(), 200));
 }
 
@@ -110,6 +113,7 @@ function renderLegends() {
   const html = Object.entries(STRENGTH).map(([k, v]) =>
     `<div class="cv-leg"><span class="cv-swatch" style="background:${v.hex}"></span>${v.label}</div>`).join("");
   document.getElementById("legend-map").innerHTML = html;
+  document.getElementById("legend-tree").innerHTML = html;
   document.getElementById("legend-gaps").innerHTML = html;
 }
 
@@ -130,7 +134,8 @@ function unitMatches(u) {
 }
 
 function redraw() {
-  if (VIEW === "map") drawIcicle();
+  if (VIEW === "tree") drawTree();
+  else if (VIEW === "map") drawIcicle();
   else if (VIEW === "matrix") drawMatrix();
   else if (VIEW === "net") drawNetwork();
   else drawGaps();
@@ -494,7 +499,7 @@ function closePanel() {
 
 function setView(v) {
   VIEW = v;
-  ["map", "matrix", "net", "gaps"].forEach(k => {
+  ["tree", "map", "matrix", "net", "gaps"].forEach(k => {
     document.getElementById("v-" + k).classList.toggle("hidden", k !== v);
     document.getElementById("tb-" + k)?.classList.toggle("active", k === v);
     document.getElementById("mn-" + k)?.classList.toggle("active", k === v);

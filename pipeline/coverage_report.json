@@ -1,8 +1,8 @@
 {
   "schema": "che-coverage-report/1",
   "counts": {
-    "reference_units": 82,
-    "covered": 81,
+    "reference_units": 93,
+    "covered": 92,
     "gaps": 1,
     "core_gaps": 1,
     "bloom_shortfalls": 10
@@ -415,6 +415,13 @@
       "expected_bloom": "Analyze",
       "courses": [
         {
+          "code": "CH-114",
+          "semester": 2,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.6
+        },
+        {
           "code": "CHE-223",
           "semester": 3,
           "bloom": "Understand",
@@ -607,6 +614,44 @@
           "bloom": "Apply",
           "depth": "primary",
           "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "KU-01.08",
+      "name": "Data Science and Machine Learning",
+      "area": "Mathematical and Computational Foundations",
+      "area_id": "KA-01",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CS-117",
+          "semester": 1,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.7
+        },
+        {
+          "code": "CHE-226",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.75
+        },
+        {
+          "code": "CHE-323",
+          "semester": 6,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.6
+        },
+        {
+          "code": "CHE-465",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.95
         }
       ]
     },
@@ -1387,6 +1432,37 @@
       ]
     },
     {
+      "id": "KU-10.04",
+      "name": "Instrumentation and Measurement",
+      "area": "Process Dynamics, Control and Instrumentation",
+      "area_id": "KA-10",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "ME-105",
+          "semester": 1,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.55
+        },
+        {
+          "code": "PHY-102",
+          "semester": 2,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.58
+        },
+        {
+          "code": "CHE-323",
+          "semester": 6,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
       "id": "KU-11.03",
       "name": "Process Simulation",
       "area": "Process Design, Synthesis and Economics",
@@ -1569,14 +1645,20 @@
   ],
   "coverage_by_area": {
     "Mathematical and Computational Foundations": {
-      "total": 7,
-      "covered": 7,
+      "total": 9,
+      "covered": 9,
       "core_gaps": 0,
       "pct": 100.0
     },
     "Chemistry for Chemical Engineers": {
       "total": 5,
       "covered": 5,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Physics for Chemical Engineers": {
+      "total": 3,
+      "covered": 3,
       "core_gaps": 0,
       "pct": 100.0
     },
@@ -1629,14 +1711,20 @@
       "pct": 100.0
     },
     "Process Design, Synthesis and Economics": {
+      "total": 7,
+      "covered": 7,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Materials and Polymer Engineering": {
       "total": 6,
       "covered": 6,
       "core_gaps": 0,
       "pct": 100.0
     },
-    "Materials and Polymer Engineering": {
-      "total": 5,
-      "covered": 5,
+    "Energy and Process Industry Sectors": {
+      "total": 4,
+      "covered": 4,
       "core_gaps": 0,
       "pct": 100.0
     },
@@ -1655,8 +1743,8 @@
   },
   "method_comparison": {
     "existing_concepts": 268,
-    "reference_units": 82,
-    "reference_units_covered": 81,
+    "reference_units": 93,
+    "reference_units_covered": 92,
     "note": "Label sets are not directly comparable - the existing run produced free-text concepts, this one maps onto fixed unit ids. Compare per-course code sets, not label strings."
   }
 }

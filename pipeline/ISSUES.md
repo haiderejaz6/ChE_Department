@@ -9,11 +9,14 @@ Working document. Two independent problem sets, kept apart on purpose:
   These corrupt the mapping if left unfixed, and several would corrupt PLO
   attainment reporting regardless of this project.
 
-Status as of semester 1–6 mapping (37 of 51 courses). Updated as work continues.
+**Part A is now CLOSED** — see the appendix at the end for what was applied.
+Part B remains open and needs departmental input.
+
+Status: all 51 courses mapped; reference enlarged to 16 areas / 93 units / 390 topics.
 
 ---
 
-# Part A — Reference ontology gaps
+# Part A — Reference ontology gaps  ✅ CLOSED
 
 Every entry was raised by a real course whose content had nowhere to map.
 The "raised by" column is the evidence; a gap flagged by several independent
@@ -239,3 +242,31 @@ being reported as findings.
 KA-13 is the finding to be most careful about: it is the area accreditation
 weights most heavily, and the one course that should cover it (CHE-425) has only
 a partial alias outline with no safety content. Confirm before publishing.
+
+
+---
+
+# Part A — what was actually added
+
+| Gap | Fix applied |
+|---|---|
+| A1 physics | **KA-15 Physics for Chemical Engineers** — Classical Mechanics, Oscillations and Waves, Electricity and Magnetism (3 units, 11 topics) |
+| A2 machine learning | **KU-01.08 Data Science and Machine Learning** — supervised, unsupervised, validation, data-driven process modelling, reinforcement/ensemble |
+| A3 materials structure | **KU-12.06 Crystal Structure and Phase Behaviour** — crystal structures, defects, diffusion, binary phase diagrams |
+| A4 electrochemical | topic **T-04.05.05 Electrochemical Energy Conversion** added to KU-04.05 |
+| A5 leaching | topic **T-07.04.05** added; KU-07.04 renamed *Liquid-Liquid Extraction and Leaching* |
+| A6 KA-01 topics | analytical geometry, complex numbers; plus **KU-01.09 Quantitative and Logical Reasoning** |
+| A7 KA-02 topics | chemical bonding / molecular orbitals; nuclear and radiochemistry |
+| A8 microeconomics | topic **T-11.04.06 Market Economics** added to KU-11.04 |
+| sector gap (sem 7-8) | **KA-16 Energy and Process Industry Sectors** — Petroleum Refining, Natural Gas Processing, Fuels and Combustion Technology, Petrochemicals |
+| utilities | **KU-11.07 Plant Utility Systems** |
+| NDT, metrology, queuing | topics added to KU-11.06, KU-10.04, KU-01.07 |
+
+Coverage of the enlarged reference: **76 strong · 1 moderate · 7 weak · 8 very
+weak · 1 uncovered**. Only KU-16.04 Petrochemicals came out weak among the new
+units, which is honest — CH-113 mentions petrochemical applications once.
+
+21 `unmapped` entries remain, all deliberate: content genuinely outside a ChemE
+body of knowledge (A9), plus CHE-344's unidentifiable separation techniques and
+CHE-347's absent residence time distribution, which are curriculum questions
+rather than reference gaps.

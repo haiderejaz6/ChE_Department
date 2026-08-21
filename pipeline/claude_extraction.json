@@ -64,14 +64,16 @@
           "depth": "secondary",
           "evidence": "CLO-5: To demonstrate responsible conduct while working individually as well as in team.",
           "confidence": 0.62
+        },
+        {
+          "unit_id": "KU-01.08",
+          "bloom_level": "Apply",
+          "depth": "secondary",
+          "evidence": "Introduction to statistics, artificial intelligence, and machine learning using Python; introduction to regression and classification tasks.",
+          "confidence": 0.7
         }
       ],
       "unmapped": [
-        {
-          "label": "machine learning",
-          "evidence": "Introduction to statistics, artificial intelligence, and machine learning using Python; regression and classification tasks.",
-          "suggestion": "KA-01 Mathematical and Computational Foundations - the reference has no machine-learning unit"
-        },
         {
           "label": "cloud computing",
           "evidence": "Introduction to cloud computing (SaaS, PaaS, IaaS, Azure, AWS, GCP).",
@@ -174,6 +176,13 @@
           "depth": "secondary",
           "evidence": "Introduction to Workshop Technology covers industrial safety; each machining section lists safety precautions.",
           "confidence": 0.58
+        },
+        {
+          "unit_id": "KU-10.04",
+          "bloom_level": "Understand",
+          "depth": "secondary",
+          "evidence": "Measuring system/standards; manufacturing metrology; limits, fits, allowances, and tolerances; measuring instruments and their uses.",
+          "confidence": 0.55
         }
       ],
       "unmapped": [
@@ -181,11 +190,6 @@
           "label": "manufacturing processes",
           "evidence": "Machine shop, welding and fabrication, woodwork and pattern making, bench fitting, surface treatment, foundry and forging.",
           "suggestion": "none - mechanical engineering service course, outside the ChemE body of knowledge"
-        },
-        {
-          "label": "engineering metrology",
-          "evidence": "Measuring system/standards; manufacturing metrology; limits, fits, allowances, and tolerances.",
-          "suggestion": "KA-10 Process Dynamics, Control and Instrumentation - dimensional measurement is not covered by KU-10.04"
         }
       ]
     },
@@ -251,6 +255,20 @@
           "depth": "secondary",
           "evidence": "Chemistry of solutions.",
           "confidence": 0.5
+        },
+        {
+          "unit_id": "KU-12.06",
+          "bloom_level": "Understand",
+          "depth": "secondary",
+          "evidence": "Crystalline state of metals and lattice structure.",
+          "confidence": 0.6
+        },
+        {
+          "unit_id": "KU-16.04",
+          "bloom_level": "Understand",
+          "depth": "secondary",
+          "evidence": "Applications of petrochemicals.",
+          "confidence": 0.58
         }
       ],
       "unmapped": [
@@ -263,11 +281,6 @@
           "label": "radioactive elements",
           "evidence": "Radioactive elements.",
           "suggestion": "KA-02 Chemistry for Chemical Engineers"
-        },
-        {
-          "label": "crystal lattice structure",
-          "evidence": "Crystalline state of metals and lattice structure.",
-          "suggestion": "KA-12 Materials and Polymer Engineering - KU-12.01 covers properties, not crystal structure"
         }
       ]
     },
@@ -333,15 +346,16 @@
           "depth": "secondary",
           "evidence": "Reaction kinetics and equilibrium.",
           "confidence": 0.62
+        },
+        {
+          "unit_id": "KU-04.05",
+          "bloom_level": "Understand",
+          "depth": "secondary",
+          "evidence": "Electrochemistry, fuel cells.",
+          "confidence": 0.6
         }
       ],
-      "unmapped": [
-        {
-          "label": "fuel cells",
-          "evidence": "Electrochemistry, fuel cells.",
-          "suggestion": "KA-04 Chemical Engineering Thermodynamics - no unit covers electrochemical energy conversion"
-        }
-      ]
+      "unmapped": []
     },
     {
       "code": "CHE-115",
@@ -492,25 +506,30 @@
           "depth": "secondary",
           "evidence": "CLO-2: Discuss the fundamentals of electromagnetic induction and thermometry to demonstrate the working principle of related equipment.",
           "confidence": 0.58
+        },
+        {
+          "unit_id": "KU-15.01",
+          "bloom_level": "Apply",
+          "depth": "primary",
+          "evidence": "CLO-1: Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics. Weekly plan: Newton's laws, work and energy, friction, rotation, moment of inertia.",
+          "confidence": 0.9
+        },
+        {
+          "unit_id": "KU-15.03",
+          "bloom_level": "Apply",
+          "depth": "primary",
+          "evidence": "Electric charge and Coulomb's law, electric field, electric potential, capacitors and dielectrics, magnetic fields, electromagnetic induction. CLO-2: fundamentals of electromagnetic induction.",
+          "confidence": 0.9
+        },
+        {
+          "unit_id": "KU-15.02",
+          "bloom_level": "Understand",
+          "depth": "primary",
+          "evidence": "Oscillations, waves and propagation.",
+          "confidence": 0.82
         }
       ],
-      "unmapped": [
-        {
-          "label": "Newtonian mechanics",
-          "evidence": "CLO-1: Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics. Weekly plan: Newton's laws, work and energy, friction, rotation, moment of inertia.",
-          "suggestion": "NEW KNOWLEDGE AREA - the reference has no physics area; mechanics is a standard engineering-science requirement"
-        },
-        {
-          "label": "electricity and magnetism",
-          "evidence": "Electric charge and Coulomb's law, electric field, electric potential, capacitors and dielectrics, magnetic fields, electromagnetic induction.",
-          "suggestion": "NEW KNOWLEDGE AREA - physics for chemical engineers"
-        },
-        {
-          "label": "oscillations and waves",
-          "evidence": "Oscillations, waves and propagation.",
-          "suggestion": "NEW KNOWLEDGE AREA - physics for chemical engineers"
-        }
-      ]
+      "unmapped": []
     },
     {
       "code": "QR-100",
@@ -532,15 +551,16 @@
           "depth": "secondary",
           "evidence": "Units and their conversions; dimensions, area, perimeter, and volume; rates, ratios, and proportions.",
           "confidence": 0.62
+        },
+        {
+          "unit_id": "KU-01.09",
+          "bloom_level": "Apply",
+          "depth": "primary",
+          "evidence": "Introduction to quantitative reasoning; number systems and basic arithmetic operations; units and conversions; rates, ratios, and proportions; measurement scales; tabular and graphical presentation of data.",
+          "confidence": 0.85
         }
       ],
-      "unmapped": [
-        {
-          "label": "quantitative literacy",
-          "evidence": "Introduction to quantitative reasoning; number systems and basic arithmetic operations; basics of geometry; sets.",
-          "suggestion": "KA-01 Mathematical and Computational Foundations - no unit covers foundational numeracy"
-        }
-      ]
+      "unmapped": []
     },
     {
       "code": "CCE-401",
@@ -763,15 +783,16 @@
           "depth": "secondary",
           "evidence": "CLO-3: data analysis and visualization of chemical processes data sets; contents cover data science concepts and JSON serialization.",
           "confidence": 0.7
+        },
+        {
+          "unit_id": "KU-01.08",
+          "bloom_level": "Apply",
+          "depth": "primary",
+          "evidence": "Comprehend the fundamentals of introductory programming, data science concepts, and the application of associated tools; How Big Is Big Data?",
+          "confidence": 0.75
         }
       ],
-      "unmapped": [
-        {
-          "label": "data science workflow",
-          "evidence": "Comprehend the fundamentals of introductory programming, data science concepts, and the application of associated tools; How Big Is Big Data?",
-          "suggestion": "KA-01 Mathematical and Computational Foundations - the reference has no data science or machine learning unit"
-        }
-      ]
+      "unmapped": []
     },
     {
       "code": "MATH-121",
@@ -825,20 +846,16 @@
           "depth": "secondary",
           "evidence": "Introduction to advanced materials and nanotechnology.",
           "confidence": 0.62
-        }
-      ],
-      "unmapped": [
-        {
-          "label": "crystal structures and defects",
-          "evidence": "CLO-1: explain crystallographic planes and directions as well as imperfections in materials. Crystal structures, imperfections and defects in solids.",
-          "suggestion": "KA-12 Materials and Polymer Engineering - KU-12.01 covers properties but not crystal structure or defects"
         },
         {
-          "label": "binary phase diagrams",
-          "evidence": "CLO-3: Interpret the binary phase diagram. Solutions and phase diagrams, metals and alloys.",
-          "suggestion": "KA-12 Materials and Polymer Engineering - materials phase diagrams differ from the VLE treatment in KU-04.03"
+          "unit_id": "KU-12.06",
+          "bloom_level": "Understand",
+          "depth": "primary",
+          "evidence": "CLO-1: explain crystallographic planes and directions as well as imperfections in materials. CLO-3: Interpret the binary phase diagram. Crystal structures, imperfections and defects in solids, diffusion, solutions and phase diagrams.",
+          "confidence": 0.92
         }
-      ]
+      ],
+      "unmapped": []
     },
     {
       "code": "CHE-220",
@@ -1081,15 +1098,16 @@
           "depth": "secondary",
           "evidence": "Logical reasoning supported by mathematical and statistical concepts and modeling/analysis techniques; interpret and analyze numerical data.",
           "confidence": 0.6
+        },
+        {
+          "unit_id": "KU-01.09",
+          "bloom_level": "Evaluate",
+          "depth": "primary",
+          "evidence": "Inductive, deductive, and abductive approaches of reasoning; propositions, arguments, logical connectives, truth tables, propositional equivalences; logical fallacies; Venn diagrams.",
+          "confidence": 0.9
         }
       ],
-      "unmapped": [
-        {
-          "label": "formal logic and argumentation",
-          "evidence": "Inductive, deductive, and abductive approaches of reasoning; propositions, arguments, logical connectives, truth tables, propositional equivalences; logical fallacies; Venn diagrams.",
-          "suggestion": "KA-14 Professional Practice and Engineering Skills - no unit covers formal logic or critical reasoning"
-        }
-      ]
+      "unmapped": []
     },
     {
       "code": "CHE-332",
@@ -1331,15 +1349,16 @@
           "depth": "secondary",
           "evidence": "CLO-7: Demonstrates responsible handling of control equipment and participates effectively in group-based experimentation and troubleshooting.",
           "confidence": 0.78
+        },
+        {
+          "unit_id": "KU-01.08",
+          "bloom_level": "Understand",
+          "depth": "secondary",
+          "evidence": "Process control in the Industry 4.0 era; overview of AI applications in process control.",
+          "confidence": 0.6
         }
       ],
-      "unmapped": [
-        {
-          "label": "AI in process control",
-          "evidence": "Process control in the Industry 4.0 era; overview of AI applications in process control.",
-          "suggestion": "KA-01 / KA-10 - the reference has no machine-learning unit; this is the fourth course to flag it"
-        }
-      ]
+      "unmapped": []
     },
     {
       "code": "CHE-345",
@@ -1631,20 +1650,16 @@
           "depth": "secondary",
           "evidence": "Reactor calculations; reactors in refineries.",
           "confidence": 0.55
-        }
-      ],
-      "unmapped": [
-        {
-          "label": "petroleum refining processes",
-          "evidence": "Alkylation; reforming; isomerization; hydroprocessing; modern petroleum processing and refining operations.",
-          "suggestion": "NEW UNIT - the reference has no petroleum refining unit anywhere; KU-02.03 covers inorganic process industries only"
         },
         {
-          "label": "upstream petroleum",
-          "evidence": "Origin of hydrocarbons; exploration techniques; resource estimation; oil field development; well logging; oil production processes.",
-          "suggestion": "NEW UNIT - upstream oil and gas is outside the current reference"
+          "unit_id": "KU-16.01",
+          "bloom_level": "Apply",
+          "depth": "primary",
+          "evidence": "Modern petroleum processing; refining operations; atmospheric and vacuum distillation; alkylation; reforming; isomerization; hydroprocessing. Origin of hydrocarbons; exploration techniques; well logging; oil production processes.",
+          "confidence": 0.93
         }
-      ]
+      ],
+      "unmapped": []
     },
     {
       "code": "CHE-423",
@@ -1716,19 +1731,16 @@
           "depth": "secondary",
           "evidence": "Fluidized bed combustion boilers.",
           "confidence": 0.55
+        },
+        {
+          "unit_id": "KU-16.03",
+          "bloom_level": "Analyze",
+          "depth": "primary",
+          "evidence": "Classification and storage of solid, liquid, and gaseous fuels; characterization of fuel oil, coal, and gas; fuel upgradation: carbonization, liquefaction, gasification, Fischer-Tropsch. Principles of combustion; oil & gas burners, fluidized bed combustion boilers, furnaces and waste heat recovery.",
+          "confidence": 0.93
         }
       ],
       "unmapped": [
-        {
-          "label": "fuel characterization and classification",
-          "evidence": "Classification and storage of solid, liquid, and gaseous fuels; characterization of fuel oil, coal, and gas; criteria for the selection of fuels for industrial purposes.",
-          "suggestion": "NEW UNIT - fuels and energy has no unit in the reference"
-        },
-        {
-          "label": "combustion technologies",
-          "evidence": "Oil & gas burners, fluidized bed combustion boilers, furnaces and waste heat recovery; excess air, temperature control, draft control.",
-          "suggestion": "NEW UNIT - combustion equipment is not covered by KA-06 or KA-08"
-        },
         {
           "label": "energy policy",
           "evidence": "Overview of energy policies.",
@@ -2067,6 +2079,13 @@
           "depth": "secondary",
           "evidence": "Importance of utilities in process industries: flare network, instrument and plant air, boiler feed water, steam, cooling water supply.",
           "confidence": 0.6
+        },
+        {
+          "unit_id": "KU-11.07",
+          "bloom_level": "Understand",
+          "depth": "primary",
+          "evidence": "Importance of utilities in process industries: basic utilities of a process, selection criteria, and economical utilization; flare network, instrument and plant air, boiler feed water, steam, cooling water supply.",
+          "confidence": 0.85
         }
       ],
       "unmapped": [
@@ -2074,11 +2093,6 @@
           "label": "inspection and non-destructive testing",
           "evidence": "Computerized maintenance; inspection techniques; non-destructive testing techniques; maintenance of rotary and stationary equipment.",
           "suggestion": "KA-11 or KA-12 - no unit covers inspection, NDT or asset integrity"
-        },
-        {
-          "label": "utility systems engineering",
-          "evidence": "Basic utilities of a process, selection criteria, and economical utilization; boiler feed water, steam, cooling water supply.",
-          "suggestion": "KA-11 - utility system design has no unit; KU-04.05 covers steam thermodynamics only"
         }
       ]
     },
@@ -2110,25 +2124,16 @@
           "depth": "secondary",
           "evidence": "CLO-1: Describe and apply the concepts of linear algebra.",
           "confidence": 0.7
+        },
+        {
+          "unit_id": "KU-01.08",
+          "bloom_level": "Apply",
+          "depth": "primary",
+          "evidence": "Supervised learning: decision trees, Naive Bayes, artificial neural networks, support vector machines, overfitting and pruning. Unsupervised learning: hierarchical and K-means clustering, self-organizing maps, kNN. Reinforcement learning: Markov decision processes, bagging and boosting.",
+          "confidence": 0.95
         }
       ],
-      "unmapped": [
-        {
-          "label": "supervised learning",
-          "evidence": "Decision trees, Naive Bayes, artificial neural networks, support vector machines, overfitting, noisy data, and pruning.",
-          "suggestion": "NEW UNIT under KA-01 - reference gap A2, now flagged by five courses"
-        },
-        {
-          "label": "unsupervised learning",
-          "evidence": "Hierarchical agglomerative clustering, K-means partitional clustering, self-organizing maps, k-nearest-neighbor, semi-supervised learning with EM.",
-          "suggestion": "NEW UNIT under KA-01 - reference gap A2"
-        },
-        {
-          "label": "reinforcement learning",
-          "evidence": "Hidden Markov models, Monte Carlo inference, exploration vs exploitation, Markov decision processes, ensemble learning, bagging and boosting.",
-          "suggestion": "NEW UNIT under KA-01 - reference gap A2"
-        }
-      ]
+      "unmapped": []
     },
     {
       "code": "CHE-484",
@@ -2214,15 +2219,16 @@
           "depth": "secondary",
           "evidence": "Testing of well fluid, test separator, multiphase flow meters, establishing GOR.",
           "confidence": 0.55
+        },
+        {
+          "unit_id": "KU-16.02",
+          "bloom_level": "Analyze",
+          "depth": "primary",
+          "evidence": "Introduction to the natural gas industry; gas sweetening; dehydration of natural gas; LPG recovery and condensate stabilization; LNG and CNG; gas processing facilities; gas compression; pigging of gas lines.",
+          "confidence": 0.93
         }
       ],
-      "unmapped": [
-        {
-          "label": "natural gas processing sector",
-          "evidence": "Introduction to the natural gas industry, gas production, gas processing facilities, process flow schemes and product specifications; pigging of gas lines.",
-          "suggestion": "NEW UNIT - same gap as petroleum refining; the reference has no oil and gas sector unit"
-        }
-      ]
+      "unmapped": []
     },
     {
       "code": "CHE-499",
