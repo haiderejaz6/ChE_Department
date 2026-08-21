@@ -1,0 +1,158 @@
+[
+  {
+    "code": "CHE-323",
+    "title": "Instrumentation & Process Control",
+    "semester": 6,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-10.02", "bloom_level": "Create", "depth": "primary",
+       "evidence": "CLO-3 (C-6): Design and explain control loops for process variables, i.e., temperature, pressure, level, etc., of a given industrial process. Contents: feedback control; types of feedback controllers; closed-loop response, servo and regulator problems; stability analysis; tuning of feedback controllers.",
+       "confidence": 0.96},
+      {"unit_id": "KU-10.01", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Laplace transform of differential equations and characterization of systems; transfer functions and block diagrams; dynamic behavior of first- and second-order systems.",
+       "confidence": 0.95},
+      {"unit_id": "KU-10.04", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Principles of measurement of temperature, pressure, level, flow, and concentration; description of sensors; characteristics and calibration of sensors; transmitters. Control valves: fail-safe mode, valve characteristics, and valve sizing. CLO-4: Calibrates automatic process control sensors using manual instruments as reference standards.",
+       "confidence": 0.95},
+      {"unit_id": "KU-10.05", "bloom_level": "Understand", "depth": "primary",
+       "evidence": "Safety instrumented systems: alarm, trip, and interlock systems. P&ID diagrams. Process control in the Industry 4.0 era.",
+       "confidence": 0.88},
+      {"unit_id": "KU-14.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-5: Follows procedures to apply ON/OFF, PI, and PID control modes. CLO-6: Analyzes and interprets process response curves in relation to control theory to evaluate performance of control strategies.",
+       "confidence": 0.85},
+      {"unit_id": "KU-10.03", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Multi-loop control: cascade control, ratio control, split-range control, feed-forward control.",
+       "confidence": 0.82},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-7: Demonstrates responsible handling of control equipment and participates effectively in group-based experimentation and troubleshooting.",
+       "confidence": 0.78}
+    ],
+    "unmapped": [
+      {"label": "AI in process control", "evidence": "Process control in the Industry 4.0 era; overview of AI applications in process control.",
+       "suggestion": "KA-01 / KA-10 - the reference has no machine-learning unit; this is the fourth course to flag it"}
+    ]
+  },
+  {
+    "code": "CHE-345",
+    "title": "Transport Phenomena",
+    "semester": 6,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-05.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Momentum transport: diffusivity and mechanism of momentum transport. Derivation of equations of continuity and motion (Navier-Stokes) for 1D, 2D, and 3D. Application of Navier-Stokes equations to solve fluid flow problems. Introduction to transport in turbulent flow.",
+       "confidence": 0.9},
+      {"unit_id": "KU-07.01", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Mass transport: diffusivity and mechanism of mass transport. Derivation of species conservation equations for binary and multi-component mixtures; convection-diffusion equation.",
+       "confidence": 0.9},
+      {"unit_id": "KU-06.01", "bloom_level": "Analyze", "depth": "secondary",
+       "evidence": "Energy transport: thermal conductivity and mechanism of energy transport; derivation of the energy equation at the microscopic level; temperature distribution profiles for 1D and 2D cases.",
+       "confidence": 0.78},
+      {"unit_id": "KU-06.02", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Application to heat transfer problems involving conduction, free/forced convection, and radiation; interphase transport in non-isothermal systems.",
+       "confidence": 0.72},
+      {"unit_id": "KU-01.01", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Introduction to vectors and tensors and their application in fluid flow.",
+       "confidence": 0.65},
+      {"unit_id": "KU-03.05", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-1: identify their applications for steady and transient flow systems. CLO-2: Express microscopic and macroscopic mass/energy/momentum balances.",
+       "confidence": 0.58}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "CHE-347",
+    "title": "Chemical Reaction Engineering",
+    "semester": 6,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-08.02", "bloom_level": "Create", "depth": "primary",
+       "evidence": "CLO-4 (C-6): Design chemical reactors for various industrial chemical problems. Contents: introduction to ideal reactor types; design and comprehensive parameters for ideal reactors; design for single reactions; best reactor set-up and contacting pattern.",
+       "confidence": 0.97},
+      {"unit_id": "KU-08.01", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Calculation of rates and rate expression representation for elementary & non-elementary reactions; model expressions for zeroth, 1st, 2nd, and 3rd order reactions; half-life and fractional-life methods. Practicals: obtain reaction order by initial velocity, integral and differential methods of analysis.",
+       "confidence": 0.96},
+      {"unit_id": "KU-08.05", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Design for complex multiple and solid-catalyzed reactions; best reactor set-up and contacting pattern for heterogeneous reactions. CLO-3: Differentiate homogeneous and heterogeneous reactions, and modify the design parameters.",
+       "confidence": 0.88},
+      {"unit_id": "KU-14.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-5: Execute the reactor startup procedures and trace the concentration-time data with precision. CLO-8: analyze and interpret the results, comparing them with theoretical concepts.",
+       "confidence": 0.88},
+      {"unit_id": "KU-08.03", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Non-isothermal reactions. CLO-7: Identify any signs of runaway reaction reacting for its mitigation.",
+       "confidence": 0.85},
+      {"unit_id": "KU-13.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-7: Practice lab safety considerations while preparing reactants and collecting products for any toxic or corrosive substances.",
+       "confidence": 0.85},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-6: Demonstrate punctuality and attentive demeanor as an individual or in a team during the lab conduct.",
+       "confidence": 0.78},
+      {"unit_id": "KU-02.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Design for complex multiple and solid-catalyzed reactions.",
+       "confidence": 0.55}
+    ],
+    "unmapped": [
+      {"label": "residence time distribution absent", "evidence": "The contents list ideal reactors, single and multiple reactions, heterogeneous and non-isothermal reactions, but no residence time distribution, dispersion or tanks-in-series modelling.",
+       "suggestion": "KU-08.04 exists in the reference but no evidence of coverage here - candidate genuine gap, verify with the instructor"}
+    ]
+  },
+  {
+    "code": "CHE-349",
+    "title": "Separation Processes II",
+    "semester": 6,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "evidence_note": "Outline taken from CHE-341.md under the confirmed renumbering (see outline_aliases.json).",
+    "mapped": [
+      {"unit_id": "KU-07.06", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Humidification terms, wet-bulb and adiabatic saturation temperature, temperature-humidity chart, cooling tower design. Drying: general principles, rate of drying, classification and selection of dryers. CLO-5: Computes and analyze performance metrics (e.g., drying rate).",
+       "confidence": 0.96},
+      {"unit_id": "KU-07.04", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Liquid-liquid extraction: introduction, extraction processes, equilibrium data, calculation of the number of theoretical stages for counter-current and concurrent operations.",
+       "confidence": 0.93},
+      {"unit_id": "KU-07.08", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Crystallization: growth and properties of crystals, saturation and nucleation, effect of temperature on solubility, crystallization rate, solubility and phase diagrams, fractional crystallization.",
+       "confidence": 0.92},
+      {"unit_id": "KU-14.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-4: Measures key process variables such as temperature, flow rate, and composition during operation of separation process equipment. CLO-7: Adjusts and operates experimental units such as evaporators, dryers, and extraction columns.",
+       "confidence": 0.9},
+      {"unit_id": "KU-07.01", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-1: Comprehend the principles of simultaneous heat and mass transfer. CLO-2: Describe the coupled heat and mass transfer equations and apply to design the process equipment.",
+       "confidence": 0.72},
+      {"unit_id": "KU-07.07", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Membrane separation processes: principles, applications, and equipment.",
+       "confidence": 0.7},
+      {"unit_id": "KU-07.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Ion exchange: principles, applications, and equipment.",
+       "confidence": 0.62},
+      {"unit_id": "KU-06.05", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-7: Adjusts and operates experimental units such as evaporators, dryers, and extraction columns.",
+       "confidence": 0.6},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-6: Participate actively and responsibly in teamwork while conducting separation experiments and handling equipment.",
+       "confidence": 0.8}
+    ],
+    "unmapped": [
+      {"label": "leaching", "evidence": "Leaching: general principles, factors influencing the rate of extraction, mass transfer in leaching operations, equipment for leaching, calculation of the number of stages by graphical methods.",
+       "suggestion": "KA-07 Mass Transfer and Separation Processes - KU-07.04 covers liquid-liquid extraction only; solid-liquid extraction has no unit"}
+    ]
+  },
+  {
+    "code": "ECO-130",
+    "title": "Engineering Economics",
+    "semester": 6,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-11.04", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-2: Gain a working knowledge of money management and analyse how to make economics comparisons of alternative engineering projects. Contents: cost and revenue analysis - fixed, variable, average, marginal and sunk costs; time value of money, simple and compound interest.",
+       "confidence": 0.95}
+    ],
+    "unmapped": [
+      {"label": "microeconomics", "evidence": "Demand, supply, and equilibrium in the market; consumption and production theories; market structure.",
+       "suggestion": "KA-11 Process Design, Synthesis and Economics - KU-11.04 covers project costing and profitability, not market economics"}
+    ]
+  }
+]

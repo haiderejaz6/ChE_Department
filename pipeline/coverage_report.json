@@ -1,0 +1,1662 @@
+{
+  "schema": "che-coverage-report/1",
+  "counts": {
+    "reference_units": 82,
+    "covered": 81,
+    "gaps": 1,
+    "core_gaps": 1,
+    "bloom_shortfalls": 10
+  },
+  "core_gaps": [
+    {
+      "id": "KU-08.04",
+      "name": "Non-Ideal Flow and Residence Time",
+      "area": "Chemical Reaction Engineering",
+      "area_id": "KA-08",
+      "core": true,
+      "expected_bloom": "Analyze",
+      "courses": []
+    }
+  ],
+  "all_gaps": [
+    {
+      "id": "KU-08.04",
+      "name": "Non-Ideal Flow and Residence Time",
+      "area": "Chemical Reaction Engineering",
+      "area_id": "KA-08",
+      "core": true,
+      "expected_bloom": "Analyze",
+      "courses": []
+    }
+  ],
+  "overlap": [
+    {
+      "id": "KU-14.04",
+      "name": "Teamwork and Project Execution",
+      "area": "Professional Practice and Engineering Skills",
+      "area_id": "KA-14",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CS-117",
+          "semester": 1,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.62
+        },
+        {
+          "code": "ME-105",
+          "semester": 1,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CH-113",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.82
+        },
+        {
+          "code": "CH-114",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.8
+        },
+        {
+          "code": "PHY-102",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.8
+        },
+        {
+          "code": "CCE-401",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.6
+        },
+        {
+          "code": "CHE-214",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.8
+        },
+        {
+          "code": "CHE-220",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.8
+        },
+        {
+          "code": "CHE-242",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.75
+        },
+        {
+          "code": "CHE-332",
+          "semester": 5,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.8
+        },
+        {
+          "code": "CHE-344",
+          "semester": 5,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.8
+        },
+        {
+          "code": "CHE-323",
+          "semester": 6,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.78
+        },
+        {
+          "code": "CHE-347",
+          "semester": 6,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.78
+        },
+        {
+          "code": "CHE-349",
+          "semester": 6,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.8
+        },
+        {
+          "code": "CHE-423",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.8
+        },
+        {
+          "code": "CSL-402",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.88
+        },
+        {
+          "code": "CHE-499",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "id": "KU-14.02",
+      "name": "Laboratory and Experimental Practice",
+      "area": "Professional Practice and Engineering Skills",
+      "area_id": "KA-14",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CH-113",
+          "semester": 2,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.9
+        },
+        {
+          "code": "CH-114",
+          "semester": 2,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.9
+        },
+        {
+          "code": "PHY-102",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CHE-214",
+          "semester": 3,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.9
+        },
+        {
+          "code": "CHE-220",
+          "semester": 4,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.88
+        },
+        {
+          "code": "CHE-242",
+          "semester": 4,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.9
+        },
+        {
+          "code": "CHE-346",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.88
+        },
+        {
+          "code": "CHE-332",
+          "semester": 5,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.88
+        },
+        {
+          "code": "CHE-344",
+          "semester": 5,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CHE-323",
+          "semester": 6,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CHE-347",
+          "semester": 6,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.88
+        },
+        {
+          "code": "CHE-349",
+          "semester": 6,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.9
+        },
+        {
+          "code": "CHE-423",
+          "semester": 7,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.88
+        }
+      ]
+    },
+    {
+      "id": "KU-13.04",
+      "name": "Occupational Health and Laboratory Safety",
+      "area": "Process Safety, Health and Environment",
+      "area_id": "KA-13",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "ME-105",
+          "semester": 1,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.58
+        },
+        {
+          "code": "CH-113",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.88
+        },
+        {
+          "code": "CH-114",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CHE-214",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CHE-220",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.82
+        },
+        {
+          "code": "CHE-242",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CHE-346",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.8
+        },
+        {
+          "code": "CHE-332",
+          "semester": 5,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CHE-344",
+          "semester": 5,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.82
+        },
+        {
+          "code": "CHE-347",
+          "semester": 6,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CHE-423",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.82
+        }
+      ]
+    },
+    {
+      "id": "KU-01.05",
+      "name": "Statistics and Data Analysis",
+      "area": "Mathematical and Computational Foundations",
+      "area_id": "KA-01",
+      "core": true,
+      "expected_bloom": "Analyze",
+      "courses": [
+        {
+          "code": "CS-117",
+          "semester": 1,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.78
+        },
+        {
+          "code": "QR-100",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.72
+        },
+        {
+          "code": "CHE-226",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.7
+        },
+        {
+          "code": "QR-101",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.6
+        },
+        {
+          "code": "MATH-351",
+          "semester": 5,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.68
+        },
+        {
+          "code": "CHE-465",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.85
+        },
+        {
+          "code": "OTM-456",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": "KU-04.05",
+      "name": "Thermodynamic Cycles and Energy Systems",
+      "area": "Chemical Engineering Thermodynamics",
+      "area_id": "KA-04",
+      "core": true,
+      "expected_bloom": "Analyze",
+      "courses": [
+        {
+          "code": "CHE-223",
+          "semester": 3,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.55
+        },
+        {
+          "code": "CHE-242",
+          "semester": 4,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.55
+        },
+        {
+          "code": "CHE-332",
+          "semester": 5,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "CHE-425",
+          "semester": 8,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.6
+        },
+        {
+          "code": "CHE-484",
+          "semester": 8,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.58
+        }
+      ]
+    },
+    {
+      "id": "KU-14.03",
+      "name": "Technical Communication",
+      "area": "Professional Practice and Engineering Skills",
+      "area_id": "KA-14",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "HU-114",
+          "semester": 1,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.6
+        },
+        {
+          "code": "ENGL-101",
+          "semester": 2,
+          "bloom": "Analyze",
+          "depth": "secondary",
+          "confidence": 0.62
+        },
+        {
+          "code": "ME-124",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.93
+        },
+        {
+          "code": "CSL-402",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.68
+        },
+        {
+          "code": "CHE-499",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "id": "KU-01.01",
+      "name": "Calculus and Analysis",
+      "area": "Mathematical and Computational Foundations",
+      "area_id": "KA-01",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "MATH-101",
+          "semester": 1,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "MATH-121",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.58
+        },
+        {
+          "code": "MATH-243",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "CHE-345",
+          "semester": 6,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.65
+        }
+      ]
+    },
+    {
+      "id": "KU-01.02",
+      "name": "Differential Equations",
+      "area": "Mathematical and Computational Foundations",
+      "area_id": "KA-01",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "MATH-121",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "MATH-243",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.9
+        },
+        {
+          "code": "MATH-351",
+          "semester": 5,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.62
+        },
+        {
+          "code": "CHE-464",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.65
+        }
+      ]
+    },
+    {
+      "id": "KU-01.06",
+      "name": "Programming and Computational Tools",
+      "area": "Mathematical and Computational Foundations",
+      "area_id": "KA-01",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CS-117",
+          "semester": 1,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.9
+        },
+        {
+          "code": "CHE-222",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.55
+        },
+        {
+          "code": "CHE-226",
+          "semester": 3,
+          "bloom": "Create",
+          "depth": "primary",
+          "confidence": 0.97
+        },
+        {
+          "code": "CHE-465",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "KU-03.01",
+      "name": "Process Variables and Units",
+      "area": "Material and Energy Balances",
+      "area_id": "KA-03",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CHE-103",
+          "semester": 1,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.72
+        },
+        {
+          "code": "QR-100",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.62
+        },
+        {
+          "code": "CHE-214",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.78
+        },
+        {
+          "code": "CHE-222",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": "KU-03.04",
+      "name": "Energy Balances",
+      "area": "Material and Energy Balances",
+      "area_id": "KA-03",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CHE-222",
+          "semester": 3,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.96
+        },
+        {
+          "code": "CHE-223",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.62
+        },
+        {
+          "code": "CHE-350",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.72
+        },
+        {
+          "code": "CHE-452",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.62
+        }
+      ]
+    },
+    {
+      "id": "KU-04.03",
+      "name": "Phase Equilibrium",
+      "area": "Chemical Engineering Thermodynamics",
+      "area_id": "KA-04",
+      "core": true,
+      "expected_bloom": "Analyze",
+      "courses": [
+        {
+          "code": "CH-114",
+          "semester": 2,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.7
+        },
+        {
+          "code": "CHE-223",
+          "semester": 3,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.5
+        },
+        {
+          "code": "CHE-220",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.75
+        },
+        {
+          "code": "CHE-332",
+          "semester": 5,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "id": "KU-05.04",
+      "name": "Fluid Machinery",
+      "area": "Fluid Mechanics",
+      "area_id": "KA-05",
+      "core": true,
+      "expected_bloom": "Analyze",
+      "courses": [
+        {
+          "code": "CHE-214",
+          "semester": 3,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.55
+        },
+        {
+          "code": "CHE-350",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.65
+        },
+        {
+          "code": "CHE-451",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.72
+        },
+        {
+          "code": "CHE-484",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "KU-11.01",
+      "name": "Process Synthesis and Flowsheeting",
+      "area": "Process Design, Synthesis and Economics",
+      "area_id": "KA-11",
+      "core": true,
+      "expected_bloom": "Create",
+      "courses": [
+        {
+          "code": "CHE-115",
+          "semester": 2,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.6
+        },
+        {
+          "code": "CHE-451",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.9
+        },
+        {
+          "code": "CHE-452",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.88
+        },
+        {
+          "code": "CHE-499",
+          "semester": 8,
+          "bloom": "Create",
+          "depth": "secondary",
+          "confidence": 0.62
+        }
+      ]
+    },
+    {
+      "id": "KU-11.04",
+      "name": "Engineering Economics",
+      "area": "Process Design, Synthesis and Economics",
+      "area_id": "KA-11",
+      "core": true,
+      "expected_bloom": "Analyze",
+      "courses": [
+        {
+          "code": "ECO-130",
+          "semester": 6,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "CHE-451",
+          "semester": 7,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.88
+        },
+        {
+          "code": "CHE-452",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.72
+        },
+        {
+          "code": "OTM-456",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.62
+        }
+      ]
+    },
+    {
+      "id": "KU-14.01",
+      "name": "Engineering Ethics and Professional Responsibility",
+      "area": "Professional Practice and Engineering Skills",
+      "area_id": "KA-14",
+      "core": true,
+      "expected_bloom": "Evaluate",
+      "courses": [
+        {
+          "code": "CS-117",
+          "semester": 1,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.58
+        },
+        {
+          "code": "MGT-271",
+          "semester": 5,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.68
+        },
+        {
+          "code": "CHE-451",
+          "semester": 7,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.7
+        },
+        {
+          "code": "CSL-402",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.75
+        }
+      ]
+    },
+    {
+      "id": "KU-14.05",
+      "name": "Research Methods and Lifelong Learning",
+      "area": "Professional Practice and Engineering Skills",
+      "area_id": "KA-14",
+      "core": true,
+      "expected_bloom": "Analyze",
+      "courses": [
+        {
+          "code": "ENGL-101",
+          "semester": 2,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.72
+        },
+        {
+          "code": "QR-101",
+          "semester": 4,
+          "bloom": "Evaluate",
+          "depth": "secondary",
+          "confidence": 0.65
+        },
+        {
+          "code": "CSL-402",
+          "semester": 7,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.6
+        },
+        {
+          "code": "CHE-499",
+          "semester": 8,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "KU-14.06",
+      "name": "Engineering in Society",
+      "area": "Professional Practice and Engineering Skills",
+      "area_id": "KA-14",
+      "core": true,
+      "expected_bloom": "Understand",
+      "courses": [
+        {
+          "code": "CCE-401",
+          "semester": 3,
+          "bloom": "Understand",
+          "depth": "primary",
+          "confidence": 0.8
+        },
+        {
+          "code": "MGT-271",
+          "semester": 5,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CSL-402",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.85
+        },
+        {
+          "code": "CHE-499",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.82
+        }
+      ]
+    },
+    {
+      "id": "KU-01.03",
+      "name": "Linear Algebra",
+      "area": "Mathematical and Computational Foundations",
+      "area_id": "KA-01",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "MATH-121",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "MATH-351",
+          "semester": 5,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.78
+        },
+        {
+          "code": "CHE-465",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": "KU-02.01",
+      "name": "Physical Chemistry",
+      "area": "Chemistry for Chemical Engineers",
+      "area_id": "KA-02",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CH-113",
+          "semester": 2,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.5
+        },
+        {
+          "code": "CH-114",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "CHE-360",
+          "semester": 8,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.6
+        }
+      ]
+    },
+    {
+      "id": "KU-02.02",
+      "name": "Organic Chemistry",
+      "area": "Chemistry for Chemical Engineers",
+      "area_id": "KA-02",
+      "core": true,
+      "expected_bloom": "Understand",
+      "courses": [
+        {
+          "code": "CH-113",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "CHE-115",
+          "semester": 2,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.72
+        },
+        {
+          "code": "CHE-423",
+          "semester": 7,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.58
+        }
+      ]
+    },
+    {
+      "id": "KU-02.04",
+      "name": "Chemical Analysis and Characterisation",
+      "area": "Chemistry for Chemical Engineers",
+      "area_id": "KA-02",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CH-113",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.8
+        },
+        {
+          "code": "CH-114",
+          "semester": 2,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.93
+        },
+        {
+          "code": "CHE-350",
+          "semester": 7,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.68
+        }
+      ]
+    },
+    {
+      "id": "KU-03.03",
+      "name": "Material Balances With Reaction",
+      "area": "Material and Energy Balances",
+      "area_id": "KA-03",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CHE-115",
+          "semester": 2,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.58
+        },
+        {
+          "code": "CHE-222",
+          "semester": 3,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.5
+        },
+        {
+          "code": "CHE-423",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.78
+        }
+      ]
+    },
+    {
+      "id": "KU-04.01",
+      "name": "Laws of Thermodynamics",
+      "area": "Chemical Engineering Thermodynamics",
+      "area_id": "KA-04",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CHE-222",
+          "semester": 3,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.68
+        },
+        {
+          "code": "CHE-223",
+          "semester": 3,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.96
+        },
+        {
+          "code": "CHE-332",
+          "semester": 5,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.75
+        }
+      ]
+    },
+    {
+      "id": "KU-05.02",
+      "name": "Fluid Flow Fundamentals",
+      "area": "Fluid Mechanics",
+      "area_id": "KA-05",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CHE-214",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "CHE-345",
+          "semester": 6,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.9
+        },
+        {
+          "code": "CHE-464",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.75
+        }
+      ]
+    },
+    {
+      "id": "KU-05.03",
+      "name": "Flow in Pipes and Ducts",
+      "area": "Fluid Mechanics",
+      "area_id": "KA-05",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CHE-214",
+          "semester": 3,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.93
+        },
+        {
+          "code": "CHE-350",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.7
+        },
+        {
+          "code": "CHE-451",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": "KU-06.01",
+      "name": "Conduction",
+      "area": "Heat Transfer",
+      "area_id": "KA-06",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CHE-242",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "CHE-345",
+          "semester": 6,
+          "bloom": "Analyze",
+          "depth": "secondary",
+          "confidence": 0.78
+        },
+        {
+          "code": "CHE-464",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.6
+        }
+      ]
+    },
+    {
+      "id": "KU-07.01",
+      "name": "Diffusion and Mass Transfer Fundamentals",
+      "area": "Mass Transfer and Separation Processes",
+      "area_id": "KA-07",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CHE-220",
+          "semester": 4,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.97
+        },
+        {
+          "code": "CHE-345",
+          "semester": 6,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.9
+        },
+        {
+          "code": "CHE-349",
+          "semester": 6,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.72
+        }
+      ]
+    },
+    {
+      "id": "KU-07.02",
+      "name": "Distillation",
+      "area": "Mass Transfer and Separation Processes",
+      "area_id": "KA-07",
+      "core": true,
+      "expected_bloom": "Analyze",
+      "courses": [
+        {
+          "code": "CHE-220",
+          "semester": 4,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.96
+        },
+        {
+          "code": "CHE-332",
+          "semester": 5,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.55
+        },
+        {
+          "code": "CHE-350",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.88
+        }
+      ]
+    },
+    {
+      "id": "KU-07.03",
+      "name": "Absorption and Stripping",
+      "area": "Mass Transfer and Separation Processes",
+      "area_id": "KA-07",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CHE-220",
+          "semester": 4,
+          "bloom": "Apply",
+          "depth": "primary",
+          "confidence": 0.93
+        },
+        {
+          "code": "CHE-350",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.7
+        },
+        {
+          "code": "CHE-484",
+          "semester": 8,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "KU-07.07",
+      "name": "Membrane Separation",
+      "area": "Mass Transfer and Separation Processes",
+      "area_id": "KA-07",
+      "core": false,
+      "expected_bloom": "Understand",
+      "courses": [
+        {
+          "code": "CHE-349",
+          "semester": 6,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.7
+        },
+        {
+          "code": "CHE-442",
+          "semester": 7,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.95
+        },
+        {
+          "code": "CHE-484",
+          "semester": 8,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.6
+        }
+      ]
+    },
+    {
+      "id": "KU-08.01",
+      "name": "Reaction Kinetics",
+      "area": "Chemical Reaction Engineering",
+      "area_id": "KA-08",
+      "core": true,
+      "expected_bloom": "Analyze",
+      "courses": [
+        {
+          "code": "CH-114",
+          "semester": 2,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.62
+        },
+        {
+          "code": "CHE-347",
+          "semester": 6,
+          "bloom": "Analyze",
+          "depth": "primary",
+          "confidence": 0.96
+        },
+        {
+          "code": "CHE-423",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": "KU-11.03",
+      "name": "Process Simulation",
+      "area": "Process Design, Synthesis and Economics",
+      "area_id": "KA-11",
+      "core": true,
+      "expected_bloom": "Apply",
+      "courses": [
+        {
+          "code": "CHE-452",
+          "semester": 7,
+          "bloom": "Create",
+          "depth": "primary",
+          "confidence": 0.97
+        },
+        {
+          "code": "CHE-484",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.6
+        },
+        {
+          "code": "CHE-499",
+          "semester": 8,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.6
+        }
+      ]
+    },
+    {
+      "id": "KU-12.01",
+      "name": "Engineering Materials",
+      "area": "Materials and Polymer Engineering",
+      "area_id": "KA-12",
+      "core": true,
+      "expected_bloom": "Understand",
+      "courses": [
+        {
+          "code": "MSE-226",
+          "semester": 3,
+          "bloom": "Understand",
+          "depth": "primary",
+          "confidence": 0.96
+        },
+        {
+          "code": "CHE-451",
+          "semester": 7,
+          "bloom": "Apply",
+          "depth": "secondary",
+          "confidence": 0.7
+        },
+        {
+          "code": "CHE-360",
+          "semester": 8,
+          "bloom": "Understand",
+          "depth": "secondary",
+          "confidence": 0.6
+        }
+      ]
+    }
+  ],
+  "bloom_shortfall": [
+    {
+      "id": "KU-01.05",
+      "name": "Statistics and Data Analysis",
+      "area": "Mathematical and Computational Foundations",
+      "expected": "Analyze",
+      "highest_taught": 3,
+      "courses": [
+        "CS-117",
+        "QR-100",
+        "CHE-226",
+        "QR-101",
+        "MATH-351",
+        "CHE-465",
+        "OTM-456"
+      ]
+    },
+    {
+      "id": "KU-05.04",
+      "name": "Fluid Machinery",
+      "area": "Fluid Mechanics",
+      "expected": "Analyze",
+      "highest_taught": 3,
+      "courses": [
+        "CHE-214",
+        "CHE-350",
+        "CHE-451",
+        "CHE-484"
+      ]
+    },
+    {
+      "id": "KU-06.06",
+      "name": "Heat Integration",
+      "area": "Heat Transfer",
+      "expected": "Analyze",
+      "highest_taught": 2,
+      "courses": [
+        "CHE-423",
+        "CHE-452"
+      ]
+    },
+    {
+      "id": "KU-08.03",
+      "name": "Non-Isothermal Reactor Operation",
+      "area": "Chemical Reaction Engineering",
+      "expected": "Analyze",
+      "highest_taught": 3,
+      "courses": [
+        "CHE-347"
+      ]
+    },
+    {
+      "id": "KU-09.02",
+      "name": "Particle-Fluid Mechanics",
+      "area": "Particulate Systems and Solids Handling",
+      "expected": "Apply",
+      "highest_taught": 2,
+      "courses": [
+        "CHE-346",
+        "CHE-423"
+      ]
+    },
+    {
+      "id": "KU-13.01",
+      "name": "Hazard Identification",
+      "area": "Process Safety, Health and Environment",
+      "expected": "Analyze",
+      "highest_taught": 3,
+      "courses": [
+        "CHE-451"
+      ]
+    },
+    {
+      "id": "KU-13.02",
+      "name": "Risk Assessment and Management",
+      "area": "Process Safety, Health and Environment",
+      "expected": "Evaluate",
+      "highest_taught": 2,
+      "courses": [
+        "CHE-451",
+        "CHE-425"
+      ]
+    },
+    {
+      "id": "KU-13.03",
+      "name": "Inherent Safety and Design for Safety",
+      "area": "Process Safety, Health and Environment",
+      "expected": "Evaluate",
+      "highest_taught": 3,
+      "courses": [
+        "CHE-484",
+        "CHE-499"
+      ]
+    },
+    {
+      "id": "KU-13.06",
+      "name": "Sustainability and Cleaner Production",
+      "area": "Process Safety, Health and Environment",
+      "expected": "Evaluate",
+      "highest_taught": 4,
+      "courses": [
+        "CHE-423"
+      ]
+    },
+    {
+      "id": "KU-14.01",
+      "name": "Engineering Ethics and Professional Responsibility",
+      "area": "Professional Practice and Engineering Skills",
+      "expected": "Evaluate",
+      "highest_taught": 3,
+      "courses": [
+        "CS-117",
+        "MGT-271",
+        "CHE-451",
+        "CSL-402"
+      ]
+    }
+  ],
+  "coverage_by_area": {
+    "Mathematical and Computational Foundations": {
+      "total": 7,
+      "covered": 7,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Chemistry for Chemical Engineers": {
+      "total": 5,
+      "covered": 5,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Material and Energy Balances": {
+      "total": 5,
+      "covered": 5,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Chemical Engineering Thermodynamics": {
+      "total": 5,
+      "covered": 5,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Fluid Mechanics": {
+      "total": 7,
+      "covered": 7,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Heat Transfer": {
+      "total": 6,
+      "covered": 6,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Mass Transfer and Separation Processes": {
+      "total": 8,
+      "covered": 8,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Chemical Reaction Engineering": {
+      "total": 6,
+      "covered": 5,
+      "core_gaps": 1,
+      "pct": 83.3
+    },
+    "Particulate Systems and Solids Handling": {
+      "total": 5,
+      "covered": 5,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Process Dynamics, Control and Instrumentation": {
+      "total": 5,
+      "covered": 5,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Process Design, Synthesis and Economics": {
+      "total": 6,
+      "covered": 6,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Materials and Polymer Engineering": {
+      "total": 5,
+      "covered": 5,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Process Safety, Health and Environment": {
+      "total": 6,
+      "covered": 6,
+      "core_gaps": 0,
+      "pct": 100.0
+    },
+    "Professional Practice and Engineering Skills": {
+      "total": 6,
+      "covered": 6,
+      "core_gaps": 0,
+      "pct": 100.0
+    }
+  },
+  "method_comparison": {
+    "existing_concepts": 268,
+    "reference_units": 82,
+    "reference_units_covered": 81,
+    "note": "Label sets are not directly comparable - the existing run produced free-text concepts, this one maps onto fixed unit ids. Compare per-course code sets, not label strings."
+  }
+}

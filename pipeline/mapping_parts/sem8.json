@@ -1,0 +1,191 @@
+[
+  {
+    "code": "CHE-360",
+    "title": "Fundamentals Of Polymer Engineering",
+    "semester": 8,
+    "is_non_technical": false,
+    "had_course_file": false,
+    "evidence_note": "No outline available. The two CLOs name the sub-topics explicitly, so mapping is possible on CLO evidence alone.",
+    "mapped": [
+      {"unit_id": "KU-12.03", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-1: polymer classification, thermal, and mechanical properties of the polymers. CLO-2: Relate the fundamental concepts of polymer engineering to study the techniques for the synthesis of polymeric materials.",
+       "confidence": 0.9},
+      {"unit_id": "KU-12.04", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-1: rheology. CLO-2: techniques for the synthesis and processing of polymeric materials.",
+       "confidence": 0.88},
+      {"unit_id": "KU-02.01", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "CLO-1: colligative properties of the polymers.",
+       "confidence": 0.6},
+      {"unit_id": "KU-12.01", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "CLO-1: thermal, and mechanical properties of the polymers.",
+       "confidence": 0.6}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "CHE-425",
+    "title": "Maintenance & Process Safety",
+    "semester": 8,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "evidence_note": "Outline is the PARTIAL alias CHE-555.md (Maintenance & Utility Engineering), which contains maintenance and utilities but NO process safety content. Safety mappings below are drawn from the CLOs only, which do name process safety and risk management. Both safety CLOs are C-2 (Understand), so this course cannot evidence safety above that level.",
+    "mapped": [
+      {"unit_id": "KU-11.06", "bloom_level": "Understand", "depth": "primary",
+       "evidence": "Role of maintenance in plant operation; types of maintenance: preventive, predictive, corrective, breakdown and total productive maintenance; scheduling and maintenance planning; production planning methods, capacity planning and control; quality control; software for project management.",
+       "confidence": 0.9},
+      {"unit_id": "KU-13.02", "bloom_level": "Understand", "depth": "primary",
+       "evidence": "CLO-2: Explain the practical application of safety and risk management in process industry.",
+       "confidence": 0.75},
+      {"unit_id": "KU-04.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Importance of utilities in process industries: flare network, instrument and plant air, boiler feed water, steam, cooling water supply.",
+       "confidence": 0.6}
+    ],
+    "unmapped": [
+      {"label": "inspection and non-destructive testing", "evidence": "Computerized maintenance; inspection techniques; non-destructive testing techniques; maintenance of rotary and stationary equipment.",
+       "suggestion": "KA-11 or KA-12 - no unit covers inspection, NDT or asset integrity"},
+      {"label": "utility systems engineering", "evidence": "Basic utilities of a process, selection criteria, and economical utilization; boiler feed water, steam, cooling water supply.",
+       "suggestion": "KA-11 - utility system design has no unit; KU-04.05 covers steam thermodynamics only"}
+    ]
+  },
+  {
+    "code": "CHE-465",
+    "title": "Data Science and Machine Learning in Chemical Engineering",
+    "semester": 8,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "evidence_note": "Outline taken from CHE-434.md under the confirmed renumbering. Most of this course's content has no reference unit - see reference gap A2.",
+    "mapped": [
+      {"unit_id": "KU-01.05", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "CLO-1: Describe and apply the concepts of linear algebra, probability, and statistics used for data distributions. CLO-2: Use mathematical and statistical theory for decision-making. Contents include linear and logistic regression, measuring classifier accuracy.",
+       "confidence": 0.85},
+      {"unit_id": "KU-01.06", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "CLO-3: Apply algorithms of data science and machine learning using Python.",
+       "confidence": 0.85},
+      {"unit_id": "KU-01.03", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-1: Describe and apply the concepts of linear algebra.",
+       "confidence": 0.7}
+    ],
+    "unmapped": [
+      {"label": "supervised learning", "evidence": "Decision trees, Naive Bayes, artificial neural networks, support vector machines, overfitting, noisy data, and pruning.",
+       "suggestion": "NEW UNIT under KA-01 - reference gap A2, now flagged by five courses"},
+      {"label": "unsupervised learning", "evidence": "Hierarchical agglomerative clustering, K-means partitional clustering, self-organizing maps, k-nearest-neighbor, semi-supervised learning with EM.",
+       "suggestion": "NEW UNIT under KA-01 - reference gap A2"},
+      {"label": "reinforcement learning", "evidence": "Hidden Markov models, Monte Carlo inference, exploration vs exploitation, Markov decision processes, ensemble learning, bagging and boosting.",
+       "suggestion": "NEW UNIT under KA-01 - reference gap A2"}
+    ]
+  },
+  {
+    "code": "CHE-484",
+    "title": "Natural Gas Engineering",
+    "semester": 8,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "evidence_note": "Outline taken from CHE-444.md under the confirmed renumbering.",
+    "mapped": [
+      {"unit_id": "KU-07.03", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-3: Analyze and design gas processing and purification operations. Gas sweetening process: chemical and physical solvent processes; solvent regeneration; dehydration of natural gas.",
+       "confidence": 0.85},
+      {"unit_id": "KU-05.04", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Gas compression; compressor types; selection between centrifugal and reciprocating compressors; design considerations; energy conservation in gas processing facilities.",
+       "confidence": 0.85},
+      {"unit_id": "KU-13.03", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Flare system design; PSVs, blow-down, flare/vent stack sizing.",
+       "confidence": 0.85},
+      {"unit_id": "KU-13.05", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Gas emissions: disposal of gas field emissions, effluent, and produced water (EOR, re-injection, flaring); sludge handling.",
+       "confidence": 0.8},
+      {"unit_id": "KU-12.02", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Design, metallurgy, and corrosion protection of gas pipelines and equipment.",
+       "confidence": 0.72},
+      {"unit_id": "KU-09.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Separation process: gas-liquid separation design and configurations; test separator.",
+       "confidence": 0.62},
+      {"unit_id": "KU-07.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Membrane/molecular sieve processes.",
+       "confidence": 0.6},
+      {"unit_id": "KU-07.07", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Membrane/molecular sieve processes for gas sweetening.",
+       "confidence": 0.6},
+      {"unit_id": "KU-11.03", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Case studies: simulation of the sweetening process.",
+       "confidence": 0.6},
+      {"unit_id": "KU-04.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Cryogenic separation; LPG recovery and condensate stabilization; LNG and CNG.",
+       "confidence": 0.58},
+      {"unit_id": "KU-05.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Testing of well fluid, test separator, multiphase flow meters, establishing GOR.",
+       "confidence": 0.55}
+    ],
+    "unmapped": [
+      {"label": "natural gas processing sector", "evidence": "Introduction to the natural gas industry, gas production, gas processing facilities, process flow schemes and product specifications; pigging of gas lines.",
+       "suggestion": "NEW UNIT - same gap as petroleum refining; the reference has no oil and gas sector unit"}
+    ]
+  },
+  {
+    "code": "CHE-499",
+    "title": "Final Year Design Project-II",
+    "semester": 8,
+    "is_non_technical": false,
+    "had_course_file": false,
+    "evidence_note": "No outline, as expected for a project course. Its 8 CLOs are the PEC graduate attributes restated almost verbatim, so they evidence professional-practice outcomes but name no technical content. The design capstone units (KU-11.01/02) cannot be evidenced from these CLOs even though the project certainly exercises them - a documentation limit, not a curriculum gap.",
+    "mapped": [
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "CLO-9: Ability to work effectively, as an individual or in a team, on multifaceted and/or multidisciplinary settings. CLO-11: demonstrate management skills... as a member and/or leader in a team to manage projects in a multidisciplinary environment.",
+       "confidence": 0.9},
+      {"unit_id": "KU-14.03", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "CLO-10: Ability to communicate effectively, orally as well as in writing on complex engineering activities... comprehend and write effective reports and design documentations, make effective presentations.",
+       "confidence": 0.9},
+      {"unit_id": "KU-14.05", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-2: Ability to identify, formulate, research literature, and analyze complex engineering problems. CLO-12: pursue lifelong learning in the broader context of innovation and technological developments.",
+       "confidence": 0.85},
+      {"unit_id": "KU-14.06", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "CLO-7: Ability to understand the impact of professional engineering solutions in societal contexts and demonstrate knowledge of and need for sustainable development.",
+       "confidence": 0.82},
+      {"unit_id": "KU-11.01", "bloom_level": "Create", "depth": "secondary",
+       "evidence": "CLO-3: Ability to design solutions for complex engineering problems and design systems, components, or processes that meet specified needs.",
+       "confidence": 0.62},
+      {"unit_id": "KU-11.03", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-5: apply appropriate techniques, resources, and modern engineering and IT tools, including prediction and modeling, to complex engineering activities.",
+       "confidence": 0.6},
+      {"unit_id": "KU-13.03", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "CLO-3: with appropriate consideration for public health and safety.",
+       "confidence": 0.5}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "HU-115",
+    "title": "Principles of Sociology",
+    "semester": 8,
+    "is_non_technical": true,
+    "had_course_file": false,
+    "mapped": [],
+    "unmapped": []
+  },
+  {
+    "code": "OTM-456",
+    "title": "Production & Operations Management",
+    "semester": 8,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "evidence_note": "Outline is the PARTIAL alias CHE-436.md (Operations Management and Risk Assessment); the file may contain content the current course does not teach.",
+    "mapped": [
+      {"unit_id": "KU-11.06", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-1: Comprehend the process of transforming resources into products and development of its operational strategy. CLO-3: Apply project management tools, techniques and inventory management methods. Contents: production management functions, classification of production systems, quality control, process selection and capacity planning.",
+       "confidence": 0.92},
+      {"unit_id": "KU-01.07", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Resource allocation - linear programming: model formulation, analysis of linear programming models, graphical approach, simplex method, applications of linear programming.",
+       "confidence": 0.85},
+      {"unit_id": "KU-01.05", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-2: Use of a variety of problem-solving and forecasting techniques to aid in effective decision making and quality control. Forecasting environments and their modeling.",
+       "confidence": 0.7},
+      {"unit_id": "KU-11.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Product life cycle: process selection and capacity planning; break-even analysis.",
+       "confidence": 0.62}
+    ],
+    "unmapped": [
+      {"label": "operations research techniques", "evidence": "Design of work systems: facility layout basic types, line balancing, waiting-line goals, queuing models (infinite source, finite source), reliability and liability.",
+       "suggestion": "KA-01 or KA-11 - queuing theory, line balancing and facility layout have no reference unit"}
+    ]
+  }
+]

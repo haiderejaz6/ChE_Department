@@ -1,0 +1,139 @@
+[
+  {
+    "code": "CHE-220",
+    "title": "Mass Transfer",
+    "semester": 4,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-07.01", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Fick's law, diffusivity, diffusion through gases and liquids, equimolar and un-equimolar diffusion, diffusion through a stagnant gas; two-film theory, penetration theory, film-penetration theory; overall and film mass transfer coefficients.",
+       "confidence": 0.97},
+      {"unit_id": "KU-07.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Lewis-Sorel and McCabe-Thiele methods; minimum reflux ratio; number of plates at total reflux; Underwood and Fenske methods; plate efficiency and Murphree's formula; HETP; multi-component distillation and key components.",
+       "confidence": 0.96},
+      {"unit_id": "KU-07.03", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Absorption: calculation of the number and height of transfer units for various cases of countercurrent and cocurrent operations. CLO-2: Apply the knowledge of separation principles for basic design calculations related to gas-liquid absorption.",
+       "confidence": 0.93},
+      {"unit_id": "KU-14.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-4: Realize experiment by following instructions by the teacher. CLO-7: Collect data from the experiment and analyse it in the view of theoretical understanding.",
+       "confidence": 0.88},
+      {"unit_id": "KU-04.03", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Phase equilibrium and phase diagrams: single-component systems, multi-component systems, and gas-liquid equilibrium.",
+       "confidence": 0.75},
+      {"unit_id": "KU-13.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-6: Follows lab instructions to ensure safe environment in the lab.",
+       "confidence": 0.82},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-5: Exhibit capability to work in team during the lab activities.",
+       "confidence": 0.8}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "CHE-242",
+    "title": "Heat Transfer",
+    "semester": 4,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-06.01", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Conduction in steady-state and unsteady-state cases for one dimension; unsteady-state heat transfer.",
+       "confidence": 0.95},
+      {"unit_id": "KU-06.02", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Heat transfer by convection (natural & forced convection); application of dimensional analysis to convection; concept of film and overall heat transfer coefficients.",
+       "confidence": 0.95},
+      {"unit_id": "KU-06.04", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Heat transfer equipment: types and selection criteria; heat exchangers and their design. Practicals compute overall heat transfer coefficient and efficiency of double-pipe exchangers in parallel and counter flow.",
+       "confidence": 0.94},
+      {"unit_id": "KU-06.03", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Heat transfer by radiation; radiation from black and real surfaces; radiation between black surfaces; radiation between grey surfaces; radiation from gases.",
+       "confidence": 0.93},
+      {"unit_id": "KU-06.05", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Heat transfer with phase change: condensation and boiling heat transfer, and designing of single-component condensers. Evaporation: single-effect and multiple-effect evaporators.",
+       "confidence": 0.93},
+      {"unit_id": "KU-14.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-4: Execute the standard startup procedure and set the requisite temperature, flows and pressures. CLO-7: analyze and interpret the results, comparing them with theoretical concepts.",
+       "confidence": 0.9},
+      {"unit_id": "KU-13.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-6: Follows lab safety considerations for operating all kinds of heat exchangers and electrical heating devices.",
+       "confidence": 0.85},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-5: Demonstrate punctuality and attentive demeanor as an individual or in a team during the whole lab session.",
+       "confidence": 0.75},
+      {"unit_id": "KU-04.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Vapor compression evaporators, the heat pump cycle.",
+       "confidence": 0.55}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "CHE-346",
+    "title": "Particulate Technology",
+    "semester": 4,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-09.01", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Characterization of solid particles: particle size, particle size distribution, and shape of solid particles; particle size analysis. CLO-5: perform distribution analysis by use of standards (Tyler mesh standard).",
+       "confidence": 0.96},
+      {"unit_id": "KU-09.03", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Size reduction: methods, characteristics of comminuted products, energy and power requirement in comminution; machinery: crushers, grinders, ultrafine grinders. Size enlargement: agglomeration, granulation, pelletization. CLO-4: Analyze the effect of attrition, impact and compression on particle size reduction and determine efficiency of equipment.",
+       "confidence": 0.96},
+      {"unit_id": "KU-09.04", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Mechanical separation: screening and screening equipment; cyclone separators, electrostatic separators; filtration: types of equipment, classification of filters, filtration theory; gravity settling, sorting classifiers, equipment for sedimentation.",
+       "confidence": 0.95},
+      {"unit_id": "KU-09.05", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Storage and conveying of solid particles: bulk storage, bin storage, flow out of bins, pneumatic and hydraulic conveying, belt conveyors and elevators. Mixing of solids. Dust explosion.",
+       "confidence": 0.94},
+      {"unit_id": "KU-14.02", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "CLO-3: Follows Equipment's standard operating procedure (SOP) for particle size reduction, separation and handling. CLO-5: Grind solid particles and perform distribution analysis.",
+       "confidence": 0.88},
+      {"unit_id": "KU-09.02", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Gravity settling processes: gravity classifiers, sorting classifiers, equipment for sedimentation.",
+       "confidence": 0.65},
+      {"unit_id": "KU-13.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-6: Initiate experiment by following equipment procedure and safety SOP's.",
+       "confidence": 0.8}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "MATH-243",
+    "title": "Vector Calculus",
+    "semester": 4,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-01.01", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Calculus of the del operator, gradient, curl, and divergence, along with their physical interpretations; parametric curves; directional derivative; double and triple integration with applications to find areas and volumes.",
+       "confidence": 0.95},
+      {"unit_id": "KU-01.02", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "CLO-2: Choose and apply the methods for analytic and approximate solutions of Ordinary and Partial differential equations. Partial differential equations are included to provide strong mathematical tools to solve engineering problems.",
+       "confidence": 0.9}
+    ],
+    "unmapped": [
+      {"label": "analytical geometry in 3-space", "evidence": "Analytical geometry in 3-space; quadric surfaces; cylindrical and spherical coordinate systems.",
+       "suggestion": "KA-01 Mathematical and Computational Foundations - no unit covers coordinate geometry"}
+    ]
+  },
+  {
+    "code": "QR-101",
+    "title": "Quantitative Reasoning-II",
+    "semester": 4,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-14.05", "bloom_level": "Evaluate", "depth": "secondary",
+       "evidence": "CLO-4: Ability to critically evaluate quantitative information to make evidence based decisions through appropriate computational tools.",
+       "confidence": 0.65},
+      {"unit_id": "KU-01.05", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Logical reasoning supported by mathematical and statistical concepts and modeling/analysis techniques; interpret and analyze numerical data.",
+       "confidence": 0.6}
+    ],
+    "unmapped": [
+      {"label": "formal logic and argumentation", "evidence": "Inductive, deductive, and abductive approaches of reasoning; propositions, arguments, logical connectives, truth tables, propositional equivalences; logical fallacies; Venn diagrams.",
+       "suggestion": "KA-14 Professional Practice and Engineering Skills - no unit covers formal logic or critical reasoning"}
+    ]
+  }
+]

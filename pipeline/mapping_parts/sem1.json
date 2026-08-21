@@ -1,0 +1,186 @@
+[
+  {
+    "code": "CHE-103",
+    "title": "Chemical Engineering Principles-I",
+    "semester": 1,
+    "is_non_technical": false,
+    "had_course_file": false,
+    "evidence_note": "Outline file CHE-103.md excluded - it contains Principles-II content (energy balances, semester 3) and duplicates CHE-222. Mapped from CLOs only.",
+    "mapped": [
+      {
+        "unit_id": "KU-03.01",
+        "bloom_level": "Understand",
+        "depth": "secondary",
+        "evidence": "Comprehend the basic concepts of chemical engineering principles and relate them to chemical engineering calculations.",
+        "confidence": 0.72
+      },
+      {
+        "unit_id": "KU-03.02",
+        "bloom_level": "Analyze",
+        "depth": "primary",
+        "evidence": "Extend the concepts of process principles to solve material balance problems for single and multiple units.",
+        "confidence": 0.92
+      }
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "CS-117",
+    "title": "Applications of ICT",
+    "semester": 1,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {
+        "unit_id": "KU-01.06",
+        "bloom_level": "Apply",
+        "depth": "primary",
+        "evidence": "Programming concepts: variables, data types, input and output, conditionals and loops, and Python libraries. Labs cover programming fundamentals and MS Excel.",
+        "confidence": 0.9
+      },
+      {
+        "unit_id": "KU-01.05",
+        "bloom_level": "Apply",
+        "depth": "secondary",
+        "evidence": "Introduction to statistics, artificial intelligence, and machine learning using Python; introduction to regression and classification tasks.",
+        "confidence": 0.78
+      },
+      {
+        "unit_id": "KU-14.01",
+        "bloom_level": "Apply",
+        "depth": "secondary",
+        "evidence": "CLO-4: Demonstrate the ethical and legal considerations in use of ICT platform tools; outline lists 'Issues of ethics in data and AI'.",
+        "confidence": 0.58
+      },
+      {
+        "unit_id": "KU-14.04",
+        "bloom_level": "Apply",
+        "depth": "secondary",
+        "evidence": "CLO-5: To demonstrate responsible conduct while working individually as well as in team.",
+        "confidence": 0.62
+      }
+    ],
+    "unmapped": [
+      {
+        "label": "machine learning",
+        "evidence": "Introduction to statistics, artificial intelligence, and machine learning using Python; regression and classification tasks.",
+        "suggestion": "KA-01 Mathematical and Computational Foundations - the reference has no machine-learning unit"
+      },
+      {
+        "label": "cloud computing",
+        "evidence": "Introduction to cloud computing (SaaS, PaaS, IaaS, Azure, AWS, GCP).",
+        "suggestion": "none"
+      },
+      {
+        "label": "web and mobile development",
+        "evidence": "Web and mobile application development process.",
+        "suggestion": "none"
+      },
+      {
+        "label": "database systems",
+        "evidence": "Role of database systems; labs on database systems exploration.",
+        "suggestion": "none"
+      }
+    ]
+  },
+  {
+    "code": "HU-101",
+    "title": "Islamic Studies",
+    "semester": 1,
+    "is_non_technical": true,
+    "had_course_file": true,
+    "mapped": [],
+    "unmapped": []
+  },
+  {
+    "code": "HU-114",
+    "title": "Functional English",
+    "semester": 1,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "evidence_note": "Language course, but it carries the programme's communication attribute (maps to PLO 9). Mapped secondary only - it teaches general rather than technical communication.",
+    "mapped": [
+      {
+        "unit_id": "KU-14.03",
+        "bloom_level": "Apply",
+        "depth": "secondary",
+        "evidence": "Produce clear, concise, and professional written documents and deliver effective public speeches tailored to various audiences and purposes.",
+        "confidence": 0.6
+      }
+    ],
+    "unmapped": [
+      {
+        "label": "general language proficiency",
+        "evidence": "Develop proficiency in English language usage - appropriate word choices, grammar, and sentence structure.",
+        "suggestion": "none"
+      }
+    ]
+  },
+  {
+    "code": "HU-131",
+    "title": "Understanding of Quran-I",
+    "semester": 1,
+    "is_non_technical": true,
+    "had_course_file": true,
+    "mapped": [],
+    "unmapped": []
+  },
+  {
+    "code": "MATH-101",
+    "title": "Calculus & Analytical Geometry",
+    "semester": 1,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {
+        "unit_id": "KU-01.01",
+        "bloom_level": "Apply",
+        "depth": "primary",
+        "evidence": "Relate the use of differentiation and integration of single variable functions and implement them to find the area and volume applicable to different engineering problems; series and limit comparison tests.",
+        "confidence": 0.95
+      }
+    ],
+    "unmapped": [
+      {
+        "label": "analytical geometry",
+        "evidence": "A brief account of three-dimensional geometry and complex numbers is also included as a pre-calculus review.",
+        "suggestion": "KA-01 Mathematical and Computational Foundations - no unit covers coordinate geometry or complex numbers"
+      }
+    ]
+  },
+  {
+    "code": "ME-105",
+    "title": "Workshop Practice",
+    "semester": 1,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {
+        "unit_id": "KU-14.04",
+        "bloom_level": "Apply",
+        "depth": "secondary",
+        "evidence": "CLO-3: Display and demonstrate the ability to work in a team by performing in group tasks; course objective 'To inculcate teamwork through projects/tasks'.",
+        "confidence": 0.85
+      },
+      {
+        "unit_id": "KU-13.04",
+        "bloom_level": "Understand",
+        "depth": "secondary",
+        "evidence": "Introduction to Workshop Technology covers industrial safety; each machining section lists safety precautions.",
+        "confidence": 0.58
+      }
+    ],
+    "unmapped": [
+      {
+        "label": "manufacturing processes",
+        "evidence": "Machine shop, welding and fabrication, woodwork and pattern making, bench fitting, surface treatment, foundry and forging.",
+        "suggestion": "none - mechanical engineering service course, outside the ChemE body of knowledge"
+      },
+      {
+        "label": "engineering metrology",
+        "evidence": "Measuring system/standards; manufacturing metrology; limits, fits, allowances, and tolerances.",
+        "suggestion": "KA-10 Process Dynamics, Control and Instrumentation - dimensional measurement is not covered by KU-10.04"
+      }
+    ]
+  }
+]

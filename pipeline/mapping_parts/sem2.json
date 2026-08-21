@@ -1,0 +1,206 @@
+[
+  {
+    "code": "CH-113",
+    "title": "Inorganic & Organic Chemistry",
+    "semester": 2,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-02.02", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Functional groups; interconversion of functional groups; reaction mechanism; mechanisms of sulfonation, nitration, hydrogenation, amination, halogenation, oxidation; applications of petrochemicals. CLO-3: Apply organic or inorganic synthesis reactions in industrial applications.",
+       "confidence": 0.95},
+      {"unit_id": "KU-02.03", "bloom_level": "Understand", "depth": "primary",
+       "evidence": "Overview of periodic table; chemistry of transition metals; coordination compounds; industrial inorganic chemistry.",
+       "confidence": 0.92},
+      {"unit_id": "KU-14.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-4: Execute inorganic and organic chemistry laboratory procedures... recording experimental data accurately. CLO-7: Analyze and interpret experimental observations... draw valid scientific conclusions.",
+       "confidence": 0.9},
+      {"unit_id": "KU-13.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-6: Practice laboratory safety protocols by properly handling chemicals, glassware, and analytical instruments, while identifying and minimizing risks associated with toxic, corrosive, and flammable substances.",
+       "confidence": 0.88},
+      {"unit_id": "KU-02.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-4 lab procedures include titration, salt analysis, recrystallization, liquid-liquid extraction and qualitative analysis.",
+       "confidence": 0.8},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-5: Demonstrate teamwork, punctuality, and professional laboratory conduct while performing experiments collaboratively.",
+       "confidence": 0.82},
+      {"unit_id": "KU-12.03", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Polymerization/polymers; classifications of polymers.",
+       "confidence": 0.65},
+      {"unit_id": "KU-02.01", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Chemistry of solutions.",
+       "confidence": 0.5}
+    ],
+    "unmapped": [
+      {"label": "molecular orbital theory", "evidence": "Molecular orbital theory.",
+       "suggestion": "KA-02 Chemistry for Chemical Engineers - no unit covers bonding or quantum chemistry"},
+      {"label": "radioactive elements", "evidence": "Radioactive elements.",
+       "suggestion": "KA-02 Chemistry for Chemical Engineers"},
+      {"label": "crystal lattice structure", "evidence": "Crystalline state of metals and lattice structure.",
+       "suggestion": "KA-12 Materials and Polymer Engineering - KU-12.01 covers properties, not crystal structure"}
+    ]
+  },
+  {
+    "code": "CH-114",
+    "title": "Physical and Analytical Chemistry",
+    "semester": 2,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-02.01", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Kinetic theory of gases; Dalton's law, Henry's law, Raoult's law; electrochemistry; colloidal chemistry; surface phenomena.",
+       "confidence": 0.95},
+      {"unit_id": "KU-02.04", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Introduction to instrumental techniques: potentiometry, pH-metry; liquid-solid, high-performance liquid, ion exchange, gas and plane chromatography; UV and visible spectroscopy.",
+       "confidence": 0.93},
+      {"unit_id": "KU-14.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-3: Execute the experimental procedures by applying appropriate techniques... demonstrating precision in measurements. CLO-6: Analyze experimental results, comparing them with theoretical concepts.",
+       "confidence": 0.9},
+      {"unit_id": "KU-13.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-5: Follow lab safety protocols attentively and apply them consistently to maintain a safe working environment.",
+       "confidence": 0.85},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-4: Demonstrate an eagerness to work in a team during the lab activities.",
+       "confidence": 0.8},
+      {"unit_id": "KU-04.03", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Raoult's law, Antoine equation; relative volatility.",
+       "confidence": 0.7},
+      {"unit_id": "KU-02.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Surface phenomena: adsorption, catalysis, enzyme catalysis.",
+       "confidence": 0.65},
+      {"unit_id": "KU-08.01", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Reaction kinetics and equilibrium.",
+       "confidence": 0.62}
+    ],
+    "unmapped": [
+      {"label": "fuel cells", "evidence": "Electrochemistry, fuel cells.",
+       "suggestion": "KA-04 Chemical Engineering Thermodynamics - no unit covers electrochemical energy conversion"}
+    ]
+  },
+  {
+    "code": "CHE-115",
+    "title": "Chemical Process Industries",
+    "semester": 2,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-02.03", "bloom_level": "Understand", "depth": "primary",
+       "evidence": "Fertilizer Industry: Ammonia and Urea; Cement Industry; Industrial Sodium Compounds; Halogens and Chlorinated Compounds; Electro-thermal Industries.",
+       "confidence": 0.9},
+      {"unit_id": "KU-02.02", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Acid Industries: acetic, formic, benzoic, phthalic and oxalic acid; industrial alcohol, glycerol, ethylene glycol, propylene glycol.",
+       "confidence": 0.72},
+      {"unit_id": "KU-11.01", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "CLO-1: Comprehend the synthesis of a compound in specific chemical industry using basic principles of process flow.",
+       "confidence": 0.6},
+      {"unit_id": "KU-03.03", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "CLO-2: Explains the interrelation of process variables and yield of desired product in a certain manufacturing process.",
+       "confidence": 0.58},
+      {"unit_id": "KU-08.06", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Sugar and Fermentation Industries: culture development, inoculum preparation, nutrients for microorganisms, toxic effects on culture.",
+       "confidence": 0.6}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "ENGL-101",
+    "title": "Expository Writing",
+    "semester": 2,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-14.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "CLO-1: Understand research methods to locate and integrate credible sources into writing; course refines analytical skills to substantiate viewpoints using credible sources while adhering to established ethical writing norms.",
+       "confidence": 0.72},
+      {"unit_id": "KU-14.03", "bloom_level": "Analyze", "depth": "secondary",
+       "evidence": "CLO-2: Analyse the rhetorical situation and use effective writing strategies and techniques to persuade readers.",
+       "confidence": 0.62}
+    ],
+    "unmapped": [
+      {"label": "expository essay composition", "evidence": "Pre-writing techniques, three-stage drafting process, paragraph and essay structure.",
+       "suggestion": "none - general academic writing rather than technical communication"}
+    ]
+  },
+  {
+    "code": "HU-127",
+    "title": "Ideology and Constitution of Pakistan",
+    "semester": 2,
+    "is_non_technical": true,
+    "had_course_file": true,
+    "mapped": [],
+    "unmapped": []
+  },
+  {
+    "code": "HU-132",
+    "title": "Understanding of Quran-II",
+    "semester": 2,
+    "is_non_technical": true,
+    "had_course_file": true,
+    "mapped": [],
+    "unmapped": []
+  },
+  {
+    "code": "ME-124",
+    "title": "Engineering Drawing and Graphics",
+    "semester": 2,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-14.03", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "CLO-1: Interpret basic components of engineering drawings and understanding the projection theory. CLO-3: Display the ability to construct engineering drawings and models using computer aided drawing (CAD).",
+       "confidence": 0.93}
+    ],
+    "unmapped": [
+      {"label": "geometric dimensioning and tolerancing", "evidence": "Limit dimensioning and geometric tolerance; limits, fits, and tolerances; conventional symbols.",
+       "suggestion": "none - mechanical design convention, outside the ChemE body of knowledge"},
+      {"label": "development of surfaces", "evidence": "Intersections of prisms, pyramids, cylinders and cones; development of surfaces.",
+       "suggestion": "none"}
+    ]
+  },
+  {
+    "code": "PHY-102",
+    "title": "Applied Physics",
+    "semester": 2,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "evidence_note": "data.json stores this course's 5 CLOs twice (10 entries). Mapped from the 5 distinct CLOs.",
+    "mapped": [
+      {"unit_id": "KU-14.02", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "CLO-3: Realize the experiment by following instructions by the teacher. CLO-5: Collect data from the experiment and analyse it in the view of theoretical understanding developed during the class.",
+       "confidence": 0.85},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-4: Exhibit capability to work in team during the lab activities.",
+       "confidence": 0.8},
+      {"unit_id": "KU-10.04", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "CLO-2: Discuss the fundamentals of electromagnetic induction and thermometry to demonstrate the working principle of related equipment.",
+       "confidence": 0.58}
+    ],
+    "unmapped": [
+      {"label": "Newtonian mechanics", "evidence": "CLO-1: Identify and interpret the core concepts of Newtonian mechanics to solve basic problems of applied physics. Weekly plan: Newton's laws, work and energy, friction, rotation, moment of inertia.",
+       "suggestion": "NEW KNOWLEDGE AREA - the reference has no physics area; mechanics is a standard engineering-science requirement"},
+      {"label": "electricity and magnetism", "evidence": "Electric charge and Coulomb's law, electric field, electric potential, capacitors and dielectrics, magnetic fields, electromagnetic induction.",
+       "suggestion": "NEW KNOWLEDGE AREA - physics for chemical engineers"},
+      {"label": "oscillations and waves", "evidence": "Oscillations, waves and propagation.",
+       "suggestion": "NEW KNOWLEDGE AREA - physics for chemical engineers"}
+    ]
+  },
+  {
+    "code": "QR-100",
+    "title": "Quantitative Reasoning-I",
+    "semester": 2,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-01.05", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Types and sources of data; measurement scales; tabular and graphical presentation of data. CLO-3: Interprets and modifies data presented in various formats, including tables, graphs, charts, and equations.",
+       "confidence": 0.72},
+      {"unit_id": "KU-03.01", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Units and their conversions; dimensions, area, perimeter, and volume; rates, ratios, and proportions.",
+       "confidence": 0.62}
+    ],
+    "unmapped": [
+      {"label": "quantitative literacy", "evidence": "Introduction to quantitative reasoning; number systems and basic arithmetic operations; basics of geometry; sets.",
+       "suggestion": "KA-01 Mathematical and Computational Foundations - no unit covers foundational numeracy"}
+    ]
+  }
+]

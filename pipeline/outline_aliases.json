@@ -1,0 +1,72 @@
+{
+  "schema": "outline-aliases/1",
+  "note": "The courses/ folder carries outlines under an older course-numbering scheme. Confirmed by the department as the same courses renumbered. Each entry maps a current data.json code to the outline file that documents it. Matches were verified by reading the file contents, not by title similarity alone.",
+  "aliases": [
+    {
+      "code": "CHE-349", "outline": "CHE-341",
+      "title_now": "Separation Processes II", "title_file": "Separation Processes",
+      "match": "confirmed",
+      "basis": "Contents are humidification and cooling towers, crystallization, drying, liquid-liquid extraction, leaching, ion exchange, membranes - the Separation Processes II syllabus. Distillation and absorption (Separation Processes I) are absent, so this file is not CHE-344."
+    },
+    {
+      "code": "CHE-350", "outline": "CHE-443",
+      "title_now": "Petroleum Refinery Process", "title_file": "Petroleum Refinery Engineering",
+      "match": "confirmed", "basis": "Same subject, renumbered."
+    },
+    {
+      "code": "CHE-423", "outline": "CHE-333",
+      "title_now": "Fuel Engineering", "title_file": "Fuels & Energy",
+      "match": "confirmed",
+      "basis": "Covers fuel classification, characterization, selection and upgradation - a general fuels course. Preferred over CHE-446 Advanced Fuel Technology, which is a narrower methanol/next-generation-fuels elective."
+    },
+    {
+      "code": "CHE-452", "outline": "CHE-454",
+      "title_now": "Chemical Process Design & Simulation", "title_file": "Process Modelling, Simulation and Optimization",
+      "match": "confirmed", "basis": "Contents are HYSYS/ChemCAD flowsheeting, fluid packages, PFDs and steady-state balances - process design and simulation."
+    },
+    {
+      "code": "CHE-464", "outline": "CHE-433",
+      "title_now": "Computational Fluid Dynamics in Chemical Engineering", "title_file": "Computational Fluid Dynamics in Process Engineering",
+      "match": "confirmed", "basis": "Same subject, renumbered."
+    },
+    {
+      "code": "CHE-465", "outline": "CHE-434",
+      "title_now": "Data Science and Machine Learning in Chemical Engineering", "title_file": "Machine Learning in Chemical Engineering",
+      "match": "confirmed", "basis": "Same subject, renumbered."
+    },
+    {
+      "code": "CHE-484", "outline": "CHE-444",
+      "title_now": "Natural Gas Engineering", "title_file": "Gas Processing & Transmission",
+      "match": "confirmed", "basis": "Contents are the natural gas industry, sweetening, dehydration, LPG/LNG/CNG and gas processing facilities."
+    },
+    {
+      "code": "CHE-425", "outline": "CHE-555",
+      "title_now": "Maintenance & Process Safety", "title_file": "Maintenance & Utility Engineering",
+      "match": "partial",
+      "basis": "Maintenance content matches (preventive/predictive/corrective, TPM, scheduling). The file covers utility engineering where the current course covers process safety, so safety mappings must NOT be drawn from this outline. File name on disk is CHE-555.md; the document itself says CHE-455."
+    },
+    {
+      "code": "OTM-456", "outline": "CHE-436",
+      "title_now": "Production & Operations Management", "title_file": "Operations Management and Risk Assessment",
+      "match": "partial",
+      "basis": "Operations management content matches (production systems, decision models, linear programming). The file adds risk assessment, which may not be in the current OTM-456."
+    }
+  ],
+  "still_missing": [
+    {"code": "CHE-344", "title": "Separation Processes I", "note": "No orphan outline covers distillation/absorption. CHE-341 is Separation Processes II."},
+    {"code": "CHE-360", "title": "Fundamentals Of Polymer Engineering", "note": "No polymer outline in the folder."},
+    {"code": "CHE-442", "title": "Membrane Technology", "note": "Membranes appear only as one bullet inside CHE-341; no dedicated outline."},
+    {"code": "CHE-499", "title": "Final Year Design Project-II", "note": "Project course, no syllabus outline expected."},
+    {"code": "CSL-402", "title": "Community Service Learning Course", "note": "No outline."},
+    {"code": "HU-115", "title": "Principles of Sociology", "note": "No outline; non-technical."},
+    {"code": "CHE-103", "title": "Chemical Engineering Principles-I", "note": "CHE-103.md exists but contains Principles-II content duplicating CHE-222. Excluded as evidence."}
+  ],
+  "unused_orphans": [
+    "CHE-224 Fluid Mechanics-II", "CHE-435 Experimental Design and Data Analytics",
+    "CHE-445 Petrochemical Engineering", "CHE-446 Advanced Fuel Technology",
+    "CHE-447 Advanced Process Control", "CHE-448 Process Intensification",
+    "CHE-449 Food Processing Engineering", "CHE-453 Environmental Engineering",
+    "EE-331 Applied Electrical Engineering", "HU-107 Pakistan Studies",
+    "HU-222 Professional Ethics", "MGT-422 Project Management"
+  ]
+}

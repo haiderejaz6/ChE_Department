@@ -1,0 +1,106 @@
+[
+  {
+    "code": "CHE-332",
+    "title": "Chemical Engineering Thermodynamics-II",
+    "semester": 5,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-04.03", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Two-component systems: liquid-vapor equilibrium with its models - Raoult's law, Henry's law; partial molar quantities; excess thermodynamic functions; ideal and non-ideal solutions; azeotropes; liquid-solid equilibrium; solid solutions.",
+       "confidence": 0.96},
+      {"unit_id": "KU-04.05", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "Production of power from heat: steam power plant, heat engines, various cycles, and turbines. Liquefaction; refrigeration and air conditioning in various cycles. Practicals interpret the vapor compression cycle on a P-h diagram and compute coefficient of performance.",
+       "confidence": 0.95},
+      {"unit_id": "KU-04.04", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Chemical equilibrium: equilibrium constants for gas-phase reactions; factors affecting degree of conversion; equilibrium involving condensed phases; equilibrium in solution mixing.",
+       "confidence": 0.92},
+      {"unit_id": "KU-14.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-5: Execute the experimental procedures by applying appropriate techniques. CLO-8: Analyze experimental results, comparing them with theoretical concepts.",
+       "confidence": 0.88},
+      {"unit_id": "KU-04.02", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Helmholtz function; Gibbs function (free energy) G; Maxwell's relationships; properties of mixtures of ideal gases; G for ideal and non-ideal gases.",
+       "confidence": 0.8},
+      {"unit_id": "KU-13.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-7: Follow lab safety protocols attentively and apply them consistently.",
+       "confidence": 0.85},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-6: Demonstrate an eagerness to work in a team during the lab activities.",
+       "confidence": 0.8},
+      {"unit_id": "KU-04.01", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Fundamental equations for closed systems. CLO-2: apply the complete energy balance of different flow processes along with their thermodynamic diagrams.",
+       "confidence": 0.75},
+      {"unit_id": "KU-07.02", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Composition of vapor in equilibrium with liquid; fractional distillation; azeotropes.",
+       "confidence": 0.55}
+    ],
+    "unmapped": [
+      {"label": "thermodynamics of electrochemical cells", "evidence": "Thermodynamics of cells.",
+       "suggestion": "KA-04 Chemical Engineering Thermodynamics - no unit covers electrochemical thermodynamics; same gap flagged by CH-114 fuel cells"}
+    ]
+  },
+  {
+    "code": "CHE-344",
+    "title": "Separation Processes I",
+    "semester": 5,
+    "is_non_technical": false,
+    "had_course_file": false,
+    "evidence_note": "NO OUTLINE AVAILABLE, and the CLOs are entirely generic - they say 'principles of advance separation processes' without naming a single technique. No separation-specific unit could be mapped on this evidence. This course certainly teaches separations; the absence here is a documentation gap, not a curriculum gap, and must not be read as one.",
+    "mapped": [
+      {"unit_id": "KU-14.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-4: Execute the experimental procedures by applying appropriate techniques. CLO-7: Analyze experimental results, comparing them with theoretical concepts.",
+       "confidence": 0.85},
+      {"unit_id": "KU-13.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-6: Follow lab safety protocols attentively and apply them consistently.",
+       "confidence": 0.82},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-5: Demonstrate an eagerness to work in a team during the lab activities.",
+       "confidence": 0.8}
+    ],
+    "unmapped": [
+      {"label": "unspecified separation processes", "evidence": "CLO-1: Comprehend the principles of advance separation processes. CLO-2: Apply principles of separation process to design the equipment.",
+       "suggestion": "KA-07 - technique cannot be identified from the CLOs; obtain the course outline to map this properly"}
+    ]
+  },
+  {
+    "code": "MATH-351",
+    "title": "Numerical Methods",
+    "semester": 5,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-01.04", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Bisection, fixed-point, Newton-Raphson, secant and Regula-Falsi methods; numerical differentiation and integration - trapezoidal, Simpson's 1/3 and 3/8, Weddle's rule. CLO-1: State the consequences of finite precision and estimate the amount of error inherent in Numerical methods.",
+       "confidence": 0.97},
+      {"unit_id": "KU-01.03", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Numerical Methods in Linear Algebra: LU factorization; Doolittle's, Crout's, and Cholesky's methods; iterative methods for systems of equations.",
+       "confidence": 0.78},
+      {"unit_id": "KU-01.05", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Curve fitting and interpolation topics are also included; Lagrange interpolation, Newton's divided difference, cubic spline interpolation.",
+       "confidence": 0.68},
+      {"unit_id": "KU-01.02", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Lengthy and subtle problems of differential calculus, integral calculus, and ordinary differential equations are also solved numerically.",
+       "confidence": 0.62}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "MGT-271",
+    "title": "Entrepreneurship",
+    "semester": 5,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-14.06", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-3: Conceptualize of business models for sustainable investment opportunities through creation of managerial, financial, operational, marketing and planning strategies for the new venture. CLO-1: Screen and examine opportunities for new ventures that add value to the overall economy.",
+       "confidence": 0.85},
+      {"unit_id": "KU-14.01", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Entrepreneurship - ethical perspective; why ethical lapses occur; establishing and maintaining ethical standards; social entrepreneurship; business responsibility to customers, investors.",
+       "confidence": 0.68}
+    ],
+    "unmapped": [
+      {"label": "new venture finance and planning", "evidence": "Fundamentals of starting and managing a small business; managerial, financial, operational, marketing and planning strategies.",
+       "suggestion": "none - business management rather than engineering economics (KU-11.04 covers capital cost, NPV and IRR, none of which appear here)"}
+    ]
+  }
+]

@@ -1,0 +1,171 @@
+[
+  {
+    "code": "CCE-401",
+    "title": "Civic and Community Engagement",
+    "semester": 3,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-14.06", "bloom_level": "Understand", "depth": "primary",
+       "evidence": "CLO-2: Students will be able to provide different sustainable development approaches to address local or global community challenges. CLO-3: develop sense of responsibility, compassion and empathy towards society.",
+       "confidence": 0.8},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Service in the Community and Methods of Community Service Project Management; community needs analysis; basic elements of a community service project.",
+       "confidence": 0.6}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "CHE-214",
+    "title": "Fluid Mechanics-I",
+    "semester": 3,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-05.02", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Nature of flow: laminar & turbulent, compressible & non-compressible; Bernoulli's equation and its applications; continuity equation; momentum of a flowing fluid; concept of boundary layer.",
+       "confidence": 0.95},
+      {"unit_id": "KU-05.01", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Concept, properties, and types of fluids; stress analysis of static fluids; Newton's law of viscosity; pressure forces on surfaces; manometry and head calculations; buoyancy.",
+       "confidence": 0.93},
+      {"unit_id": "KU-05.03", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Flow of incompressible Newtonian fluids in pipes & channels: shear stress in a pipe, friction factor & pressure drop, losses in fittings and bend pipes, enlargements and contractions, friction in non-circular channels, piping network analysis.",
+       "confidence": 0.93},
+      {"unit_id": "KU-05.05", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Orifice meter, venturi meter, rotameter, nozzle, notch and weir, electromagnetic flow meter. CLO-3: Relates the working mechanism of flow measuring devices and pressure losses across these devices.",
+       "confidence": 0.92},
+      {"unit_id": "KU-14.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-4: Execute the experimental procedures by applying appropriate techniques. CLO-7: Analyze experimental results, comparing them with theoretical concepts.",
+       "confidence": 0.9},
+      {"unit_id": "KU-13.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-6: Follow lab safety protocols attentively and apply them consistently to maintain a safe working environment.",
+       "confidence": 0.85},
+      {"unit_id": "KU-14.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-5: Demonstrate an eagerness to work in a team during the lab activities.",
+       "confidence": 0.8},
+      {"unit_id": "KU-03.01", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-2: Apply the principles of dimensional analysis and similitude to establish functional relations between important relevant parameters.",
+       "confidence": 0.78},
+      {"unit_id": "KU-05.06", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Newtonian and non-Newtonian fluids; stress in fluids: viscosity, shear stress components, Newtonian and non-Newtonian flow.",
+       "confidence": 0.62},
+      {"unit_id": "KU-05.04", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Concept of centrifugal pumps.",
+       "confidence": 0.55}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "CHE-222",
+    "title": "Chemical Engineering Principles-II",
+    "semester": 3,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-03.04", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-3: Solve and analyze complex engineering problems pertaining to energy balance of unit operations and processes. Contents: closed-system, open-system and mechanical energy balance; heat of solution; energy balance with heat of reaction and heat of combustion.",
+       "confidence": 0.96},
+      {"unit_id": "KU-03.05", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Balances on unsteady-state processes: examples of unsteady-state energy balance.",
+       "confidence": 0.75},
+      {"unit_id": "KU-03.01", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Units and dimensions, unit conversions, dimensional homogeneity.",
+       "confidence": 0.7},
+      {"unit_id": "KU-04.01", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Laws and properties of thermodynamics: laws of thermodynamics; definition of thermodynamic properties like heat capacity and enthalpy.",
+       "confidence": 0.68},
+      {"unit_id": "KU-01.06", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Computer applications/programming in stoichiometric calculations.",
+       "confidence": 0.55},
+      {"unit_id": "KU-03.03", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Energy balance on reactive systems; computer applications/programming in stoichiometric calculations.",
+       "confidence": 0.5}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "CHE-223",
+    "title": "Chemical Engineering Thermodynamics-I",
+    "semester": 3,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-04.01", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "First Law of Thermodynamics: heat and work, internal energy, enthalpy, heat capacity, reversibility. Second Law of Thermodynamics: entropy; entropy balance in open systems; the Clausius inequality.",
+       "confidence": 0.96},
+      {"unit_id": "KU-04.02", "bloom_level": "Analyze", "depth": "primary",
+       "evidence": "CLO-2: Solve and analyze the problem related to thermodynamic behavior and heat effects of pure fluids in various processes using equation of state. Contents: PVT relationships for non-ideal gases, virial equations of state, cubic equations of state, generalized correlations.",
+       "confidence": 0.95},
+      {"unit_id": "KU-03.04", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "Energy balance in closed systems; mass and energy balances for open systems; enthalpies of formation and reaction.",
+       "confidence": 0.62},
+      {"unit_id": "KU-04.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "First Law contents include thermodynamic cycles.",
+       "confidence": 0.55},
+      {"unit_id": "KU-04.03", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Thermodynamic equilibrium; phase equilibria: phase rule.",
+       "confidence": 0.5}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "CHE-226",
+    "title": "Programming and Data Science",
+    "semester": 3,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-01.06", "bloom_level": "Create", "depth": "primary",
+       "evidence": "CLO-3 (C-6): Write Python programs for data analysis and visualization of chemical processes data sets. Contents: variables, conditionals, repetition, functions, lists and tuples, NumPy array-oriented programming, files and exceptions.",
+       "confidence": 0.97},
+      {"unit_id": "KU-01.05", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-3: data analysis and visualization of chemical processes data sets; contents cover data science concepts and JSON serialization.",
+       "confidence": 0.7}
+    ],
+    "unmapped": [
+      {"label": "data science workflow", "evidence": "Comprehend the fundamentals of introductory programming, data science concepts, and the application of associated tools; How Big Is Big Data?",
+       "suggestion": "KA-01 Mathematical and Computational Foundations - the reference has no data science or machine learning unit"}
+    ]
+  },
+  {
+    "code": "MATH-121",
+    "title": "Linear Algebra & ODEs",
+    "semester": 3,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "evidence_note": "CLO-1 and CLO-2 describe multivariable calculus and partial derivatives, but the outline covers linear algebra, ODEs and Laplace transforms. The CLOs appear not to match the syllabus - worth checking against the Qalam record.",
+    "mapped": [
+      {"unit_id": "KU-01.03", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "Linear Algebra: matrix addition, scalar multiplication, matrix multiplication; linear systems of equations; Gauss elimination; inverse of a matrix; vector spaces; eigenvalues and eigenvectors.",
+       "confidence": 0.95},
+      {"unit_id": "KU-01.02", "bloom_level": "Apply", "depth": "primary",
+       "evidence": "First-Order Ordinary Differential Equations: separable, homogeneous, exact, linear, Bernoulli, Riccati and Clairaut. CLO-3: solve the mathematical models of physical systems. Course description adds Laplace transforms.",
+       "confidence": 0.95},
+      {"unit_id": "KU-01.01", "bloom_level": "Apply", "depth": "secondary",
+       "evidence": "CLO-1: Comprehend the concept of multivariable functions and partial derivative. CLO-2: use of differentiation and integration of several variable functions.",
+       "confidence": 0.58}
+    ],
+    "unmapped": []
+  },
+  {
+    "code": "MSE-226",
+    "title": "Engineering Materials",
+    "semester": 3,
+    "is_non_technical": false,
+    "had_course_file": true,
+    "mapped": [
+      {"unit_id": "KU-12.01", "bloom_level": "Understand", "depth": "primary",
+       "evidence": "Introduction to ceramic materials, polymers, metals, alloys, composites and their properties. CLO-2: Explain the mechanical properties of the materials. Properties, classification, and application of materials of fabrication: iron, steel, stainless steel, nickel, hastelloy, copper alloys, PVC, Teflon, PTFE.",
+       "confidence": 0.96},
+      {"unit_id": "KU-12.05", "bloom_level": "Understand", "depth": "secondary",
+       "evidence": "Introduction to advanced materials and nanotechnology.",
+       "confidence": 0.62}
+    ],
+    "unmapped": [
+      {"label": "crystal structures and defects", "evidence": "CLO-1: explain crystallographic planes and directions as well as imperfections in materials. Crystal structures, imperfections and defects in solids.",
+       "suggestion": "KA-12 Materials and Polymer Engineering - KU-12.01 covers properties but not crystal structure or defects"},
+      {"label": "binary phase diagrams", "evidence": "CLO-3: Interpret the binary phase diagram. Solutions and phase diagrams, metals and alloys.",
+       "suggestion": "KA-12 Materials and Polymer Engineering - materials phase diagrams differ from the VLE treatment in KU-04.03"}
+    ]
+  }
+]
